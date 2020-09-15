@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="深度学习入门：基于Python的理论与实现（2） - 余润杰的博客 | Yurj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="第七章 卷积神经网络
+">
+    
+    <meta property="article:published_time" content="2020-09-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yurj">
+    
+    
+    <meta property="article:tag" content="AI">
+    
+    <meta property="article:tag" content="深度学习">
+    
+    <meta property="article:tag" content="Python">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/15/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    
+    <title>深度学习入门：基于Python的理论与实现（2） - 余润杰的博客 | Yurj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/15/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yurj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=AI" title="AI">AI</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" title="深度学习">深度学习</a>
+                        
+                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>深度学习入门：基于Python的理论与实现（2）</h1>
+                    
+                    <h2 class="subheading">卷积神经网络</h2>
+                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="第七章-卷积神经网络">第七章 卷积神经网络</h1>
+
+<p>CNN被用于图像识别、语音识别等各种场合，在图像识别的比赛中，基于深度学习的方法几乎都以CNN为基础</p>
+
+<h2 id="整体结构">整体结构</h2>
+
+<p>CNN新出现了卷积层（Convolution层）和池化层（Pooling层）</p>
+
+<p>在之前的神经网络中，相邻层的所有神经元之间都有连接，这称为全连接。我们用Affine层实现了全连接层</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午8.56.57.png" alt="截屏2020-05-12 上午8.56.57" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午8.57.12.png" alt="截屏2020-05-12 上午8.57.12" style="zoom:50%;" /></p>
+
+<p>CNN的层的连接顺序是Convolution-ReLU-(Pooling)</p>
+
+<p>Polling有时会被省略</p>
+
+<p>还需要注意的是，CNN中靠近输出的层中使用了之前的Affine-ReLU组合。此外，最后的输出层中使用了之前的Affine-Softmax组合。这些都是一般的CNN中比较常见的结构</p>
+
+<h2 id="卷积层">卷积层</h2>
+
+<p>各层中传递的数据是有形状的数据</p>
+
+<h3 id="全连接层存在的问题">全连接层存在的问题</h3>
+
+<p>数据的形状被忽视了</p>
+
+<p>图像是3维形状，这个形状中应该含有重要的空间信息。比如，空间上邻近的像素为相似的值、RGB的各个通道之间分别有密切的关联性、相距较远的像素没有什么关联等，3维形状中可能隐藏有值得提取的本质模式。但是，因为全连接层会忽视形状，将全部的输入数据作为相同的神经元（同一维度的神经元）处理，所以无法利用与形状相关信息</p>
+
+<p>卷积层可以保持形状不变。当输入数据是图像时，卷积层会以3维数据的形式接收输入数据，并同样以3维数据的形式输出至下一层。因此，在CNN中，可以（有可能）正确理解图像等具有形状的数据</p>
+
+<p>CNN中，有时将卷积层的输入输出数据称为特征图。其中，卷积层的输入数据称为输入特征图，输出数据称为输出特征图</p>
+
+<h3 id="卷积运算">卷积运算</h3>
+
+<p>卷积层进行的处理就是卷积运算。卷积运算相当于图像处理中的滤波器运算</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.16.04.png" alt="截屏2020-05-12 上午9.16.04" style="zoom:50%;" /></p>
+
+<p>累积乘积运算</p>
+
+<p>滤波器也有高长方向上的维度</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.17.17.png" alt="截屏2020-05-12 上午9.17.17" style="zoom:50%;" /></p>
+
+<p>偏置通常只有一个（1*1）</p>
+
+<h3 id="填充">填充</h3>
+
+<p>使用填充主要为了调整输出的大小，卷积运算可以在保持空间大小不变的情况下将数据传给下一层</p>
+
+<p>否则反复进行多次卷积运算的深度网络可能不断缩小最终无法再应用卷积运算</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.20.13.png" alt="截屏2020-05-12 上午9.20.13" style="zoom:50%;" /></p>
+
+<h3 id="步幅">步幅</h3>
+
+<p>应用滤波器的位置间隔称为步幅</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.21.42.png" alt="截屏2020-05-12 上午9.21.42" style="zoom:50%;" /></p>
+
+<p>增大步幅后，输出大小会变小；而增大填充后，输出大小会变大</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.22.55.png" alt="截屏2020-05-12 上午9.22.55" style="zoom:50%;" /></p>
+
+<p>当输出大小无法除尽时，需要采取报错等对策</p>
+
+<p>根据深度学习框架的不同，当值无法除尽时，有时会向最接近的整数四舍五入，不进行报错而继续运行</p>
+
+<h3 id="3维数据的卷积运算">3维数据的卷积运算</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.27.12.png" alt="截屏2020-05-12 上午9.27.12" style="zoom:50%;" /></p>
+
+<p>高、长、通道方向</p>
+
+<p>滤波器大小可以设定为任意值，不过每个滤波器大小要全部相同</p>
+
+<p>滤波器通道数只能设置为和输入数据的通道数相同的值</p>
+
+<h3 id="结合方块思考">结合方块思考</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.31.49.png" alt="截屏2020-05-12 上午9.31.49" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.32.01.png" alt="截屏2020-05-12 上午9.32.01" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.32.26.png" alt="截屏2020-05-12 上午9.32.26" style="zoom:50%;" /></p>
+
+<p>滤波器的权重数据（20，3，5，5）</p>
+
+<p>通道数为3，大小为5*5的滤波器有20个</p>
+
+<h3 id="批处理">批处理</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.34.33.png" alt="截屏2020-05-12 上午9.34.33" style="zoom:50%;" /></p>
+
+<p>4维数据</p>
+
+<p>批处理将N次的处理汇总成了1次处理</p>
+
+<h2 id="池化层">池化层</h2>
+
+<p>池化是缩小高、长方向上的空间的运算</p>
+
+<p>缩小空间大小</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午9.38.22.png" alt="截屏2020-05-12 上午9.38.22" style="zoom:50%;" /></p>
+
+<p>一般来说，池化的窗口大小会和步幅设定成相同的值</p>
+
+<p>除了Max池化之外，还有Average池化等</p>
+
+<p>池化层的特征</p>
+
+<p>没有要学习的参数</p>
+
+<p>通道数不发生改变</p>
+
+<p>对微小的位置变化具有鲁棒性（健壮）</p>
+
+<h2 id="卷积层和赤化层的实现">卷积层和赤化层的实现</h2>
+
+<h3 id="四维数据">四维数据</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span> <span class="c1"># 随机生成数据
+</span><span class="n">x</span><span class="p">.</span><span class="n">shape</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="基于im2col的展开">基于im2col的展开</h3>
+
+<p>如果老老实实地实现卷积运算，估计要重复好几层的for语句。这样的实现有点麻烦，而且，Numpy中存在使用for语句后处理变慢的缺点（Numpy中，访问元素时最好不用for语句）。这里，我们不使用for语句，而是使用im2col这个便利的函数进行简单的实现</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.04.51.png" alt="截屏2020-05-12 上午10.04.51" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.05.19.png" alt="截屏2020-05-12 上午10.05.19" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.05.47.png" alt="截屏2020-05-12 上午10.05.47" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.06.07.png" alt="截屏2020-05-12 上午10.06.07" style="zoom:50%;" /></p>
+
+<h3 id="卷积层的实现">卷积层的实现</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.08.10.png" alt="截屏2020-05-12 上午10.08.10" style="zoom:50%;" /></p>
+
+<p>im2col会考虑滤波器大小、步幅、填充，将输入数据展开为2维数组</p>
+
+<p>P219</p>
+
+<h3 id="池化层的实现">池化层的实现</h3>
+
+<p>池化层的实现和卷积层相同，都使用im2col展开输入数据</p>
+
+<p>不过，池化的情况下，在通道方向上是独立的，这一点和卷积层不同</p>
+
+<p>池化的应用区域按通道单独展开</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.14.07.png" alt="截屏2020-05-12 上午10.14.07" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 上午10.14.21.png" alt="截屏2020-05-12 上午10.14.21" style="zoom:50%;" /></p>
+
+<p>P222</p>
+
+<p>1、展开输入数据</p>
+
+<p>2、求各行的最大值</p>
+
+<p>3、转换为合适的输出大小</p>
+
+<p>各阶段的实现都很简单，只有一两行代码</p>
+
+<h2 id="cnn的实现">CNN的实现</h2>
+
+<p>P224</p>
+
+<p>如上所述，卷积层和池化层是图像识别中必备的模块</p>
+
+<p>CNN可以有效读取图像中的某种特性，在手写数字识别中，还可以实现高精度的识别</p>
+
+<h2 id="cnn的可视化">CNN的可视化</h2>
+
+<h3 id="第一层权重的可视化">第一层权重的可视化</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 下午12.20.13.png" alt="截屏2020-05-12 下午12.20.13" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 下午12.20.41.png" alt="截屏2020-05-12 下午12.20.41" style="zoom:50%;" /></p>
+
+<p>卷积层的滤波器会提取边缘或斑块等原始信息</p>
+
+<p>而刚才实现的CNN会将这些原始信息传递给后面的层</p>
+
+<h3 id="基于分层结构的信息提取">基于分层结构的信息提取</h3>
+
+<p>根据深度学习的可视化相关的研究，随着层数加深，提取的信息（正确地讲，是反映强烈的神经元）也越来越抽象</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 下午12.24.57.png" alt="截屏2020-05-12 下午12.24.57" style="zoom:50%;" /></p>
+
+<p>如果堆积了多层卷积层，则随着层次加深，提取的信息也愈加复杂、抽象，这是深度学习中很有意思的一个地方。随着层次加深，神经元从简单的形状向高级信息变化。换句话来说，就像我们理解东西的含义一样，响应的对象在逐渐变化</p>
+
+<h2 id="具有代表性的cnn">具有代表性的CNN</h2>
+
+<h3 id="lenet">LeNet</h3>
+
+<p>LeNet在1998年被提出，是进行手写数字识别的网络，他有连续的卷积层和池化层（正确地讲，是只抽选元素的子采样层），最后经全连接层输出结果</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 下午12.31.18.png" alt="截屏2020-05-12 下午12.31.18" style="zoom:50%;" /></p>
+
+<p>LeNet中使用sigmoid函数，而现在的CNN中主要适用ReLU函数</p>
+
+<p>原始的LeNet中使用子采样缩小中间数据的大小，而现在的CNN中Max池化是主流</p>
+
+<h3 id="alexnet">AlexNet</h3>
+
+<p>AlexNet是引发深度学习浪潮的导火线</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-12 下午12.33.04.png" alt="截屏2020-05-12 下午12.33.04" style="zoom:50%;" /></p>
+
+<p>AlexNet叠有多个卷积层和池化层，最后经由全连接层输出结果</p>
+
+<p>激活函数使用ReLU</p>
+
+<p>使用进行局部正规化的LRN层</p>
+
+<p>使用Dropout</p>
+
+<p>关于网络结构，LeNet和AlexNet没有太大的不同。但是，围绕他们的环境和计算机技术有了很大的进步。具体地说，现在任何人都可以获得大量的数据。而且，擅长大规模并行计算的GPU得到普及，高速进行大量的运算已经成为可能。大数据和GPU已成为深度学习发展的巨大的原动力</p>
+
+<p>GPU和大数据给这些课题带来了希望</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/" data-toggle="tooltip" data-placement="top" title="深入理解计算机系统 第一章">
+                        Previous<br>
+                        <span>深入理解计算机系统 第一章</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" data-toggle="tooltip" data-placement="top" title="深度学习入门：基于Python的理论与实现（3）">
+                        Next<br>
+                        <span>深度学习入门：基于Python的理论与实现（3）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0005" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="13">学习笔记</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="6">计算机网络</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="5">Python</a>
+        
+                <a data-sort="0014" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="4">tips</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="3">AI</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="2">爬虫</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yurj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

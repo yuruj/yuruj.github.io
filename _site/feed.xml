@@ -1,0 +1,2649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yurj Blog</title>
+    <description></description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 15 Sep 2020 22:56:09 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Sep 2020 22:56:09 +0800</lastBuildDate>
+    <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>计算机网络（第7版）第四章</title>
+        <description>&lt;h1 id=&quot;第四章-网络层&quot;&gt;第四章 网络层&lt;/h1&gt;
+
+&lt;p&gt;本章讨论网络互连问题&lt;/p&gt;
+
+&lt;h2 id=&quot;网络层提供的两种服务&quot;&gt;网络层提供的两种服务&lt;/h2&gt;
+
+&lt;p&gt;在计算机网络领域，网络层应该像运输层提供怎样的服务（面向连接还是无连接）曾引起了长期的争端。争论焦点的实质就是：在计算机通信中，可靠交付应当由谁来负责？是网络还是端系统？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午7.43.46.png&quot; alt=&quot;截屏2020-06-01 下午7.43.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但互联网的先驱者却提出一种崭新的网络设计思路。他们认为，电信网提供的端到端可靠信息传输的服务对电话业务无疑是很合适的，因为电信网的终端电话机非常简单，没有智能，也没有差错处理能力。因此电信网必须负责把用户电话机产生的话音信号可靠的传送到对方的电话机，使还原后的话音质量符合技术规范的要求。但计算机网络的端系统是有智能的计算机。因此计算机有很强的差错处理能力（本质差别）。因此，互联网在设计上就采用了和电信网完全不同的思路&lt;/p&gt;
+
+&lt;p&gt;互联网的设计思路是这样的：网络层向上只提供简单灵活的、无连接的、尽最但努力交付的数据报服务&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午8.03.50.png&quot; alt=&quot;截屏2020-06-01 下午8.03.50&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午8.33.17.png&quot; alt=&quot;截屏2020-06-01 下午8.33.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OSI体系的支持者曾极力主张在网络层使用可靠传输的虚电路服务，也曾推出过网络层虚电路服务的著名标准——ITU-T的X.25建议书&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午8.34.41.png&quot; alt=&quot;截屏2020-06-01 下午8.34.41&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;网际协议ip&quot;&gt;网际协议IP&lt;/h2&gt;
+
+&lt;p&gt;网际协议IP是TCP/IP体系中两个最主要的协议之一，也是最重要的互联网标准协议之一&lt;/p&gt;
+
+&lt;p&gt;这里所讲的IP其实是IP的第4个版本 IPv4&lt;/p&gt;
+
+&lt;p&gt;与IP协议配套使用的还有三个协议：&lt;/p&gt;
+
+&lt;p&gt;地址解析协议ARP Address Resolution Protocol&lt;/p&gt;
+
+&lt;p&gt;网际控制报文协议ICMP Internet Control Message Protocol&lt;/p&gt;
+
+&lt;p&gt;网际组管理协议IGMP Internet Group Management Protocol&lt;/p&gt;
+
+&lt;p&gt;本来还有一个协议叫做逆地址解析协议RARP，和ARP配套使用，但现在已被淘汰不使用了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午9.21.19.png&quot; alt=&quot;截屏2020-06-01 下午9.21.19&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在这一层中，ARP画在最下面，因为IP经常要使用这个协议&lt;/p&gt;
+
+&lt;p&gt;ICMP和IGMP画在这一层的上部，因为他们要使用IP协议&lt;/p&gt;
+
+&lt;p&gt;由于网际协议IP是用来使互连起来的许多计算机网络能够进行通信的，因此TCP/IP体系中的网络层常常被称为网际层或IP层&lt;/p&gt;
+
+&lt;p&gt;使用网际层的好处时强调这是由很多网络构成的互连网络&lt;/p&gt;
+
+&lt;h3 id=&quot;虚拟互连网络&quot;&gt;虚拟互连网络&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-01 下午10.03.25.png&quot; alt=&quot;截屏2020-06-01 下午10.03.25&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从一般的概念来讲，将网络互相连接起来要使用一些中间设备。根据中间设备所在的层次，可以有以下四种不同的中间设备&lt;/p&gt;
+
+&lt;p&gt;1、物理层所使用的中间设备叫做转发器 repeater&lt;/p&gt;
+
+&lt;p&gt;2、数据链路层使用的中间设备叫做网桥或桥接器 bridge&lt;/p&gt;
+
+&lt;p&gt;3、网络层使用的中间设备叫做路由器 router&lt;/p&gt;
+
+&lt;p&gt;4、在网络层以上使用的中间设备叫做网关 gateway。用网关连接两个不兼容的系统需要在高层进行协议的转换&lt;/p&gt;
+
+&lt;p&gt;当中间设备是转发器或网桥时，这仅仅是把一个网络扩大了，而从网络层的角度看，这仍然是一个网络，一般不称之为网络互连&lt;/p&gt;
+
+&lt;p&gt;网关由于比较复杂，目前使用的较少。因此，现在我们讨论网络互连时，都是指用路由器进行网络互连和路由选择&lt;/p&gt;
+
+&lt;p&gt;路由器其实就是一台专用计算机，用来在互联网中进行路由选择&lt;/p&gt;
+
+&lt;p&gt;由于参加互连的计算机网络都是用相同的网际协议IP，因此可以把互连以后的计算机网络看成一个虚拟互联网络&lt;/p&gt;
+
+&lt;p&gt;所谓虚拟互联网络也就是逻辑互联网络，他的意思就是互连起来的各种物理网络的异构性本来是客观存在的，但是我们利用IP协议就可以使这些性能各异的网络在网络层上看起来好像是一个统一的网络&lt;/p&gt;
+
+&lt;p&gt;这种使用IP协议的虚拟互联网络可简称IP网（IP网是虚拟的，但平常不必每次都强调虚拟二字）&lt;/p&gt;
+
+&lt;p&gt;使用IP网的好处是：当IP网上的主机进行通信时，就好像在一个单个网络上通信一样，他们看不见互连的个网络的具体异构细节（如具体的编址方案、路由选择协议等等）&lt;/p&gt;
+
+&lt;p&gt;如果在这种覆盖全球的IP网的上层使用TCP协议，那么就是现在的互联网&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午1.46.33.png&quot; alt=&quot;截屏2020-06-02 下午1.46.33&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;互联网是由多种异构网络互连组成&lt;/p&gt;
+
+&lt;h3 id=&quot;分类的ip地址&quot;&gt;分类的IP地址&lt;/h3&gt;
+
+&lt;p&gt;1、IP地址及其表示方法&lt;/p&gt;
+
+&lt;p&gt;整个互联网就是一个单一的、抽象的网络。IP地址就是给互联网上的每一台主机（或路由器）的每一个接口分配一个在全世界范围内是唯一的32位的标识符&lt;/p&gt;
+
+&lt;p&gt;IP地址的结构使我们可以在互联网上很方便地进行寻址。IP地址现在由互联网名字和数字分配机构ICANN进行分配&lt;/p&gt;
+
+&lt;p&gt;IP地址的编址方法共经历了三个历史阶段&lt;/p&gt;
+
+&lt;p&gt;分类的IP地址：这是最基本的编址方法，在1981年就通过了相应的标准协议&lt;/p&gt;
+
+&lt;p&gt;子网的划分：这是对最基本的编址方法的改进，其标准RFC 950在1985年通过&lt;/p&gt;
+
+&lt;p&gt;构成超网：这是比较新的无分类编址方法。1993年提出后很快就得到推广应用&lt;/p&gt;
+
+&lt;p&gt;分类的IP地址就是将IP地址划分成若干个固定类，每一类地址都由两个固定长度的字段组成&lt;/p&gt;
+
+&lt;p&gt;其中第一个字段是网络号net-id，它标志主机（或路由器）所连接到的网络。一个网络号在整个互联网范围内必须是唯一的&lt;/p&gt;
+
+&lt;p&gt;第二个字段是主机号host-id，它标志该主机（或路由器）。一台主机号在他前面的网络号所指明的网络范围内必须是唯一的&lt;/p&gt;
+
+&lt;p&gt;由此可见，一个IP地址在整个互联网范围内是唯一的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午4.05.15.png&quot; alt=&quot;截屏2020-06-02 下午4.05.15&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;把IP地址划分为A类、B类、C类三个类别，当初是这样考虑的。各种网络的差异很大，有的网络拥有很多主机，而有的网络上的主机则很少。把IP地址划分为A类、B类、C类是为了更好的满足不同用户的要求&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午4.08.10.png&quot; alt=&quot;截屏2020-06-02 下午4.08.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、常用的三种类别的IP地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午4.20.30.png&quot; alt=&quot;截屏2020-06-02 下午4.20.30&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午4.23.00.png&quot; alt=&quot;截屏2020-06-02 下午4.23.00&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;IP地址的重要特点：&lt;/p&gt;
+
+&lt;p&gt;(1)IP地址是一种分等级的地址结构&lt;/p&gt;
+
+&lt;p&gt;分等级的好处是：第一，IP地址管理机构在分配IP地址时只分配网络号，而剩下的主机号则由得到该网络的单位自行分配，这样就方便了IP地址的管理。第二，路由器仅根据目的主机所连接的网络号来转发分组，而不考虑目的主机号，这样就可以使路由表中的项目大大减少，从而减小了路由表所占存储空间以及查找路由表的时间&lt;/p&gt;
+
+&lt;p&gt;(2)实际上IP地址是标志一台主机（或路由器）和一条链路的接口。当一台主机同时连接到两个网络上时，该主机就必须同时具有两个相应的IP地址，其网络号必须是不同的。这种主机称为多归属主机。由于一个路由器至少应当连接到两个网络，因此一个路由器至少应当有两个不同的IP地址&lt;/p&gt;
+
+&lt;p&gt;(3)按照互联网的观点，一个网络是指具有相同网络号net-id的主机的集合。因此，用转发器或网桥连接起来的若干个局域网仍为一个网络，因为这些局域网都具有同样的网络号。&lt;strong&gt;具有不同网络号的局域网必须使用路由器进行互连&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;(4)在IP地址中，所有分配到网络号的网络都是平等的。互联网平等对待每一个IP地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午4.54.36.png&quot; alt=&quot;截屏2020-06-02 下午4.54.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在同一个局域网上的主机或路由器的IP地址中的网络号必须是一样的&lt;/p&gt;
+
+&lt;p&gt;用网桥（它只在链路层工作）互连的网段仍然是一个局域网，只能有一个网络号&lt;/p&gt;
+
+&lt;p&gt;路由器总是具有两个或两个以上的IP地址。即路由器的每一个接口都有一个不同网络号的IP地址&lt;/p&gt;
+
+&lt;p&gt;当两个路由器直接相连时（例如通过一条租用线路），在连线两端的接口处，可以分配也可以不分配IP地址。如分配了IP地址，则这一段连线就构成了一种只包含一段线路的特殊网络。之所以叫做网络是因为他有IP地址。但为了节省IP地址资源，对于这一种仅有连线的特殊网络，现在也常常不分配IP地址。通常把这样的特殊网络叫做无编号网络或无名网络&lt;/p&gt;
+
+&lt;h3 id=&quot;ip地址与硬件地址&quot;&gt;IP地址与硬件地址&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午5.26.46.png&quot; alt=&quot;截屏2020-06-02 下午5.26.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;从层次的角度看，物理地址是数据链路层和物理层使用的地址，而IP地址是网络层和以上各层使用的地址，是一种逻辑地址（称IP地址为逻辑地址是因为IP地址是用软件实现的）&lt;/p&gt;
+
+&lt;p&gt;MAC帧在传送时使用的源地址和目的地址都是硬件地址，这两个硬件地址都写在MAC帧的首部中&lt;/p&gt;
+
+&lt;p&gt;连接在通信链路上的设备（主机或路由器）在收到MAC帧时，根据MAC帧首部中的硬件地址决定收下或丢弃。只有在剥去MAC帧的首尾部后把MAC层的数据上交给网络层后，网络层才能在IP数据报的首部中找到源IP地址和目的地址&lt;/p&gt;
+
+&lt;p&gt;IP地址放在IP数据包的首部，硬件地址则放在MAC帧的首部&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午5.32.46.png&quot; alt=&quot;截屏2020-06-02 下午5.32.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午5.40.03.png&quot; alt=&quot;截屏2020-06-02 下午5.40.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（1）在IP层抽象的互联网只能看到IP数据报&lt;/p&gt;
+
+&lt;p&gt;（2）虽然IP数据报首部由源站IP地址，但路由器只根据目的站的IP地址的网络号进行选择&lt;/p&gt;
+
+&lt;p&gt;（3）在局域网的链路层，只能看见MAC帧。IP数据报被封装在MAC帧中。MAC帧在不同网络上传送时，其首部中的源地址和目的地址要发生变化。MAC帧中的首部的这种变化，在上面的IP层是看不见的&lt;/p&gt;
+
+&lt;p&gt;（4）尽管互连在一起的网络的硬件地址体系各不相同，但IP层抽象的互联网却屏蔽了下层这些很复杂的细节。只要我们在网络层上讨论问题，就能够使用统一的、抽象的IP地址研究主机和主机或路由器之间的通信&lt;/p&gt;
+
+&lt;h3 id=&quot;地址解析协议arp&quot;&gt;地址解析协议ARP&lt;/h3&gt;
+
+&lt;p&gt;已经知道了一个机器的IP地址，需要找出其相应的硬件地址。ARP就是用来解决这样的问题的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午5.46.07.png&quot; alt=&quot;截屏2020-06-02 下午5.46.07&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午5.49.00.png&quot; alt=&quot;截屏2020-06-02 下午5.49.00&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面就介绍ARP协议的要点&lt;/p&gt;
+
+&lt;p&gt;网络层使用的IP地址，但在实际网络的链路上传输数据帧时，最终还是必须使用该网络的硬件地址。但IP地址和下面的网络的硬件地址之间由于格式不同而不存在简单的映射关系（例如，IP地址有32位，而局域网的硬件地址是48位）。此外，在一个网络上经常会有新的主机加入进来，或撤走一些主机。更换网络适配器也会使主机的硬件地址改变。地址协议ARP解决这个问题的方法是在主机ARP高速缓存中存放一个从IP地址到硬件地址的映射表，并且这个映射表还经常动态更新&lt;/p&gt;
+
+&lt;p&gt;每一台主机都设有一个ARP动态高速缓存（ARP cache），里面有本局域网上的各主机和路由器的IP地址到硬件地址的映射表，这些都是该主机目前知道的一些地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午6.40.04.png&quot; alt=&quot;截屏2020-06-02 下午6.40.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ARP对保存在高速缓存中的每一个映射地址项目都设置生存时间。凡超过生存时间的项目就从高速缓存中删除掉。设置这种地址映射项目的生存时间是很重要的&lt;/p&gt;
+
+&lt;p&gt;ARP是解决同一个局域网上的主机或路由器的IP地址和硬件地址的映射问题&lt;/p&gt;
+
+&lt;p&gt;如果所要找的主机和源主机不在同一个局域网，就无法解析出另一个局域网上主机的硬件地址，实际上主机也不需要知道远程主机的硬件地址&lt;/p&gt;
+
+&lt;p&gt;源主机发送给目的主机的IP数据报首先要通过与源主机连接在同一个局域网的路由器来转发到下一个路由器&lt;/p&gt;
+
+&lt;p&gt;从IP地址到硬件地址的解析是自动进行的，主机的用户对这种地址解析过程是不知道的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午6.50.04.png&quot; alt=&quot;截屏2020-06-02 下午6.50.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;既然在网络链路上传送的帧最终是按照硬件地址找到目的主机的，那么为什么我们还要使用抽象的IP地址，而不直接使用硬件地址进行通信&lt;/p&gt;
+
+&lt;p&gt;由于全世界存在着各式各样的网络，他们使用不同的硬件地址。要使用这些异构网络能够互相通信就必须进行非常复杂的硬件地址转换工作，因此由用户或用户主机来完成这项工作几乎是不可能的事。但IP编址把这个复杂的问题解决了。连接到互联网的主机只需各自拥有一个唯一的IP地址，他们之间的通信就像连接在同一个网络上那样简单方便，因为上述的调用ARP的复杂过程都是由计算机软件自动进行的，对用户来说是看不见这种调用过程的&lt;/p&gt;
+
+&lt;p&gt;因此，在虚拟的IP网络上用IP地址进行通信给广大的计算机用户带来很大的方便&lt;/p&gt;
+
+&lt;h3 id=&quot;ip数据报的格式&quot;&gt;IP数据报的格式&lt;/h3&gt;
+
+&lt;p&gt;IP数据报的格式能够说明IP协议都具有什么功能&lt;/p&gt;
+
+&lt;p&gt;在TCP/IP的标准中，各种数据格式常常以32位（即4字节）为单位来描述&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午6.56.43.png&quot; alt=&quot;截屏2020-06-02 下午6.56.43&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首部和数据两部分&lt;/p&gt;
+
+&lt;p&gt;首部的前一部分是固定长度，共20字节，是所有IP数据报必须具有的&lt;/p&gt;
+
+&lt;p&gt;在首部的固定部分的后面是一些可选字段，其长度是可变的&lt;/p&gt;
+
+&lt;p&gt;1、IP数据报首部的固定部分中的各字段&lt;/p&gt;
+
+&lt;p&gt;（1）版本&lt;/p&gt;
+
+&lt;p&gt;指IP协议的版本，通信双方使用的IP协议的版本必须一致&lt;/p&gt;
+
+&lt;p&gt;（2）首部长度&lt;/p&gt;
+
+&lt;p&gt;可表示的最大十进制数是15，单位是4字节。因为IP首部的固定长度是20字节，所以首部长度字段的最小值是5。当IP分组的首部长度不是4字节的整数倍时，必须利用最后的填充字段加以填充。因此IP数据报的数据部位永远在4字节的整数倍开始，这样在实现IP协议时较为方便。首部长度限制为60字节的缺点是有时可能不够用，但这样做是希望用户尽量较少开销。最常用的首部长度是20字节，这是不使用任何选项&lt;/p&gt;
+
+&lt;p&gt;（3）区分服务&lt;/p&gt;
+
+&lt;p&gt;用来获得更好的服务。这个字段在旧标准中叫做服务类型，但实际上一直没有被使用过。1998年IETF把这个字段改名为区分服务DS。只有在使用区分服务时，这个字段才起作用。在一般情况下都不使用这个字段&lt;/p&gt;
+
+&lt;p&gt;（4）总长度&lt;/p&gt;
+
+&lt;p&gt;首部和数据之和的长度，单位为字节&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午7.17.36.png&quot; alt=&quot;截屏2020-06-02 下午7.17.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;虽然使用尽可能长的IP数据报会使传输效率得到提高，这是因为每一个IP数据报中首部长度占数据报总长度的比例就会变小&lt;/p&gt;
+
+&lt;p&gt;但数据报短些也有好处，每一个IP数据报越短，路由器转发的速度就越快&lt;/p&gt;
+
+&lt;p&gt;为此，IP协议规定，在互联网中所有的主机和路由器，必须能够接受长度不超过576字节的数据报&lt;/p&gt;
+
+&lt;p&gt;当主机需要发送长度超过576字节的数据报时，应当先了解一下，目的主机能否接受所有发送的数据报长度。否则，就要进行分片&lt;/p&gt;
+
+&lt;p&gt;在进行分片时，数据报首部的总长度字段是指分片后的，每一个分片的首部长度与该分片的数据长度的总和&lt;/p&gt;
+
+&lt;p&gt;（5）标识&lt;/p&gt;
+
+&lt;p&gt;占16位。IP软件在存储器中维持一个计数器，每产生一个数据报，计数器就加1，并将此值赋给标识字段。但这个标识并不是序号，因为IP是无连接服务，数据报不存在按序接受的问题。当数据报由于长度超过网络的MTU而必须分片时，这个标识字段的值就被复制到所有的数据报片的标识字段中&lt;/p&gt;
+
+&lt;p&gt;相同的标识字段的值使分片后的各数据报片最后能够正确地重装成为原来的数据报&lt;/p&gt;
+
+&lt;p&gt;（6）标志&lt;/p&gt;
+
+&lt;p&gt;占3位，目前只有两位有意义&lt;/p&gt;
+
+&lt;p&gt;标志字段中的最低位记为MF more fragment。MF=1表示后面还有分片的数据报。MF=0表示这已是若干数据报片中的最后一个&lt;/p&gt;
+
+&lt;p&gt;标志字段中间的一位记为DF don’t Fragment。意思是不能分片，只有当DF=0时才能分片&lt;/p&gt;
+
+&lt;p&gt;（7）片偏移&lt;/p&gt;
+
+&lt;p&gt;占13位。片偏移指出：较长的分组在分片后，某片在原分组中的相对位置。也就是说，相对于用户数据字段的起点，该片从何处开始。片偏移以8个字节为偏移单位。这就是说，每个分片的长度一定是8字节的整数倍&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午7.32.17.png&quot; alt=&quot;截屏2020-06-02 下午7.32.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（8）生存时间&lt;/p&gt;
+
+&lt;p&gt;TTL time to live。表明数据报在网络中的寿命。由发出数据包的源点设置这个字段，其目的是防止无法交付的数据报无限制地在互联网中兜圈子，因而白白消耗网络资源&lt;/p&gt;
+
+&lt;p&gt;最初的设计是以秒为单位，每经过一个路由器时，就把TTL减去数据报在路由器所消耗的一段时间。若数据报在路由器消耗的时间小于一秒，就把TTL值减1。当TTL值减为零时，就丢弃这个数据报&lt;/p&gt;
+
+&lt;p&gt;然而随着技术的进步，路由器处理数据报所需的时间不断在缩短，一般都远远小于1秒，后来就把TTL字段的功能改为跳数限制。路由器在每次转发数据报之前就把TTL值减1。若TTL值减小为零，就丢弃这个数据报，不再转发&lt;/p&gt;
+
+&lt;p&gt;因此，现在TTL的单位不再是秒，而是跳数。TTL的意义是指明数据报在互联网中至多可经过多少个路由器。显然，数据报能在互联网中经过的路由器的最大数值是225&lt;/p&gt;
+
+&lt;p&gt;若把TTL的初始值设置为1，则表示这个数据报只能在本局域网中传送&lt;/p&gt;
+
+&lt;p&gt;（9）协议&lt;/p&gt;
+
+&lt;p&gt;协议字段指出此数据报携带的数据是使用何种协议，以便使目的主机的IP层知道应将数据部分上交给哪个协议进行处理&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午7.40.43.png&quot; alt=&quot;截屏2020-06-02 下午7.40.43&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（10）首部检验和&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午7.42.45.png&quot; alt=&quot;截屏2020-06-02 下午7.42.45&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（11）源地址&lt;/p&gt;
+
+&lt;p&gt;占32位&lt;/p&gt;
+
+&lt;p&gt;（12）目的地址&lt;/p&gt;
+
+&lt;p&gt;占32位&lt;/p&gt;
+
+&lt;p&gt;2、IP数据报首部的可变部分&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午7.44.17.png&quot; alt=&quot;截屏2020-06-02 下午7.44.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ip层转发分组的流程&quot;&gt;IP层转发分组的流程&lt;/h3&gt;
+
+&lt;p&gt;在路由表中，对每一条路由最主要的是以下两个信息：&lt;/p&gt;
+
+&lt;p&gt;（目的网络地址，下一条地址）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午8.57.56.png&quot; alt=&quot;截屏2020-06-02 下午8.57.56&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样的简化图强调了在互联网上转发分组时，是从一个路由器转发到下一个路由器&lt;/p&gt;
+
+&lt;p&gt;我们根据目的网络地址来确定下一条路由器，这样做可得出以下的结果&lt;/p&gt;
+
+&lt;p&gt;（1）IP数据报最终一定可以找到目的主机所在目的网络上的路由器（可能要通过多次的间接交付）&lt;/p&gt;
+
+&lt;p&gt;（2）只有到达最后一个路由器时，才试图向目的主机进行直接交付&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午9.03.03.png&quot; alt=&quot;截屏2020-06-02 下午9.03.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午9.03.16.png&quot; alt=&quot;截屏2020-06-02 下午9.03.16&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在IP数据报的首部中没有地方可以用来指明下一跳路由器的IP地址。在IP数据报的首部写上的是源IP地址和目的IP地址，而没有中间经过的路由器的IP地址。既然IP数据报中没有下一跳路由器的IP地址，那么待转发的数据报又怎样能够找到下一跳路由器呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午9.11.28.png&quot; alt=&quot;截屏2020-06-02 下午9.11.28&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;路由表并没有给分组指明到某个网络的完整路径。路由表指出，到某个网络应当先到某个路由器，在到达下一跳路由器后，再继续查找其路由表，知道在下一步应当到哪一个路由器。这样一步一步地查找下去，直至最后到达目的网络&lt;/p&gt;
+
+&lt;p&gt;上面讨论的是IP层怎样根据路由表的内容进行分组转发，而没有涉及到路由表一开始是如何建立的以及路由表的内容应如何更新&lt;/p&gt;
+
+&lt;p&gt;再进一步讨论路由选择之前， 我们还要介绍划分子网和构造超网这两个非常重要的概念&lt;/p&gt;
+
+&lt;h2 id=&quot;划分子网和构造超网&quot;&gt;划分子网和构造超网&lt;/h2&gt;
+
+&lt;h3 id=&quot;划分子网&quot;&gt;划分子网&lt;/h3&gt;
+
+&lt;p&gt;1、从两级IP地址到三级IP地址&lt;/p&gt;
+
+&lt;p&gt;在今天看来，在ARPANET的早期，IP地址的设计确实不够合理&lt;/p&gt;
+
+&lt;p&gt;第一，IP地址空间的利用率有时很低&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午9.57.18.png&quot; alt=&quot;截屏2020-06-02 下午9.57.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第二，给每一个物理网络分配一个网络号会使路由表变得太大因而使网络性能变坏&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午9.58.49.png&quot; alt=&quot;截屏2020-06-02 下午9.58.49&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第三，两级IP地址不够灵活&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.00.10.png&quot; alt=&quot;截屏2020-06-02 下午10.00.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了解决上述问题，从1985年起在IP地址中又增加了一个子网号字段，使两级IP地址变成为三级IP地址，它能够较好的解决上述问题，并且使用起来也很灵活&lt;/p&gt;
+
+&lt;p&gt;这种做法叫做划分子网[RFC 950]，或子网寻址或子网路由选择。划分子网已成为互联网的正式标准协议&lt;/p&gt;
+
+&lt;p&gt;划分子网的基本思路如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.06.10.png&quot; alt=&quot;截屏2020-06-02 下午10.06.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.06.22.png&quot; alt=&quot;截屏2020-06-02 下午10.06.22&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.06.45.png&quot; alt=&quot;截屏2020-06-02 下午10.06.45&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.08.59.png&quot; alt=&quot;截屏2020-06-02 下午10.08.59&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、子网掩码&lt;/p&gt;
+
+&lt;p&gt;我们知道，从IP数据报的首部无法看出源主机或目的主机所连接的网络是否进行了子网的划分。这是因为32位的IP地址本身以及数据报的首部都没有包含任何有关子网划分的信息。因此必须另外想办法，这就是使用子网掩码&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.20.57.png&quot; alt=&quot;截屏2020-06-02 下午10.20.57&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.42.41.png&quot; alt=&quot;截屏2020-06-02 下午10.42.41&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用子网掩码的好处就是：不管网络有没有划分子网，只要把子网掩码和IP地址进行逐位的与运算，就立即得出网络地址来。这样在路由器处理到来的分组就可采用同样的算法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-02 下午10.44.39.png&quot; alt=&quot;截屏2020-06-02 下午10.44.39&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总之，在这个B类网络的外面和里面，看到的网络是不一样的&lt;/p&gt;
+
+&lt;p&gt;在不划分子网时，既然没有子网，为什么还要使用子网掩码？这就是为了更便于查找路由表&lt;/p&gt;
+
+&lt;p&gt;现在的互联网标准规定：所有的网络都必须使用子网掩码，同时在路由器的路由表中也必须要有子网掩码这一栏。如果一个网络不划分子网，那么该网络的子网掩码就是用默认子网掩码。默认子网掩码中的1的位置和某个不划分子网的IP地址中的网络号字段net-id正好相对应&lt;/p&gt;
+
+&lt;p&gt;因此，若用默认子网掩码和某个不划分子网的IP地址逐位相与，就应当能得出该IP地址的网络地址来。这样做可以不用查找该地址的类别位就能知道这是哪一类的IP地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.12.35.png&quot; alt=&quot;截屏2020-06-03 上午12.12.35&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;子网掩码是一个网络或一个子网的重要属性&lt;/p&gt;
+
+&lt;p&gt;在RFC 950称为互联网的正式标准后，路由器在和相邻路由器交换路由信息时，必须把自己所在网络（或子网）的子网掩码告诉相邻路由器。在路由器的路由表中的每一个项目，除了要给出目的网络地址外，还必须同时给出该网络的子网掩码。若一个路由器连接在两个子网上就拥有两个网络地址和两个子网掩码&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.16.28.png&quot; alt=&quot;截屏2020-06-03 上午12.16.28&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.16.39.png&quot; alt=&quot;截屏2020-06-03 上午12.16.39&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;子网数是根据子网号计算出来的。除去全0和全1这两种情况，就得出表中的子网数&lt;/p&gt;
+
+&lt;p&gt;表中的子网号的位数没有0，1，15，16这四种情况，因为这没有意义&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.18.28.png&quot; alt=&quot;截屏2020-06-03 上午12.18.28&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;划分子网增加了灵活性，但却减少了能够连接在网络上的主机总数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;使用子网时分组的转发&quot;&gt;使用子网时分组的转发&lt;/h3&gt;
+
+&lt;p&gt;我们应当注意到，使用子网划分后，路由表必须包含以下三项内容：目的网络地址、子网掩码和下一跳地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.27.54.png&quot; alt=&quot;截屏2020-06-03 上午12.27.54&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午12.29.55.png&quot; alt=&quot;截屏2020-06-03 上午12.29.55&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;无分类编址cidr构造超网&quot;&gt;无分类编址CIDR（构造超网）&lt;/h3&gt;
+
+&lt;p&gt;1、网络前缀&lt;/p&gt;
+
+&lt;p&gt;划分子网在一定程度上缓解了互联网在发展中遇到的困难。然而在1992年互联网仍然面临三个必须尽早解决的问题，这就是：&lt;/p&gt;
+
+&lt;p&gt;（1）B类地址在1992年已分配了一半，眼看很快就将全部分配完毕&lt;/p&gt;
+
+&lt;p&gt;（2）互联网主干网上的路由表中的项目数急剧增长&lt;/p&gt;
+
+&lt;p&gt;（3）整个IPv4的地址空间最终将全部耗尽&lt;/p&gt;
+
+&lt;p&gt;当时预计前两个问题将在1994年变得非常重要。因此IETF很快就研究出采用无分类编址的方法来解决前两个问题。IETF认为第三个问题属于更加长远的问题，因此专门成立IPv6工作组负责研究解决新版本IP协议的问题&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.30.09.png&quot; alt=&quot;截屏2020-06-03 上午10.30.09&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CIDR最主要的特点有两个&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.35.25.png&quot; alt=&quot;截屏2020-06-03 上午10.35.25&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.37.59.png&quot; alt=&quot;截屏2020-06-03 上午10.37.59&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了更方便地进行路由选择，CIDR使用32位的地址掩码address mask。地址掩码由一串1和一串0组成，而1的个数就是网络前缀的长度。虽然CIDR不使用子网了，但由于目前仍有一些网络还使用子网划分和子网掩码，因此CIDR使用的地址掩码也可继续称为子网掩码。斜线记法中，斜线后面的数字就是地址掩码中1的个数&lt;/p&gt;
+
+&lt;p&gt;CIDR不使用子网是指CIDR并没有32位地址中指明若干位作为子网字段。但分配到一个CIDR地址块的单位，仍然可以在本单位内根据需要划分出一些子网。这些子网也都只有一个网络前缀和一台主机号字段，但子网的网络前缀比整个单位的网络前缀要长些&lt;/p&gt;
+
+&lt;p&gt;斜线记法还有一个好处就是他除了表示一个IP地址外，还提供了其他一些重要信息，如这个地址块的最小地址和最大地址&lt;/p&gt;
+
+&lt;p&gt;由于一个CIDR地址块中还有很多地址，所以在路由表中就利用CIDR地址块来查找目的网络。这种地址的聚合常称为路由聚合，他使得路由表中的一个项目可以表示原来传统分类地址的很多个路由。路由聚合也称构成超网&lt;/p&gt;
+
+&lt;p&gt;路由聚合有利于减少路由器之间的路由选择信息的交换，从而提高了整个互联网的性能&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.54.26.png&quot; alt=&quot;截屏2020-06-03 上午10.54.26&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.54.46.png&quot; alt=&quot;截屏2020-06-03 上午10.54.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.54.58.png&quot; alt=&quot;截屏2020-06-03 上午10.54.58&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午10.56.17.png&quot; alt=&quot;截屏2020-06-03 上午10.56.17&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用CIDR的一个好处就是可以更加有效的分配IPv4的地址空间，可根据客户的需要分配适当大小的CIDR地址块&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午11.01.06.png&quot; alt=&quot;截屏2020-06-03 上午11.01.06&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 上午11.57.48.png&quot; alt=&quot;截屏2020-06-03 上午11.57.48&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、最长前缀匹配&lt;/p&gt;
+
+&lt;p&gt;在使用CIDR时，由于采用了网络前缀这种记法，IP地址由网络前缀和主机号这两个部分组成，因此在路由表中的项目也要有相应的改变。这时，每个项目由网络前缀和下一跳地址组成。但是在查找路由表时可能会得到不止一个匹配结果&lt;/p&gt;
+
+&lt;p&gt;应当从匹配结果中选择具有最长网络前缀的路由。这叫做最长前缀匹配&lt;/p&gt;
+
+&lt;p&gt;这是因为网络前缀越长，其地址块就越小，因而路由就越具体&lt;/p&gt;
+
+&lt;p&gt;最长前缀匹配又称为最长匹配或最佳匹配&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.07.10.png&quot; alt=&quot;截屏2020-06-03 下午12.07.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果IP地址的分配一开始就采用CIDR，那么我们可以按网络所在的地理位置来分配地址块，这样就可以大大减小路由表中的路由项目&lt;/p&gt;
+
+&lt;p&gt;例如，可以将世界划分为四大地区，每一地区分配一个CIDR地址块&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.10.03.png&quot; alt=&quot;截屏2020-06-03 下午12.10.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面的每一个地址块包含有约3200万个地址。这种分配地址的方法就使得IP地址与地理位置相关联。它的好处是可以大大压缩路由表中的项目数&lt;/p&gt;
+
+&lt;p&gt;凡是从中国发往北美的IP数据报都先送交于美国的一个路由器，因此在路由表中使用一个项目就行了&lt;/p&gt;
+
+&lt;p&gt;但是，在使用CIDR之前，互联网的地址管理机构没有按地理位置来分配IP地址。现在要把已分配出的IP地址收回再重新分配是件十分困难的事，因为这涉及到很多正在工作的主机必须改变其IP地址。尽管这样，CIDR的使用已经推迟了IP地址耗尽的日期&lt;/p&gt;
+
+&lt;p&gt;3、使用二叉搜索查找路由表&lt;/p&gt;
+
+&lt;p&gt;使用CIDR后，由于要寻找最长前缀匹配，使路由表的查找过程变得更加复杂了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.18.51.png&quot; alt=&quot;截屏2020-06-03 下午12.18.51&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.38.58.png&quot; alt=&quot;截屏2020-06-03 下午12.38.58&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.39.33.png&quot; alt=&quot;截屏2020-06-03 下午12.39.33&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.42.35.png&quot; alt=&quot;截屏2020-06-03 下午12.42.35&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;网际控制报文协议icmp&quot;&gt;网际控制报文协议ICMP&lt;/h2&gt;
+
+&lt;p&gt;为了更有效地转发IP数据报和提高交付成功的机会，再网际层使用了网际控制报文协议ICMP&lt;/p&gt;
+
+&lt;p&gt;ICMP允许主机或路由器报告差错情况和提供有关异常情况的报告。ICMP是互联网的标准协议。但ICMP不是高层协议，而是IP层的协议&lt;/p&gt;
+
+&lt;p&gt;ICMP报文作为IP层数据报的数据，加上数据报的首部，组成IP数据报发送出去&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午12.47.09.png&quot; alt=&quot;截屏2020-06-03 下午12.47.09&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;icmp报文的种类&quot;&gt;ICMP报文的种类&lt;/h3&gt;
+
+&lt;p&gt;ICMP报文的种类有两种，即ICMP差错报告报文和ICMP查询报文&lt;/p&gt;
+
+&lt;p&gt;ICMP报文的前4个字节是统一的格式，共有三个字段：类型、代码和检验和。接着的4个字节的内容与ICMP的类型有关，最后面是数据字段，其长度取决于ICMP的类型&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午1.05.54.png&quot; alt=&quot;截屏2020-06-03 下午1.05.54&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午1.09.09.png&quot; alt=&quot;截屏2020-06-03 下午1.09.09&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们知道，在互联网的主机中也要有一个路由表。当主机要发送数据报时，首先是查找主机自己的路由表，看应当从哪一个接口把数据报发送出去。在互联网中主机的数量远大于路由器的数量，出于效率的考虑，这些主机不和连接在网络上的路由器定期交换路由信息。在主机刚开始工作时，一般都在路由表中设置一个默认路由器的IP地址。不管数据报要发送到那个目的地址，都一律先把数据报传送给这个默认路由器，而这个默认路由器知道到每一个目的网络的最佳路由（通过和其他路由器交换路由信息）。如果默认路由器发现主机发往某个目的地址的数据报的最佳路由应当经过网络上的另一个路由器R时，就用改变路由报文把这情况告诉主机。于是，该主机就在其路由表中增加一个项目：到某某目的地址应经过路由器R（而不是默认路由器）&lt;/p&gt;
+
+&lt;p&gt;所有的ICMP差错报文中的数据字段都具有同样的格式。把收到的需要进行差错处错报告的IP数据报的首部和数据字段的前8个字节提取出来，作为ICMP报文的数据字段。再加上相应的ICMP差错报告报文的前8个字节，就构成了ICMP差错报告报文。提取收到的数据报的数据字段前8个字节是为了得到运输层的端口号（对于TCP和UDP）以及运输层报文的发送序号（对于TCP）。这些信息对于源点通知高层协议是有用的&lt;/p&gt;
+
+&lt;p&gt;整个ICMP报文作为IP数据报的数据字段发送给源点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.12.39.png&quot; alt=&quot;截屏2020-06-03 下午2.12.39&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下面是不应发送ICMP差错报告报文的几种情况&lt;/p&gt;
+
+&lt;p&gt;对ICMP差错报告报文，不再发送ICMP差错报告报文&lt;/p&gt;
+
+&lt;p&gt;对第一个分片的数据报片的所有后续数据报片，都不发送ICMP差错报告报文&lt;/p&gt;
+
+&lt;p&gt;对具有多播地址的数据报，都不发送ICMP差错报告报文&lt;/p&gt;
+
+&lt;p&gt;对具有特殊地址（如127.0.0.0或0.0.0.0）的数据报，不发送ICMP差错报告报文&lt;/p&gt;
+
+&lt;p&gt;常用的ICMP询问报文有两种，即：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.15.19.png&quot; alt=&quot;截屏2020-06-03 下午2.15.19&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;icmp的应用举例&quot;&gt;ICMP的应用举例&lt;/h3&gt;
+
+&lt;p&gt;ICMP的一个重要应用就是分组间探测PING（Packet InterNet Groper），用来测试两台主机之间的连通性&lt;/p&gt;
+
+&lt;p&gt;PING使用了ICMP回送请求与回送回答报文。PING是应用层直接使用网络层ICMP的一个例子。他没有通过运输层的TCP或UDP&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.18.14.png&quot; alt=&quot;截屏2020-06-03 下午2.18.14&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.19.31.png&quot; alt=&quot;截屏2020-06-03 下午2.19.31&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;另一个非常有用的应用时traceroute（这时UNIX操作系统中名字），他用来跟踪一个分组从源点到终点的路径。在Windows操作系统下这个命令是tracert&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.21.07.png&quot; alt=&quot;截屏2020-06-03 下午2.21.07&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样，源主机达到了自己的目的，因为这些路由器和最后目的主机发来的ICMP报文正好给出了源主机想知道的路由信息——到达目的主机所经络的路由器的IP地址，以及到其中的每一个路由器的往返时间&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午2.23.20.png&quot; alt=&quot;截屏2020-06-03 下午2.23.20&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;每一行有三个时间出现，是因为对于每一个TTL值，源主机要发送三次同样的IP数据报&lt;/p&gt;
+
+&lt;p&gt;我们还应注意到，从原则上讲，IP数据报经过的路由器越多，所花费的时间也会越多。但有时正好相反。这是因为互联网的拥塞程度随时都在变化，也很难预料到。因此，完全有这样的可能，经过更多的路由器反而花费更少的时间&lt;/p&gt;
+
+&lt;h2 id=&quot;互联网的路由选择协议&quot;&gt;互联网的路由选择协议&lt;/h2&gt;
+
+&lt;h3 id=&quot;有关路由选择协议的几个基本概念&quot;&gt;有关路由选择协议的几个基本概念&lt;/h3&gt;
+
+&lt;p&gt;1、理想的路由选择算法&lt;/p&gt;
+
+&lt;p&gt;路由选择协议的核心就是路由算法，即需要何种算法来获得路由表中的各项目。一个理想的路由算法应具有如下的一些特点&lt;/p&gt;
+
+&lt;p&gt;（1）算法必须是正确的和完整的&lt;/p&gt;
+
+&lt;p&gt;（2）算法在计算上应简单&lt;/p&gt;
+
+&lt;p&gt;（3）算法能适应通信量和网络拓扑的变化&lt;/p&gt;
+
+&lt;p&gt;自适应性。当网络中的通信量发生变化时，算法能自适应的改变路由以均衡各链路的负载。当某个或某些结点、链路发生故障不能工作，或者修理好了再投入运行时，算法也能及时的改变路由。有时称这种自适应性为稳健性robustness&lt;/p&gt;
+
+&lt;p&gt;（4）算法应具有稳定性&lt;/p&gt;
+
+&lt;p&gt;在网络通信量和网络拓扑结构相对稳定的情况下，路由算法应收敛于一个可以接受的解，而不应使得出的路由不停的变化&lt;/p&gt;
+
+&lt;p&gt;（5）算法应是公平的&lt;/p&gt;
+
+&lt;p&gt;路由选择算法应对所有用户（除对少数优先级高的用户）都是平等的&lt;/p&gt;
+
+&lt;p&gt;（6）算法应是最佳的&lt;/p&gt;
+
+&lt;p&gt;对于某些网络，网络的可靠性有时要比最小的分组平均时延或最大吞吐量更加重要。因此，所谓最佳只能是相对于某一种特定要求下得出的较为合理的选择而已&lt;/p&gt;
+
+&lt;p&gt;一个实际的路由选择算法，应尽可能接近于理想的算法。在不同的应用条件下，对以上提出的六个方面也可有不同的侧重&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 上午10.28.25.png&quot; alt=&quot;截屏2020-06-04 上午10.28.25&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、分层次的路由选择协议&lt;/p&gt;
+
+&lt;p&gt;互联网采用的路由选择协议主要是自适应的（即动态的）、分布式路由选择协议。由于以下两个原因，互联网采用分层次的路由选择协议&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 上午10.39.04.png&quot; alt=&quot;截屏2020-06-04 上午10.39.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为此，可以把整个互联网划分为许多较小的自治系统，一般都记为AS。自治系统AS是在单一技术管理下的一组路由器，而这些路由器使用一种自治系统内部的路由选择协议和共同的度量。一个AS对其他AS表现出的是一个单一的和一致的路由选择策略 RFC 4271&lt;/p&gt;
+
+&lt;p&gt;在目前的互联网中，一个大的ISP就是一个自治系统。这样，互联网就把路由选择协议划分为两大类&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 上午10.53.40.png&quot; alt=&quot;截屏2020-06-04 上午10.53.40&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 上午10.54.56.png&quot; alt=&quot;截屏2020-06-04 上午10.54.56&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但每个自治系统都有一个或多个路由器除运行本系统的内部路由选择协议外，还要运行自治系统间的路由选择协议（BGP-4）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 上午10.57.44.png&quot; alt=&quot;截屏2020-06-04 上午10.57.44&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总之，使用分层次的路由选择方法，可将互联网的路由选择协议划分为：&lt;/p&gt;
+
+&lt;p&gt;内部网关协议IGP：具体的协议有多种，如RIP和OSPF等&lt;/p&gt;
+
+&lt;p&gt;外部网关协议EGP：目前使用的协议就是BGP&lt;/p&gt;
+
+&lt;p&gt;对于比较大的自治系统，还可将所有的网络再进行一次划分。例如，可以构筑一个链路速率较高的主干网和许多速率较低的区域网。每个区域网通过路由器连接到主干网。当在一个区域内找不到目的站时，即通过路由器经过主干网到达另一个区域网，或者通过外部路由器到别的自治系统中去查找。下面对这两类协议分别进行介绍&lt;/p&gt;
+
+&lt;h3 id=&quot;内部网关协议rip&quot;&gt;内部网关协议RIP&lt;/h3&gt;
+
+&lt;p&gt;1、工作原理&lt;/p&gt;
+
+&lt;p&gt;RIP是内部网关协议IGP中最先得到广泛使用的协议[RFC 1058]。它的中文名称叫做路由信息协议，但很少被使用。RIP是一种分布式的基于距离向量的路由选择协议，是互联网的标准协议，其最大优点就是简单&lt;/p&gt;
+
+&lt;p&gt;RIP协议要求网络中的每一个路由器都要维护从他自己到其他每一个目的网络的距离记录（因此，这是一组距离，即距离向量）。RIP将距离定义：从一路由器到直接连接的网络的距离定义为1，从一路由器到非直接连接的网络的距离定义为所经过的路由器数加1&lt;/p&gt;
+
+&lt;p&gt;RIP协议的距离也称为跳数hop count，因为每经过一个路由器，跳数就加1。RIP认为好的路由就是他通过的路由器的数目少，即距离短。RIP允许一条路径最多只能包含15各路由器。因此距离等于16时即相当于不可达。可见RIP只适用于小型互联网&lt;/p&gt;
+
+&lt;p&gt;需要注意的是，到直接连接的网络的距离也可定义为0&lt;/p&gt;
+
+&lt;p&gt;RIP不能在两个网络之间同时使用多条路由。RIP选择一条具有最少路由器的路由（即最短路由），哪怕还存在另一条高速（低时延）但路由器数较多的路由&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午1.43.44.png&quot; alt=&quot;截屏2020-06-04 下午1.43.44&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里要强调一点：路由器在刚开始工作的时，它的路由表是空的。然后路由器就得出到直接相连的几个网络的距离。接着，每个路由器也只和数目非常有限的相邻路由器交换并更新路由信息。但经过若干次的更新后，所有的路由器最终都会知道到达本自治系统中任何一个网络的最短距离和下一跳路由器的地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午1.54.05.png&quot; alt=&quot;截屏2020-06-04 下午1.54.05&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;路由表中最主要的信息就是：到某个网络的距离（即最短距离），以及应经过的下一跳地址。路由表更新的原则是找出到每个网络的最短距离。这种更新算法又称为距离向量算法&lt;/p&gt;
+
+&lt;p&gt;2、距离向量算法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午1.55.55.png&quot; alt=&quot;截屏2020-06-04 下午1.55.55&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;RIP协议让一个自治系统中的所有路由器都和自己的相邻路由器定期交换路由信息，并不断更新其路由表，使得从每一个路由器到每一个目的网络的路由都是最短的。这里还应注意，虽然所有的路由表最终都拥有了整个自治系统的全局路由信息，但由于每一个路由器的位置不同，他们的路由表当然也应当是不同的&lt;/p&gt;
+
+&lt;p&gt;3、RIP协议的报文格式&lt;/p&gt;
+
+&lt;p&gt;现在较新的RIP版本是1998年11月公布的RIP2[RFC 2453]（已成为互联网标准），新协议本身并无多大变化，但性能上有些改进。RIP2可以支持变长子网掩码和无分类域间路由选择CIDR。此外，RIP2还提供简单的鉴别过程支持多播&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午2.03.48.png&quot; alt=&quot;截屏2020-06-04 下午2.03.48&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;RIP报文由首部和路由部分组成&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午2.10.47.png&quot; alt=&quot;截屏2020-06-04 下午2.10.47&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;RIP2报文中的路由部分由若干个路由信息组成。地址族标识符（又称为地址类别）字段用来标志所使用的地址协议。如采用IP地址就令这个字段的值为2（原来考虑RIP也可用于其他非TCP/IP协议的情况）。路由标记填入自治系统号ASN（autonomous system number），这是考虑使RIP有可能受到本自治系统以外的路由选择信息。在后面指出某个网络地址、该网络的子网掩码、下一跳路由器地址以及到此网络的距离。一个RIP最多可包括25个路由，如超过，必须再使用一个RIP报文来传送&lt;/p&gt;
+
+&lt;p&gt;RIP2还具有简单的鉴别功能。若使用鉴别功能，则将原来写入第一个路由信息（20字节）的位置用作鉴别。这时应将地址族标识符置为全1，而路由标记写入鉴别类型，剩下的16字节作为鉴别数据。在鉴别数据之后才写入路由信息，但这是最多只能再放入24个路由信息&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RIP存在的一个问题是当网络出现故障时，要经过比较长的时间才能将此信息传送到所有的路由器&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午2.21.20.png&quot; alt=&quot;截屏2020-06-04 下午2.21.20&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;RIP协议的这一特点叫做：好消息传播的快，而坏消息传播的慢&lt;/p&gt;
+
+&lt;p&gt;但如果一个路由器发现了更短的路由，那么这种更新信息就传播的很快&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午2.23.07.png&quot; alt=&quot;截屏2020-06-04 下午2.23.07&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;内部网关协议ospf&quot;&gt;内部网关协议OSPF&lt;/h3&gt;
+
+&lt;p&gt;1、OSPF协议的基本特点&lt;/p&gt;
+
+&lt;p&gt;这个协议的名字是开放最短路径优先OSPF（Open Shortest Path First）。它是为克服RIP的缺点在1989年开发出来的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-04 下午2.26.35.png&quot; alt=&quot;截屏2020-06-04 下午2.26.35&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OSPF最主要的特征就是使用分布式的链路状态协议（link state protocol），而不是像RIP那样的距离向量协议。和RIP协议相比，OSPF的三个要点和RIP的都不一样&lt;/p&gt;
+
+&lt;p&gt;（1）向本自治系统中所有路由器发送信息。这里使用的是洪泛法（flooding），这就是路由器通过所有输出端口向所有相邻的路由器发送信息。而每一个相邻路由器又再将此信息发往其所有的相邻路由器（但不再发送给刚刚发来信息的那个路由器）。这样，最终整个区域中所有的路由器都得到了这个信息的一个副本。更具体的做法后面还要讨论。我们应注意，RIP协议是仅仅向自己相邻的几个路由器发送信息&lt;/p&gt;
+
+&lt;p&gt;（2）发送的信息就是与本路由器相邻的所有路由器的链路状态，但这只是路由器所知道的部分信息。所谓链路状态就是说明本路由器都和哪些路由器相邻，以及该链路的度量。OSPF将这个度量用来表示费用、距离、时延、带宽，等等。这些都由网络管理人员来决定，因此较为灵活。有时为了方便就称这个度量为代价。我们应注意，对于RIP协议，发送的信息是：到所有网络的距离和下一跳路由器&lt;/p&gt;
+
+&lt;p&gt;（3）只有当链路状态发生变化时，路由器才向所有路由器用洪泛法发送此信息，而不像RIP那样，不管网络拓扑有没有发生变化，路由器之间都要定期交换路由表的信息&lt;/p&gt;
+
+&lt;p&gt;从上述的三个方面可以看出，OSPF和RIP的工作原理相差较大&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午1.48.46.png&quot; alt=&quot;截屏2020-06-05 下午1.48.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了使OSPF能够用于规模很大的网络，OSPF将一个自治系统在划分为若干个更小的范围，叫做区域（area）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午1.52.25.png&quot; alt=&quot;截屏2020-06-05 下午1.52.25&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图4-34就表示一个自治系统划分为四个区域。每一个区域都有一个32位的区域标识符（用点分十进制表示）。当然， 一个区域也不能太大，在一个区域内的路由器最好不超过200个&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午1.55.51.png&quot; alt=&quot;截屏2020-06-05 下午1.55.51&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OSPF不用UDP而是直接用IP数据报传送（其IP数据报首部的协议字段值为89）。OSPF构成的数据报很短。这样做可减少路由信息的通信量。数据报很短的另一好处是可以不必将长的数据报分片发送。分片传送的数据报只要丢失一个，就无法组装成原来的数据报，而整个数据报就必须重传&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.00.22.png&quot; alt=&quot;截屏2020-06-05 下午2.00.22&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.01.03.png&quot; alt=&quot;截屏2020-06-05 下午2.01.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;除了以上的几个基本特点外，OSPF还具有下列的一些特点：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.02.47.png&quot; alt=&quot;截屏2020-06-05 下午2.02.47&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、OSPF的五种分组类型&lt;/p&gt;
+
+&lt;p&gt;（1）问候分组，用来发现和维持邻站的可达性&lt;/p&gt;
+
+&lt;p&gt;（2）数据库描述分组，向邻站给出自己的链路状态数据库中的所有的链路状态项目的摘要信息&lt;/p&gt;
+
+&lt;p&gt;（3）链路状态请求分组，向对方请求发送某些链路状态项目的详细信息&lt;/p&gt;
+
+&lt;p&gt;（4）链路状态更新分组，用洪泛法对全网更新链路状态。这种分组是最最复杂的，也是OSPF协议最核心的部分。路由器使用这种分组将其链路状态通知给链路状态。链路状态更新分组共有五种不同的链路状态[RFC 2328]&lt;/p&gt;
+
+&lt;p&gt;（5）链路状态确认分组，对链路更新分组的确认&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.20.55.png&quot; alt=&quot;截屏2020-06-05 下午2.20.55&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在网络运行的过程中，只要有一个路由器的链路状态发生变化，该路由器就要使用链路状态更新分组，向洪泛法向全网更新链路状态&lt;/p&gt;
+
+&lt;p&gt;OSPF使用的是可靠的洪泛法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.23.08.png&quot; alt=&quot;截屏2020-06-05 下午2.23.08&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;收到重复的更新分组只需要发送一次确认。ACK报文即为链路状态确认分组&lt;/p&gt;
+
+&lt;p&gt;为了确保链路状态数据库与全网的状态保持一致，OSPF还规定每隔一段时间，如30分钟，要刷新一次数据库中的链路状态&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.27.43.png&quot; alt=&quot;截屏2020-06-05 下午2.27.43&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;外部网关协议bgp&quot;&gt;外部网关协议BGP&lt;/h3&gt;
+
+&lt;p&gt;1989年，公布了新的外部网关协议——边界网关协议BGP。为简单起见，后面我们把目前使用的最多的版本BGP-4经常简写成BGP。最近已经陆续发布了一些BGP-4的更新文档，但目前BGP-4仍然是草案标准[RFC 4271]&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.32.42.png&quot; alt=&quot;截屏2020-06-05 下午2.32.42&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.33.03.png&quot; alt=&quot;截屏2020-06-05 下午2.33.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;由于上述情况，边界网关协议BGP只能是力求寻找一条能够到达目的网络且比较好的路由（不能兜圈子），而并非要寻找一条最佳路由。BGP采用了路径向量（path vector）路由选择协议，他与距离向量协议（如RIP）和链路状态协议（如OSPF）都有很大的区别&lt;/p&gt;
+
+&lt;p&gt;在配置BGP时，每一个自治系统的管理员要选择至少一个路由器作为该自治系统的BGP发言人。一按来说，两个BGP发言人都是通过一个共享网络连接在一起的，而BGP发言人往往就是BGP边界路由器，但也可以不是BGP边界路由器&lt;/p&gt;
+
+&lt;p&gt;一个BGP发言人与其他AS的BGP发言人要交换路由信息，就要先建立TCP连接（端口号为179），然后在此连接上交换BGP报文以建立BGP会话（session），利用BGP会话交换路由信息，如增加了新的路由，或撤销过时的路由，以及报告出差错的情况等等。使TCP连接能提供可靠的服务，也简化了路由选择协议。使用TCP链接交换路由信息的两个BGP发言人，彼此成为对方的邻站（neighbor）或对等站（peer）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.49.52.png&quot; alt=&quot;截屏2020-06-05 下午2.49.52&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当前互联网的多级结构特点决定了BGP路由选择协议的特点&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午2.53.03.png&quot; alt=&quot;截屏2020-06-05 下午2.53.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;BGP协议交换路由信息的结点数量级是自治系统个数的量级，这要比这些自治系统中的网络数少很多。要在许多自治系统之间寻找一条较好的路径，就是要寻找正确的BGP发言人（或边界路由器），而在每一个自治系统中BGP发言人（或边界路由器）的数目是很少的。这样就使得自治系统之间的路由选择不致过分复杂&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.05.42.png&quot; alt=&quot;截屏2020-06-05 下午3.05.42&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.05.58.png&quot; alt=&quot;截屏2020-06-05 下午3.05.58&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;路由器的构成&quot;&gt;路由器的构成&lt;/h3&gt;
+
+&lt;p&gt;1、路由器的结构&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.07.17.png&quot; alt=&quot;截屏2020-06-05 下午3.07.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;整个路由器结构可划分为两大部分：路由选择部分和分组转发部分&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.11.14.png&quot; alt=&quot;截屏2020-06-05 下午3.11.14&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.34.38.png&quot; alt=&quot;截屏2020-06-05 下午3.34.38&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.35.38.png&quot; alt=&quot;截屏2020-06-05 下午3.35.38&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、交换结构&lt;/p&gt;
+
+&lt;p&gt;交换结构是路由器的关键构件。正是这个交换结构把分组从一个输入端口撞到某个合适的输出端口。实现这样的交换有多种方法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.37.30.png&quot; alt=&quot;截屏2020-06-05 下午3.37.30&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-05 下午3.38.40.png&quot; alt=&quot;截屏2020-06-05 下午3.38.40&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ipv6&quot;&gt;IPv6&lt;/h2&gt;
+
+&lt;p&gt;IP是互联网的的核心协议。现在使用的IP（即IPv4）是在20世纪70年代末期设计的。互联网经过几十年的飞速发展，到2011年2月，IPv4的地址已经耗尽，ISP已经不能再申请到新的IP地址块了&lt;/p&gt;
+
+&lt;p&gt;我国在2014年至2015年也逐步停止了向新用户和应用分配IPv4地址，同时全面开始商用部署IPv6&lt;/p&gt;
+
+&lt;p&gt;解决IP地址耗尽的根本措施就是采用具有更大地址空间的新版本的IP，即IPv6。到目前为止，IPv6还只是草案标准阶段&lt;/p&gt;
+
+&lt;h3 id=&quot;ipv6的基本首部&quot;&gt;IPv6的基本首部&lt;/h3&gt;
+
+&lt;p&gt;IPv6仍支持无连接的传送，但将协议数据单元PDU，而不是IPv4的数据报。为方便起见，本书仍然采用数据报这一名词&lt;/p&gt;
+
+&lt;p&gt;IPv6所引进的主要变化如下：&lt;/p&gt;
+
+&lt;p&gt;（1）更大的地址空间&lt;/p&gt;
+
+&lt;p&gt;IPv6把地址从IPv4的32位增大到4倍，即增大到128位，使地址空间增大了2^96倍。这样大的地址空间在可预见的将来是不会用完的&lt;/p&gt;
+
+&lt;p&gt;（2）扩展的地址层次结构&lt;/p&gt;
+
+&lt;p&gt;IPv6由于地址空间很大，因此可以划分为更多的层次&lt;/p&gt;
+
+&lt;p&gt;（3）灵活的首部格式&lt;/p&gt;
+
+&lt;p&gt;IPv6数据报的首部和IPv4的并不兼容。IPv6定义了许多可选的扩展首部，不仅可提供比IPv4更多的功能，而且还可提高路由器的处理效率，这是因为路由器对拓展首部不进行处理（除逐跳拓展首部外）&lt;/p&gt;
+
+&lt;p&gt;（4）改进的选项&lt;/p&gt;
+
+&lt;p&gt;IPv6允许数据报包含有选项的控制信息，因而可以包含一些新的选项。但IPv6的首部长度是固定的，其选项放在有效载荷中。我们知道，IPv4所规定的选项是固定不变的，其选项放在首部的可变部分&lt;/p&gt;
+
+&lt;p&gt;（5）允许协议继续扩充&lt;/p&gt;
+
+&lt;p&gt;这一点很重要，因为技术总是在不断的发展，而新的应用也还会出现。但我们知道，IPv4的功能是固定不变的&lt;/p&gt;
+
+&lt;p&gt;（6）支持即插即用（自动配置）&lt;/p&gt;
+
+&lt;p&gt;因此IPv6不需要使用DHCP&lt;/p&gt;
+
+&lt;p&gt;（7）支持资源的预分配&lt;/p&gt;
+
+&lt;p&gt;IPv6支持实时视像等要求保证一定的带宽和时延的应用&lt;/p&gt;
+
+&lt;p&gt;（8）IPv6首部改为8字节对齐（即首部长度必须是8字节的整数倍）。原来的IPv4首部是4字节对齐&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IPv6数据报由两大部分组成，即基本首部（base header）和后面的有效载荷（payload）。有效载荷也称为净负荷。有效载荷允许有零个或多个拓展首部（extension header），在后面是数据部分。但请注意，所有的拓展首部并不属于IPv6数据报的首部&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午6.05.02.png&quot; alt=&quot;截屏2020-06-03 下午6.05.02&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午6.41.44.png&quot; alt=&quot;截屏2020-06-03 下午6.41.44&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午6.43.38.png&quot; alt=&quot;截屏2020-06-03 下午6.43.38&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（1）版本&lt;/p&gt;
+
+&lt;p&gt;他指明了协议的版本，对IPv6该字段是6&lt;/p&gt;
+
+&lt;p&gt;（2）通信量类&lt;/p&gt;
+
+&lt;p&gt;占8位，这是为了区分不同的IPv6数据报的类别或优先级。目前正在进行不同的通信量类性能的试验&lt;/p&gt;
+
+&lt;p&gt;（3）流标号&lt;/p&gt;
+
+&lt;p&gt;占20位。IPv6的一个新机制是支持资源预分配，并且允许路由器把每一个数据报与一个给定的资源分配相联系。IPv6提出流flow的抽象概念。所谓流就是把互联网上从特定源点到特定终点（单播或双播）的一系列数据报（如实时音频或视频传输），而在这个流所经过的路径上的路由器都保证指明的服务质量。所有属于同一个流的数据报都具有同样的流标号。因此，流标号对实时音频/视频数据的传送特别有用。对于传统的电子邮件或非实时数据，流标号则没有用处，把它置为0即可&lt;/p&gt;
+
+&lt;p&gt;（4）有效载荷长度&lt;/p&gt;
+
+&lt;p&gt;占16位。它指明IPv6数据报除基本首部以外的字节数。这个字段的最大值是64KB&lt;/p&gt;
+
+&lt;p&gt;（5）下一个首部&lt;/p&gt;
+
+&lt;p&gt;它相当于IPv4的协议字段或可选字段&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午7.12.57.png&quot; alt=&quot;截屏2020-06-03 下午7.12.57&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（6）跳数限制&lt;/p&gt;
+
+&lt;p&gt;（7）源地址&lt;/p&gt;
+
+&lt;p&gt;（8）目的地址&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午7.13.19.png&quot; alt=&quot;截屏2020-06-03 下午7.13.19&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;每一个拓展首部都由若干个字段组成，他们的长度也各不同。但所有拓展首部的第一个字段都是8位的下一个首部字段。此字段的值指出了再该拓展首部后面的字段是什么。当使用多个拓展首部时，应按以上的先后顺序出现。高层首部总是放在最后面&lt;/p&gt;
+
+&lt;h3 id=&quot;ipv6的地址&quot;&gt;IPv6的地址&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午7.17.28.png&quot; alt=&quot;截屏2020-06-03 下午7.17.28&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;IPv6把实现IPv6的主机和路由器均称为结点，由于一个结点可能会使用多条链路与其他的一些结点相连，因此一个结点可能有多个与链路相连的接口。这样，IPv6给结点的每一个接口指派一个IP地址。一个结点可以有多个单播地址，而其中任何一个地址都可以当作到达该结点的目的地址&lt;/p&gt;
+
+&lt;p&gt;在IPv6中，每个地址占128位，地址空间大于3.4*10^38。可见在想象到的将来，IPv6的地址空间是不可能用完的&lt;/p&gt;
+
+&lt;p&gt;巨大的地址范围还必须使维护互联网的人易于阅读和操纵这些地址。IPv4所用的点分十进制记法现在也不够方便了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午7.56.40.png&quot; alt=&quot;截屏2020-06-03 下午7.56.40&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;CIDR的斜线表示法仍然可用&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.02.17.png&quot; alt=&quot;截屏2020-06-03 下午8.02.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.02.55.png&quot; alt=&quot;截屏2020-06-03 下午8.02.55&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;从ipv4向ipv6过渡&quot;&gt;从IPv4向IPv6过渡&lt;/h3&gt;
+
+&lt;p&gt;由于整个互联网的规模太大。这样，向IPv6过渡只能采用逐步演进的方法，同时，还必须保证新安装的IPv6系统能够向后兼容。这就是说，IPv6系统必须能够接受和转发IPv4分组，并且能够为IPv4分组选择路由&lt;/p&gt;
+
+&lt;p&gt;下面介绍两种向IPv6过渡的政策&lt;/p&gt;
+
+&lt;p&gt;1、双协议栈&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.07.05.png&quot; alt=&quot;截屏2020-06-03 下午8.07.05&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、隧道技术&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.07.49.png&quot; alt=&quot;截屏2020-06-03 下午8.07.49&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;icmpv6&quot;&gt;ICMPv6&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.08.29.png&quot; alt=&quot;截屏2020-06-03 下午8.08.29&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;和IPv4一样，IPv6也不保证数据报的可靠交付，因为互联网中的路由器可能会丢弃数据报。因此IPv6也需要ICMP来反馈一些差错信息。新的版本称为ICMPv6，他比ICMPv4要复杂得多。地址解析协议ARP和网际组管理协议IGMP的功能都已被合并到ICMPv6中&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.11.18.png&quot; alt=&quot;截屏2020-06-03 下午8.11.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-03 下午8.11.59.png&quot; alt=&quot;截屏2020-06-03 下午8.11.59&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>计算机网络（第7版）第六章</title>
+        <description>&lt;h1 id=&quot;第六章-应用层&quot;&gt;第六章 应用层&lt;/h1&gt;
+
+&lt;p&gt;每个应用层协议都是为了解决某一类应用问题，而问题的解决又必须通过位于不同主机中的多个应用进程之间的通信和协同工作来完成&lt;/p&gt;
+
+&lt;h2 id=&quot;域名系统dns&quot;&gt;域名系统DNS&lt;/h2&gt;
+
+&lt;h3 id=&quot;域名系统概述&quot;&gt;域名系统概述&lt;/h3&gt;
+
+&lt;p&gt;Domain Name System&lt;/p&gt;
+
+&lt;p&gt;层次树状命名方法&lt;/p&gt;
+
+&lt;p&gt;互联网的域名系统DNS被设计成为一个联机分布式数据库系统， 并采用客户服务器方式。DNS使大多数名字都在本地进行解析resolve，仅少量解析需要在互联网上通信，因此DNS系统的效率很高。由于DNS是分布式系统，即使单个计算机出了故障，也不会妨碍整个DNS系统的正常运行&lt;/p&gt;
+
+&lt;p&gt;域名到IP地址的解析是由分布在互联网上的许多域名服务器程序共同完成的。域名服务器程序在专设的结点上运行，而人们也常把运行域名服务器程序的机器称为域名服务器&lt;/p&gt;
+
+&lt;p&gt;域名到IP地址的解析过程的要点如下：当某一个应用进程需要把主机名解析为IP地址时，该应用进程就调用解析程序，并成为DNS的一个客户，把待解析的域名放在DNS请求报文中，以UDP用户数据报方式发给本地域名服务器（使用UDP是为了介绍开销）。本地域名服务器在查找域名后，把对应的IP地址放在回答报文中返回。应用进程获得目的主机的IP地址后即可进行通信&lt;/p&gt;
+
+&lt;p&gt;若本地域名服务器不能回答该请求，则此域名服务器就暂时成为DNS中的另一个客户，并向其他域名服务器发出查询请求。这种过程直至找到能够回答该请求的域名服务器为止&lt;/p&gt;
+
+&lt;h3 id=&quot;互联网的域名结构&quot;&gt;互联网的域名结构&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-18 上午9.10.05.png&quot; alt=&quot;截屏2020-06-18 上午9.10.05&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;域名树&lt;/p&gt;
+
+&lt;p&gt;顶级域名可申请，申请费很高&lt;/p&gt;
+
+&lt;p&gt;各级域名由上一级的域名管理机构管理，而最高的顶级域名则有ICANN进行管理&lt;/p&gt;
+
+&lt;p&gt;我国将二级域名划分为类别域名和行政区域名两大类&lt;/p&gt;
+
+&lt;p&gt;互联网的名字空间是按照机构的组织来划分的，与物理的网络无关，与IP地址中的子网也没有关系&lt;/p&gt;
+
+&lt;h3 id=&quot;域名服务器&quot;&gt;域名服务器&lt;/h3&gt;
+
+&lt;p&gt;一个服务器所负责管辖的范围叫做区。各单位根据具体情况来划分自己管辖范围的区，但在一个区中的所有节点必须是能够连通的。每一个区设置相应的权限域名服务器,，用来保存该区中的所有主机的域名到IP地址的映射&lt;/p&gt;
+
+&lt;p&gt;区小于等于域&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-18 上午9.23.23.png&quot; alt=&quot;截屏2020-06-18 上午9.23.23&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（1）根域名服务器&lt;/p&gt;
+
+&lt;p&gt;根域名服务器是最高层次的域名服务器，也是最重要的域名服务器。所有的根域名服务器都知道所有的顶级域名服务器的域名和IP地址。根域名服务器是最重要的域名服务器，因为不管是哪一个本地域名服务器，若要对互联网上任何一个域名进行解析，只要自己无法解析，就首先要求助于根域名服务器。&lt;/p&gt;
+
+&lt;p&gt;现在的根域名服务器只使用13个不同IP地址的域名，镜像根服务器&lt;/p&gt;
+
+&lt;p&gt;现在世界上大部分DNS域名服务器，都能就近找到一个根域名服务器查询IP地址&lt;/p&gt;
+
+&lt;p&gt;由于根域名服务器采用了任播技术，因此当DNS客户想某个根域名服务器的IP地址发出查询报文时，互联网上的路由器就能找到离这个DNS客户最近的一个根域名服务器。这样做不仅加快了DNS的查询过程，也更加合理地利用了互联网的资源&lt;/p&gt;
+
+&lt;p&gt;根域名服务器的分布很不均衡&lt;/p&gt;
+
+&lt;p&gt;亚洲网民上网速度明显的低于北美的&lt;/p&gt;
+
+&lt;p&gt;许多情况下，根域名服务器并不直接把待查询的域名直接转换成IP地址，根域名服务器也没有存放这种信息，而是告诉本地域名服务器下一步应当找哪一个顶级域名服务器进行查询&lt;/p&gt;
+
+&lt;p&gt;（2）顶级域名服务器（TLD服务器）&lt;/p&gt;
+
+&lt;p&gt;（3）权限域名服务器&lt;/p&gt;
+
+&lt;p&gt;（4）本地域名服务器&lt;/p&gt;
+
+&lt;p&gt;不属于域名服务器层次结构&lt;/p&gt;
+
+&lt;p&gt;本地域名服务器离用户较近，一般不超过几个路由器的距离，当所要查询的主机也属于同一个本地ISP时，该本地域名服务器立即就能将所要查询的主机名转换为它的IP地址，而不需要再去询问其他的域名服务器&lt;/p&gt;
+
+&lt;p&gt;为了提高域名服务可靠性，主域名服务器和辅助域名服务器&lt;/p&gt;
+
+&lt;p&gt;主机向本地域名服务器的查询一般都是采用递归查询&lt;/p&gt;
+
+&lt;p&gt;本地域名服务器向根域名服务器的查询通常都是采用迭代查询（当然，本地域名服务器也可以采用递归查询，这取决于最初的查询请求报文的设置要求使用哪一种查询方式）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-18 上午9.39.07.png&quot; alt=&quot;截屏2020-06-18 上午9.39.07&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了提高DNS查询效率，并减轻根域名服务器的负荷和减少互联网上的DNS查询报文数量，在域名服务器中广泛地使用了高速缓存&lt;/p&gt;
+
+&lt;p&gt;假定本地域名服务器的缓存中存放着顶级域名服务器的IP地址，也可以不向根域名服务器进行查询，而是直接向顶级域名服务器查询&lt;/p&gt;
+
+&lt;p&gt;为每项内容设置计时器&lt;/p&gt;
+
+&lt;p&gt;主机中也需要缓存&lt;/p&gt;
+
+&lt;p&gt;由于域名改动并不频繁，大多数网点不需花太多精力就能维护数据库的一致性&lt;/p&gt;
+
+&lt;h2 id=&quot;文件传送协议&quot;&gt;文件传送协议&lt;/h2&gt;
+
+&lt;p&gt;文件传送协议FTP是互联网上使用的最广泛的文件传输协议。FTP提供交互式的访问，允许客户指明文件的类型与格式（如指明是否使用ASCII码），并允许文件具有存取权限（如访问文件的用户必须经过授权，并输入有效的口令）。FTP屏蔽了各计算机系统的细节，因而适合于在异构网络中任意计算机之间传送文件&lt;/p&gt;
+
+&lt;p&gt;基于TCP的FTP和基于UDP的简单文件传送协议TFTP，他们都是文件共享协议中的一大类，即复制整个文件，其特点是：若要存取一个文件，就必须先获得一个本地的文件副本。如果要修改文件，只能对文件的副本进行修改，然后再将修改后的文件副本传回到原节点&lt;/p&gt;
+
+&lt;p&gt;文件共享协议中的另一大类是联机访问。联机访问意味着允许多个程序同时对一个文件进行存取。和数据库系统的不同之处是用户不需要调用一个特殊的客户进程，而是有操作系统提供对远地共享文件进行访问的服务，就如同对本地文件的访问一样&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.36.03.png&quot; alt=&quot;截屏2020-06-19 上午10.36.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ftp的基本工作原理&quot;&gt;FTP的基本工作原理&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.38.36.png&quot; alt=&quot;截屏2020-06-19 上午10.38.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.39.03.png&quot; alt=&quot;截屏2020-06-19 上午10.39.03&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;由于FTP使用了一个分离的控制连接，因此FTP的控制信息是带外传送的&lt;/p&gt;
+
+&lt;p&gt;当客户进程向服务器进程发出建立连接请求时，要寻找连接服务器进程的熟知端口号21，同时还要告诉服务器进程自己的另一个端口号吗，用于建立数据传送连接。接着，服务器进程用自己传送数据的熟知端口号20与客户进程所提供的端口号建立数据传送连接。由于FTP使用了两个不同的端口号，所以数据连接和控制连接不会发生混乱&lt;/p&gt;
+
+&lt;p&gt;使用两个独立的连接的主要好处是使协议更加简单和更容易实现，同时在传输文件时还可以利用控制连接对文件的传输进行控制&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.45.13.png&quot; alt=&quot;截屏2020-06-19 上午10.45.13&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;简单文件传送协议tftp&quot;&gt;简单文件传送协议TFTP&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.47.18.png&quot; alt=&quot;截屏2020-06-19 上午10.47.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.47.36.png&quot; alt=&quot;截屏2020-06-19 上午10.47.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;套接字&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午10.57.56.png&quot; alt=&quot;截屏2020-06-19 上午10.57.56&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;远程终端协议telnet&quot;&gt;远程终端协议TELNET&lt;/h2&gt;
+
+&lt;p&gt;ssh与telnet的相同点：&lt;/p&gt;
+
+&lt;p&gt;1.两种协议都可以远程登录另一台主机&lt;/p&gt;
+
+&lt;p&gt;2.两种协议都属于基于TCP/IP的协议&lt;/p&gt;
+
+&lt;p&gt;ssh与telnet的不同点：&lt;/p&gt;
+
+&lt;p&gt;1.telnet是明文传送；ssh是加密传送，并且支持压缩&lt;/p&gt;
+
+&lt;p&gt;2.telnet的默认端口号为23；ssh的默认端口号为22&lt;/p&gt;
+
+&lt;p&gt;3.ssh使用公钥对访问的服务器的用户验证身份，进一步提高的安全性；telnet没有使用公钥&lt;/p&gt;
+
+&lt;p&gt;TELNET是一个简单的远程终端协议，他也是互联网的正式标准&lt;/p&gt;
+
+&lt;p&gt;TELNET又称为终端仿真协议&lt;/p&gt;
+
+&lt;p&gt;TELENT并不复杂，以前应用的很多。现在由于计算机的功能越来越强，用户已较少使用TELNET了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午11.05.44.png&quot; alt=&quot;截屏2020-06-19 上午11.05.44&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午11.06.36.png&quot; alt=&quot;截屏2020-06-19 上午11.06.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-19 上午11.07.00.png&quot; alt=&quot;截屏2020-06-19 上午11.07.00&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;万维网www&quot;&gt;万维网WWW&lt;/h2&gt;
+
+&lt;h3 id=&quot;万维网概述&quot;&gt;万维网概述&lt;/h3&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>计算机网络（第7版）第五章</title>
+        <description>&lt;h1 id=&quot;第五章-运输层&quot;&gt;第五章 运输层&lt;/h1&gt;
+
+&lt;h2 id=&quot;运输层协议概述&quot;&gt;运输层协议概述&lt;/h2&gt;
+
+&lt;h3 id=&quot;进程之间的通信&quot;&gt;进程之间的通信&lt;/h3&gt;
+
+&lt;p&gt;从通信和信息处理的角度看，运输层向他上面的应用提供通信服务，它属于面向通信部分的最高层，同时也是用户功能中的最底层。当网络的边缘部分中的两台主机使用网络的核心部分的功能进行端到端的通信时，只有主机的协议栈才有运输层，而网络核心部分中的路由器在转发分组时都只用到下三层的功能&lt;/p&gt;
+
+&lt;p&gt;网络层为主机之间提供逻辑通信，而运输层为应用进程之间提供端到端的逻辑通信&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.27.14.png&quot; alt=&quot;截屏2020-06-07 上午11.27.14&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;复用和分用：复用是指在发送方不同的应用进程都可以使用同一个运输层协议传输数据（当然需要加上适当的首部），而分用是指接受方的运输层在剥去报文的首部后能够把这些数据正确交付目的应用进程&lt;/p&gt;
+
+&lt;p&gt;运输层还要对收到的报文进行差错检测。在网络层，IP数据报首部中的检验和字段，只检验首部是否出现差错而不检查数据部分&lt;/p&gt;
+
+&lt;p&gt;根据应用程序的不同需求，运输层需要有两种不同的运输协议，即面向连接的TCP和无连接的UDP&lt;/p&gt;
+
+&lt;p&gt;运输层向高层用户屏蔽了下面网络核心的细节，他使应用进程看见的就是好像在两个运输层实体之间有一条端到端的逻辑通信信道，但这条逻辑通信信道对上层的表现却因运输层使用的不同协议而有很大的差别。当运输层采用面向连接的TCP协议时，尽管下面的网络是不可靠的（只提供尽最大努力服务），但这种逻辑通信信道就相当于是一条全双工的可靠信道。但当运输层采用无连接的UDP协议时，这种逻辑通信信道仍然是一条不可靠信道&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.35.04.png&quot; alt=&quot;截屏2020-06-07 上午11.35.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;运输层的两个主要协议&quot;&gt;运输层的两个主要协议&lt;/h3&gt;
+
+&lt;p&gt;TCP/IP运输层的两个主要协议都是互联网的正式标准，即：&lt;/p&gt;
+
+&lt;p&gt;（1）用户数据报协议 UDP user datagram protocol&lt;/p&gt;
+
+&lt;p&gt;（2）传输控制协议 TCP transmission control protocol&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.37.11.png&quot; alt=&quot;截屏2020-06-07 上午11.37.11&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.38.10.png&quot; alt=&quot;截屏2020-06-07 上午11.38.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.39.00.png&quot; alt=&quot;截屏2020-06-07 上午11.39.00&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;运输层的端口&quot;&gt;运输层的端口&lt;/h3&gt;
+
+&lt;p&gt;我们知道，在单个计算机中的进程使用进程标识符（一个不大的整数）来标志的。但是在互联网环境下，用计算机操作系统所指派的这种进程标识符来标志运行在应用层的各种应用进程则是不行的。这是因为在互联网上使用的计算机的操作系统种类很多，而不同的操作系统又使用不同格式的进程标识符。为了使运行不同操作系统的计算机的应用进程能够互相通信，就必须用统一的方法（而这种方法必须与特定操作系统无关）对TCP/IP体系的应用进程进行标志&lt;/p&gt;
+
+&lt;p&gt;但是，把一个特定机器上运行的特定进程，指明为互联网上通信的最后终点还是不可行的，这是因为进程的创建和撤销都是动态的，通信的一方几乎无法识别对方机器上的进程。另外，我们往往需要利用目的主机提供的功能来识别重点，而不需要知道具体实现这个功能的进程是哪一个&lt;/p&gt;
+
+&lt;p&gt;解决这个问题的方法就是运输层使用协议端口号，或通常简称为端口port。这就是说，虽然通信的终点是应用进程，但只要把所传送的报文交到目的主机的某个合适的端口，剩下的工作（即最后交付目的进程）就由TCP或UDP来完成&lt;/p&gt;
+
+&lt;p&gt;这种在协议栈层间的抽象的协议端口是软件端口，和路由器或交换机上的硬件端口是完全不同的概念。硬件端口是不同硬件设备进行交互的接口，而软件端口是应用层的各种协议进程与运输实体进行层间交互的一种地址。不同的系统具体实现端口的方法可以是不同的&lt;/p&gt;
+
+&lt;p&gt;TCP/IP的运输层用一个16位端口号来标志一个端口。但请注意，端口号只具有本地意义，他只是为了标志本计算机应用层中的各个进程在和运输层交互式的层间接口。在互联网不同计算机中，相同的端口号是没有关联的。16位的端口号可允许有65535个不同的端口号，这个数目对一个计算机来说是足够用的&lt;/p&gt;
+
+&lt;p&gt;运输层的端口号分为下面的两类&lt;/p&gt;
+
+&lt;p&gt;（1）服务器端使用的端口号&lt;/p&gt;
+
+&lt;p&gt;这里又分为两类，最重要的一类叫做熟知端口号或系统端口号，数值为0～1023.这些数值可在网址www.iana.org查到。IANA把这些端口号指派给了TCP/IP最重要的一些应用程序，让所有的用户都知道。当一个新的应用程序出现后，IANA必须为他指派一个熟知端口，否则互联网上的其他应用进程就无法和他进行通信&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午10.03.14.png&quot; alt=&quot;截屏2020-06-07 下午10.03.14&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;另一类叫做登记端口号，数值为1024～49151。这类端口是为没有熟知端口号的应用程序使用的。使用这类端口号必须在IANA按照规定的手续登记，以防止重复&lt;/p&gt;
+
+&lt;p&gt;（2）客户端使用的端口号&lt;/p&gt;
+
+&lt;p&gt;数值为49152～65535。这类端口号仅在客户进程运行时才动态选择，因此又叫做短暂端口号。这类端口号留给客户进程选择暂时使用。当服务器进程收到客户进程的报文时，就知道了客户进程所使用的端口号，因而可以把数据发送给客户进程。通信结束后，刚才已使用过的客户端口号就不复存在，这个端口号就可以供其他客户进程使用&lt;/p&gt;
+
+&lt;h2 id=&quot;用户数据报协议-udp&quot;&gt;用户数据报协议 UDP&lt;/h2&gt;
+
+&lt;h3 id=&quot;udp概述&quot;&gt;UDP概述&lt;/h3&gt;
+
+&lt;p&gt;用户数据报协议只在IP的数据报服务之上增加了很少一点的功能，这就是复用和分用的功能以及差错检测的功能。UDP的主要特点是：&lt;/p&gt;
+
+&lt;p&gt;（1）UDP是无连接的，即发送数据之前不需要建立连接，因此减少了开销和发送数据之前的时延&lt;/p&gt;
+
+&lt;p&gt;（2）UDP使用尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的连接状态表&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午10.30.21.png&quot; alt=&quot;截屏2020-06-07 下午10.30.21&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（4）UDP没有拥塞控制，因为网络出现的拥塞不会使源主机的发送速率降低。这对某些实时应用是很重要的。很多的实时应用（如IP会议、实时视频会议等）要求源主机以恒定的速率发送数据，并且允许在网络发生拥塞时丢失一些数据，但却不允许数据有太大的时延。UDP正好适合这种要求&lt;/p&gt;
+
+&lt;p&gt;（5）UDP支持一对一、一对多、多对一和多对多的交互通信&lt;/p&gt;
+
+&lt;p&gt;（6）UDP的首部开销小，只有8个字节，比TCP的20个字节的首部要短&lt;/p&gt;
+
+&lt;p&gt;不使用拥塞控制功能的UDP有可能会引起网络产生严重的拥塞问题，还有一些使用UDP的实时应用，需要对UDP的不可靠的传输进行适当的改进，以减少数据的丢失。在这种情况下，应用进程本身可以在不影响应用的实时性的前提下，增加一些提高可靠性的措施，如采用前向纠错或重传已丢失的报文&lt;/p&gt;
+
+&lt;h3 id=&quot;udp的首部格式&quot;&gt;UDP的首部格式&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.09.43.png&quot; alt=&quot;截屏2020-06-07 下午11.09.43&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.11.21.png&quot; alt=&quot;截屏2020-06-07 下午11.11.21&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果接收方UDP发现收到的报文中目的端口号不正确，就丢弃该报文，并由网际控制报文协议ICMP发送端口不可达差错报文给发送方&lt;/p&gt;
+
+&lt;p&gt;traceout就是让发送的UDP用户数据报故意使用一个非法的UDP端口，结果ICMP就返回端口不可达差错报文，因而达到了测试的目的&lt;/p&gt;
+
+&lt;p&gt;虽然在UDP之间的通信要用到其端口号，但由于UDP的通信是无连接的，因而不需要使用套接字（TCP之间的通信必须要在两个套接字之间建立连接）&lt;/p&gt;
+
+&lt;p&gt;UDP用户数据报首部中检验和的计算方法有些特殊。在计算检验和时，要在UDP用户数据报之前增加12个字节的伪首部。所谓伪首部是因为这种伪首部并不是UDP数据报真正的首部，只是在计算检验和时，临时添加在UDP数据报前面，得到一个临时的UDP用户数据报。检验和就是按照这个临时的UDP用户数据报来计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算检验和&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.20.19.png&quot; alt=&quot;截屏2020-06-07 下午11.20.19&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;UDP的检验和是把首部和数据部分一起都检验，IP数据报只检验IP数据报的首部&lt;/p&gt;
+
+&lt;p&gt;这种简单的差错检验方法的检错能力并不强，但它的好处是简单，处理起来较快&lt;/p&gt;
+
+&lt;h2 id=&quot;传输控制协议tcp概述&quot;&gt;传输控制协议TCP概述&lt;/h2&gt;
+
+&lt;h3 id=&quot;tcp最主要的特点&quot;&gt;TCP最主要的特点&lt;/h3&gt;
+
+&lt;p&gt;（1）TCP是面向连接的运输层协议。这就是说，应用程序在使用TCP协议之前，必须先建立TCP连接。在传送数据完毕后，必须释放已经建立的TCP连接&lt;/p&gt;
+
+&lt;p&gt;（2）每一条TCP连接只能有两个端点，每一条TCP连接只能是点对点的&lt;/p&gt;
+
+&lt;p&gt;（3）TCP提供可靠交付的服务。通过TCP连接传送的数据，无差错、不丢失、不重复，并且按序到达&lt;/p&gt;
+
+&lt;p&gt;（4）TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接受缓存，用来临时存放双向通信的数据&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.35.43.png&quot; alt=&quot;截屏2020-06-08 上午10.35.43&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（5）面向字节流。TCP中的流stream指的是流入到进程或从进程流出的字节序列&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.38.36.png&quot; alt=&quot;截屏2020-06-08 上午10.38.36&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;实际的网络中，一个TCP报文段包含上千个字节是很常见的&lt;/p&gt;
+
+&lt;p&gt;TCP并不关心应用进程一次把多长的报文发送到TCP的缓存中，而是根据对方给出的窗口值和当前网络拥塞的程度来决定一个报文段应包含多少个字节（UDP发送的报文长度是应用进程给出的）。如果应用进程传送带TCP缓存的数据块太长，TCP就可以把它划分短一些再传送。如果应用进程一次只发来一个字节，TCP也可以等待积累有足够多的字节后再构成报文段发送出去&lt;/p&gt;
+
+&lt;h3 id=&quot;tcp的连接&quot;&gt;TCP的连接&lt;/h3&gt;
+
+&lt;p&gt;TCP把连接作为最基本的抽象&lt;/p&gt;
+
+&lt;p&gt;TCP连接的端点不是主机，不是主机的IP地址，不是用应用进程，也不是运输层协议端口。TCP连接的端口叫做套接字socket或插口&lt;/p&gt;
+
+&lt;p&gt;端口号拼接到IP地址即构成了套接字&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.47.10.png&quot; alt=&quot;截屏2020-06-08 上午10.47.10&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;TCP连接的端点是个很抽象的套接字&lt;/p&gt;
+
+&lt;p&gt;同一个名词socket却可表示多种不同的意思&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.48.18.png&quot; alt=&quot;截屏2020-06-08 上午10.48.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;可靠传输的工作原理&quot;&gt;可靠传输的工作原理&lt;/h2&gt;
+
+&lt;p&gt;理想的传输条件有以下两个特点：&lt;/p&gt;
+
+&lt;p&gt;（1）传输信道不产生差错&lt;/p&gt;
+
+&lt;p&gt;（2）不管发送方以多快的速度发送数据，接受方总是来得及处理收到的数据&lt;/p&gt;
+
+&lt;h3 id=&quot;停止等待协议&quot;&gt;停止等待协议&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.54.47.png&quot; alt=&quot;截屏2020-06-08 上午10.54.47&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1、无差错情况&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.55.30.png&quot; alt=&quot;截屏2020-06-08 上午10.55.30&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、出现差错&lt;/p&gt;
+
+&lt;p&gt;这里应注意以下三点：&lt;/p&gt;
+
+&lt;p&gt;第一，A在发送完一个分组后，必须暂时保留已发送的分组的副本（在发生超时重传时使用）。只有在收到相应的确认后才能清楚暂时保留的分组副本&lt;/p&gt;
+
+&lt;p&gt;第二，分组和确认分组都必须进行编号。这样才能明确是哪一个发送出去的分组收到了确认，而哪一个分组还没有收到确认&lt;/p&gt;
+
+&lt;p&gt;第三，超时计时器设置的重传时间应当比数据在分组传输的平均往返时间更长一些&lt;/p&gt;
+
+&lt;p&gt;3、确认丢失和确认迟到&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.02.17.png&quot; alt=&quot;截屏2020-06-08 上午11.02.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通常A最终总能收到对所有发出的分组的确认。如果A不断重传分组但总是收不到确认，就说明通信线路太差，不能进行通信&lt;/p&gt;
+
+&lt;p&gt;使用上述的确认和重传机制，我们就可以在不可靠的传输网络上实现可靠的通信&lt;/p&gt;
+
+&lt;p&gt;向上述的这种可靠传输协议常称为自动重传请求ARQ（automatic repeat request）。意思是重传的请求是自动进行的。接受方不需要请求发送方重传某个出错的分组&lt;/p&gt;
+
+&lt;p&gt;4、信道利用率&lt;/p&gt;
+
+&lt;p&gt;停止等待协议的优点是简单，但缺点是信道利用率太低&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.07.25.png&quot; alt=&quot;截屏2020-06-08 上午11.07.25&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.09.01.png&quot; alt=&quot;截屏2020-06-08 上午11.09.01&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.09.18.png&quot; alt=&quot;截屏2020-06-08 上午11.09.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了提高传输效率，发送方可以不使用低效率的停止等待协议，而是采用流水线传输&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.11.05.png&quot; alt=&quot;截屏2020-06-08 上午11.11.05&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当使用流水线传输的时候，就要使用下面介绍的连续ARQ协议和滑动窗口协议&lt;/p&gt;
+
+&lt;h3 id=&quot;连续arq协议&quot;&gt;连续ARQ协议&lt;/h3&gt;
+
+&lt;p&gt;滑动窗口协议比较复杂，是TCP协议的精髓所在&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.12.51.png&quot; alt=&quot;截屏2020-06-08 上午11.12.51&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.14.39.png&quot; alt=&quot;截屏2020-06-08 上午11.14.39&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tcp报文段的首部格式&quot;&gt;TCP报文段的首部格式&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.15.26.png&quot; alt=&quot;截屏2020-06-08 上午11.15.26&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（1）源端口和目的端口&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.09.04.png&quot; alt=&quot;截屏2020-06-08 下午12.09.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.11.22.png&quot; alt=&quot;截屏2020-06-08 下午12.11.22&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（4）数据偏移&lt;/p&gt;
+
+&lt;p&gt;他指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。这个字段实际上是指出TCP报文段的首部长度&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.13.38.png&quot; alt=&quot;截屏2020-06-08 下午12.13.38&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（5）保留&lt;/p&gt;
+
+&lt;p&gt;占六位，保留为今后使用，但目前应置为0&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.21.11.png&quot; alt=&quot;截屏2020-06-08 下午12.21.11&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（7）确认号ACK（ACKnowledgment）&lt;/p&gt;
+
+&lt;p&gt;仅当ACK=1时确认好字段才有效。当ACK=0时，确认号无效。TCP规定，在连接建立后所有传送的报文段都必须把ACK置1&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.24.17.png&quot; alt=&quot;截屏2020-06-08 下午12.24.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（9）复位RST（ReSeT）&lt;/p&gt;
+
+&lt;p&gt;当RST=1时，表明TCP连接中出现严重差错（如由于主机崩溃或其他原因），必须释放连接，然后再重新建立运输连接。RST置1还用来拒绝一个非法的报文段或拒绝打开一个连接。RST也可称为重建位或重置位&lt;/p&gt;
+
+&lt;p&gt;（10）同步SYN（SYNchronization）&lt;/p&gt;
+
+&lt;p&gt;在连接建立时用来同步序号。当SYN=1而ACK=0时，表明这是一个连接请求报文段。对方若同意建立连接，则应在响应的报文段中使用SYN=1和ACK=1。因此，SYN置为1就表示这是一个连接请求或连接接受报文&lt;/p&gt;
+
+&lt;p&gt;（11）终止FIN&lt;/p&gt;
+
+&lt;p&gt;用来释放一个连接。当FIN=1时，表明此报文段的发送方的数据已发送完毕，并要求释放运输连接&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.35.01.png&quot; alt=&quot;截屏2020-06-08 下午12.35.01&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（13）检验和&lt;/p&gt;
+
+&lt;p&gt;占2字节。检验和字段检验的范围包括首部和数据这两部分。和UDP用户数据报一样，在计算检验和时，要在TCP报文段的前面加上12字节的伪首部。伪首部的格式与UDP用户数据报的伪首部一样。但应把伪首部第4个字段中的17改为6（TCP的协议号是6），把第5字段中的UDP长度改为TCP长度。接收方收到此报文段后，仍要加上这个伪首部来计算检验和。若使用IPv6，则相应的伪首部也要改变&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.45.20.png&quot; alt=&quot;截屏2020-06-08 下午12.45.20&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（15）选项&lt;/p&gt;
+
+&lt;p&gt;长度可变，最长可达40字节。当没有使用选项时，TCP的首部长度是20字节&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.48.44.png&quot; alt=&quot;截屏2020-06-08 下午12.48.44&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.49.00.png&quot; alt=&quot;截屏2020-06-08 下午12.49.00&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.49.17.png&quot; alt=&quot;截屏2020-06-08 下午12.49.17&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tcp可靠传输的实现&quot;&gt;TCP可靠传输的实现&lt;/h2&gt;
+
+&lt;h3 id=&quot;以字节为单位的滑动窗口&quot;&gt;以字节为单位的滑动窗口&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.53.08.png&quot; alt=&quot;截屏2020-06-08 下午12.53.08&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;发送窗口表示：在没有收到B的确认的情况下，A可以连续把窗口内的数据都发送出去。凡是已经发送过的数据，在未收到确认之前都必须暂时保留，以便在超时重传时使用&lt;/p&gt;
+
+&lt;p&gt;发送窗口里面的序号表示允许发送的序号。显然，窗口越大，发送方就可以在收到对方确认之前连续发送更多的数据，因而可能获得更高的传输效率。接收方会把自己的接受窗口数值放在窗口字段中发送给对方。因此，发送方的发送窗口大小还要受到当时网络拥塞程度的制约。但在目前，我们暂不考虑网络拥塞的影响&lt;/p&gt;
+
+&lt;p&gt;发送窗口后沿的后面部分表示已发送且已收到了确认。这些数据显然不需要再保留了。而发送窗口前沿的前面部分表示不允许发送的，因为接收方都没有为这部分数据保留临时存放的缓存空间&lt;/p&gt;
+
+&lt;p&gt;发送窗口前沿通常是不断的向前移动，但也有可能不动，这对应于两种情况：一是没有收到新的确认，对方通知的窗口大小也不变；二是收到了新的确认但对方通知的窗口缩小了，使得发送窗口前沿正好不动&lt;/p&gt;
+
+&lt;p&gt;发送前沿也有可能向后收缩。这发生在对方通知的窗口缩小了。但TCP的标准强烈不赞成这样做。因为很可能发送方在收到这个通知以前已经发送了窗口中的许多数据，现在又要收缩窗口，不让发送这些数据，这样就会产生一些错误&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.36.27.png&quot; alt=&quot;截屏2020-06-08 下午2.36.27&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.36.39.png&quot; alt=&quot;截屏2020-06-08 下午2.36.39&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.37.04.png&quot; alt=&quot;截屏2020-06-08 下午2.37.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.37.23.png&quot; alt=&quot;截屏2020-06-08 下午2.37.23&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;第一，缓存空间和序号空间都是有限的，并且都是循环使用的。最好是把他们画成圆环状的，但这里为了画图的方便，我们还是把他们画成长条状的&lt;/p&gt;
+
+&lt;p&gt;第二，由于实际上缓存或窗口中的字节数是非常之大的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.42.26.png&quot; alt=&quot;截屏2020-06-08 下午2.42.26&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;超时重传时间的选择&quot;&gt;超时重传时间的选择&lt;/h3&gt;
+
+&lt;p&gt;TCP采用了一种自适应算法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.50.42.png&quot; alt=&quot;截屏2020-06-08 下午2.50.42&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.51.21.png&quot; alt=&quot;截屏2020-06-08 下午2.51.21&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;选择确认sack&quot;&gt;选择确认SACK&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.52.58.png&quot; alt=&quot;截屏2020-06-08 下午2.52.58&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.53.11.png&quot; alt=&quot;截屏2020-06-08 下午2.53.11&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tcp的流量控制&quot;&gt;TCP的流量控制&lt;/h2&gt;
+
+&lt;h3 id=&quot;利用滑动窗口实现流量控制&quot;&gt;利用滑动窗口实现流量控制&lt;/h3&gt;
+
+&lt;p&gt;所谓流量控制flow control就是让发送方的发送速率不要太快，要让接受方来得及接受&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.55.40.png&quot; alt=&quot;截屏2020-06-08 下午2.55.40&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.05.58.png&quot; alt=&quot;截屏2020-06-08 下午3.05.58&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tcp的传输效率&quot;&gt;TCP的传输效率&lt;/h3&gt;
+
+&lt;p&gt;应用进程把数据传送到TCP的发送缓存后，剩下的发送任务就由TCP来控制了，可以用不同的机制来控制TCP报文段的发送机会。例如，第一种机制是TCP维持一个变量，它等于最大报文段长度MSS。只要缓存中的存放的数据达到MSS字节时，就组装成一个TCP报文段发送出去。第二种机制是由发送方的应用进程指明要求发送报文段，即TCP支持的推送push操作，第三种机制是发送方的一个计时器期限到了，这时就把当前已有的缓存数据装入报文段（但长度不能超过MSS）发送出去&lt;/p&gt;
+
+&lt;p&gt;如何控制TCP发送报文段的时机仍然是一个较为复杂的问题&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.10.46.png&quot; alt=&quot;截屏2020-06-08 下午3.10.46&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在TCP的实现中广泛使用Nagle算法&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.12.08.png&quot; alt=&quot;截屏2020-06-08 下午3.12.08&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;糊涂窗口综合征&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.14.31.png&quot; alt=&quot;截屏2020-06-08 下午3.14.31&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tcp的拥塞控制&quot;&gt;TCP的拥塞控制&lt;/h2&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E8%BF%90%E8%BE%93%E5%B1%82/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E8%BF%90%E8%BE%93%E5%B1%82/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>计算机网络（第7版）第九章</title>
+        <description>&lt;h1 id=&quot;第九章-无线网络和移动网络&quot;&gt;第九章 无线网络和移动网络&lt;/h1&gt;
+
+&lt;p&gt;如果说，互联网在过去的二十多年是PC互联网，那么现在就可以说应当是移动互联网了&lt;/p&gt;
+
+&lt;p&gt;由于无线网络和移动网络的数据链路层与传统的有线互联网的数据链路层相差很大，因此有必要单列一章来讨论这个问题&lt;/p&gt;
+
+&lt;h2 id=&quot;无线局域网wlan&quot;&gt;无线局域网WLAN&lt;/h2&gt;
+
+&lt;p&gt;在局域网刚刚问世后的一段时间，无线局域网的发展比较缓慢，原因是价格贵、数据传输速率低、安全性较差，以及使用登记手续复杂（使用无线电频率必须得到有关部门的批准）&lt;/p&gt;
+
+&lt;p&gt;由于手机普及率日益提高，通过无线局域网接入到互联网已成为当今上网的最常用的方式，无线局域网常简写成WLAN wireless local area network&lt;/p&gt;
+
+&lt;h3 id=&quot;无线局域网的组成&quot;&gt;无线局域网的组成&lt;/h3&gt;
+
+&lt;p&gt;无线局域网可分为两大类。第一类有固定基础设施的，第二类是无固定基础设施的。所谓固定基础设施是指预先建立起来的、能够福鼎一定地理范围的一批固定基站。大家经常使用的蜂窝移动电话就是利用电信公司预先建立的、覆盖全国的大量固定基站来接通用户手机拨打的电话&lt;/p&gt;
+
+&lt;p&gt;1、IEEE 802.11&lt;/p&gt;
+
+&lt;p&gt;对于第一类有固定基础设施的无线局域网，1997年IEEE制定出无线局域网的协议标准&lt;/p&gt;
+
+&lt;p&gt;我国WLAN国家标准是基于国际标准之上的WLAN标准&lt;/p&gt;
+
+&lt;p&gt;以太网是一种&lt;a href=&quot;https://baike.baidu.com/item/计算机&quot;&gt;计算机&lt;/a&gt;&lt;a href=&quot;https://baike.baidu.com/item/局域网&quot;&gt;局域网&lt;/a&gt;技术。&lt;a href=&quot;https://baike.baidu.com/item/IEEE&quot;&gt;IEEE&lt;/a&gt;组织的&lt;a href=&quot;https://baike.baidu.com/item/IEEE 802.3/3684685&quot;&gt;IEEE 802.3&lt;/a&gt;标准制定了以太网的技术标准，它规定了包括&lt;a href=&quot;https://baike.baidu.com/item/物理层&quot;&gt;物理层&lt;/a&gt;的连线、电子信号和介质访问层&lt;a href=&quot;https://baike.baidu.com/item/协议&quot;&gt;协议&lt;/a&gt;的内容。以太网是目前应用最普遍的局域网技术，取代了其他局域网技术如&lt;a href=&quot;https://baike.baidu.com/item/令牌环&quot;&gt;令牌环&lt;/a&gt;、&lt;a href=&quot;https://baike.baidu.com/item/FDDI&quot;&gt;FDDI&lt;/a&gt;和&lt;a href=&quot;https://baike.baidu.com/item/ARCNET&quot;&gt;ARCNET&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;802.11是个相当复杂的标准。但简单的说，802.11就是无线以太网的标准&lt;/p&gt;
+
+&lt;p&gt;系列协议的局域网又称为Wi-Fi（Wireless-Fidelity，意思是无线保真度）。请注意，现在Wi-Fi实际上已经成为了无线局域网WLAN的代名词，但无线局域网和保真度实在没有什么关系&lt;/p&gt;
+
+&lt;p&gt;P391&lt;/p&gt;
+
+&lt;p&gt;2、移动自组网络&lt;/p&gt;
+
+&lt;p&gt;P393&lt;/p&gt;
+
+&lt;h3 id=&quot;80211局域网的mac层协议&quot;&gt;802.11局域网的MAC层协议&lt;/h3&gt;
+
+&lt;p&gt;P397&lt;/p&gt;
+
+&lt;h3 id=&quot;80211局域网的mac帧&quot;&gt;802.11局域网的MAC帧&lt;/h3&gt;
+
+&lt;p&gt;P403&lt;/p&gt;
+
+&lt;h2 id=&quot;无线个人区域网wpan&quot;&gt;无线个人区域网WPAN&lt;/h2&gt;
+
+&lt;p&gt;Wireless Personal Area Network&lt;/p&gt;
+
+&lt;p&gt;WPAN和无线局域网WLAN并不一样。WPAN是以个人为中心来使用的无线个人区域网，他实际上就是一个低功率、小范围、低速率和低价格的电缆替代技术。但WLAN却是同时为许多用户服务的无线局域网，它是一个大功率、中等范围、高速率的局域网&lt;/p&gt;
+
+&lt;p&gt;P407&lt;/p&gt;
+
+&lt;h2 id=&quot;无线城域网wman&quot;&gt;无线城域网WMAN&lt;/h2&gt;
+
+&lt;p&gt;P409&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>计算机网络（第7版）第七章</title>
+        <description>&lt;h1 id=&quot;第七章-网络安全&quot;&gt;第七章 网络安全&lt;/h1&gt;
+
+&lt;p&gt;计算机网络安全是另一门专业学科&lt;/p&gt;
+
+&lt;h2 id=&quot;网络安全问题概述&quot;&gt;网络安全问题概述&lt;/h2&gt;
+
+&lt;h3 id=&quot;计算机网络面临的安全性威胁&quot;&gt;计算机网络面临的安全性威胁&lt;/h3&gt;
+
+&lt;p&gt;计算机网络的通信面临两大类威胁，即被动攻击和主动攻击&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 上午10.15.41.png&quot; alt=&quot;截屏2020-07-23 上午10.15.41&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;被动攻击是指攻击者从网络上窃听他人的通信内容。通常把这类攻击称为截获。在被动攻击中，攻击者只是观察和分析某一个协议数据单元PDU而不干扰信息流。即使这些数据对攻击者来说是不易理解的，它也可以通过观察PDU的协议控制信息部分，了解正在通信的协议实体的地址和身份，研究PDU的长度和传输的频度，从而了解所交换的数据的某种性质。这种被动攻击又称为流量分析&lt;/p&gt;
+
+&lt;p&gt;主动攻击有如下几种最常见的方式&lt;/p&gt;
+
+&lt;p&gt;（1）篡改&lt;/p&gt;
+
+&lt;p&gt;攻击者故意篡改网络上传送的报文，这里也包括彻底中断传输的报文，甚至是把完全伪造的报文传送给接收方。这种攻击方式有时也称为更改报文流&lt;/p&gt;
+
+&lt;p&gt;（2）恶意程序&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;计算机病毒，一种会传染其他程序的程序，传染是通过修改其他程序来把自身或自己的变种复制进去而完成的&lt;/li&gt;
+  &lt;li&gt;计算机蠕虫病毒，一种通过网络的通信功能将自身从一个结点发送到另一个结点并自动启动运行的程序&lt;/li&gt;
+  &lt;li&gt;特洛伊木马，一种程序，他执行的功能并非所声称的功能而是某种恶意功能。计算机病毒有时也已特洛伊木马的形式出现&lt;/li&gt;
+  &lt;li&gt;逻辑炸弹，一种当运行环境满足某种特定条件时执行其他特殊功能的程序&lt;/li&gt;
+  &lt;li&gt;后门入侵，是指利用系统实现中的漏洞通过网络入侵系统&lt;/li&gt;
+  &lt;li&gt;流氓软件，一种未经用户允许就在用户计算机上安装运行并损害用户利益的软件。现在流氓软件的泛滥程度已超过了各种计算机病毒，成为互联网上最大的公害&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面所说的计算机病毒是狭义的，也有人把所有的恶意程序泛指为计算机病毒&lt;/p&gt;
+
+&lt;p&gt;（3）拒绝服务DoS&lt;/p&gt;
+
+&lt;p&gt;指攻击者向互联网上的某个服务器不停的发送大量分组，使该服务器无法提供正常服务，甚至完全瘫痪&lt;/p&gt;
+
+&lt;p&gt;若从互联网上的成百上千个网站集中攻击一个网站，则称为分布式拒绝服务DDoS。有时也把这种攻击称为网络带宽攻击或连通性攻击&lt;/p&gt;
+
+&lt;p&gt;还有其他类似的网络问题。例如，在使用以太网交换机的网络中，攻击者向某个以太网交换机发送大量的伪造源MAC地址的帧。以太网交换机收到这样的帧，就把这个假的源MAC地址写入交换表中（因为表中没有这个地址）。由于伪造的数量太大，因此很快就会把交换表填满了，导致以太网交换机无法正常工作（称为交换机中毒）&lt;/p&gt;
+
+&lt;p&gt;对于主动攻击，可以采取适当措施加以检测。但对被动攻击，通常却是检测不出来的&lt;/p&gt;
+
+&lt;p&gt;根据这些特点，可得出计算机网络通信安全的目标如下：&lt;/p&gt;
+
+&lt;p&gt;（1）防止析出报文内容和流量分析&lt;/p&gt;
+
+&lt;p&gt;（2）防止恶意程序&lt;/p&gt;
+
+&lt;p&gt;（3）检测更改报文流和拒绝服务&lt;/p&gt;
+
+&lt;p&gt;对付被动攻击可采用各种数据加密技术，而对付主动攻击，则需要将加密技术与适当的鉴别技术相结合&lt;/p&gt;
+
+&lt;h3 id=&quot;安全的计算机网络&quot;&gt;安全的计算机网络&lt;/h3&gt;
+
+&lt;p&gt;形式化方法证明 经验分析安全性&lt;/p&gt;
+
+&lt;p&gt;1、保密性&lt;/p&gt;
+
+&lt;p&gt;2、端点鉴别&lt;/p&gt;
+
+&lt;p&gt;3、信息的完整性&lt;/p&gt;
+
+&lt;p&gt;在谈到鉴别时，有时是同时包含了端点鉴别和报文的完整性。也就是说，既要鉴别发送方的身份，又鉴别报文的完整性&lt;/p&gt;
+
+&lt;p&gt;4、运行的安全性&lt;/p&gt;
+
+&lt;p&gt;访问控制&lt;/p&gt;
+
+&lt;h3 id=&quot;数据加密模型&quot;&gt;数据加密模型&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 上午11.46.41.png&quot; alt=&quot;截屏2020-07-23 上午11.46.41&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里我们假定加密密钥和解密密钥都是一样的。但实际上他们可以是不一样的（即使不一样，这两个密钥也必然有某种相关性）。密钥通常由密钥中心提供。当密钥需要向原地传送时，一定要通过另一个安全信道&lt;/p&gt;
+
+&lt;p&gt;密码编码学是密码体制的设计学，而密码分析学则是在未知密钥的情况下从密文推演出明文或密钥的技术。密码编码学与密码分析学合起来即为密码学cryptology&lt;/p&gt;
+
+&lt;p&gt;如果不论截取者获得了多少密文，但在密文中都没有足够的信息来唯一地确定出对应的明文，则这一密码体制称为无条件安全的，或称为理论上是不可破的。在无任何限制的条件下，目前几乎所有实用的密码体制均是可破的。因此，人们关心的是要研制出在计算上是不可破的密码体制&lt;/p&gt;
+
+&lt;h2 id=&quot;两类密码体制&quot;&gt;两类密码体制&lt;/h2&gt;
+
+&lt;h3 id=&quot;对称密钥密码体制&quot;&gt;对称密钥密码体制&lt;/h3&gt;
+
+&lt;p&gt;所谓对称密钥加密体制，即加密密钥与解密密钥是使用相同的密码体制&lt;/p&gt;
+
+&lt;p&gt;数据加密标准DES属于对称密钥加密体制&lt;/p&gt;
+
+&lt;p&gt;DES是一种分组密码。在加密前，先对整个的明文进行分组。每一个组为64位长的二进制数据。然后对每一个64位二进制数据进行加密处理，产生一组64位密文数据，最后将各组密文串接起来，即得出整个的密文。使用的密钥占有64位（实际密钥长度为56位，外加8位用于奇偶验证）&lt;/p&gt;
+
+&lt;p&gt;DES的保密性仅取决于对密钥的保密，而算法是公开的。DES的问题是他的密钥长度。56位DES已不再被认为是安全的&lt;/p&gt;
+
+&lt;p&gt;三重DES。把一个64位明文用一个密钥加密，在用另一个密钥解密，然后再使用第一个密钥加密&lt;/p&gt;
+
+&lt;p&gt;三重DES广泛应用于网络、金融、信用卡等系统&lt;/p&gt;
+
+&lt;p&gt;高级加密标准AES&lt;/p&gt;
+
+&lt;h3 id=&quot;公钥密码体制&quot;&gt;公钥密码体制&lt;/h3&gt;
+
+&lt;p&gt;公钥密码体制的产生主要由两个方面的原因，一是由于对称密钥体制的密钥分配问题，二是由于对数字签名的需求&lt;/p&gt;
+
+&lt;p&gt;在对称密钥密码体制中，加解密的双方使用的是相同的密钥。如果事先约定密钥，就会给密钥的管理和更换带来极大的不便。若使用高度安全的密钥分配中心KDC，也会使得网络成本增加&lt;/p&gt;
+
+&lt;p&gt;对数字签名的强烈需求也是产生公钥密码体制的一个原因。在许多应用中，人们需要对纯数字的电子信息进行签名，表明该信息确实是某个特定的人产生的&lt;/p&gt;
+
+&lt;p&gt;RSA体制，它是基于数论中的大数分解问题的体制&lt;/p&gt;
+
+&lt;p&gt;（1）密钥对产生器产生出接收者B的一对密钥：加密密钥PKB和解密密钥SKB。发送者A所用的加密密钥PKB就是接受者B的公钥，他向公众公开。而B所用的解密密钥SKB就是接受者B的私钥，对其他人都保密&lt;/p&gt;
+
+&lt;p&gt;（2）发送者A用B的公钥PKB通过E运算对明文X加密，得出密文Y，发送给B。B用自己的私钥SKB通过D运算进行解密，恢复出明文&lt;/p&gt;
+
+&lt;p&gt;（3）虽然在计算机上可以容易的产生成对的PKB和SKB，但从已知的PKB实际上不可能推导出SKB，即从PKB到SKB是计算上不可能的&lt;/p&gt;
+
+&lt;p&gt;（4）虽然公钥可用来加密，但却不能用来解密&lt;/p&gt;
+
+&lt;p&gt;（5）先后对X进行D运算和E运算或进行E运算和D运算，结果都是一样的&lt;/p&gt;
+
+&lt;p&gt;使用对称密钥时，一对一的双向保密通信&lt;/p&gt;
+
+&lt;p&gt;在使用公开密钥时，多对一的单向保密通信，反方向的保密通信则是不行的&lt;/p&gt;
+
+&lt;p&gt;任何加密方法的安全性取决于密钥的长度，以及攻破密文所需的计算量，而不是简单的取决于加密的体制（公钥密码体制或传统加密体制）。我们还要指出，公钥密码并没有使传统密码体制被弃用，因为目前公钥加密算法的开销较大，在可见的将来还不会放弃传统加密方法&lt;/p&gt;
+
+&lt;h2 id=&quot;数字签名&quot;&gt;数字签名&lt;/h2&gt;
+
+&lt;p&gt;（1）接收者能够核实发送这对报文的签名。也就是说，接收者能够确信该报文的确是发送者发送的。报文鉴别&lt;/p&gt;
+
+&lt;p&gt;（2）接收者确信收到的数据和发送者发送的完全一样而没有被篡改过。报文的完整性&lt;/p&gt;
+
+&lt;p&gt;（3）发送者事后不能抵赖对报文的签名。不可否认🙅‍♂️&lt;/p&gt;
+
+&lt;p&gt;采用公钥算法要比采用对称密钥算法更容易实现&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午12.50.47.png&quot; alt=&quot;截屏2020-07-23 下午12.50.47&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上述过程只是对报文进行了签名，对报文X本身却未保密&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午12.51.35.png&quot; alt=&quot;截屏2020-07-23 下午12.51.35&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;鉴别&quot;&gt;鉴别&lt;/h2&gt;
+
+&lt;p&gt;鉴别和加密的概念不同，鉴别是要验证通信的对方的确是自己所要通信的对象，而不是其他的冒充者，并且所传送的报文是完整的，没有被他人篡改过&lt;/p&gt;
+
+&lt;p&gt;鉴别和授权是不同的概念。授权涉及的问题是：所进行的过程是否被允许（如是否可以对某文件进行读或写）&lt;/p&gt;
+
+&lt;p&gt;有时可再把鉴别细分为两种。一种是报文鉴别，即鉴别所受到的报文的确是报文的发送者发送的，而不是其他人伪造的或篡改的。这就包含了端点鉴别和报文完整性的鉴别。另一种则是实体鉴别，即仅仅鉴别发送报文的实体。实体可以是一个人，也可以是一个进程（客户或服务器）。这就是端点鉴别&lt;/p&gt;
+
+&lt;h3 id=&quot;报文鉴别&quot;&gt;报文鉴别&lt;/h3&gt;
+
+&lt;p&gt;1、密码散列函数&lt;/p&gt;
+
+&lt;p&gt;数字签名能够实现对报文的鉴别。然而这种方式有一个很大的缺点，就是对较长的报文（这是很常见的）进行数字签名会使计算机增加非常大的负担，因为这需要进行较多的时间来进行运算。因此，我们需要找出一种相对简单的方法对报文进行鉴别，这种方式就是使用密码散列函数&lt;/p&gt;
+
+&lt;p&gt;检验和就是散列函数的一种应用，用于发现数据在传输过程中的比特差错&lt;/p&gt;
+
+&lt;p&gt;散列函数的特点&lt;/p&gt;
+
+&lt;p&gt;（1）散列函数的输入长度可以很长，但其输出长度则是固定的，并且较短。散列函数的输出叫做散列值，或更简单些，称为散列&lt;/p&gt;
+
+&lt;p&gt;（2）不同的散列值肯定对应于不同的输入，但不同的输入却可能得出相同的散列值。散列函数的输入和输出多对一&lt;/p&gt;
+
+&lt;p&gt;密码散列函数，要找到两个不同的报文，他们具有同样的密码散列函数输出，在计算上是不可行的。也就是说，密码散列函数实际上是一种单向函数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.16.51.png&quot; alt=&quot;截屏2020-07-23 下午1.16.51&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、实用的密码散列函数MD5和SHA-1&lt;/p&gt;
+
+&lt;p&gt;MD就是Message Digest的缩写，意思是报文摘要&lt;/p&gt;
+
+&lt;p&gt;SHA Secure Hash Algorithm&lt;/p&gt;
+
+&lt;p&gt;MD5的逆向变换是不可能的这一传统观念以受到了颠覆性的动摇，可以通过系统的方法在较短的时间内找出一对报文具有相同的MD5报文摘要，有许多学者开发了对MD5实际的攻击&lt;/p&gt;
+
+&lt;p&gt;MD5最终被另一种叫做安全散列算法SHA的标准所取代&lt;/p&gt;
+
+&lt;p&gt;MD5算法的大致过程如下：&lt;/p&gt;
+
+&lt;p&gt;（1）先把任意长的报文按模2^64计算其余数（64位），追加到报文的后面&lt;/p&gt;
+
+&lt;p&gt;（2）在报文和余数之间填充1~512位，使得填充后的总长度是512的整数倍。填充的首部是1，后面都是0&lt;/p&gt;
+
+&lt;p&gt;（3）把追加和填充后的报文分割成一个个512位的数据块，每个512位的报文数据再分成4个128位的数据块依次送到不同的散列函数进行四轮计算。每一轮又都按32位的小数据块进行复杂的运算。一直到最后计算出MD5报文摘要代码（128位）&lt;/p&gt;
+
+&lt;p&gt;这样得出的MD5报文摘要代码中的每一位都与原来报文中的每一位有关。由此可见，像MD5这样的密码散列函数实际上已是个相当复杂的算法，而不是简单的函数了&lt;/p&gt;
+
+&lt;p&gt;SHA比MD5更安全，但计算起来却比MD5要慢些。后来SHA-1也被证明其实际安全性并未达到设计要求。虽然现在SHA-1也在使用，但很快就会被另外的两个版本SHA-2和SHA-3所替代&lt;/p&gt;
+
+&lt;p&gt;3、报文鉴别码&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.38.12.png&quot; alt=&quot;截屏2020-07-23 下午1.38.12&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;像上面列举的做法，实际上是不可行的。解决的办法并不复杂，就是对散列进行一次加密&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.39.18.png&quot; alt=&quot;截屏2020-07-23 下午1.39.18&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;报文鉴别码MAC（Message Authentication Code）&lt;/p&gt;
+
+&lt;p&gt;局域网中使用的媒体接入控制MAC也是使用这三个字母&lt;/p&gt;
+
+&lt;p&gt;现在整个报文是不需要加密的。虽然从散列H导出报文鉴别码MAC需要加密算法，但由于散列H的长度通常都远远小于报文X的长度，因此这种加密不会消耗很多的计算资源。这样，使用鉴别码MAC就能够很方便的保护报文的完整性&lt;/p&gt;
+
+&lt;p&gt;现在已经有了好几个不同的MAC标准，而使用最广泛的就是HMAC，他可以和MD5或SHA-1一起使用&lt;/p&gt;
+
+&lt;p&gt;采用什么方法可以安全有效的分发通信双方共享的密钥？一种可行的方法是采用公钥系统，用户A用其私钥对散列H进行运算，采用这种方式得到的扩展报文，不仅是不可伪造的，也是不可否认的&lt;/p&gt;
+
+&lt;h3 id=&quot;实体鉴别&quot;&gt;实体鉴别&lt;/h3&gt;
+
+&lt;p&gt;实体鉴别和报文鉴别不同。报文鉴别是对每一个收到的报文都要鉴别报文的发送者，而实体鉴别实在系统接入的全部持续时间内对和自己通信的对方实体只需验证一次&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.49.22.png&quot; alt=&quot;截屏2020-07-23 下午1.49.22&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为了对付重放攻击，可以使用不重数nonce。不重数就是一个不重复使用的大随机数，即一次一数。在鉴别过程中不重数可以使B能够把重复的鉴别请求和新的鉴别请求区分开来&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.50.52.png&quot; alt=&quot;截屏2020-07-23 下午1.50.52&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在使用公钥密码体制时，可以对不重数进行签名认证&lt;/p&gt;
+
+&lt;p&gt;公钥密码体制虽然不必在互相通信的用户之间秘密地分配共享密钥，但仍有受到攻击的可能&lt;/p&gt;
+
+&lt;p&gt;中间人攻击&lt;/p&gt;
+
+&lt;p&gt;由此可见，公钥的分配和认证公钥的真实性也是一个非常重要的问题&lt;/p&gt;
+
+&lt;h2 id=&quot;密钥分配&quot;&gt;密钥分配&lt;/h2&gt;
+
+&lt;p&gt;密钥管理包括：密钥的产生、分配、注入、验证和使用&lt;/p&gt;
+
+&lt;p&gt;密钥分配（或密钥分发）是密钥管理中最大的问题。密钥必须通过最安全的通路进行分配&lt;/p&gt;
+
+&lt;p&gt;网外分配方式	网内分配方式，即对密钥自动分配&lt;/p&gt;
+
+&lt;h3 id=&quot;对称密钥的分配&quot;&gt;对称密钥的分配&lt;/h3&gt;
+
+&lt;p&gt;目前常用的密钥分配方式是设立密钥分配中心KDC。KDC是大家都信任的机构，其任务就是给需要进行秘密通信的用户临时分配一个会话密钥（仅使用一次）&lt;/p&gt;
+
+&lt;p&gt;假定用户A和B都是KDC的登记用户。A和B在KDC登记时就已经在KDC的服务器上安装了各自和KDC进行通信的主密钥KA和KB&lt;/p&gt;
+
+&lt;p&gt;1、用户A向KDC发送时用明文，说明想和用户B通信。在明文中给出A和B在KDC登记的身份&lt;/p&gt;
+
+&lt;p&gt;2、KDC用随机数产生一次一密的会话密钥KAB供A和B的这次会话使用，然后向A发送回答报文。这个回答报文用A的密钥KA加密。这个报文中包含这次会话使用的密钥KAB和请A转给B的一个票据，该票据包括A和B在KDC登记的身份，以及这次会话将要使用的密钥KAB。票据用B的密钥KAB加密，A无法知道此票据的内容，因为A没有B的密钥KB，当然A也不需要知道此票据的内容&lt;/p&gt;
+
+&lt;p&gt;3、当B收到A转来的票据并使用自己的密钥KB解密后，就知道A要和他通信，同时也知道KDC为这次和A通信所分配的会话密钥KAB了&lt;/p&gt;
+
+&lt;p&gt;在网络上传送密钥时，都是经过加密的。解密用的密钥都不在网上传送&lt;/p&gt;
+
+&lt;p&gt;KDC还可在报文中加入时间戳，以防止报文的截取者利用已记录下的报文进行重放攻击。会话密钥时一次性的，因此保密性较高，而KDC分配给用户的密钥KA和KB，都应定期更换，以减少攻击者破译密钥的机会&lt;/p&gt;
+
+&lt;p&gt;目前最出名的密钥分配协议时Kerberos V5，使用AES进行加密&lt;/p&gt;
+
+&lt;p&gt;Kerberos使用两个服务器：鉴别服务器AS、票据授予服务器TGS。Kerberos只用于客户与服务器之间的鉴别，而不用于人对人的鉴别。&lt;/p&gt;
+
+&lt;p&gt;P338&lt;/p&gt;
+
+&lt;h3 id=&quot;公钥的分配&quot;&gt;公钥的分配&lt;/h3&gt;
+
+&lt;p&gt;在公钥密码体制中，如果每个用户都具有其他用户的公钥，就可实现安全通信&lt;/p&gt;
+
+&lt;p&gt;需要一个值得信赖的机构来将公钥与其对应的实体进行绑定。这样的机构就叫做认证中心CA，他一般由政府出资建立。每个实体都有CA发来的证书，里面有公钥极其拥有着的标识信息（人名或IP地址）。此证书被CA进行了数字签名。任何用户都可从可信的地方获得认证中心CA的公钥，此公钥来验证某个公钥是否为某个实体所拥有（通过向CA查询）。有的大公司也提供认证中心服务&lt;/p&gt;
+
+&lt;h2 id=&quot;互联网使用的安全协议&quot;&gt;互联网使用的安全协议&lt;/h2&gt;
+
+&lt;h3 id=&quot;网络层安全协议&quot;&gt;网络层安全协议&lt;/h3&gt;
+
+&lt;p&gt;1、IPsec协议族概述&lt;/p&gt;
+
+&lt;p&gt;虚拟专用网VPN中传送的信息都是经过加密的。提供这种加密服务的就是IPsec&lt;/p&gt;
+
+&lt;p&gt;IPsec并不是一个单一协议，而是能够在IP层提供互联网通信安全的协议族。IPsec并没有限定用户必须使用何种特定的加密和鉴别算法。实际上，IPsec是个框架，它允许通信双方选择合适的参数和算法（例如，密钥长度）。为保证互操作性，IPsec还包含了一套加密算法，所有IPsec的实现都必须使用&lt;/p&gt;
+
+&lt;p&gt;IPsec就是IP安全（security）的缩写&lt;/p&gt;
+
+&lt;p&gt;IPsec协议族中的协议可划分为以下三个部分：&lt;/p&gt;
+
+&lt;p&gt;（1）IP安全数据报格式的两个协议：鉴别首部AH（Authentication Header）协议和封装安全有效载荷ESP（Encapsulation Payload）协议&lt;/p&gt;
+
+&lt;p&gt;（2）有关加密算法的三个协议&lt;/p&gt;
+
+&lt;p&gt;（3）互联网密钥交换IKE（Internet Key Exchange）协议&lt;/p&gt;
+
+&lt;p&gt;后面我们要重点介绍IP安全数据报的格式，以便了解IPsec怎样提供网络层的安全通信。AH协议提供源点鉴别和数据完整性，但不能保密。而ESP协议比AH协议复杂的多，它提供源点鉴别、数据完整性和保密。IPsec支持IPv4和IPv6。在IPv6中，AH和ESP都是扩展首部的一部分。AH协议的功能都已包含在ESP协议中，因此使用ESP协议就可以不使用AH协议。下面我们将不再讨论都已包含在ESP协议中，因此使用ESP协议就可以不使用AH协议。下面我们将不再讨论AH协议，而只介绍ESP协议的要点&lt;/p&gt;
+
+&lt;p&gt;使用ESP或AH协议的IP数据报称为IP安全数据报（IPsec数据报），它可以在两台主机之间、两个路由器之间或一台主机和一个路由器之间发送&lt;/p&gt;
+
+&lt;p&gt;IP安全数据报有以下两种不同的工作方式&lt;/p&gt;
+
+&lt;p&gt;第一种工作方式是运输方式。运输方式是在整个运输层报文段的前后分别添加若干控制信息，再加上IP首部，构成IP安全数据报&lt;/p&gt;
+
+&lt;p&gt;第二种工作方式是隧道方式。隧道方式是在原始的IP数据报的前后分别添加若干控制信息，再加上新的IP首部，构成一个IP安全数据报&lt;/p&gt;
+
+&lt;p&gt;无论使用哪种方式，最后得出的IP数据报的IP首部都是不加密的。只有使用不加密的IP首部，互联网上的各个路由器才能识别IP首部中的有关信息，把IP安全数据报在不安全的互联网中进行转发，从源点安全地转发到终点。所谓安全数据报是指数据报的数据部分是经过加密的，并能够被鉴别的。通常把数据报的数据部分称为数据报的有效载荷&lt;/p&gt;
+
+&lt;p&gt;由于目前使用最多的就是隧道方式，因此下面的讨论只限于隧道方式&lt;/p&gt;
+
+&lt;p&gt;2、安全关联&lt;/p&gt;
+
+&lt;p&gt;在发送IP安全数据报之前，在源实体和目的实体之间必须创建一条网络层的逻辑连接，即安全关联SA（Security Association）。这样，传统的互联网中无连接的网络层就变为了具有逻辑连接的一个层。安全关联是从源点到终点的单向连接，它能够提供安全服务。如要进行双向安全通信，则两个方向都需要建立安全关联&lt;/p&gt;
+
+&lt;p&gt;在这些安全关联SA上传送的就是IP安全数据报&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.21.11.png&quot; alt=&quot;截屏2020-07-23 下午3.21.11&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;原始的IP数据报隐藏在IP安全数据报中了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.22.21.png&quot; alt=&quot;截屏2020-07-23 下午3.22.21&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;建立安全关联SA的路由器或主机，必须维护这条SA的状态信息&lt;/p&gt;
+
+&lt;p&gt;（1）一个32位的连接标识符，称为安全参数索引SPI&lt;/p&gt;
+
+&lt;p&gt;（2）安全关联SA的源点和终点的IP地址&lt;/p&gt;
+
+&lt;p&gt;（3）所使用的加密类型&lt;/p&gt;
+
+&lt;p&gt;（4）加密的密钥&lt;/p&gt;
+
+&lt;p&gt;（5）完整性检查的类型&lt;/p&gt;
+
+&lt;p&gt;（6）鉴别使用的密钥&lt;/p&gt;
+
+&lt;p&gt;当路由器R1要通过SA发送IP安全数据报时，就必须读取SA的这些状态信息，以便知道如何把IP数据报进行加密和鉴别&lt;/p&gt;
+
+&lt;p&gt;3、IP安全数据报的格式&lt;/p&gt;
+
+&lt;p&gt;以隧道方式为例&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.27.01.png&quot; alt=&quot;截屏2020-07-23 下午3.27.01&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;P343&lt;/p&gt;
+
+&lt;p&gt;4、IPsec的其他构件&lt;/p&gt;
+
+&lt;p&gt;发送IP安全数据报的实体可能要用到很多条安全关联SA&lt;/p&gt;
+
+&lt;p&gt;安全关联数据库SAD Security Association Database&lt;/p&gt;
+
+&lt;p&gt;当主机要发送IP安全数据报时，就在SAD中查找相应的SA，以便获得必要的信息，来对该IP安全数据报实施必要保护。同样，当主机要接受IP安全数据报时，也要在SAD中查找相应的SA，以便获得信息来检查该分组的安全性&lt;/p&gt;
+
+&lt;p&gt;安全策略数据库SPD Security Policy Database&lt;/p&gt;
+
+&lt;p&gt;SPD指明什么样的数据报需要进行IPsec处理，这取决于源地址、源端口、目的地址、目的端口、以及协议的类型等&lt;/p&gt;
+
+&lt;p&gt;当一个IP数据报到达时，SPD指出应当做什么（使用IP数据报还是不使用），而SAD则指明了应当使用哪一个SA&lt;/p&gt;
+
+&lt;p&gt;互联网密钥交换IKE协议——为IP安全数据报创建安全关联SA&lt;/p&gt;
+
+&lt;p&gt;IKEv2以另外三个协议为基础：&lt;/p&gt;
+
+&lt;p&gt;（1）Oakley——密钥生成协议&lt;/p&gt;
+
+&lt;p&gt;（2）安全密钥交换机制——用于密钥交换协议。他利用公钥加密来实现密钥交换协议中的实体鉴别&lt;/p&gt;
+
+&lt;p&gt;（3）互联网安全关联和密钥管理协议——用于实现IKE中定义的密钥交换，使IKE的交换能够以标准化、格式化的报文创建安全关联SA&lt;/p&gt;
+
+&lt;h3 id=&quot;运输层安全协议&quot;&gt;运输层安全协议&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安全套接字层SSL（Secure Socket Layer）&lt;/li&gt;
+  &lt;li&gt;运输层安全TLS（Transport Layer Security）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SSL作用在端系统应用层的HTTP和运输层之间，在TCP之上建立一个安全通道，为通过TCP传输的应用层数据提供安全保障&lt;/p&gt;
+
+&lt;p&gt;IETF在SSL 3.0的基础上设计了TLS协议，为所有基于TCP的网络应用提供安全数据传输服务&lt;/p&gt;
+
+&lt;p&gt;运输层原来还有一个安全电子交易SET协议，是专门用于在互联网上进行安全信用卡交易的协议，但后来在市场竞争中失败了&lt;/p&gt;
+
+&lt;p&gt;很多浏览器都已使用了SSL和TLS&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.20.52.png&quot; alt=&quot;截屏2020-07-23 下午4.20.52&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用SSL后的情况有些特殊，因为SSL增强了TCP的服务（更加安全了），因此，SSL应该是运输层协议。然而实际上，使用安全运输的应用程序（如HTTP）却把SSL驻留在应用层&lt;/p&gt;
+
+&lt;p&gt;应用层使用SSL最多的就是HTTP，但SSL并非仅用于HTTP，而是可用于任何应用层的协议。例如，SSL也可用于IMAP邮件的鉴别和数据加密。当使用普通不加密的浏览器查看网页时，HTTP就直接使用TCP连接，这时SSL不起作用。但使用信用卡进行网上支付，就需要使用安全的浏览器，这时，应用程序HTTP就调用SSL对整个网页进行加密。网页上会提示用户，同时网址栏原来显示http的地方，现在变成了https。TCP的HTTPS端口号是443，而不是平时使用的端口号80&lt;/p&gt;
+
+&lt;p&gt;SSL提供的安全服务可归纳为以下三种：&lt;/p&gt;
+
+&lt;p&gt;（1）SSL服务器鉴别，允许用户证实服务器的身份。支持SSL的客户端通过验证来自服务器的证书，来鉴别服务器的真实身份并获得服务器的公钥&lt;/p&gt;
+
+&lt;p&gt;（2）SSL客户鉴别，SSL的可选服务，允许服务器证实客户的身份&lt;/p&gt;
+
+&lt;p&gt;（3）加密的SSL会话，对客户和服务器间发送的所有报文进行加密，并检测报文是否被篡改&lt;/p&gt;
+
+&lt;p&gt;当顾客点击该网站的链接建立TCP连接后，先进行浏览器和服务器之间的握手协议，完成加密算法的协商和会话密钥的传递，然后进行安全数据传输&lt;/p&gt;
+
+&lt;p&gt;（1）协商加密算法&lt;/p&gt;
+
+&lt;p&gt;（2）服务器鉴别&lt;/p&gt;
+
+&lt;p&gt;（3）会话密钥计算。由浏览器A随机产生一个秘密数。用服务器B的RSA公钥进行加密后发送给B。双方根据协商的算法产生共享的对称会话密钥&lt;/p&gt;
+
+&lt;p&gt;（4）安全数据传输&lt;/p&gt;
+
+&lt;p&gt;上述的SSL安全会话建立过程&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.28.54.png&quot; alt=&quot;截屏2020-07-23 下午4.28.54&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;目前全球通过SSL进行的网上交易每年以超过数百亿美元。但SSL还缺少一些措施来防止在互联网商务中出现各种可能的欺骗行为&lt;/p&gt;
+
+&lt;h3 id=&quot;应用层安全协议&quot;&gt;应用层安全协议&lt;/h3&gt;
+
+&lt;p&gt;限于篇幅，我们在这一节仅讨论应用层中有关电子邮件的安全协议&lt;/p&gt;
+
+&lt;p&gt;电子邮件在传送过程中可能要经过许多路由器，其中的任何一个路由器都有可能对转发的邮件进行阅读。从这个意义上讲，电子邮件是没有什么隐私可言的&lt;/p&gt;
+
+&lt;p&gt;电子邮件这种网络应用有其特殊性，发送电子邮件是个即时的行为。A和B并不会为此建立任何会话。单向报文的安全问题&lt;/p&gt;
+
+&lt;p&gt;PGP&lt;/p&gt;
+
+&lt;p&gt;P347&lt;/p&gt;
+
+&lt;p&gt;PGP很难被攻破，因此在目前可以认为PGP是足够安全的&lt;/p&gt;
+
+&lt;h2 id=&quot;系统安全防火墙与入侵检测&quot;&gt;系统安全：防火墙与入侵检测&lt;/h2&gt;
+
+&lt;p&gt;加密技术并不能阻止植入了特洛伊木马的计算机系统通过网络向攻击者泄漏秘密信息&lt;/p&gt;
+
+&lt;h3 id=&quot;防火墙&quot;&gt;防火墙&lt;/h3&gt;
+
+&lt;p&gt;访问控制技术，严格控制进出网络边界的分组，禁止任何不必要的通信，从而减少潜在入侵的发生，尽可能降低这类安全威胁所带来的安全风险。由于防火墙不可能阻止所有入侵行为，作为系统防御的第二道防线，入侵检测系统IDS通过对进入网络的分组进行深度分析与检测发现疑似入侵行为的网络活动，并进行报警以便进一步采取相应措施&lt;/p&gt;
+
+&lt;p&gt;防火墙是一种特殊编程的路由器，安装在一个网点和网络的其余部分之间，目的是实施访问控制策略&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.42.04.png&quot; alt=&quot;截屏2020-07-23 下午4.42.04&quot; style=&quot;zoom:50%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;防火墙技术一般分为以下两类&lt;/p&gt;
+
+&lt;p&gt;（1）分组过滤路由器是一种具有分组过滤功能的路由器，他根据过滤规则对进出内部网络的分组执行转发或者丢弃（即过滤）。过滤规则是基于分组的网络层或运输层首部的信号，例如：源/目的IP地址、源/目的端口、协议类型，等等&lt;/p&gt;
+
+&lt;p&gt;分组过滤可以是无状态的，即独立的处理每一个分组。也可以是有状态的，即要跟踪每个连接或会话的通信状态并根据这些状态信息来决定是否转发分组&lt;/p&gt;
+
+&lt;p&gt;分组过滤路由器的优点是简单高效，且对于用户是透明的，但不能对高层数据进行过滤。例如，不能禁止用户对某个特定应用的进行某个特定的操作，不能支持用户层用户鉴别等。这些功能要通过使用应用网关技术来实现的&lt;/p&gt;
+
+&lt;p&gt;（2）应用网关也称为代理服务器，他在应用层通信中扮演报文中继的角色。一种网络应用需要一个应用网关。在应用网关中可以实现基于应用层数据的过滤和高层用户鉴别&lt;/p&gt;
+
+&lt;p&gt;所有进出网络的应用程序报文都必须通过应用网关。应用网关在应用层打开该报文。应用网关也有一些缺点，首先，每种应用都需要一个不同的应用网关（可以运行在同一台主机上）。其次，在应用层转发和处理报文，处理负担较重。另外，对应用程序不透明，需要在应用程序客户端配置应用网关地址&lt;/p&gt;
+
+&lt;p&gt;通常可将这两种技术相结合&lt;/p&gt;
+
+&lt;h3 id=&quot;入侵检测系统&quot;&gt;入侵检测系统&lt;/h3&gt;
+
+&lt;p&gt;IDS&lt;/p&gt;
+
+&lt;p&gt;基于特征的入侵检测 已知攻击标志性特征&lt;/p&gt;
+
+&lt;p&gt;基于异常的入侵检测 网络流量统计等&lt;/p&gt;
+
+&lt;p&gt;误报&lt;/p&gt;
+
+&lt;p&gt;漏报&lt;/p&gt;
+
+&lt;h2 id=&quot;一些未来的发展方向&quot;&gt;一些未来的发展方向&lt;/h2&gt;
+
+&lt;p&gt;1、椭圆曲线密码 ECC&lt;/p&gt;
+
+&lt;p&gt;与AES这一系统现在已广泛用于电子护照，也是下一代金融系统使用的加密系统&lt;/p&gt;
+
+&lt;p&gt;2、移动安全&lt;/p&gt;
+
+&lt;p&gt;3、量子密码&lt;/p&gt;
+
+&lt;p&gt;量子计算机的到来将使得目前许多使用中的密码技术无效&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>计算机网络（第7版）第一章</title>
+        <description>&lt;h1 id=&quot;第一章-概述&quot;&gt;第一章 概述&lt;/h1&gt;
+
+&lt;h2 id=&quot;计算机网络在信息时代中的作用&quot;&gt;计算机网络在信息时代中的作用&lt;/h2&gt;
+
+&lt;p&gt;电信网络、有线电视网络、计算机网络&lt;/p&gt;
+
+&lt;p&gt;Internet 因特网 互联网&lt;/p&gt;
+
+&lt;p&gt;连通性 共享&lt;/p&gt;
+
+&lt;h2 id=&quot;互联网概述&quot;&gt;互联网概述&lt;/h2&gt;
+
+&lt;p&gt;起源于美国&lt;/p&gt;
+
+&lt;p&gt;若干结点node和连接这些结点的链路link&lt;/p&gt;
+
+&lt;p&gt;网络中的结点可以是计算机、集线器、交换机或路由器等&lt;/p&gt;
+
+&lt;p&gt;在很多情况下，我们可以用一朵云表示一个网络。这样做的好处是可以不去关心网络中的相当复杂的细节问题，因而可以集中精力研究涉及到与网络互连有关的一些问题&lt;/p&gt;
+
+&lt;p&gt;网络之间还可以通过路由器互联起来 互连网internetwork/internet&lt;/p&gt;
+
+&lt;p&gt;网络把许多计算机连接在一起，而互连网则把许多网络通过路由器连接在一起。与网络相连的计算机常称为主机host&lt;/p&gt;
+
+&lt;p&gt;现在使用智能手机上网已非常普遍。由于智能手机中有中央处理机CPU，因此也可以把连接在计算机网络上的智能手机称为主机&lt;/p&gt;
+
+&lt;p&gt;第一阶段&lt;/p&gt;
+
+&lt;p&gt;RFC 1208&lt;/p&gt;
+
+&lt;p&gt;internet 通用名词，他泛指有多个计算机网络互连而成的计算机网络。在这些网络之间的通信协议即通信规则可以任意选择，不一定非要使用TCP/IP协议&lt;/p&gt;
+
+&lt;p&gt;Internet 专用名词，指当前全球最大的、开放的、有众多网络相互连接而成的特定互连网，它采用TCP/IP协议族作为通信的规则，且其前身是美国的ARPANET&lt;/p&gt;
+
+&lt;p&gt;第二阶段&lt;/p&gt;
+
+&lt;p&gt;建成了三级结构的互联网&lt;/p&gt;
+
+&lt;p&gt;主干网、地区网和校园网（或企业网）&lt;/p&gt;
+
+&lt;p&gt;第三阶段&lt;/p&gt;
+
+&lt;p&gt;多层次ISP结构的互联网&lt;/p&gt;
+
+&lt;p&gt;从1993年开始，由美国政府资助的NSFNET逐渐被若干个商用网络的互联网主干网替代，而政府机构不再负责互联网的运营。这样，就出现了一个新的名词：互联网服务提供者ISF(Internet Service Provider)，在许多情况下，ISP就是一个进行商业活动的公司，因此ISP又常译为互联网服务提供商。例如，中国电信、中国联通、中国移动就是我国最著名的ISP&lt;/p&gt;
+
+&lt;p&gt;ISP可以从互联网管理机构申请到很多IP地址（互联网上的主机都必须有IP地址才能上网），同时拥有通信线路（大ISP自己建造通信线路，小ISP则向电信公司租用通信线路）以及路由器等连网设备，因此任何机构和个人只要向某个ISP缴纳规定的费用，就可以从该ISP获取所需IP地址的使用权，并可通过该ISP接入到互联网&lt;/p&gt;
+
+&lt;p&gt;IP地址的管理机构不会把一个单个的IP地址分配给单个用户，而是把一批IP地址有常租赁给经审查合格的ISP。由此可见，现在的互联网已不是某个单个组织所拥有而是全世界无数大大小小的ISP所共同拥有的&lt;/p&gt;
+
+&lt;p&gt;网络的网络&lt;/p&gt;
+
+&lt;p&gt;根据提供服务的覆盖面积大小以及所拥有的IP地址数目的不同，ISP也分为不同层次的ISP：主干ISP、地区ISP和本地ISP&lt;/p&gt;
+
+&lt;p&gt;主干ISP有几个专门的公司创建和维持，服务面积最大（一般能覆盖国家范围），并且还拥有高速主干网。有一些地区ISP网络也可直接与主干ISP相连&lt;/p&gt;
+
+&lt;p&gt;地区ISP是一些较小的ISP。这些地区ISP通过一个或多个主干ISP连接起来。他们位于等级中的第二层，数据率也低一些&lt;/p&gt;
+
+&lt;p&gt;本地ISP给用户提供直接的服务。本地ISP可以连接到地区ISP，也可直接连接到主干ISP。绝大多数用户都是连接到本地ISP的。本地ISP可以是一个仅仅提供互联网服务的公司，也可以是一个拥有网络并向自己的雇员题哦那个服务的企业，或者是一个运行自己的网络的非盈利机构（如学院或大学）。本地ISP可以与地区ISP或主干ISP连接&lt;/p&gt;
+
+&lt;p&gt;从原理上讲，只要每一个本地ISP都安装了路由器连接到某个地区ISP，而每一个地区ISP也有路由器连接到主干ISP，那么在这些相互连接的ISP的共同合作下，就可以完成互联网中的所有的分组转发任务&lt;/p&gt;
+
+&lt;p&gt;但随着互联网上数据流量的急剧增长，人们开始研究如何更快地转发分组，以及如何更加有效地利用网络资源，于是，互联网交换结点IXP(Internet eXchange Point)就应运而生了&lt;/p&gt;
+
+&lt;p&gt;互联网交换结点IXP的主要作用就是允许两个网络直接相连并交换分组，而不再需要通过第三个网络来转发分组。这样就使互联网上的数据流量分布更加合理，同时也减少了分组转发的迟延时间，降低了分组转发的费用。现在许多IXP在进行对等交换分组时，都互相不收费。但本地IXP或地区ISP通过IXP向高层的IXP转发分组时，则需要缴纳一定的费用&lt;/p&gt;
+
+&lt;p&gt;IXP的结构非常复杂，典型的IXP由一个或多个网络交换机组成，许多ISP再连接到这些网络交换机的相关端口上。IXP常采用工作在数据链路层的网络交换机，这些网络交换机都用局域网互连起来&lt;/p&gt;
+
+&lt;p&gt;到2016年3月，全球已经有226个IXP，分布不平衡&lt;/p&gt;
+
+&lt;p&gt;互联网发展迅猛&lt;/p&gt;
+
+&lt;p&gt;互联网的标准化工作&lt;/p&gt;
+
+&lt;p&gt;彩电三大制式&lt;/p&gt;
+
+&lt;p&gt;国际标准的制定是非常复杂的问题，这里既有很多技术问题，也有很多属于非技术问题&lt;/p&gt;
+
+&lt;p&gt;标准制定过早，由于技术还没有发展到成熟水平，会使技术比较陈旧的标准限制了产品的技术水平。其结果是以后不得不再次修订标准，造成浪费&lt;/p&gt;
+
+&lt;p&gt;标准制定的太迟，也会使技术的发展无章可循，造成产品的互不兼容，也不利于产品的推广&lt;/p&gt;
+
+&lt;p&gt;互联网在指定其标准上很有特色，其中的一个很大的特点是面向公众。互联网所有RFC文档都可从互联网上免费下载，而且任何人都可以用电子邮件随时发表对某个文档的意见或建议。这种开放方式对互联网的迅速发展影响很大&lt;/p&gt;
+
+&lt;p&gt;互联网协会ISOC&lt;/p&gt;
+
+&lt;p&gt;RFC request for comment&lt;/p&gt;
+
+&lt;p&gt;并非所有的RFC文档都是互联网标准&lt;/p&gt;
+
+&lt;p&gt;互联网标准的制定往往要花费漫长的时间，并且是一件非常慎重的工作&lt;/p&gt;
+
+&lt;p&gt;只有很少部分的RFC最后能变成互联网标准&lt;/p&gt;
+
+&lt;p&gt;RFC按发表时间的先后编上序号。一个RFC文档更新后就是用一个新的编号，并在文档中指出原来老编号的RFC文档已成为陈旧的或被更新&lt;/p&gt;
+
+&lt;p&gt;但陈旧的RFC不会被删除，而是永远保留供用户参考&lt;/p&gt;
+
+&lt;p&gt;RFC的数量增长很快&lt;/p&gt;
+
+&lt;p&gt;1、互联网草案&lt;/p&gt;
+
+&lt;p&gt;2、建议标准 RFC文档&lt;/p&gt;
+
+&lt;p&gt;3、互联网标准，每个标准被分配到一个标号 STD xx。一个标准可以和多个RFC文档关联&lt;/p&gt;
+
+&lt;p&gt;原先要经过三个阶段，现在RFC 6410取消了草案标准&lt;/p&gt;
+
+&lt;p&gt;索引文档 RFC INDEX[W-RFCX]&lt;/p&gt;
+
+&lt;p&gt;RFC文档：建议标准、互联网标准、历史的、实验的、提供信息的&lt;/p&gt;
+
+&lt;h2 id=&quot;互联网的组成&quot;&gt;互联网的组成&lt;/h2&gt;
+
+&lt;p&gt;边缘部分&lt;/p&gt;
+
+&lt;p&gt;核心部分：有大量网络和连接这些网络的路由器组成，为边缘部分提供服务&lt;/p&gt;
+
+&lt;p&gt;处在互联网边缘的部分就是连接在互联网上的所有主机。这些主机又被称为端系统&lt;/p&gt;
+
+&lt;p&gt;主机A和主机B进行通信，实际上指主机A的某个进程和主机B上的另一个进程进行通信&lt;/p&gt;
+
+&lt;p&gt;1、客户-服务器模式&lt;/p&gt;
+
+&lt;p&gt;客户是服务请求方，服务器是服务提供方，都要使用网络核心部分所提供的服务&lt;/p&gt;
+
+&lt;p&gt;客户程序：&lt;/p&gt;
+
+&lt;p&gt;被用户调用后运行，在通信时主动地向远地服务器发起通信。因此，客户程序必须知道服务器程序的地址&lt;/p&gt;
+
+&lt;p&gt;不需要特殊的硬件和很复杂的操作系统&lt;/p&gt;
+
+&lt;p&gt;服务器程序：&lt;/p&gt;
+
+&lt;p&gt;是一种专门用来提供某种服务的程序，可同时处理多个远地或本地客户的请求&lt;/p&gt;
+
+&lt;p&gt;系统启动后即自动调用并一直不断的运行着，被动的等待并接受来自各地的客户的通信请求。因此，服务器程序不需要知道客户程序的地址&lt;/p&gt;
+
+&lt;p&gt;一般需要强大的硬件和高级的操作系统支持&lt;/p&gt;
+
+&lt;p&gt;2、对等连接方式&lt;/p&gt;
+
+&lt;p&gt;对等连接 peer-to-peer P2P&lt;/p&gt;
+
+&lt;p&gt;对等连接方式本质上看仍然是客户-服务器方式，只是对等连接中的每一台主机既有客户又同时是服务器&lt;/p&gt;
+
+&lt;p&gt;互联网的核心部分&lt;/p&gt;
+
+&lt;p&gt;在网络核心部分起特殊作用的是路由器，它是一种专用计算机（但不叫做主机）。路由器是实现分组交换的关键构建，其任务是转发收到的分组，这是网络核心部分最重要的功能&lt;/p&gt;
+
+&lt;p&gt;1、电路交换的主要特点&lt;/p&gt;
+
+&lt;p&gt;从通信资源的分配角度来看，交换就是按照某种方式动态的分配传输线路的资源。在使用电路交换通信之前， 必须先拨号建立连接&lt;/p&gt;
+
+&lt;p&gt;建立连接（占用通信资源）-&amp;gt; 通话（一直占用通信资源）-&amp;gt; 释放连接（归还通信资源）&lt;/p&gt;
+
+&lt;p&gt;电路交换&lt;/p&gt;
+
+&lt;p&gt;用户线 电信网 交换机 中继线&lt;/p&gt;
+
+&lt;p&gt;当使用电路交换来传送计算机数据时，其线路的传输效率往往很低。这是因为计算机数据是突发式地出现在传输线路上，因此已被用户占用的通信资源在绝大部分时间里都是空闲的&lt;/p&gt;
+
+&lt;p&gt;2、分组交换的主要特点&lt;/p&gt;
+
+&lt;p&gt;分组交换则采用存储转发技术&lt;/p&gt;
+
+&lt;p&gt;报文message&lt;/p&gt;
+
+&lt;p&gt;在每一个数据段前面，加上一些由必要的控制信息组成的首部header后，就构成了一个分组packet。分组又称为包，而分组的首部也可以称为包头&lt;/p&gt;
+
+&lt;p&gt;分组是在互联网中传送的数据单元&lt;/p&gt;
+
+&lt;p&gt;在互联网核心部分的路由器之间一般都是用高速连路相连接，而在网络边缘的主机接入到核心部分则通常以相对较低速率的链路相连接&lt;/p&gt;
+
+&lt;p&gt;位于网络边缘的主机和位于网络核心部分的路由器都是计算机，但是作用不一样&lt;/p&gt;
+
+&lt;p&gt;路由器收到一个分组，先暂时存储一下，检查其首部，查找转发表，按照首部中的目的地址，找到合适的接口转发出去，把分组交给下一个路由器。这样一步一步的（有时会经过几十个不同的路由器）以存储转发的方式，把分组交付最终的目的主机。各路由器之间必须经常交换彼此掌握的路由信息，以便创建和动态维护路由器中的转发表，使得转发表能够在整个网络拓扑发生变化时及时更新&lt;/p&gt;
+
+&lt;p&gt;当我们讨论互联网的核心部分中的路由器转发分组的过程中，往往把单个的网络简化成一条链路，而路由器成为核心部分的结点。这种简化图看起来可以更加突出重点&lt;/p&gt;
+
+&lt;p&gt;路由器暂时存储的是一个个短分组，而不是整个的长报文。短分组是暂存在路由器的存储器（即内存）中而不是存储在磁盘中，这就保证了较高的交换速率&lt;/p&gt;
+
+&lt;p&gt;省去了建立连接和释放连接的开销，因而数据的传输效率更高&lt;/p&gt;
+
+&lt;p&gt;互联网采取了专门的措施，保证了数据传送具有非常高的可靠性。当网络中的某个结点或链路突然发生故障时，在各路由器中运行的路由选择协议能够自动找到转发分组最合适的路径&lt;/p&gt;
+
+&lt;p&gt;采用存储转发的分组交换，实质上是采用了在数据通信的过程中断续或动态分配传输带宽的策略。这对传送突发式的计算机数据非常合适，使得通信线路的利用率大大提高了&lt;/p&gt;
+
+&lt;p&gt;为了提高分组交换网的可靠性，互联网的核心部分常采用网状拓扑结构，使得当发生网络拥塞或少数结点、链路出现故障时，路由器可灵活地改变转发路由而不致引起通信的中断或全网的瘫痪。此外，通信网络的主干线路往往由一些高速链路构成，这样就可以较高的数据率迅速地传送计算机数据&lt;/p&gt;
+
+&lt;p&gt;高效&lt;/p&gt;
+
+&lt;p&gt;灵活&lt;/p&gt;
+
+&lt;p&gt;迅速：以分组为传送单位，可以不先连接就能向其他主机发送分组&lt;/p&gt;
+
+&lt;p&gt;可靠&lt;/p&gt;
+
+&lt;p&gt;分组交换也会带来一些新的问题。例如，分组在各路由器存储转发时需要排队，这就会造成一定的时延。此外，由于分组交换不像电路交换那样通过建立连接来保证通信时所需的各种资源，因而无法确保通信时端到端所需的带宽&lt;/p&gt;
+
+&lt;p&gt;分组交换带来的另一个问题是各分组必须携带的控制信息也造成了一定的开销overhead。整个分组交换网还需专门的管理和控制机制&lt;/p&gt;
+
+&lt;p&gt;从本质上讲，这种断续分配传输带宽的存储转发原理并非是完全新的概念。自古就有的邮政通信，就其本质来说也属于存储转发方式。而在20世纪40年代，电报通信也采用了基于存储转发原理的报文交换&lt;/p&gt;
+
+&lt;p&gt;分组交换虽然也采用存储转发原理，但由于使用了计算机进行处理，就使得分组的转发非常迅速&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午12.13.28.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;若要连续传送大量的数据，且其传送时间远大于连接建立时间，则电路交换的传输速率比较快。报文交换和分组交换不需要预先分配传输带宽，在传送突发数据时可提高整个网络的信道利用率。由于一个分组的长度往往远小于整个报文的长度，因此分组交换比报文交换的时延小，同时也具有更好的灵活性&lt;/p&gt;
+
+&lt;h2 id=&quot;计算机网络的类别&quot;&gt;计算机网络的类别&lt;/h2&gt;
+
+&lt;p&gt;可编程的硬件表明这种硬件一定包含有中央处理机CPU&lt;/p&gt;
+
+&lt;p&gt;1、按照网络的作用范围进行分类&lt;/p&gt;
+
+&lt;p&gt;广域网 WAN Wide Area Network&lt;/p&gt;
+
+&lt;p&gt;广域网是互联网的核心部分，其任务是通过长距离运送主机所发送的数据。连接广域网各结点交换机的链路一般都是高速链路，具有较大的通信容量&lt;/p&gt;
+
+&lt;p&gt;城域网 MAN Metropolitan Area Network&lt;/p&gt;
+
+&lt;p&gt;用来将多个局域网进行互连。目前很多城域网采用的是以太网技术，因此有时也常并入局域网的范围进行讨论&lt;/p&gt;
+
+&lt;p&gt;局域网 LAN Local Area Network&lt;/p&gt;
+
+&lt;p&gt;个人区域网 PAN Personal Area Network&lt;/p&gt;
+
+&lt;p&gt;个人区域网就是在个人工作的地方把属于个人使用的电子设别用无线技术连接起来的网络，因此也被常称为无线个人区域网WPAN(Wireless PAN)&lt;/p&gt;
+
+&lt;p&gt;2、按照网络的使用者进行分类&lt;/p&gt;
+
+&lt;p&gt;公用网 public network&lt;/p&gt;
+
+&lt;p&gt;专用网 private network&lt;/p&gt;
+
+&lt;p&gt;公用网和专用网都可以提供多种服务。如传送的是计算机数据，则分别是公用计算机网络和专用计算机网络&lt;/p&gt;
+
+&lt;p&gt;3、用来把用户接入到互联网的网络&lt;/p&gt;
+
+&lt;p&gt;接入网 AN Access network&lt;/p&gt;
+
+&lt;p&gt;他又称为本地接入网或居民接入网。这是一类比较特殊的计算机网络。用户必须通过ISP才能接入到互联网，由于从用户家中接入到互联网可以使用的技术有许多种，因此就出现了可以使用多种接入网技术连接到互联网的情况。接入网本身既不属于互联网的核心部分，也不属于互联网的边缘部分。接入网是从某个用户端系统到互联网中的第一个路由器也称为边缘路由器之间的网络。从覆盖的范围看，很多接入网还属于局域网。从作用上看，接入网只是起到让用户能够与互联网连接的桥梁作用&lt;/p&gt;
+
+&lt;p&gt;宽带接入技术&lt;/p&gt;
+
+&lt;h2 id=&quot;计算机网络的性能&quot;&gt;计算机网络的性能&lt;/h2&gt;
+
+&lt;p&gt;计算机网络的性能指标&lt;/p&gt;
+
+&lt;p&gt;1、速率&lt;/p&gt;
+
+&lt;p&gt;2、带宽&lt;/p&gt;
+
+&lt;p&gt;3、吞吐量&lt;/p&gt;
+
+&lt;p&gt;4、时延&lt;/p&gt;
+
+&lt;p&gt;对于高速网络链路，我们提高的仅仅是数据的发送速率而不是比特在链路上的传播速率&lt;/p&gt;
+
+&lt;p&gt;5、时延带宽积&lt;/p&gt;
+
+&lt;p&gt;6、往返时间RTT&lt;/p&gt;
+
+&lt;p&gt;7、利用率&lt;/p&gt;
+
+&lt;p&gt;信道或网络的利用率过高会产生非常大的时延。因此一些拥有较大主干网的ISP通常控制信道利用率不超过50%。如果超过了就要准备扩容，增大线路的带宽&lt;/p&gt;
+
+&lt;p&gt;计算机网络的非性能特征&lt;/p&gt;
+
+&lt;p&gt;1、费用&lt;/p&gt;
+
+&lt;p&gt;2、质量&lt;/p&gt;
+
+&lt;p&gt;3、标准化&lt;/p&gt;
+
+&lt;p&gt;4、可靠性&lt;/p&gt;
+
+&lt;p&gt;5、可扩展性和可升级性&lt;/p&gt;
+
+&lt;p&gt;6、易于管理和维护&lt;/p&gt;
+
+&lt;h2 id=&quot;计算机网络体系结构&quot;&gt;计算机网络体系结构&lt;/h2&gt;
+
+&lt;p&gt;国际标准化组织ISO于1977年成立了专门机构研究该问题。他们提出了一个试图使各种计算机在世界范围内互连成网的标准框架，即著名的开放系统互连基本参考模型OSI/RM，简称OSI。开放指非独家垄断的。因此只要遵循OSI标准，一个系统就可以和位于世界上任何地方的、也遵循这同一标准的其他任何系统进行通信&lt;/p&gt;
+
+&lt;p&gt;所以OSI/RM是一个抽象概念，在1983年形成了开放系统互连基本参考模型的正式文件，即著名的ISO 7498国际标准，也就是所谓的七层协议的体系结构&lt;/p&gt;
+
+&lt;p&gt;OSI试图达到一种理想境界，即全球计算机网络都遵循这个统一标准，因而全球的计算机能够很方便地进行互连和交换数据。在20世纪80年代，许多大公司甚至一些国家的政府机构纷纷表示支持OSI。然而到了20世纪90年代，虽然整套的OSI国际标准已经制定出来了，但是基于TCP/IP的互联网已抢先在全球相当大的范围内成功地运行了。而与此同时OSI只获得了一些理论研究成果，在市场化方面则事与愿违地失败了&lt;/p&gt;
+
+&lt;p&gt;现今规模最大的、覆盖全球的、基于TCP/IP的互联网并未使用OSI标准&lt;/p&gt;
+
+&lt;p&gt;1、OSI专家缺乏实际经验，在完成OSI标准时缺乏商业驱动力&lt;/p&gt;
+
+&lt;p&gt;2、协议实现起来过分复杂，运行效率低&lt;/p&gt;
+
+&lt;p&gt;3、制定周期太长，使得按OSI标准生产的设备无法及时进入市场&lt;/p&gt;
+
+&lt;p&gt;4、层次划分不太合理，有些功能在多个层次中重复出现&lt;/p&gt;
+
+&lt;p&gt;得到最广泛应用的不是法律上的国际标准OSI，而是事实上的国际标准TCP/IP&lt;/p&gt;
+
+&lt;p&gt;这些为进行网络中的数据交换而建立的规则、标准或约定称为网络协议&lt;/p&gt;
+
+&lt;p&gt;语法&lt;/p&gt;
+
+&lt;p&gt;语义&lt;/p&gt;
+
+&lt;p&gt;同步：事件实现顺序的详细说明&lt;/p&gt;
+
+&lt;p&gt;各层之间是独立的&lt;/p&gt;
+
+&lt;p&gt;灵活性好&lt;/p&gt;
+
+&lt;p&gt;结构上可分割开&lt;/p&gt;
+
+&lt;p&gt;易于实现和维护&lt;/p&gt;
+
+&lt;p&gt;能促进标准化工作&lt;/p&gt;
+
+&lt;p&gt;各层功能：&lt;/p&gt;
+
+&lt;p&gt;差错控制&lt;/p&gt;
+
+&lt;p&gt;流量控制&lt;/p&gt;
+
+&lt;p&gt;分段和重装&lt;/p&gt;
+
+&lt;p&gt;复用和分用&lt;/p&gt;
+
+&lt;p&gt;连接建立和释放&lt;/p&gt;
+
+&lt;p&gt;分层当然也有一些缺点，例如有些功能会在不同层次重复出现，因而产生了额外开销&lt;/p&gt;
+
+&lt;p&gt;计算机网络的各层及其协议的集合就是网络的体系结构。换种说法，计算机网络的体系结构就是这个计算机网络及其构件所应完成的功能的精确定义&lt;/p&gt;
+
+&lt;p&gt;architecture 体系结构&lt;/p&gt;
+
+&lt;p&gt;体系结构是抽象的，而实现则是具体的，是真正在运行的计算机硬件和软件&lt;/p&gt;
+
+&lt;p&gt;OSI的七层协议体系结构的概念清楚，理论也较完整，但他既复杂又不实用&lt;/p&gt;
+
+&lt;p&gt;TCP/IP是一个四层的体系结构，它包含应用层、运输层、网际层和网络接口层&lt;/p&gt;
+
+&lt;p&gt;不过从实质上讲，TCP/IP只有最上面的三层，因为最下面的网络接口层并没有什么具体内容&lt;/p&gt;
+
+&lt;p&gt;因此在学习计算机网络的原理时往往采取折中的办法，即综合OSI和TCP/IP的优点，采用一种只有五层协议的体系结构，这样既简洁又能把概念阐述清楚&lt;/p&gt;
+
+&lt;p&gt;有时为了方便，也可把最底下两层称为网络接口层&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午2.41.38.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;应用层：&lt;/p&gt;
+
+&lt;p&gt;应用层的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程间通信和交互的规则。这里的进程就是指主机中正在运行的程序。对于不同的网络应用需要有不同的应用层协议&lt;/p&gt;
+
+&lt;p&gt;域名系统DNS 支持万维网应用的HTTP协议 支持电子邮件的SMTP协议&lt;/p&gt;
+
+&lt;p&gt;应用层交互的数据单元称为报文&lt;/p&gt;
+
+&lt;p&gt;运输层：&lt;/p&gt;
+
+&lt;p&gt;运输层的任务就是负责向两台主机中进程之间的通信提供通用的数据传输服务&lt;/p&gt;
+
+&lt;p&gt;应用进程利用该服务传送应用层报文&lt;/p&gt;
+
+&lt;p&gt;由于一台主机可同时运行多个进程，因此运输层有复用和分用的功能。复用就是多个应用进程可同时使用下面运输层的服务，分用和复用相反，是运输层把收到的信息分别交付上面应用层中的相应进程&lt;/p&gt;
+
+&lt;p&gt;传输控制协议 TCP Transmission Control Protocol&lt;/p&gt;
+
+&lt;p&gt;提供面向连接的、可靠的数据传输服务，其数据传输的单位是报文段segment&lt;/p&gt;
+
+&lt;p&gt;用户数据报协议 UDP User Datagram Protocol&lt;/p&gt;
+
+&lt;p&gt;提供无连接的、尽最大努力的数据传输服务（不保证数据传输的可靠性），其数据传输的单位是用户数据报&lt;/p&gt;
+
+&lt;p&gt;网络层：&lt;/p&gt;
+
+&lt;p&gt;网络层负责为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装层分组或包进行传送。在TCP/IP体系中，由于网络层实用IP协议，因此分组也称之为IP数据报，或简称数据报&lt;/p&gt;
+
+&lt;p&gt;运输层的用户数据报UDP和网络层的IP数据报不同。无论在哪一层传送的数据单元，都可笼统地用分组来表示&lt;/p&gt;
+
+&lt;p&gt;网络层的另一个任务就是要选择合适的路由，使源主机传输层所传下来的分组，能够通过网络中的路由器找到目的主机&lt;/p&gt;
+
+&lt;p&gt;互联网是由大量异构网络通过路由器相互连接起来。互联网使用的网络层协议是无连接的网际协议IP和许多种路由选择协议，因此互联网的网络层也叫做网际层或IP层&lt;/p&gt;
+
+&lt;p&gt;数据链路层：&lt;/p&gt;
+
+&lt;p&gt;两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。在两个相邻结点之间传送数据时，数据链路层将网络层交下来的IP数据报组装成帧framing，在两个相邻结点间的链路上传送帧frame。每一帧包括数据和必要的控制信息（如同步信息、地址信息、差错控制等）&lt;/p&gt;
+
+&lt;p&gt;在接受数据时，控制信息使接收端能够知道一个帧从哪个比特开始，从哪个比特结束。这样，数据链路层在收到一个帧后，就可以从中提取出数据部分，上交给网络层&lt;/p&gt;
+
+&lt;p&gt;控制信息还使接收端能够检测到所收到的帧中有无差错。如发现有差错，数据链路层就简单的丢弃这个出了差错的帧，以免继续在网络中传送下去白白浪费网络资源。如果需要改正数据在数据链路层传输时出现的差错，那么就要采用可靠传输协议来纠正出现的差错。这种方法使得数据链路层的协议复杂些&lt;/p&gt;
+
+&lt;p&gt;物理层：&lt;/p&gt;
+
+&lt;p&gt;在物理层上传送数据的单位是比特&lt;/p&gt;
+
+&lt;p&gt;物理层要考虑用多大的电压表示1或0，以及接收方如何识别发送方所发送的比特。物理层还要确定连接电缆的插头应当有多少根引脚以及各引脚应如何连接&lt;/p&gt;
+
+&lt;p&gt;解释比特代表的意思，就不是物理层的任务&lt;/p&gt;
+
+&lt;p&gt;物理层下面的物理媒体&lt;/p&gt;
+
+&lt;p&gt;TCP/IP并不一定单指TCP和IP这两个具体的协议，而往往表示互联网所使用的整个TCP/IP协议族&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.41.10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.43.09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;协议数据单元 PDU Protocol Data Unit&lt;/p&gt;
+
+&lt;p&gt;对等层 peer layers&lt;/p&gt;
+
+&lt;p&gt;协议栈 protocol stack&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.47.29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;TCP/IP的体系结构&lt;/p&gt;
+
+&lt;p&gt;四层&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.49.40.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;技术的发展并不是遵循严格的OSI分层概念。实际上现在的互联网结构有时已经演变成图1-23所示的那样&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.51.17.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在图中，网络接口层有时也称为子网层。这里的子网是指一些局域网和某些广域网，但从IP层来看，这些网络属于数据链路层，也就是属于网络接口层。我们在第四章讲到IP地址时，将会讲到子网划分。但子网划分中的子网和图1-23中子网层中的子网是完全不同的概念&lt;/p&gt;
+
+&lt;p&gt;还有一种方法，就是分层次画出具体的协议来表示TCP/IP协议族&lt;/p&gt;
+
+&lt;p&gt;这种很像沙漏计时器形状的TCP/IP协议族表明：TCP/IP协议可以为各式各样的应用提供服务everything over IP，同时TCP/IP协议也允许IP协议在各式各样的网络构成的互联网上运行IP over everything&lt;/p&gt;
+
+&lt;p&gt;正因为如此，互联网才会发展到今天的这种全球规模&lt;/p&gt;
+
+&lt;p&gt;IP协议在互联网中的核心作用&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-06-01 下午3.58.56.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;有的服务器进程可以同时向几百个或更多的客户进程提供服务&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0/</guid>
+        
+        <category>谢希仁</category>
+        
+        <category>计算机网络</category>
+        
+        <category>学习笔记</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>dfs&amp;bfs</title>
+        <description>&lt;h2 id=&quot;dfs-深度优先搜索&quot;&gt;dfs 深度优先搜索&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先将根节点放入stack中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;从stack中取出第一个节点，并检验它是否为目标。&lt;/p&gt;
+
+    &lt;p&gt;​		如果找到目标，则结束搜寻并回传结果。&lt;/p&gt;
+
+    &lt;p&gt;​		否则将它某一个尚未检验过的直接子节点加入stack中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重复步骤2。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果不存在未检测过的直接子节点。&lt;/p&gt;
+
+    &lt;p&gt;​		将上一级节点加入stack中。&lt;/p&gt;
+
+    &lt;p&gt;​		重复步骤2。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重复步骤4。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;若stack为空，表示整张图都检查过了——亦即图中没有欲搜寻的目标。结束搜寻并回传“找不到目标”。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;bfs-广度优先搜索&quot;&gt;bfs 广度优先搜索&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先将根节点放入队列中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;从队列中取出第一个节点，并检验它是否为目标。&lt;/p&gt;
+
+    &lt;p&gt;​		如果找到目标，则结束搜索并回传结果。&lt;/p&gt;
+
+    &lt;p&gt;​		否则将它所有尚未检验过的直接子节点加入队列中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;若队列为空，表示整张图都检查过了——亦即图中没有欲搜索的目标。结束搜索并回传“找不到目标”。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重复步骤2。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/dfs&bfs/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/dfs&bfs/</guid>
+        
+        <category>算法</category>
+        
+        <category>tips</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>?bin</title>
+        <description>&lt;h2 id=&quot;bin&quot;&gt;bin&lt;/h2&gt;
+
+&lt;p&gt;百度百科解释：&lt;/p&gt;
+
+&lt;p&gt;二进制文件，其用途依系统或应用而定。一种文件格式binary的缩写。一个后缀名为”.bin”的文件，只是表明它是binary格式。比如虚拟光驱文件常用”.bin”作为后缀，但并不意味着所有的bin文件都是虚拟光驱文件。一般来讲是机器代码，汇编语言编译后的结果（磁盘操作系统下汇编语言编译后与”.com”文件相类似），用debug、WINHEX，U_EDIT等软件可以打开。这类所有的文件，无论后缀名是什么，一律分为两种格式”.text” 和”.binary”。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/bin/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/bin/</guid>
+        
+        <category>tips</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Typora数学公式</title>
+        <description>&lt;p&gt;Typora支持使用Tex/LaTex语法渲染普通数学。渲染过程用MathJax处理&lt;/p&gt;
+
+&lt;p&gt;H~2~0 e^2^  ==高亮==&lt;/p&gt;
+
+&lt;h2 id=&quot;math-blockdisplay-math&quot;&gt;Math Block（Display Math）&lt;/h2&gt;
+
+\[\begin{align*}
+y = y(x,t) &amp;amp;= A e^{i\theta} \\
+&amp;amp;= A (\cos \theta + i \sin \theta) \\
+&amp;amp;= A (\cos(kx - \omega t) + i \sin(kx - \omega t)) \\
+&amp;amp;= A\cos \Big(\frac{2\pi}{\lambda}x - \frac{2\pi v}{\lambda} t \Big) + i A\sin \Big(\frac{2\pi}{\lambda}x - \frac{2\pi v}{\lambda} t \Big)  \\
+&amp;amp;= A\cos \frac{2\pi}{\lambda} (x - v t) + i A\sin \frac{2\pi}{\lambda} (x - v t)
+\end{align*}\]
+
+&lt;h2 id=&quot;inline-math&quot;&gt;Inline Math&lt;/h2&gt;
+
+&lt;p&gt;f = $\frac{2 \pi}{T}$&lt;/p&gt;
+
+&lt;p&gt;$lim_{x \to \infty} \exp(-x) = 0$&lt;/p&gt;
+
+&lt;h2 id=&quot;tex-commands-available-in-typora&quot;&gt;TeX Commands available in Typora&lt;/h2&gt;
+
+&lt;p&gt;http://docs.mathjax.org/en/v2.6-latest/tex.html#supported-latex-commands&lt;/p&gt;
+
+&lt;p&gt;You could add new commands using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\def&lt;/code&gt; or&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\newcommand&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;chemistry-expressions&quot;&gt;Chemistry Expressions&lt;/h2&gt;
+
+&lt;h2 id=&quot;cross-reference&quot;&gt;Cross Reference&lt;/h2&gt;
+
+&lt;p&gt;Typora支持TeX样式的引用语法&lt;/p&gt;
+
+&lt;h2 id=&quot;自动编号&quot;&gt;自动编号&lt;/h2&gt;
+
+&lt;p&gt;Typora支持自动编号数学块&lt;/p&gt;
+
+&lt;p&gt;To turn on this feature, please open preferences panel, and enable “Auto Numbering Math Equations” under the “Markdown” section&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/Math-and-Acadamic-Functions/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/Math-and-Acadamic-Functions/</guid>
+        
+        <category>tips</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>IC卡&amp;ID卡&amp;CPU卡</title>
+        <description>&lt;h2 id=&quot;ic卡和id卡的定义&quot;&gt;IC卡和ID卡的定义&lt;/h2&gt;
+
+&lt;p&gt;IC卡（Integrated Circuit Card 集成电路卡），又称智能卡（Smart Card）。可读写，容量大，有加密卡，数据记录可靠，使用更方便。&lt;/p&gt;
+
+&lt;p&gt;ID卡（Identification Card）全称身份识别卡，是一种不可写入的感应卡，含固定的编号。&lt;/p&gt;
+
+&lt;h2 id=&quot;工作原理&quot;&gt;工作原理&lt;/h2&gt;
+
+&lt;p&gt;C卡要做初始化（即加密）工作，而ID卡不用。IC卡在使用时，必须要先通过IC卡与读写设备间特有的双向密钥认证后，才能进行相关工作，从而使整个系统具有极高的安全保障。&lt;/p&gt;
+
+&lt;p&gt;所以，就必须对出厂的IC进行初始化（即加密），目的是在出厂后的IC卡内生成不可破解的一卡通系统密钥，以保证一卡通系统的安全发放机制。IC卡初始化加密后，交给用户使用时，客户通过IC卡发行系统，又将各用户卡生成自己系统的专用密钥。这样，就保证了在其它用户系统发行的用户卡不能在该系统使用，保证了系统的专一性，从而保证了系统的安全使用机制。&lt;/p&gt;
+
+&lt;p&gt;ID卡与磁卡一样，都仅仅使用了“卡的号码”而已，卡内除了卡号外，无任何保密功能，其“卡号”是公开、裸露的。所以说，ID卡就是“感应式磁卡”，也主根本谈不上需要还是不需要初始化的问题。&lt;/p&gt;
+
+&lt;p&gt;磁卡:是接触式卡片，需要和读卡器接触，才能进行读写数据。&lt;/p&gt;
+
+&lt;p&gt;初始化过程为什么不交由用户自己做呢？这是因为：&lt;/p&gt;
+
+&lt;p&gt;a、如果由用户自己初始化，就不能防范用户内部人员作弊。因为用户在使用一卡通系统时，若有员工用社会上买来的卡随意初始化，便可随意发行成住户才能使用的住户卡，甚至可随意给卡充值消费，这不仅将造成严重作弊后果，也将导致一卡通系统的安全出现使用机制上的严重漏洞。&lt;/p&gt;
+
+&lt;p&gt;b、另外，若用户买到劣质出厂卡自己初始化，而在系统上不能使用，则会例系统使用性能不良或瘫痪，这将造成成事故责任不清。&lt;/p&gt;
+
+&lt;p&gt;c、初始化过程在厂家执行，主要是IC卡安全密钥认证机制的基本需要，也是IC卡系统集成商的行规。就像城市公共交通IC卡一样，这些卡在交给公交系统使用前，每张卡的密钥都要进行出厂加密控制。&lt;/p&gt;
+
+&lt;p&gt;d、如果因用户缺乏专业性管理而万一丢失了初始化授权用的密钥卡，用户和厂家将无法补用该卡。所以，初始化工作由厂家做，才有安全保障。&lt;/p&gt;
+
+&lt;h2 id=&quot;ic卡系统与id卡系统的比较&quot;&gt;IC卡系统与ID卡系统的比较&lt;/h2&gt;
+
+&lt;p&gt;a、安全性：IC卡的安全性远大于ID卡。ID卡内的卡号读取无任何权限，易于仿制。IC卡内所记录数据的读取、写入均需相应的密码认证，甚至卡片内每个区均有不同的密码保护，全面保护数据安全，IC卡写数据的密码与读出数据的密码可设为不同，提供了良好分级管理方式，确保系统安全。&lt;/p&gt;
+
+&lt;p&gt;b、可记录性：ID卡不可写入数据，其记录内容（卡号）只可由 生产厂一次性写入，开发商只可读出卡号加以利用，无法根据系统的实际需要制订新的号码管理制度。IC卡不仅可由授权用户读出大量数据，而且亦可由授权用户写入大量数据（如新的卡号、用户的权限、用户资料等），IC卡所记录内容可反复擦写。&lt;/p&gt;
+
+&lt;p&gt;c、存储容量：ID卡仅仅记录卡号；而IC卡（比如 Philips mifare卡）可以记录约1000个字符的内容。&lt;/p&gt;
+
+&lt;p&gt;d、脱机与联网运行：由于ID 内无内容，故其卡片持有者的权限、系统功能操作要完全能依赖于计算机网络平台 的支持。而IC卡本身已记录了大量用户相关内容（卡号、用户资料、权限、消费余额等大量信息），完全可以脱离计算机平台运行，实现联网与脱机自动转换的运行方式，能够达到大范围使用、少布线的需求。&lt;/p&gt;
+
+&lt;p&gt;e、一卡通扩展应用：ID卡由于无记录、无分区、只能依赖网络软件来处理各子系统的信息，这就大大增加对网络的依赖；如果在Id卡系统完成后，用户欲增加功能点，则需要另外布线，这不仅增加了工程施工难度，而且增加了不必要的投资。所以说，使用ID卡来做系统，难以进行系统扩展，难以实现真正的一卡通。&lt;/p&gt;
+
+&lt;p&gt;而IC卡存储区自身分为16个分区，每个分区有不同的密码，具有多个子系*立管理功能，如第一分区实现门禁，第二分区实现消费、第三分区实现员工考勤等等。充分实现一卡通的目的，并且可以做到完全模块化设计，用户即使要增加功能点，也无需再布线，只需增加硬件和软件模块，这便于IC卡系统以乒的随时升级扩展，实现平稳升级，减少重复投资。&lt;/p&gt;
+
+&lt;p&gt;f、系统的维护和运行&lt;/p&gt;
+
+&lt;p&gt;g、性价比：虽然ID卡片及其读卡器较IC卡及其读卡器便宜，但从整个一卡通系统的构成（布线成本、结构组成）上看，两个系统的价格相当，而IC卡系统比ID卡系统运行稳定、可靠，因而IC卡系统的性价比要远高于ID卡系统。&lt;/p&gt;
+
+&lt;h2 id=&quot;cpu卡&quot;&gt;CPU卡&lt;/h2&gt;
+
+&lt;p&gt;因为IC卡简单方便的操作方式，IC卡成为国内应用最广泛的智能卡，并逐渐成为公共交通、城市一通卡建设的首选智能卡。IC卡多为逻辑加密卡，随着IC卡不断应用的发展，逻辑加密卡技术的不足之处也日益暴露，不法分子利用技术漏洞方法可以低成本对对IC芯片充值和复制，例如各类“一卡通”、门禁卡进行非法充值或复制，带来极大的社会安全隐患。因此，CPU卡智能卡技术正成为一种技术上更新换代的选择。&lt;/p&gt;
+
+&lt;p&gt;CPU卡也是属于IC卡的一种，CPU卡内的集成电路中带有微处理器CPU、存储单元、用户数据存储器以及芯片操作系统。CPU卡相当于一台微型计算机，不仅具有数据存储功能，同时具有命令处理和数据安全保护等功能。自带操作系统的CPU卡对计算机网络系统要求较低，可实现脱机操作；可实现真正意义上的一卡多应用。&lt;/p&gt;
+
+&lt;p&gt;CPU卡与IC卡相比，有以下区别：&lt;/p&gt;
+
+&lt;p&gt;●更灵活，CPU卡拥有独立的CPU处理器和芯片操作系统，所以可以更灵活的支持各种不同的应用需求。&lt;/p&gt;
+
+&lt;p&gt;●更安全，CPU卡的密钥系统使CPU卡更安全，密钥通常分为充值密钥，减值密钥，身份认证密钥，不同的应用受控于各自的密钥管理系统，相互独立而不冲突。&lt;/p&gt;
+
+&lt;p&gt;●更大容量，CPU卡的存储容量大，可提供8K-64K字节的数据存储，而一般的IC卡存储容量在64bit-8Kbit 。更大的容量可以是CPU卡存储更多的信息。&lt;/p&gt;
+
+&lt;p&gt;一句话来说CPU卡系统支持更广泛的功能，也更为灵活、安全和复杂。当然IC卡的快捷交易功能也是CPU卡比不上的，这也是IC卡技术现在被广泛应用的一个重要原因。所以在选择制作IC卡还是选择制作CPU卡时，要考虑实际需求和各种因素，充分做好系统改造的技术认证和规划设计。&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/09/15/IC%E5%8D%A1&ID%E5%8D%A1&CPU%E5%8D%A1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/15/IC%E5%8D%A1&ID%E5%8D%A1&CPU%E5%8D%A1/</guid>
+        
+        <category>tips</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="深入理解计算机系统 第一章 - 余润杰的博客 | Yurj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="第一章 计算机系统漫游
+">
+    
+    <meta property="article:published_time" content="2020-09-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yurj">
+    
+    
+    <meta property="article:tag" content="计算机系统">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
+    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    
+    <title>深入理解计算机系统 第一章 - 余润杰的博客 | Yurj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yurj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F" title="计算机系统">计算机系统</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>深入理解计算机系统 第一章</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="第一章-计算机系统漫游">第一章 计算机系统漫游</h1>
+
+<h2 id="信息就是位上下文">信息就是位+上下文</h2>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-20 下午7.01.33.png" alt="截屏2020-07-20 下午7.01.33" style="zoom:50%;" /></p>
+
+<p>作为程序员，我们需要了解数字的机器表示方法，他们是对真值的有限近似值，有时候会有意想不到的行为表现</p>
+
+<blockquote>
+  <h2 id="c编程语言的起源">C编程语言的起源</h2>
+
+  <p>C语言是系统级编程的首选，同时它也非常适用于应用级程序的编写。同时，C语言还缺乏对非常有用的抽象的显式支持，例如类、对象和异常。像C++和Java这样针对应用级程序的新程序语言解决了这些问题</p>
+
+  <ul>
+    <li>
+      <p>C语言与Unix操作系统关系密切</p>
+    </li>
+    <li>
+      <p>C语言小而简单</p>
+    </li>
+    <li>
+      <p>C语言是为实践目的设计的</p>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="程序被其他程序翻译成不同的格式">程序被其他程序翻译成不同的格式</h2>
+
+<p>在Unix系统上，从源文件到目标文件的转化是由编译器驱动程序完成的</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>linux&gt; gcc <span class="nt">-o</span> hello hello.c
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>翻译成可执行文件</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-20 下午7.40.03.png" alt="截屏2020-07-20 下午7.40.03" style="zoom:50%;" /></p>
+
+<ul>
+  <li>
+    <p>预处理阶段。预处理器（cpp）根据以字符#开头的命令，修改原始的C程序</p>
+  </li>
+  <li>
+    <p>编译阶段。编译器（ccl）将文本文件hello.i翻译成hello.s，它包含一个汇编语言程序。该程序包含函数main的定义，如下所示：</p>
+
+    <p>1 main：</p>
+
+    <p>2	subq	$8, %rsp</p>
+
+    <p>3	movl	$.LC0, %edi</p>
+
+    <p>4	call	puts</p>
+
+    <p>5	movl	$0, %eax</p>
+
+    <p>6	addq	$8, %rsp</p>
+
+    <p>7	ret</p>
+
+    <p>定义中2～7行的每条语句都以一种文本格式描述了一条低级机器语言指令。汇编语言是非常有用的，因为他为不同高级语言的不同编译器提供了通用的输出语言</p>
+  </li>
+  <li>
+    <p>汇编阶段。汇编器将hello.s翻译成机器语言指令，把这些指令打包成一种可重定位目标程序的格式，并将结果保存在目标文件hello.o中。hello.c文件是一个二进制文件，它包含的17个字节是函数main的指令编码。如果我们在文本编辑器中打开了hello.o文件，将看到一堆乱码</p>
+  </li>
+  <li>
+    <p>链接阶段。printf函数存在于一个名为printf.o的单独的预编译好了的目标文件中，而这个文件必须以某种方式合并到我们的hello.o程序中。链接器就负责处理这种合并。结果就得到hello文件。它是一个可执行目标文件，可以被加载到内存中，由系统执行</p>
+  </li>
+</ul>
+
+<blockquote>
+  <h2 id="gnu项目">GNU项目</h2>
+
+  <p>free software</p>
+</blockquote>
+
+<h2 id="了解编译系统如何工作是大有益处的">了解编译系统如何工作是大有益处的</h2>
+
+<ul>
+  <li>优化程序性能</li>
+  <li>理解链接时出现的错误</li>
+  <li>避免安全漏洞。多年来，缓冲区溢出错误是造成大多数网络和Internet服务器上安全漏洞的主要原因</li>
+</ul>
+
+<h2 id="处理器读并解释储存在内存中的指令">处理器读并解释储存在内存中的指令</h2>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>linux&gt; ./hello
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>shell是一个命令行解释器，如果该命令行的第一个单词不是内置的shell命令，那么shell就会假设这是一个可执行文件的名字，它将加载并运行这个文件。所以在此例中，shell将加载并运行hello程序，然后等待程序终止</p>
+
+<h3 id="系统的硬件组成">系统的硬件组成</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午1.46.26.png" alt="截屏2020-07-22 下午1.46.26" style="zoom:50%;" /></p>
+
+<p>1、总线</p>
+
+<p>贯穿整个系统的是一组电子管道，它携带信息字节并负责在各个部件间传递。通常总线被设计成传送定长的字节块，也就是字（word）。字中的字节数是一个基本的系统参数。现在的大多数机器字长要么是4个字节，要么是8个字节</p>
+
+<p>2、I/O设备</p>
+
+<p>每个I/O设备都通过一个控制器或适配器与I/O总线相连。控制器和适配器之间的区别主要在于他们的封装方式。控制器是I/O设备本身或者系统的主印制电路板（通常称作主板）上的芯片组。而适配器则是一块插在主板插槽上的卡。无论如何，他们的功能都是在I/O设备和I/O总线之间传递信息</p>
+
+<p>3、主存</p>
+
+<p>主存是一个临时存储设备，在处理执行程序时，用来存放程序和程序处理的数据。从物理上来说，主存是由一组动态随机存取存储器（DRAM）芯片组成的。从逻辑上来说，存储器是一个线性的字节数组，每个字节都有其唯一的地址（数组索引），这些地址是从零开始的。一般来说，组成程序的每条机器指令都由不同数量的字节构成。与C程序变量相对应的数据项的大小是根据类型变化的</p>
+
+<p>4、处理器</p>
+
+<p>中央处理单元（CPU），简称处理器，是解释（或执行）存储在主存中指令的引擎。处理器的核心是一个大小为一个字的存储设备（或寄存器），称为程序计数器（PC）。在任何时刻，PC都指向主存中的某条机器语言指令（即含有该条指令的地址）</p>
+
+<p>从系统通电到断电，处理器一直在不断地执行程序计数器指向的指令，再更新程序计数器，使其指向下一条指令。处理器看上去是按照一个非常简单的指令执行模型来操作的，这个模型是由指令集架构决定的。在这个模型中，指令按照严格的顺序执行，而执行一条指令包含一系列的步骤。处理器从程序计数器指向的内存处读取指令，解释指令中的位，执行该指令指示的简单操作，然后更新PC，使其指向下一条指令，而这条指令并不一定和在内存中刚刚执行的指令相邻</p>
+
+<p>这样的简单操作并不多，他们围绕着主存、寄存器文件和算术/逻辑单元（ALU）进行。寄存器文件是一个小的存储设备，由一些单个字长的寄存器组成，每个寄存器都有唯一的名字。ALU计算新的数据和地址值</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>* 加载：从主存复制一个字节或者一个字到寄存器，以覆盖寄存器原来的内容
+* 存储：从寄存器复制一个字节或者一个字到主存的某个位置，以覆盖着这个位置上原来的内容
+* 操作：把两个寄存器的内容复制到ALU，ALU对这两个字做算术运算，并将结果存放到一个寄存器中，以覆盖该寄存器中原来的内容
+* 跳转：从指令本身中抽取一个字，并将这个字复制到程序计数器PC中，以覆盖PC中原来的值
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>处理器看上去是他的指令集架构的简单实现，但实际上现代处理器使用了非常复杂的机制来加速程序的执行。因此，我们将处理器的指令集架构和处理器的微体系结构区分开来：指令集架构描述的是每条机器代码指令的效果；而微体系结构描述的是处理器实际上是如何实现的</p>
+
+<h3 id="运行hello程序">运行hello程序</h3>
+
+<p>初始时，shell程序执行他的指令，等待我们输入一个命令。当我们在键盘上输入字符串后，shell程序将字符逐一读入寄存器，再把它存放到内存中</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.24.16.png" alt="截屏2020-07-22 下午2.24.16" style="zoom:50%;" /></p>
+
+<p>shell执行一系列指令来加载可执行的hello文件，这些指令将hello目标文件中的代码和数据从磁盘复制到主存中</p>
+
+<p>利用直接存储器存取技术，数据可以不通过处理器而直接从磁盘到达主存</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.24.34.png" alt="截屏2020-07-22 下午2.24.34" style="zoom:50%;" /></p>
+
+<p>一旦目标文件hello中的代码和数据被加载到主存，处理器就开始执行hello程序的main程序中的机器语言指令。这些指令将”hello, world\n”字符串中的字节从主存复制到寄存器文件中，再从寄存器文件中复制到显示设备，最终显示在屏幕上</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.25.00.png" alt="截屏2020-07-22 下午2.25.00" style="zoom:50%;" /></p>
+
+<h2 id="高速缓存至关重要">高速缓存至关重要</h2>
+
+<p>系统花费了大量的时间把信息从一个地方挪到另一个地方。复制就是开销，减慢了程序真正的工作</p>
+
+<p>根据机械原理，较大的存储设备要比较小的存储设备运行的慢，而快速设备的造价远高于同类的低速设备</p>
+
+<p>随着这些年半导体技术的发展，这种处理器与主存之间的差距还在持续增大。加快处理器的运行速度比加快主存的运行速度要容易和便宜的多</p>
+
+<p>针对这种处理器和主存之间的差异，系统设计者采用了更小更快的存储设备，称为高速缓存存储器，作为暂时的集结区域，存放处理器近期可能会需要的信息</p>
+
+<p>L1和L2高速缓存是用一种叫做静态随机访问存储器（SRAM）的硬件技术实现的。比较新的，处理能力更强大的系统甚至有三级高速缓存</p>
+
+<p>系系统可以获得一个很大的存储器，同时访问速度也很快，原因是利用了高速缓存的局部性远离，及程序具有访问局部区域里的数据和代码的趋势。通过让高速缓存里存放可能经常访问的数据，大部分的内存操作都能在快速的高速缓存中完成</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.40.00.png" alt="截屏2020-07-22 下午2.40.00" style="zoom:50%;" /></p>
+
+<h2 id="存储设备形成层次结构">存储设备形成层次结构</h2>
+
+<p>在处理器和一个较大较慢的设备（例如主存）之间插入一个更小更快的存储设备（例如高速缓存）的想法已经成为了一个普遍的观念</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.41.32.png" alt="截屏2020-07-22 下午2.41.32" style="zoom:50%;" /></p>
+
+<p>存储器层次结构的主要思想是上一层的存储器作为低一层存储器的高速缓存</p>
+
+<h2 id="操作系统管理硬件">操作系统管理硬件</h2>
+
+<p>所有应用程序对硬件的操作尝试都必须通过操作系统</p>
+
+<p>操作系统有两个基本功能：（1）防止硬件被失控的应用程序滥用（2）向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备。操作系统通过几个基本的抽象概念（进程、虚拟内存和文件）来实现这两个功能</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.46.48.png" alt="截屏2020-07-22 下午2.46.48" style="zoom:50%;" /></p>
+
+<h3 id="进程">进程</h3>
+
+<p>操作系统会提供一种假象，就好像系统上只有这个程序在运行。程序看上去是独占地使用处理器、主存和I/O设备。处理器看上去就像在不断的一条接一条地执行程序中的指令，及该程序的代码和数据是系统内存中唯一的对象。这些假象是通过进程的概念来实现的，进程是计算机科学中最重要和最成功的概念之一</p>
+
+<p>进程是操作系统对一个正在运行的程序的一种抽象。在一个系统上可以同时运行多个进程，而每个进程都好像在独占地使用硬件。而并发运行，则是说一个进程的指令和另一个进程的指令是交错执行的</p>
+
+<p>操作系统实现这种交错执行的机制称为上下文切换</p>
+
+<p>操作系统保持跟踪进程运行所需的所有状态信息。这种状态，也就是上下文，包括许多信息，比如PC和寄存器文件的当前值，以及主存的内容。在任何一个时刻，但处理器系统都只能执行一个进程的代码。当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程的上下文，恢复新进程的上下文，然后将控制权传递到新进程。新进程就会从他上次停止的地方开始</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.14.21.png" alt="截屏2020-07-22 下午3.14.21" style="zoom:50%;" /></p>
+
+<p>从一个进程到另一个进程的转换是由操作系统内核Kernel管理的。内核是操作系统代码常驻主存的部分。当应用程序需要操作系统的某些操作时，比如读写文件，他就执行一条特殊的系统调用指令，将控制权传递给内核，然后内核执行被请求的操作并返回应用程序。注意，内核不是一独立的进程。相反，他是系统管理全部进程所用代码和数据结构的集合</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.14.05.png" alt="截屏2020-07-22 下午3.14.05" style="zoom:50%;" /></p>
+
+<p>实现进程这个抽象概念需要低级硬件和操作系统软件之间的紧密合作</p>
+
+<h3 id="线程">线程</h3>
+
+<p>尽管通常我们认为一个进程只有单一的控制流，但是在现代系统中，一个进程实际上可以有多个称为线程的执行单元组成，每个线程都运行在进程的上下文中，并共享代码和全局数据。由于网路服务器中对并行处理的需求，线程成为原来越重要的编程模型，因为多线程之间比多进程之间更容易共享数据，也因为线程一般来说都比进程更高效。当有多处理器可用的时候，多线程也是一种使得程序可以运行得更快的方法</p>
+
+<h3 id="虚拟内存">虚拟内存</h3>
+
+<p>虚拟内存是一个抽象概念，他为每个进程提供了一个假象，即每个进程都在独占地使用内存。每个进程看到的内存都是一致的，称为虚拟地址空间</p>
+
+<p>在Linux中，地址空间最上面的区域是保留给操作系统中的代码和数据的，这对所有进程来说都是一样的。地址空间的底部区域存放用户进程定义的代码和数据</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.19.41.png" alt="截屏2020-07-22 下午3.19.41" style="zoom:50%;" /></p>
+
+<ul>
+  <li>程序代码和数据。对所有的进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量相对应的数据位置。代码和数据区是直接按照可执行目标文件的内容初始化的</li>
+  <li>堆。代码和数据区后紧随着的是运行时堆。代码和数据区在进程已开始运行时就被指定了大小，与此不同，当调用想malloc和free这样的C标准库函数时，堆可以在运行时动态的扩展和收缩</li>
+  <li>共享库。大约在地址空间的中间部分是一块用来存放像C标准库和数学库这样的共享库的代码和数据的区域。共享库的概念非常强大，也相当难懂</li>
+  <li>栈。位于用户虚拟地址空间顶部的是用户栈，编译器用它来实现函数调用。和堆一样，用户栈在程序执行期间可以动态的扩展和收缩。特别的，每次我们调用一个函数时，栈就会增长；从一个函数返回时，栈就会收缩</li>
+  <li>内核虚拟内存。地址空间顶部的区域是为内核保留的。不允许应用程序读写这个区域的内容或直接调用内核代码定义的函数。相反，他们必须调用内核来执行这些操作</li>
+</ul>
+
+<p>虚拟内存的运作需要硬件和操作系用之间精密复杂的交互，包括对处理器生成的每个地址的硬件翻译。基本思想是把一个进程虚拟内存的内容存储在磁盘上，然后用主存作为磁盘的高速缓存</p>
+
+<h3 id="文件">文件</h3>
+
+<p>文件就是文字序列，仅此而已。每个I/O设备，包括磁盘、键盘、显示器，甚至网络，都可以看成是文件。系统中的所有输入输出都是通过使用一小组称为Unix I/O的系统函数调用读写文件来实现的</p>
+
+<p>文件这个简单而精致的概念是非常强大的，因为他向应用程序提供了一个统一的视图，来看待系统中可能含有的所有各式各样的I/O设备。例如，处理磁盘文件内容的应用程序猿可以非常幸福，因为他么无需了解具体的磁盘技术。进一步说，同一个程序可以在使用不同磁盘技术的不同系统上运行</p>
+
+<h2 id="系统之间利用网络通信">系统之间利用网络通信</h2>
+
+<p>从一个单独的系统来看，网络可视为一个I/O设备</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.14.02.png" alt="截屏2020-07-22 下午4.14.02" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.15.29.png" alt="截屏2020-07-22 下午4.15.29" style="zoom:50%;" /></p>
+
+<h2 id="重要主题">重要主题</h2>
+
+<h3 id="amdahl定律">Amdahl定律</h3>
+
+<p>想要显著加速整个系统，必须提升全系统中相当大的部分的速度</p>
+
+<h3 id="并发和并行">并发和并行</h3>
+
+<p>我们用的术语并发是一个通用的概念，指一个同时具有多个活动的系统；而术语并行指的是用并发来使一个系统运行的更快。并行可以在计算机系统的多个抽象层次上运用。在此，我们按照系统层次结构中由高到低的顺序重点强调三个层次</p>
+
+<p>1、线程级并发</p>
+
+<p>使用线程，我们甚至能够在一个进程中执行多个控制流</p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.24.31.png" alt="截屏2020-07-22 下午4.24.31" style="zoom:50%;" /></p>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.25.40.png" alt="截屏2020-07-22 下午4.25.40" style="zoom:50%;" /></p>
+
+<p>超线程，有时称为同时多线程，是一项允许一个CPU执行多个控制流的技术。他设计CPU某些硬件有多个备份，比如程序计数器和寄存器文件，而其他的硬件部分只有一份，比如执行浮点算数运算的单元。</p>
+
+<p>常规的处理器需要大约2000个时钟周期做不同线程间的转换，而超线程的处理器可以在单个周期的基础上决定要执行哪个线程。这使得CPU能够更好地利用他的处理资源。比如，假设一个线程必须等到某些数据被装载到高速缓存中，那CPU就可以继续去执行另一个线程</p>
+
+<p>多处理器的使用可以从两方面提高系统性能。首先，他减少了在执行多个任务时模拟并发的需要。正如前面提到的，即使是只有一个用户使用的个人计算机也需要并发的执行多个活动。其次，它可以是应用程序运行的更快，当然，这必须要求程序是以多线程的方式来书写的，这些线程可以并行的高效执行</p>
+
+<p>2、指令集并行</p>
+
+<p>在较低的抽象层次上，现代处理器可以同时执行多条指令的属性称为指令集并行</p>
+
+<p>其实每条指令从开始到结束需要长的多的时间，大约20个或者更多周期，但是处理器使用了非常多的聪明技巧来同时处理多达100条指令。流水线的一个相当简单的硬件设计，能够接近于一个时钟周期一条指令的执行速率</p>
+
+<p>如果处理器可以达到比一个周期一条指令更快的执行速率，就称之为超标量处理器。大多数现代处理器都支持超标量操作。应用程序猿可以用超标量处理器的高级模型。应用程序猿可以用这个模型来理解程序的性能。然后，他们就能写出拥有更高程度的指令级并行性的程序代码，因而运行的更快</p>
+
+<p>3、单指令、多数据并行</p>
+
+<p>在最低层次上，许多现代处理器拥有特殊的硬件，允许一条指令产生多个可以并行执行的操作，这种方式称为单指令、多数据，即SIMD并行</p>
+
+<h3 id="计算机系统中抽象的重要性">计算机系统中抽象的重要性</h3>
+
+<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.40.37.png" alt="截屏2020-07-22 下午4.40.37" style="zoom:50%;" /></p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/15/Git%E6%95%99%E7%A8%8B/" data-toggle="tooltip" data-placement="top" title="Git教程">
+                        Previous<br>
+                        <span>Git教程</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/15/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="深度学习入门：基于Python的理论与实现（2）">
+                        Next<br>
+                        <span>深度学习入门：基于Python的理论与实现（2）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0005" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="13">学习笔记</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="6">计算机网络</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="5">Python</a>
+        
+                <a data-sort="0014" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="4">tips</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="3">AI</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="2">爬虫</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yurj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

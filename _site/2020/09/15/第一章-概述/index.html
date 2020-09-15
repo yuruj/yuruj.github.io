@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="计算机网络（第7版）第一章 - 余润杰的博客 | Yurj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="第一章 概述
+">
+    
+    <meta property="article:published_time" content="2020-09-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yurj">
+    
+    
+    <meta property="article:tag" content="谢希仁">
+    
+    <meta property="article:tag" content="计算机网络">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0/">
+    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    
+    <title>计算机网络（第7版）第一章 - 余润杰的博客 | Yurj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yurj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81" title="谢希仁">谢希仁</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C" title="计算机网络">计算机网络</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>计算机网络（第7版）第一章</h1>
+                    
+                    <h2 class="subheading">计算机网络概述</h2>
+                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="第一章-概述">第一章 概述</h1>
+
+<h2 id="计算机网络在信息时代中的作用">计算机网络在信息时代中的作用</h2>
+
+<p>电信网络、有线电视网络、计算机网络</p>
+
+<p>Internet 因特网 互联网</p>
+
+<p>连通性 共享</p>
+
+<h2 id="互联网概述">互联网概述</h2>
+
+<p>起源于美国</p>
+
+<p>若干结点node和连接这些结点的链路link</p>
+
+<p>网络中的结点可以是计算机、集线器、交换机或路由器等</p>
+
+<p>在很多情况下，我们可以用一朵云表示一个网络。这样做的好处是可以不去关心网络中的相当复杂的细节问题，因而可以集中精力研究涉及到与网络互连有关的一些问题</p>
+
+<p>网络之间还可以通过路由器互联起来 互连网internetwork/internet</p>
+
+<p>网络把许多计算机连接在一起，而互连网则把许多网络通过路由器连接在一起。与网络相连的计算机常称为主机host</p>
+
+<p>现在使用智能手机上网已非常普遍。由于智能手机中有中央处理机CPU，因此也可以把连接在计算机网络上的智能手机称为主机</p>
+
+<p>第一阶段</p>
+
+<p>RFC 1208</p>
+
+<p>internet 通用名词，他泛指有多个计算机网络互连而成的计算机网络。在这些网络之间的通信协议即通信规则可以任意选择，不一定非要使用TCP/IP协议</p>
+
+<p>Internet 专用名词，指当前全球最大的、开放的、有众多网络相互连接而成的特定互连网，它采用TCP/IP协议族作为通信的规则，且其前身是美国的ARPANET</p>
+
+<p>第二阶段</p>
+
+<p>建成了三级结构的互联网</p>
+
+<p>主干网、地区网和校园网（或企业网）</p>
+
+<p>第三阶段</p>
+
+<p>多层次ISP结构的互联网</p>
+
+<p>从1993年开始，由美国政府资助的NSFNET逐渐被若干个商用网络的互联网主干网替代，而政府机构不再负责互联网的运营。这样，就出现了一个新的名词：互联网服务提供者ISF(Internet Service Provider)，在许多情况下，ISP就是一个进行商业活动的公司，因此ISP又常译为互联网服务提供商。例如，中国电信、中国联通、中国移动就是我国最著名的ISP</p>
+
+<p>ISP可以从互联网管理机构申请到很多IP地址（互联网上的主机都必须有IP地址才能上网），同时拥有通信线路（大ISP自己建造通信线路，小ISP则向电信公司租用通信线路）以及路由器等连网设备，因此任何机构和个人只要向某个ISP缴纳规定的费用，就可以从该ISP获取所需IP地址的使用权，并可通过该ISP接入到互联网</p>
+
+<p>IP地址的管理机构不会把一个单个的IP地址分配给单个用户，而是把一批IP地址有常租赁给经审查合格的ISP。由此可见，现在的互联网已不是某个单个组织所拥有而是全世界无数大大小小的ISP所共同拥有的</p>
+
+<p>网络的网络</p>
+
+<p>根据提供服务的覆盖面积大小以及所拥有的IP地址数目的不同，ISP也分为不同层次的ISP：主干ISP、地区ISP和本地ISP</p>
+
+<p>主干ISP有几个专门的公司创建和维持，服务面积最大（一般能覆盖国家范围），并且还拥有高速主干网。有一些地区ISP网络也可直接与主干ISP相连</p>
+
+<p>地区ISP是一些较小的ISP。这些地区ISP通过一个或多个主干ISP连接起来。他们位于等级中的第二层，数据率也低一些</p>
+
+<p>本地ISP给用户提供直接的服务。本地ISP可以连接到地区ISP，也可直接连接到主干ISP。绝大多数用户都是连接到本地ISP的。本地ISP可以是一个仅仅提供互联网服务的公司，也可以是一个拥有网络并向自己的雇员题哦那个服务的企业，或者是一个运行自己的网络的非盈利机构（如学院或大学）。本地ISP可以与地区ISP或主干ISP连接</p>
+
+<p>从原理上讲，只要每一个本地ISP都安装了路由器连接到某个地区ISP，而每一个地区ISP也有路由器连接到主干ISP，那么在这些相互连接的ISP的共同合作下，就可以完成互联网中的所有的分组转发任务</p>
+
+<p>但随着互联网上数据流量的急剧增长，人们开始研究如何更快地转发分组，以及如何更加有效地利用网络资源，于是，互联网交换结点IXP(Internet eXchange Point)就应运而生了</p>
+
+<p>互联网交换结点IXP的主要作用就是允许两个网络直接相连并交换分组，而不再需要通过第三个网络来转发分组。这样就使互联网上的数据流量分布更加合理，同时也减少了分组转发的迟延时间，降低了分组转发的费用。现在许多IXP在进行对等交换分组时，都互相不收费。但本地IXP或地区ISP通过IXP向高层的IXP转发分组时，则需要缴纳一定的费用</p>
+
+<p>IXP的结构非常复杂，典型的IXP由一个或多个网络交换机组成，许多ISP再连接到这些网络交换机的相关端口上。IXP常采用工作在数据链路层的网络交换机，这些网络交换机都用局域网互连起来</p>
+
+<p>到2016年3月，全球已经有226个IXP，分布不平衡</p>
+
+<p>互联网发展迅猛</p>
+
+<p>互联网的标准化工作</p>
+
+<p>彩电三大制式</p>
+
+<p>国际标准的制定是非常复杂的问题，这里既有很多技术问题，也有很多属于非技术问题</p>
+
+<p>标准制定过早，由于技术还没有发展到成熟水平，会使技术比较陈旧的标准限制了产品的技术水平。其结果是以后不得不再次修订标准，造成浪费</p>
+
+<p>标准制定的太迟，也会使技术的发展无章可循，造成产品的互不兼容，也不利于产品的推广</p>
+
+<p>互联网在指定其标准上很有特色，其中的一个很大的特点是面向公众。互联网所有RFC文档都可从互联网上免费下载，而且任何人都可以用电子邮件随时发表对某个文档的意见或建议。这种开放方式对互联网的迅速发展影响很大</p>
+
+<p>互联网协会ISOC</p>
+
+<p>RFC request for comment</p>
+
+<p>并非所有的RFC文档都是互联网标准</p>
+
+<p>互联网标准的制定往往要花费漫长的时间，并且是一件非常慎重的工作</p>
+
+<p>只有很少部分的RFC最后能变成互联网标准</p>
+
+<p>RFC按发表时间的先后编上序号。一个RFC文档更新后就是用一个新的编号，并在文档中指出原来老编号的RFC文档已成为陈旧的或被更新</p>
+
+<p>但陈旧的RFC不会被删除，而是永远保留供用户参考</p>
+
+<p>RFC的数量增长很快</p>
+
+<p>1、互联网草案</p>
+
+<p>2、建议标准 RFC文档</p>
+
+<p>3、互联网标准，每个标准被分配到一个标号 STD xx。一个标准可以和多个RFC文档关联</p>
+
+<p>原先要经过三个阶段，现在RFC 6410取消了草案标准</p>
+
+<p>索引文档 RFC INDEX[W-RFCX]</p>
+
+<p>RFC文档：建议标准、互联网标准、历史的、实验的、提供信息的</p>
+
+<h2 id="互联网的组成">互联网的组成</h2>
+
+<p>边缘部分</p>
+
+<p>核心部分：有大量网络和连接这些网络的路由器组成，为边缘部分提供服务</p>
+
+<p>处在互联网边缘的部分就是连接在互联网上的所有主机。这些主机又被称为端系统</p>
+
+<p>主机A和主机B进行通信，实际上指主机A的某个进程和主机B上的另一个进程进行通信</p>
+
+<p>1、客户-服务器模式</p>
+
+<p>客户是服务请求方，服务器是服务提供方，都要使用网络核心部分所提供的服务</p>
+
+<p>客户程序：</p>
+
+<p>被用户调用后运行，在通信时主动地向远地服务器发起通信。因此，客户程序必须知道服务器程序的地址</p>
+
+<p>不需要特殊的硬件和很复杂的操作系统</p>
+
+<p>服务器程序：</p>
+
+<p>是一种专门用来提供某种服务的程序，可同时处理多个远地或本地客户的请求</p>
+
+<p>系统启动后即自动调用并一直不断的运行着，被动的等待并接受来自各地的客户的通信请求。因此，服务器程序不需要知道客户程序的地址</p>
+
+<p>一般需要强大的硬件和高级的操作系统支持</p>
+
+<p>2、对等连接方式</p>
+
+<p>对等连接 peer-to-peer P2P</p>
+
+<p>对等连接方式本质上看仍然是客户-服务器方式，只是对等连接中的每一台主机既有客户又同时是服务器</p>
+
+<p>互联网的核心部分</p>
+
+<p>在网络核心部分起特殊作用的是路由器，它是一种专用计算机（但不叫做主机）。路由器是实现分组交换的关键构建，其任务是转发收到的分组，这是网络核心部分最重要的功能</p>
+
+<p>1、电路交换的主要特点</p>
+
+<p>从通信资源的分配角度来看，交换就是按照某种方式动态的分配传输线路的资源。在使用电路交换通信之前， 必须先拨号建立连接</p>
+
+<p>建立连接（占用通信资源）-&gt; 通话（一直占用通信资源）-&gt; 释放连接（归还通信资源）</p>
+
+<p>电路交换</p>
+
+<p>用户线 电信网 交换机 中继线</p>
+
+<p>当使用电路交换来传送计算机数据时，其线路的传输效率往往很低。这是因为计算机数据是突发式地出现在传输线路上，因此已被用户占用的通信资源在绝大部分时间里都是空闲的</p>
+
+<p>2、分组交换的主要特点</p>
+
+<p>分组交换则采用存储转发技术</p>
+
+<p>报文message</p>
+
+<p>在每一个数据段前面，加上一些由必要的控制信息组成的首部header后，就构成了一个分组packet。分组又称为包，而分组的首部也可以称为包头</p>
+
+<p>分组是在互联网中传送的数据单元</p>
+
+<p>在互联网核心部分的路由器之间一般都是用高速连路相连接，而在网络边缘的主机接入到核心部分则通常以相对较低速率的链路相连接</p>
+
+<p>位于网络边缘的主机和位于网络核心部分的路由器都是计算机，但是作用不一样</p>
+
+<p>路由器收到一个分组，先暂时存储一下，检查其首部，查找转发表，按照首部中的目的地址，找到合适的接口转发出去，把分组交给下一个路由器。这样一步一步的（有时会经过几十个不同的路由器）以存储转发的方式，把分组交付最终的目的主机。各路由器之间必须经常交换彼此掌握的路由信息，以便创建和动态维护路由器中的转发表，使得转发表能够在整个网络拓扑发生变化时及时更新</p>
+
+<p>当我们讨论互联网的核心部分中的路由器转发分组的过程中，往往把单个的网络简化成一条链路，而路由器成为核心部分的结点。这种简化图看起来可以更加突出重点</p>
+
+<p>路由器暂时存储的是一个个短分组，而不是整个的长报文。短分组是暂存在路由器的存储器（即内存）中而不是存储在磁盘中，这就保证了较高的交换速率</p>
+
+<p>省去了建立连接和释放连接的开销，因而数据的传输效率更高</p>
+
+<p>互联网采取了专门的措施，保证了数据传送具有非常高的可靠性。当网络中的某个结点或链路突然发生故障时，在各路由器中运行的路由选择协议能够自动找到转发分组最合适的路径</p>
+
+<p>采用存储转发的分组交换，实质上是采用了在数据通信的过程中断续或动态分配传输带宽的策略。这对传送突发式的计算机数据非常合适，使得通信线路的利用率大大提高了</p>
+
+<p>为了提高分组交换网的可靠性，互联网的核心部分常采用网状拓扑结构，使得当发生网络拥塞或少数结点、链路出现故障时，路由器可灵活地改变转发路由而不致引起通信的中断或全网的瘫痪。此外，通信网络的主干线路往往由一些高速链路构成，这样就可以较高的数据率迅速地传送计算机数据</p>
+
+<p>高效</p>
+
+<p>灵活</p>
+
+<p>迅速：以分组为传送单位，可以不先连接就能向其他主机发送分组</p>
+
+<p>可靠</p>
+
+<p>分组交换也会带来一些新的问题。例如，分组在各路由器存储转发时需要排队，这就会造成一定的时延。此外，由于分组交换不像电路交换那样通过建立连接来保证通信时所需的各种资源，因而无法确保通信时端到端所需的带宽</p>
+
+<p>分组交换带来的另一个问题是各分组必须携带的控制信息也造成了一定的开销overhead。整个分组交换网还需专门的管理和控制机制</p>
+
+<p>从本质上讲，这种断续分配传输带宽的存储转发原理并非是完全新的概念。自古就有的邮政通信，就其本质来说也属于存储转发方式。而在20世纪40年代，电报通信也采用了基于存储转发原理的报文交换</p>
+
+<p>分组交换虽然也采用存储转发原理，但由于使用了计算机进行处理，就使得分组的转发非常迅速</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午12.13.28.png" alt="" /></p>
+
+<p>若要连续传送大量的数据，且其传送时间远大于连接建立时间，则电路交换的传输速率比较快。报文交换和分组交换不需要预先分配传输带宽，在传送突发数据时可提高整个网络的信道利用率。由于一个分组的长度往往远小于整个报文的长度，因此分组交换比报文交换的时延小，同时也具有更好的灵活性</p>
+
+<h2 id="计算机网络的类别">计算机网络的类别</h2>
+
+<p>可编程的硬件表明这种硬件一定包含有中央处理机CPU</p>
+
+<p>1、按照网络的作用范围进行分类</p>
+
+<p>广域网 WAN Wide Area Network</p>
+
+<p>广域网是互联网的核心部分，其任务是通过长距离运送主机所发送的数据。连接广域网各结点交换机的链路一般都是高速链路，具有较大的通信容量</p>
+
+<p>城域网 MAN Metropolitan Area Network</p>
+
+<p>用来将多个局域网进行互连。目前很多城域网采用的是以太网技术，因此有时也常并入局域网的范围进行讨论</p>
+
+<p>局域网 LAN Local Area Network</p>
+
+<p>个人区域网 PAN Personal Area Network</p>
+
+<p>个人区域网就是在个人工作的地方把属于个人使用的电子设别用无线技术连接起来的网络，因此也被常称为无线个人区域网WPAN(Wireless PAN)</p>
+
+<p>2、按照网络的使用者进行分类</p>
+
+<p>公用网 public network</p>
+
+<p>专用网 private network</p>
+
+<p>公用网和专用网都可以提供多种服务。如传送的是计算机数据，则分别是公用计算机网络和专用计算机网络</p>
+
+<p>3、用来把用户接入到互联网的网络</p>
+
+<p>接入网 AN Access network</p>
+
+<p>他又称为本地接入网或居民接入网。这是一类比较特殊的计算机网络。用户必须通过ISP才能接入到互联网，由于从用户家中接入到互联网可以使用的技术有许多种，因此就出现了可以使用多种接入网技术连接到互联网的情况。接入网本身既不属于互联网的核心部分，也不属于互联网的边缘部分。接入网是从某个用户端系统到互联网中的第一个路由器也称为边缘路由器之间的网络。从覆盖的范围看，很多接入网还属于局域网。从作用上看，接入网只是起到让用户能够与互联网连接的桥梁作用</p>
+
+<p>宽带接入技术</p>
+
+<h2 id="计算机网络的性能">计算机网络的性能</h2>
+
+<p>计算机网络的性能指标</p>
+
+<p>1、速率</p>
+
+<p>2、带宽</p>
+
+<p>3、吞吐量</p>
+
+<p>4、时延</p>
+
+<p>对于高速网络链路，我们提高的仅仅是数据的发送速率而不是比特在链路上的传播速率</p>
+
+<p>5、时延带宽积</p>
+
+<p>6、往返时间RTT</p>
+
+<p>7、利用率</p>
+
+<p>信道或网络的利用率过高会产生非常大的时延。因此一些拥有较大主干网的ISP通常控制信道利用率不超过50%。如果超过了就要准备扩容，增大线路的带宽</p>
+
+<p>计算机网络的非性能特征</p>
+
+<p>1、费用</p>
+
+<p>2、质量</p>
+
+<p>3、标准化</p>
+
+<p>4、可靠性</p>
+
+<p>5、可扩展性和可升级性</p>
+
+<p>6、易于管理和维护</p>
+
+<h2 id="计算机网络体系结构">计算机网络体系结构</h2>
+
+<p>国际标准化组织ISO于1977年成立了专门机构研究该问题。他们提出了一个试图使各种计算机在世界范围内互连成网的标准框架，即著名的开放系统互连基本参考模型OSI/RM，简称OSI。开放指非独家垄断的。因此只要遵循OSI标准，一个系统就可以和位于世界上任何地方的、也遵循这同一标准的其他任何系统进行通信</p>
+
+<p>所以OSI/RM是一个抽象概念，在1983年形成了开放系统互连基本参考模型的正式文件，即著名的ISO 7498国际标准，也就是所谓的七层协议的体系结构</p>
+
+<p>OSI试图达到一种理想境界，即全球计算机网络都遵循这个统一标准，因而全球的计算机能够很方便地进行互连和交换数据。在20世纪80年代，许多大公司甚至一些国家的政府机构纷纷表示支持OSI。然而到了20世纪90年代，虽然整套的OSI国际标准已经制定出来了，但是基于TCP/IP的互联网已抢先在全球相当大的范围内成功地运行了。而与此同时OSI只获得了一些理论研究成果，在市场化方面则事与愿违地失败了</p>
+
+<p>现今规模最大的、覆盖全球的、基于TCP/IP的互联网并未使用OSI标准</p>
+
+<p>1、OSI专家缺乏实际经验，在完成OSI标准时缺乏商业驱动力</p>
+
+<p>2、协议实现起来过分复杂，运行效率低</p>
+
+<p>3、制定周期太长，使得按OSI标准生产的设备无法及时进入市场</p>
+
+<p>4、层次划分不太合理，有些功能在多个层次中重复出现</p>
+
+<p>得到最广泛应用的不是法律上的国际标准OSI，而是事实上的国际标准TCP/IP</p>
+
+<p>这些为进行网络中的数据交换而建立的规则、标准或约定称为网络协议</p>
+
+<p>语法</p>
+
+<p>语义</p>
+
+<p>同步：事件实现顺序的详细说明</p>
+
+<p>各层之间是独立的</p>
+
+<p>灵活性好</p>
+
+<p>结构上可分割开</p>
+
+<p>易于实现和维护</p>
+
+<p>能促进标准化工作</p>
+
+<p>各层功能：</p>
+
+<p>差错控制</p>
+
+<p>流量控制</p>
+
+<p>分段和重装</p>
+
+<p>复用和分用</p>
+
+<p>连接建立和释放</p>
+
+<p>分层当然也有一些缺点，例如有些功能会在不同层次重复出现，因而产生了额外开销</p>
+
+<p>计算机网络的各层及其协议的集合就是网络的体系结构。换种说法，计算机网络的体系结构就是这个计算机网络及其构件所应完成的功能的精确定义</p>
+
+<p>architecture 体系结构</p>
+
+<p>体系结构是抽象的，而实现则是具体的，是真正在运行的计算机硬件和软件</p>
+
+<p>OSI的七层协议体系结构的概念清楚，理论也较完整，但他既复杂又不实用</p>
+
+<p>TCP/IP是一个四层的体系结构，它包含应用层、运输层、网际层和网络接口层</p>
+
+<p>不过从实质上讲，TCP/IP只有最上面的三层，因为最下面的网络接口层并没有什么具体内容</p>
+
+<p>因此在学习计算机网络的原理时往往采取折中的办法，即综合OSI和TCP/IP的优点，采用一种只有五层协议的体系结构，这样既简洁又能把概念阐述清楚</p>
+
+<p>有时为了方便，也可把最底下两层称为网络接口层</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午2.41.38.png" alt="" /></p>
+
+<p>应用层：</p>
+
+<p>应用层的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程间通信和交互的规则。这里的进程就是指主机中正在运行的程序。对于不同的网络应用需要有不同的应用层协议</p>
+
+<p>域名系统DNS 支持万维网应用的HTTP协议 支持电子邮件的SMTP协议</p>
+
+<p>应用层交互的数据单元称为报文</p>
+
+<p>运输层：</p>
+
+<p>运输层的任务就是负责向两台主机中进程之间的通信提供通用的数据传输服务</p>
+
+<p>应用进程利用该服务传送应用层报文</p>
+
+<p>由于一台主机可同时运行多个进程，因此运输层有复用和分用的功能。复用就是多个应用进程可同时使用下面运输层的服务，分用和复用相反，是运输层把收到的信息分别交付上面应用层中的相应进程</p>
+
+<p>传输控制协议 TCP Transmission Control Protocol</p>
+
+<p>提供面向连接的、可靠的数据传输服务，其数据传输的单位是报文段segment</p>
+
+<p>用户数据报协议 UDP User Datagram Protocol</p>
+
+<p>提供无连接的、尽最大努力的数据传输服务（不保证数据传输的可靠性），其数据传输的单位是用户数据报</p>
+
+<p>网络层：</p>
+
+<p>网络层负责为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装层分组或包进行传送。在TCP/IP体系中，由于网络层实用IP协议，因此分组也称之为IP数据报，或简称数据报</p>
+
+<p>运输层的用户数据报UDP和网络层的IP数据报不同。无论在哪一层传送的数据单元，都可笼统地用分组来表示</p>
+
+<p>网络层的另一个任务就是要选择合适的路由，使源主机传输层所传下来的分组，能够通过网络中的路由器找到目的主机</p>
+
+<p>互联网是由大量异构网络通过路由器相互连接起来。互联网使用的网络层协议是无连接的网际协议IP和许多种路由选择协议，因此互联网的网络层也叫做网际层或IP层</p>
+
+<p>数据链路层：</p>
+
+<p>两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。在两个相邻结点之间传送数据时，数据链路层将网络层交下来的IP数据报组装成帧framing，在两个相邻结点间的链路上传送帧frame。每一帧包括数据和必要的控制信息（如同步信息、地址信息、差错控制等）</p>
+
+<p>在接受数据时，控制信息使接收端能够知道一个帧从哪个比特开始，从哪个比特结束。这样，数据链路层在收到一个帧后，就可以从中提取出数据部分，上交给网络层</p>
+
+<p>控制信息还使接收端能够检测到所收到的帧中有无差错。如发现有差错，数据链路层就简单的丢弃这个出了差错的帧，以免继续在网络中传送下去白白浪费网络资源。如果需要改正数据在数据链路层传输时出现的差错，那么就要采用可靠传输协议来纠正出现的差错。这种方法使得数据链路层的协议复杂些</p>
+
+<p>物理层：</p>
+
+<p>在物理层上传送数据的单位是比特</p>
+
+<p>物理层要考虑用多大的电压表示1或0，以及接收方如何识别发送方所发送的比特。物理层还要确定连接电缆的插头应当有多少根引脚以及各引脚应如何连接</p>
+
+<p>解释比特代表的意思，就不是物理层的任务</p>
+
+<p>物理层下面的物理媒体</p>
+
+<p>TCP/IP并不一定单指TCP和IP这两个具体的协议，而往往表示互联网所使用的整个TCP/IP协议族</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.41.10.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.43.09.png" alt="" /></p>
+
+<p>协议数据单元 PDU Protocol Data Unit</p>
+
+<p>对等层 peer layers</p>
+
+<p>协议栈 protocol stack</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.47.29.png" alt="" /></p>
+
+<p>TCP/IP的体系结构</p>
+
+<p>四层</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.49.40.png" alt="" /></p>
+
+<p>技术的发展并不是遵循严格的OSI分层概念。实际上现在的互联网结构有时已经演变成图1-23所示的那样</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.51.17.png" alt="" /></p>
+
+<p>在图中，网络接口层有时也称为子网层。这里的子网是指一些局域网和某些广域网，但从IP层来看，这些网络属于数据链路层，也就是属于网络接口层。我们在第四章讲到IP地址时，将会讲到子网划分。但子网划分中的子网和图1-23中子网层中的子网是完全不同的概念</p>
+
+<p>还有一种方法，就是分层次画出具体的协议来表示TCP/IP协议族</p>
+
+<p>这种很像沙漏计时器形状的TCP/IP协议族表明：TCP/IP协议可以为各式各样的应用提供服务everything over IP，同时TCP/IP协议也允许IP协议在各式各样的网络构成的互联网上运行IP over everything</p>
+
+<p>正因为如此，互联网才会发展到今天的这种全球规模</p>
+
+<p>IP协议在互联网中的核心作用</p>
+
+<p><img src="/img/typora-user-images/截屏2020-06-01 下午3.58.56.png" alt="" /></p>
+
+<p>有的服务器进程可以同时向几百个或更多的客户进程提供服务</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/15/dfs&bfs/" data-toggle="tooltip" data-placement="top" title="dfs&bfs">
+                        Previous<br>
+                        <span>dfs&bfs</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/15/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" data-toggle="tooltip" data-placement="top" title="计算机网络（第7版）第七章">
+                        Next<br>
+                        <span>计算机网络（第7版）第七章</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0005" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="13">学习笔记</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="6">计算机网络</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="5">Python</a>
+        
+                <a data-sort="0014" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="4">tips</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0015" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="3">AI</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="2">爬虫</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yurj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
