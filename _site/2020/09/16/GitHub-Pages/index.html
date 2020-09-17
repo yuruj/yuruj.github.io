@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Github Pages & Jekyll - YRJ的博客 | Yuruj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="GitHub Pages使用入门
+">
+    
+    <meta property="article:published_time" content="2020-09-16T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yuruj">
+    
+    
+    <meta property="article:tag" content="Git">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/16/GitHub-Pages/">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
+    
+    <title>Github Pages & Jekyll - YRJ的博客 | Yuruj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/16/GitHub-Pages/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Git" title="Git">Git</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>Github Pages & Jekyll</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by yuruj on September 16, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="github-pages使用入门">GitHub Pages使用入门</h1>
+
+<h2 id="关于github-pages">关于GitHub Pages</h2>
+
+<h3 id="关于github-pages-1">关于GitHub Pages</h3>
+
+<p>GitHub Pages是一项静态站点托管服务，他直接从GitHub上的仓库获取HTML、CSS和JavaScript文件，（可选）通过构建过程运行文件，然后发布网站</p>
+
+<p>你可以在GitHub的<code class="language-plaintext highlighter-rouge">github.io</code>域或自己的自定义域上托管站点</p>
+
+<h3 id="github-pages站点的类型">GitHub Pages站点的类型</h3>
+
+<p>项目站点：连接到GitHub上托管的特定项目</p>
+
+<p>用户站点：必须创建名为 <code class="language-plaintext highlighter-rouge">&lt;user&gt;.github.io</code> 的用户帐户所拥有的仓库</p>
+
+<p>组织站点：必须创建名为 <code class="language-plaintext highlighter-rouge">&lt;organization&gt;.github.io</code> 的组织所拥有的仓库</p>
+
+<p>除非您使用自定义域，否则用户和组织站点位于 <code class="language-plaintext highlighter-rouge">http(s)://&lt;username&gt;.github.io</code> 或 <code class="language-plaintext highlighter-rouge">http(s)://&lt;organization&gt;.github.io</code></p>
+
+<p>只能为每个GitHub账号创建一个用户或组织站点</p>
+
+<h3 id="github-pages站点的发布来源">GitHub Pages站点的发布来源</h3>
+
+<p>GitHub Pages站点将成为互联网上的公开内容，即使其仓库是私有的或内部的。如果站点的仓库中有敏感数据，您可能想要在发布前删除它</p>
+
+<h3 id="静态站点生成器">静态站点生成器</h3>
+
+<p>GitHub Pages 会发布您推送到仓库的任何静态文件。 您可以创建自己的静态文件或使用静态站点生成器为您构建站点。 您还可以在本地或其他服务器上自定义自己的构建过程。 我们建议使用 Jekyll，它是一个静态站点生成器，内置 GitHub Pages 支持和简化的构建流程</p>
+
+<p>默认情况下，GitHub Pages 将使用 Jekyll 来构建您的站点。 如果您想使用除 Jekyll 以外的静态站点生成器，通过在发布来源的根目录中创建一个名为 <code class="language-plaintext highlighter-rouge">.nojekyll</code> 的空文件来禁用 Jekyll 构建过程，然后按照静态站点生成器的说明在 本地构建站点。</p>
+
+<p>GitHub Pages 不支持服务器端语言，例如 PHP、Ruby 或 Python</p>
+
+<h3 id="使用github-pages的指南">使用GitHub Pages的指南</h3>
+
+<p>2016年6月15日后创建并使用github.io域的GitHub Pages站点通过HTTPS提供服务</p>
+
+<p>使用限制：</p>
+
+<ul>
+  <li>GitHub Pages 源仓库建议的限制为 1GB</li>
+  <li>发布的 GitHub Pages 站点不得超过 1 GB</li>
+  <li>GitHub Pages 站点的<em>软</em>带宽限制为每月 100GB</li>
+  <li>GitHub Pages 站点的<em>软</em>限制为每小时 10 次构建</li>
+</ul>
+
+<p>如果您的站点超出这些使用配额，我们可能无法为您的站点提供服务</p>
+
+<h3 id="github-pages上的mime类型">GitHub Pages上的MIME类型</h3>
+
+<p>MIME类型是服务器发送到浏览器的标头，提供有关浏览器所请求文件性质和格式的信息</p>
+
+<p>GitHub Pages 支持数千种文件扩展名中 750 多种 MIME 类型。虽然无法基于每个文件或每个仓库指定自定义 MIME 类型，但您可以添加或修改 MIME 类型以在 GitHub Pages 上使用</p>
+
+<h2 id="创建github-pages站点">创建GitHub Pages站点</h2>
+
+<h3 id="为站点创建仓库">为站点创建仓库</h3>
+
+<p>1、在任何页面的右上角，使用 下拉菜单选择 <strong>New repository（新建仓库）</strong></p>
+
+<p>2、使用 <strong>Owner（所有者）</strong>下拉菜单选择你想要拥有仓库的帐户</p>
+
+<p>3、输入仓库的名称和说明（可选）。 如果您创建的是用户或组织站点，仓库名称必须为 <code class="language-plaintext highlighter-rouge">&lt;user&gt;.github.io</code> 或 <code class="language-plaintext highlighter-rouge">&lt;organization&gt;.github.io</code></p>
+
+<p>4、Choose a repository visibility</p>
+
+<p>5、选择选择 <strong>Initialize this repository with a README（使用自述文件初始化此仓库）</strong></p>
+
+<p>6、Click Create repository</p>
+
+<h3 id="创建站点">创建站点</h3>
+
+<p>1、在GitHub上，导航到站点的仓库</p>
+
+<p>2、Decide which publishing source you want to use</p>
+
+<p>3、如果所选发布源已经存在，请导航到发布源。如果所选发布源不存在，则创建发布源</p>
+
+<p>4、在发布源的根目录中，创建一个名为index.md、包含要在网站主页上显示的内容的文件</p>
+
+<p>5、Configure your publishing source</p>
+
+<p>6、在仓库名称下，单击Settings</p>
+
+<p>7、要查看您已发布的站点，请在“GitHub Pages”下点击您的站点 URL</p>
+
+<p>对站点的更改在推送到GitHub上，最长可能需要20分钟才会发布</p>
+
+<h3 id="后续步骤">后续步骤</h3>
+
+<p>可以通过创建更多新文件向网站添加更多页面。每个文件都将在网站上与发布源相同的目录结构中。例如，例如，如果项目网站的发布源是 <code class="language-plaintext highlighter-rouge">gh-pages</code> 分支，并且您在 <code class="language-plaintext highlighter-rouge">gh-pages</code> 分支上创建了名为 <code class="language-plaintext highlighter-rouge">/about/contact-us.md</code> 的新文件，该文件将在 <code class="language-plaintext highlighter-rouge">https://&lt;user&gt;.github.io/&lt;repository&gt;/about/contact-us.md</code> 下</p>
+
+<p>还可以添加主题以自定义网站的外观</p>
+
+<p>要更多地自定义您的站点，你可以使用Jekyl-内置GitHub Pages支持的静态站点生成器</p>
+
+<h2 id="使用主题选择器将主题添加到github-pages站点">使用主题选择器将主题添加到GitHub Pages站点</h2>
+
+<p>拥有仓库管理员权限的人可以使用主题选择器向GitHub Pages站点添加主题</p>
+
+<h3 id="关于主题选择器">关于主题选择器</h3>
+
+<p>主题选择器可用于向仓库添加 Jekyll 主题</p>
+
+<p>主题选择器如何工作取决于您的资源库是公共的还是私有的</p>
+
+<ul>
+  <li>如果已为仓库启用 GitHub Pages，主题选择器会将主题添加到当前发布源</li>
+  <li>如果您的仓库是公共的，并且已对仓库禁用 GitHub Pages，则必须先通过配置发布源来启用 GitHub Pages，然后才可使用主题选择器</li>
+</ul>
+
+<p>如果以前曾手动向仓库添加 Jekyll 主题，则这些文件在使用主题选择器后也可能应用。 为避免冲突，请先删除所有手动添加的主题文件夹和文件，然后再使用主题选择器。</p>
+
+<h3 id="使用主题选择器添加主题">使用主题选择器添加主题</h3>
+
+<p>1、在GitHub上，导航到站点的仓库</p>
+
+<p>2、在仓库名称下，单击Settings</p>
+
+<p>3、在GitHub Pages下，单击Choose a theme或Change theme</p>
+
+<p>4、在页面顶部单击所需的主题，然后单击Select theme（选择主题）</p>
+
+<p>5、系统可能会提示您编辑站点的README.md文件</p>
+
+<p>您选择的主题将自动应用到仓库中的MarkDown文件。要将主题应用到仓库中的HTML文件，您需要添加YAML前页，以指定每个文件的布局</p>
+
+<h2 id="配置github-pages站点的发布源">配置GitHub Pages站点的发布源</h2>
+
+<p>如果您使用GitHub Pages站点的默认发布源，您的站点将自动发布</p>
+
+<p>You can also choose to publish your site from a different branch or folder</p>
+
+<p>People with admin or maintainer permissions for a repository can configure a publishing source for a GitHub Pages site</p>
+
+<h3 id="选择发布源">选择发布源</h3>
+
+<p>Before you configure a publishing source, make sure the branch you want to use as your publishing source already exists in your repository</p>
+
+<p>1、在GitHub上，导航到站点的仓库</p>
+
+<p>2、在仓库名称下，单击Settings</p>
+
+<p>3、Under “GitHub Pages”, use the <strong>None</strong> or <strong>Branch</strong> drop-down menu and select a publishing source</p>
+
+<p>4、Optionally, use the drop-down menu to select a folder for your publishing source</p>
+
+<p>5、单击Save</p>
+
+<h3 id="github-pages站点发布问题疑难排解">GitHub Pages站点发布问题疑难排解</h3>
+
+<p>If your site has not published automatically, make sure someone with admin permissions and a verified email address has pushed to the publishing source</p>
+
+<p>f you choose the <code class="language-plaintext highlighter-rouge">docs</code> folder on any branch as your publishing source, then later remove the <code class="language-plaintext highlighter-rouge">/docs</code> folder from that branch in your repository, your site won’t build and you’ll get a page build error message for a missing <code class="language-plaintext highlighter-rouge">/docs</code> folder</p>
+
+<h2 id="为github-pages站点创建自定义404界面">为GitHub Pages站点创建自定义404界面</h2>
+
+<p>可以自定义在人们尝试访问站点上不存在的页面时显示的404错误页面</p>
+
+<p>1、在Github上，导航到站点的仓库</p>
+
+<p>2、导航到站点的发布来源</p>
+
+<p>3、Above the list of files, using the Add file drop-down, click Create new file</p>
+
+<p>4、在文件名字段中，键入404.html或404.md</p>
+
+<p>5、如果将文件命名为404.md，请将以下YAML前页添加到文件的开头</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>---
+permalink: /404.html
+---
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>6、在YAML前页（如果存在）下方添加要在404页面上显示的内容</p>
+
+<p>7、在页面底部，输入一条简短、有意义的提交信息，描述您对文件所做的更改。您可以在提交消息中将提交归于多个作者</p>
+
+<p>8、以下是提交消息字段，请单击电子邮件地址下拉菜单并选择 Git 作者电子邮件地址。 只有经过验证的电子邮件地址才会出现在此下拉菜单中。 如果您启用了电子邮件地址隐私保护，则 <code class="language-plaintext highlighter-rouge">&lt;username&gt;@users.noreply.github.com</code> 为默认的提交作者电子邮件地址</p>
+
+<p>9、在提交消息字段下面，确定是要将提交添加到当前分支还是新分支。 If your current branch is the default branch, you should choose to create a new branch for your commit and then create a pull request</p>
+
+<p>10、单击Propose new file（提议新文件）</p>
+
+<h2 id="使用https保护github-pages站点">使用HTTPS保护GitHub Pages站点</h2>
+
+<p>HTTPS增加一层加密，用于防止其他人窥探或篡改您的站点的流量。您可对GitHub Pages站点强制实施HTTPS，从而将所有HTTPS请求透明的重定向到HTTPS</p>
+
+<p>拥有仓库管理员权限的人可对GitHub Pages站点实施HTTPS</p>
+
+<h3 id="关于https和github-pages">关于HTTPS和GitHub Pages</h3>
+
+<p>所有 GitHub Pages 站点（包括使用自定义域正确配置的站点）均支持 HTTPS 和 HTTPS 强制实施</p>
+
+<p>对于使用 2016 年 1 月 15 日后创建的 <code class="language-plaintext highlighter-rouge">github.io</code> 域的 GitHub Pages 站点，需要强制实施 HTTPS。 如果您在 2016 年 6 月 15 日之前创建了站点，则可以手动启用实施 HTTPS</p>
+
+<p>GitHub Pages 站点不应该用于敏感事务，例如发送密码或信用卡号码</p>
+
+<h3 id="对您的github-pages站点强制实施https">对您的GitHub Pages站点强制实施HTTPS</h3>
+
+<p>1、在GitHub上，导航到站点的仓库</p>
+
+<p>2、在仓库名称下，单击Settings</p>
+
+<p>3、在GitHub Pages下，选择Enforce HTTPS（实施HTTPS）</p>
+
+<h3 id="解决具有混合内容的问题">解决具有混合内容的问题</h3>
+
+<p>如果您对 GitHub Pages 站点启用了 HTTPS，但站点的 HTML 仍通过 HTTP 引用图像、CSS 或 JavaScript，则您的站点将提供<em>混合内容</em>。 提供混合内容可能会降低站点的安全性，并导致在加载资产时出现问题</p>
+
+<p>要删除站点的混合内容，请在站点的 HTML 中将 <code class="language-plaintext highlighter-rouge">http://</code> 更改为 <code class="language-plaintext highlighter-rouge">https://</code>，确保所有资产都通过 HTTPS 提供</p>
+
+<p>资产通常位于以下位置：</p>
+
+<ul>
+  <li>如果您的站点使用 Jekyll，则 HTML 文件可能位于 <em>_layouts</em> 文件夹中</li>
+  <li>CSS 通常位于 HTML 文件的 <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 部分</li>
+  <li>JavaScript 通常位于 <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> 部分或结束 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 标记之前</li>
+  <li>图像通常位于 <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> 部分</li>
+</ul>
+
+<p><img src="/img/typora-user-images/截屏2020-09-06 下午4.24.28.png" alt="" /></p>
+
+<h2 id="将子模块用于github-pages">将子模块用于GitHub Pages</h2>
+
+<p>如果 GitHub Pages 站点的仓库包含子模块，则在构建站点时会自动拉取其内容</p>
+
+<p>只能使用指向公共仓库的子模块，因为 GitHub Pages 服务器无法访问私有仓库</p>
+
+<p>对子模块（包括嵌套子模块）使用 <code class="language-plaintext highlighter-rouge">https://</code> 只读 URL。 您可以在 <em>.gitmodules</em> 文件中进行此更改</p>
+
+<h2 id="取消发布github-pages站点">取消发布GitHub Pages站点</h2>
+
+<p>1、在GitHub上，导航到仓库的主页面</p>
+
+<p>2、在仓库名称下，单击Settings</p>
+
+<p>3、Under GitHub Pages, use the Branch drop-down menu and select None</p>
+
+<p>4、如果为站点启用了自定义域，为避免域名被占用，请更新您的DNS设置</p>
+
+<h1 id="使用jekyll设置github-pages站点">使用Jekyll设置GitHub Pages站点</h1>
+
+<h2 id="关于github-pages和jekyll">关于GitHub Pages和Jekyll</h2>
+
+<h3 id="关于jekyll">关于Jekyll</h3>
+
+<p>Jekyll是一个静态站点生成器，内置GitHub Pages支持和简化的构建过程</p>
+
+<p>Jekyll使用Markdown和HTML文件，并根据您选择的布局创建完整静态网站。Jekyll支持Markdown和Lick，这是一种可在网站上加载动态内容的模版语言</p>
+
+<p>Windows并未正式支持Jekyll</p>
+
+<p>我们建议将Jekyll用于GitHub Pages。如果您喜欢，可以使用其他静态站点生成器或者在本地或其他服务器上自定义构建过程</p>
+
+<h3 id="在github-pages网站中配置jekyll">在GitHub Pages网站中配置Jekyll</h3>
+
+<p>可以通过编辑_config.yml文件来配置大多数Jekyll设置，例如网站的主题和插件</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午9.09.10.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午9.09.59.png" alt="" /></p>
+
+<h3 id="前页附属资料">前页附属资料</h3>
+
+<p>要为网站上的页面或帖子设置变量和原数据，例如标题和布局，可以讲YAML前页添加到任意MarkDown或HTML文件的顶部</p>
+
+<p>可以添加site.github到帖子或页面，以将任何仓库引用元数据添加到您的网站</p>
+
+<h3 id="主题">主题</h3>
+
+<p>您可以将Jekyll主题添加到GitHub Pages站点，以自定义站点的外观</p>
+
+<p>您可以在GitHub上添加支持的主题到站点</p>
+
+<p>要使用GitHub上托管的任何其他开源Jekyll主题，您可以手动添加主题</p>
+
+<p>您可以通过编辑主题文件来覆盖任何主题的默认值</p>
+
+<h3 id="插件">插件</h3>
+
+<p>可以下载或创建Jekyll插件，以便为您的网站拓展Jekyll的功能</p>
+
+<p>例如， <a href="https://github.com/jekyll/jemoji">jemoji</a> 插件允许您在站点的任何页面上使用 GitHub 风格的表情符号，就像在 GitHub 上使用一样</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-09 上午9.44.39.png" alt="" /></p>
+
+<p>可以通过在_config.yml文件中添加插件的gem到<code class="language-plaintext highlighter-rouge">plugins</code>设置来启用额外的插件</p>
+
+<p>GitHub Pages无法使用不支持的插件构建网站。如果想使用不支持的插件，请在本地生成网站，然后将网站的静态文件推送到GitHub</p>
+
+<h3 id="语法突显">语法突显</h3>
+
+<p>为了使网站更容易读取，代码片段在GitHub Pages上突显，就像在GitHub上突显一样</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-09 上午9.52.32.png" alt="" /></p>
+
+<h3 id="本地构建网站">本地构建网站</h3>
+
+<p>当更改合并到站点的发布源时，对站点的更改将自动发布。如果想先预览您的更改，可以在本地而不是GitHub上进行更改，然后在本地测试站点</p>
+
+<h2 id="使用jekyll创建github-pages站点mac">使用Jekyll创建GitHub Pages站点（Mac）</h2>
+
+<p>可以使用Jekyll在新仓库或现有仓库中创建GiHub Pages站点</p>
+
+<p>拥有仓库管理员权限的人员可以使用Jekyll创建GitHub Pages站点</p>
+
+<h3 id="基本要求">基本要求</h3>
+
+<p>必须安装Jekyll和Git后才可使用Jekyll创建GitHub Pages站点</p>
+
+<p>建议使用Bundler安装和运行Jekyll。Bunder可管理Ruby gem依赖项，减少Jekyll构建错误和组织环境相关的漏洞</p>
+
+<p><a href="https://jekyllrb.com/docs/installation/">Jekyll的安装</a></p>
+
+<p>Jekyll是可以在大多数系统上安装的Ruby Gem</p>
+
+<p>Ruby是一种跨平台、面向对象的动态类型编程语言。</p>
+
+<h3 id="为站点创建仓库-1">为站点创建仓库</h3>
+
+<h3 id="创建站点-1">创建站点</h3>
+
+<h1 id="jekyll-官方文档">Jekyll 官方文档</h1>
+
+<p>Jekyll是静态站点生成器。它采用您喜欢的标记语言编写的文本，并使用布局创建静态网站。您可以调整网站的外观，URL，页面上显示的数据等。</p>
+
+<h2 id="ruby-101">Ruby 101</h2>
+
+<p>Jekyll用Ruby编写</p>
+
+<h3 id="gem">Gem</h3>
+
+<p>Gem是包含在Ruby项目中的代码。Gem包装的特定功能。您可以在多个项目中或与他人共享宝石。宝石可以执行以下操作：</p>
+
+<ul>
+  <li>将Ruby对象转换为JSON</li>
+  <li>分页</li>
+  <li>与GitHub等API交互</li>
+</ul>
+
+<p>Jekyll是一个Gem，许多Jekyll插件也是Gem</p>
+
+<h3 id="gemfile">Gemfile</h3>
+
+<p>网站使用的Gem列表。每个Jekyll站点的主文件夹中都有一个Gemfile</p>
+
+<h3 id="bundler">Bundler</h3>
+
+<p>Bundler是一种宝石，可在您的电脑上安装所有gems in your Gemfile</p>
+
+<p>While you don’t have to use <code class="language-plaintext highlighter-rouge">Gemfile</code> and <code class="language-plaintext highlighter-rouge">bundler</code>, it is highly recommended as it ensures you’re running the same version of Jekyll and its plugins across different environments.</p>
+
+<p>Install Bundler using <code class="language-plaintext highlighter-rouge">gem install bundler</code>. You only need to install it once, not every time you create a new Jekyll project.</p>
+
+<p>要使用Bundler在Gemfile中安装gem，请在具有Gemfile的目录中运行以下命令：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>bundle <span class="nb">install
+</span>bundle <span class="nb">exec </span>jekyll serve
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>要在不使用Gemfile的情况下绕过Bundler，请运行<code class="language-plaintext highlighter-rouge">jekyll serve</code></p>
+
+<h3 id="step-by-step-tutorial">Step by Step Tutorial</h3>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/15/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%B1%82/" data-toggle="tooltip" data-placement="top" title="计算机网络（第7版）第四章">
+                        Previous<br>
+                        <span>计算机网络（第7版）第四章</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/16/%E9%87%91%E8%9E%8D%E5%AD%A6%E5%8E%9F%E7%90%86/" data-toggle="tooltip" data-placement="top" title="看了点金融学mooc？">
+                        Next<br>
+                        <span>看了点金融学mooc？</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="28">学习笔记</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="7">计算机网络</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="5">tips</a>
+        
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="3">爬虫</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yuruj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

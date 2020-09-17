@@ -1,6 +1,86 @@
 [
   
     {
+      "title"    : "《汇编语言》（第一到五章",
+      "subtitle" : "王爽著",
+      "tags"     : "汇编, 学习笔记",
+      "url"      : "/2020/09/17/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E7%AC%AC%E4%B8%80%E5%88%B0%E4%BA%94%E7%AB%A0/",
+      "date"     : "2020-09-17 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Threading Programming Guide（2）",
+      "subtitle" : "Thread Management",
+      "tags"     : "iOS, 学习笔记",
+      "url"      : "/2020/09/16/Thread-Management/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Threading Programming Guide（1）",
+      "subtitle" : "About Threaded Programming",
+      "tags"     : "iOS, 学习笔记",
+      "url"      : "/2020/09/16/About-Threaded-Programming/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Swift tutorial",
+      "subtitle" : "",
+      "tags"     : "Swift, iOS, 学习笔记",
+      "url"      : "/2020/09/16/Swift_tutorial/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Swift closures",
+      "subtitle" : "",
+      "tags"     : "Swift, iOS, 学习笔记",
+      "url"      : "/2020/09/16/Swift_closures/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "CS193P（3）",
+      "subtitle" : "Reactive UI Protocols Layout",
+      "tags"     : "Swift, SwiftUI, iOS, 学习笔记",
+      "url"      : "/2020/09/16/CS193P-3/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "CS193P（2）",
+      "subtitle" : "MVVM and the Swift Type System",
+      "tags"     : "Swift, SwiftUI, iOS, 学习笔记",
+      "url"      : "/2020/09/16/CS193P-2/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "CS193P（1）",
+      "subtitle" : "Course Logistics and Intro to SwiftUI",
+      "tags"     : "Swift, SwiftUI, iOS, 学习笔记",
+      "url"      : "/2020/09/16/CS193P-1/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "看了点金融学mooc？",
+      "subtitle" : "",
+      "tags"     : "金融学, 学习笔记",
+      "url"      : "/2020/09/16/%E9%87%91%E8%9E%8D%E5%AD%A6%E5%8E%9F%E7%90%86/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Github Pages &amp; Jekyll",
+      "subtitle" : "",
+      "tags"     : "Git, 学习笔记",
+      "url"      : "/2020/09/16/GitHub-Pages/",
+      "date"     : "2020-09-16 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "计算机网络（第7版）第四章",
       "subtitle" : "计算机网络网络层",
       "tags"     : "谢希仁, 计算机网络, 学习笔记",
@@ -49,6 +129,22 @@
     } ,
   
     {
+      "title"    : "网络安全基本原理与协议技术（mooc？",
+      "subtitle" : "",
+      "tags"     : "计算机网络, 学习笔记",
+      "url"      : "/2020/09/15/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E4%B8%8E%E5%8D%8F%E8%AE%AE%E6%8A%80%E6%9C%AF/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "网络入侵与脚本攻防修炼（第二、三章）",
+      "subtitle" : "",
+      "tags"     : "学习笔记",
+      "url"      : "/2020/09/15/%E7%BD%91%E7%BB%9C%E5%85%A5%E4%BE%B5%E4%B8%8E%E8%84%9A%E6%9C%AC%E6%94%BB%E9%98%B2%E4%BF%AE%E7%82%BC/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "dfs&amp;bfs",
       "subtitle" : "",
       "tags"     : "算法, tips",
@@ -81,7 +177,23 @@
     } ,
   
     {
-      "title"    : "Python爬虫（2）",
+      "title"    : "Python爬虫mooc的一些小笔记",
+      "subtitle" : "",
+      "tags"     : "爬虫, Python, 学习笔记",
+      "url"      : "/2020/09/15/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%ABmooc/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Python的一些常用库",
+      "subtitle" : "",
+      "tags"     : "Python, tips",
+      "url"      : "/2020/09/15/Python%E5%B8%B8%E7%94%A8%E5%BA%93/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Python3网络爬虫开发实战（2）",
       "subtitle" : "",
       "tags"     : "爬虫, Python, 学习笔记",
       "url"      : "/2020/09/15/Python3-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98-2/",
@@ -89,7 +201,7 @@
     } ,
   
     {
-      "title"    : "Python爬虫（1）",
+      "title"    : "Python3网络爬虫开发实战（1）",
       "subtitle" : "",
       "tags"     : "爬虫, Python, 学习笔记",
       "url"      : "/2020/09/15/Python3-%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98-1/",
@@ -98,7 +210,7 @@
   
     {
       "title"    : "刷LeetCode（第一周",
-      "subtitle" : "",
+      "subtitle" : "2020 09.10-09.16",
       "tags"     : "算法, LeetCode",
       "url"      : "/2020/09/15/LeetCode-%E7%AC%AC%E4%B8%80%E5%91%A8/",
       "date"     : "2020-09-15 00:00:00 +0800"
@@ -129,10 +241,26 @@
     } ,
   
     {
+      "title"    : "人工智能与信息社会mooc",
+      "subtitle" : "神经网络",
+      "tags"     : "AI, 学习笔记",
+      "url"      : "/2020/09/15/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E4%BF%A1%E6%81%AF%E7%A4%BE%E4%BC%9A/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "深入理解计算机系统 第一章",
       "subtitle" : "",
       "tags"     : "计算机系统, 学习笔记",
       "url"      : "/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/",
+      "date"     : "2020-09-15 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "大一下Web前端mooc随手记的（？",
+      "subtitle" : "可读性比较差，随便放这了",
+      "tags"     : "前端, 学习笔记",
+      "url"      : "/2020/09/15/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/",
       "date"     : "2020-09-15 00:00:00 +0800"
     } ,
   

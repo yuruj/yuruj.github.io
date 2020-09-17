@@ -1,0 +1,1410 @@
+I"S0<h1 id="swift">Swift</h1>
+
+<h2 id="swift闭包">Swift闭包</h2>
+
+<p>闭包是自包含的功能代码块，可以在代码中使用或者用来作为参数传值</p>
+
+<p>闭包的形式：</p>
+
+<p>1、全局函数：有名字但不能捕获任何的值</p>
+
+<p>2、嵌套函数：有名字，也能捕获封闭函数内的值</p>
+
+<p>3、闭包表达式：无名闭包，使用轻量级语法，可以根据上下文环境捕获值</p>
+
+<p>Swift的几点优化：</p>
+
+<p>1、根据上下文推断参数和返回值类型</p>
+
+<p>2、从单行表达式闭包中隐式返回</p>
+
+<p>3、可以使用简化参数名，如$0，$1</p>
+
+<p>4、提供了尾随闭包语法</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="p">{(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">return</span> <span class="n">type</span> <span class="k">in</span>
+	<span class="n">statements</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Swift的String类型定义了关于&gt;的字符串实现，其作为一个函数接受两个String类型的参数并返回Bool类型的值。而这正好与sort(_:)方法的第二个参数需要的函数类型相符合</p>
+
+<h3 id="尾随闭包">尾随闭包</h3>
+
+<p>尾随闭包是一个书写在函数括号之后的闭包表达式，函数支持将其作为最后一个参数调用</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kd">func</span> <span class="nf">someFunctionThatTakesAClosure</span><span class="p">(</span><span class="nv">closure</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">){</span>
+  <span class="c1">//函数部分</span>
+<span class="p">}</span>
+
+<span class="nf">someFunctionThatTakesAClouse</span><span class="p">({</span>
+  <span class="c1">//闭包主体部分</span>
+<span class="p">})</span>
+
+<span class="nf">someFuncionThatTakesAClouse</span><span class="p">(){</span>
+  <span class="c1">//闭包主体部分</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>如果函数只需要闭包表达式一个参数，当您使用尾随闭包时，您甚至可以把()省略掉</p>
+
+<h3 id="捕获值">捕获值</h3>
+
+<p>闭包可以在其定义的上下文捕获常量或变量</p>
+
+<p>即使定义这些变量和常量的原域已经不存在了，闭包仍然可以在闭包函数体内引用和修改这些值</p>
+
+<p>嵌套函数可以捕获其外部函数所有的参数以及定义的常量和变量</p>
+
+<h3 id="闭包是引用类型">闭包是引用类型</h3>
+
+<h2 id="swift结构体">Swift结构体</h2>
+
+<p>与C和Objective C不同的是：</p>
+
+<ul>
+  <li>结构体不需要包含实现文件和接口</li>
+  <li>结构体允许我们创建一个单一文件，且系统会自动生成面向其他代码的外部接口</li>
+</ul>
+
+<h3 id="结构体是值类型">结构体是值类型</h3>
+
+<p>结构体实例化</p>
+
+<h2 id="swift类">Swift类</h2>
+
+<p>与其他编程语言所不同的是，Swift并不要求你为自定义类去创建独立的接口和实现文件。你所要做的是在一个单一的文件中定义一个类，系统会自动生成面向其他代码的外部接口</p>
+
+<p>与结构体相比，类的附加功能：</p>
+
+<ul>
+  <li>继承允许一个类继承另一个类的特征</li>
+  <li>类型转换允许在运行时检查和解释一个类实例的类型</li>
+  <li>结构起允许一个类实例释放其任何所被分配的资源</li>
+  <li>引用计数允许对一个类的多次饮用</li>
+</ul>
+
+<p>类实例化</p>
+
+<p>因为类是引用类型，有可能有多个常量和变量在后台同时引用某一个类实例</p>
+
+<p>为了能够判断两个常量或者变量是否引用同一个类实例，Swift内建了恒等运算符===、!==</p>
+
+<h2 id="swift属性">Swift属性</h2>
+
+<p>属性可分为存储属性和计算属性</p>
+
+<p>存储属性：存储常量或变量作为实例的一部分，用于类和结构体</p>
+
+<p>计算属性：计算（而不是）存储一个值，用于类、结构体和枚举</p>
+
+<h3 id="存储属性">存储属性</h3>
+
+<ul>
+  <li>可以在定义存储属性的时候制定默认值</li>
+  <li>也可以在构造过程中设置或修改存储属性的值，甚至修改常量存储属性的值</li>
+</ul>
+
+<h3 id="延迟存储属性">延迟存储属性</h3>
+
+<p>当第一次被调用时才会计算其初始值的属性</p>
+
+<p>关键字lazy</p>
+
+<p>必须将延迟存储属性声明成变量（使用var关键字），因为属性的值在实例构造完成之前可能无法得到。而常量属性在构造过程完成之前必须要有初始值，因此无法声明成延迟属性</p>
+
+<p>延迟存储属性一般用于：</p>
+
+<ul>
+  <li>延迟对象的创建</li>
+  <li>当属性的值依赖于其他未知类</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">class</span> <span class="n">sample</span> <span class="p">{</span>
+  <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">no</span> <span class="o">=</span> <span class="nf">number</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="n">number</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span> <span class="o">=</span> <span class="s">"xixi"</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">firstsample</span> <span class="o">=</span> <span class="nf">sample</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">firtsample</span><span class="o">.</span><span class="n">no</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="实例化变量">实例化变量</h3>
+
+<p>如果您有过 Objective-C 经验，应该知道Objective-C 为类实例存储值和引用提供两种方法。对于属性来说，也可以使用实例变量作为属性值的后端存储</p>
+
+<p>Swift 编程语言中把这些理论统一用属性来实现。Swift 中的属性没有对应的实例变量，属性的后端存储也无法直接访问。这就避免了不同场景下访问方式的困扰，同时也将属性的定义简化成一个语句。一个类型中属性的全部信息——包括命名、类型和内存管理特征——都在唯一一个地方（类型定义中）定义</p>
+
+<h3 id="计算属性">计算属性</h3>
+
+<p>计算属性不直接存储值，而是通过一个getter来获取值，一个可选的setter来间接设置其他属性或变量的值</p>
+
+<p>如果计算属性的setter没有定义新值的参数名，则可以使用默认名称newValue</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">class</span> <span class="n">sample</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">no1</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">no2</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">var</span> <span class="nv">length</span> <span class="o">=</span> <span class="mf">300.0</span><span class="p">,</span> <span class="n">breadth</span> <span class="o">=</span> <span class="mf">150.0</span>
+    
+    <span class="k">var</span> <span class="nv">middle</span><span class="p">:</span> <span class="p">(</span><span class="kt">Double</span><span class="p">,</span> <span class="kt">Double</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">get</span><span class="p">{</span>
+            <span class="nf">return</span> <span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">breadth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nf">set</span><span class="p">(</span><span class="n">axis</span><span class="p">){</span>
+            <span class="n">no1</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="mi">0</span> <span class="o">-</span> <span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">no2</span> <span class="o">=</span> <span class="n">axis</span><span class="o">.</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">breadth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">sample</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">middle</span><span class="p">)</span> <span class="c1">//(150.0, 75.0)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">no1</span><span class="p">)</span> <span class="c1">//-150.0</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">no2</span><span class="p">)</span> <span class="c1">//-65.0</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="只读计算属性">只读计算属性</h3>
+
+<p>只有getter没有setter的属性就是只读属性</p>
+
+<p>只读属性总是返回一个值，可以通过点运算符访问，不能设置新的值</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">class</span> <span class="n">film</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">head</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">var</span> <span class="nv">duration</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">var</span> <span class="nv">metaInfo</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span><span class="kt">String</span><span class="p">]</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s">"head"</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">head</span><span class="p">,</span>
+            <span class="s">"duration"</span><span class="p">:</span><span class="s">"</span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">duration</span><span class="se">)</span><span class="s">"</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">movie</span> <span class="o">=</span> <span class="nf">film</span><span class="p">()</span>
+<span class="n">movie</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="s">"Swift 属性"</span>
+<span class="n">movie</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mf">3.09</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">movie</span><span class="o">.</span><span class="n">metaInfo</span><span class="p">[</span><span class="s">"head"</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">movie</span><span class="o">.</span><span class="n">metaInfo</span><span class="p">[</span><span class="s">"duration"</span><span class="p">]</span><span class="o">!</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>必须使用var关键字定义计算属性，包括只读属性，因为他们的值不是固定的</p>
+
+<h3 id="属性观察器">属性观察器</h3>
+
+<p>属性观察器监控和响应属性的值的变化，每次属性被设置值的时候都会调用属性观察器，甚至新的值和现在的值相同的时候也不例外</p>
+
+<p>可以为除了延迟存储属性之外的其他存储属性添加属性观察器，也可以通过属性重载的方式为继承的属性（包括存储属性和计算属性）添加属性观察期</p>
+
+<p>不需要为无法重载的计算属性添加属性观察器，因为可以通过setter直接监控和响应值的变化</p>
+
+<p>可以为属性添加如下的一个或全部观察器：</p>
+
+<ul>
+  <li>willSet在设置新的值之前调用</li>
+  <li>didSet在新的值被设置之后调用</li>
+  <li>willSet和didSet观察器在属性初始化过程中不会被调用</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">class</span> <span class="kt">Samplepgm</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">{</span>
+        <span class="nf">willSet</span><span class="p">(</span><span class="n">newTotal</span><span class="p">){</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"计数器: </span><span class="se">\(</span><span class="n">newTotal</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">didSet</span><span class="p">{</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;</span> <span class="n">oldValue</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"新增数 </span><span class="se">\(</span><span class="n">counter</span> <span class="o">-</span> <span class="n">oldValue</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">NewCounter</span> <span class="o">=</span> <span class="kt">Samplepgm</span><span class="p">()</span>
+<span class="kt">NewCounter</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="kt">NewCounter</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">800</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="全局变量和局部变量">全局变量和局部变量</h3>
+
+<p>计算属性和属性观察器所描述的模式也可以用于全局变量和局部变量</p>
+
+<h3 id="类型属性">类型属性</h3>
+
+<p>类型属性是作为类型定义的一部分写在类型最外层的花括号内</p>
+
+<p>使用关键字static来定义值类型的类型属性，关键字class来为类定义类型属性</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="kd">struct</span> <span class="kt">Structname</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">storedTypeProperty</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">computedTypeProperty</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="c1">//这里返回一个Int值</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span> <span class="kt">Enumname</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">storedTypeProperty</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">computedTypeProperty</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="c1">//这里返回一个Int值</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">Classname</span> <span class="p">{</span>
+  <span class="kd">class</span> <span class="k">var</span> <span class="nv">computedTypeProperty</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="c1">//这里返回一个Int值</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>例子中的计算型类型属性是只读的，但也可以定义可读可写的计算型类型属性，跟实例计算属性的语法类似</p>
+
+<h3 id="获取和设置类型属性的值">获取和设置类型属性的值</h3>
+
+<p>类似于实例的属性，类型属性的访问也是通过点运算符来进行。但是，类型属性是通过类型本身来获取和设置，而不是通过实例</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">struct</span> <span class="kt">StudMarks</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">let</span> <span class="nv">markCount</span> <span class="o">=</span> <span class="mi">97</span>
+  <span class="kd">static</span> <span class="k">var</span> <span class="nv">totalCount</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">var</span> <span class="nv">InternalMarks</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
+    <span class="k">didSet</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="kt">InternalMarks</span> <span class="o">&gt;</span> <span class="kt">StudMarks</span><span class="o">.</span><span class="n">markCount</span> <span class="p">{</span>
+        <span class="kt">InternalMarks</span> <span class="o">=</span> <span class="kt">StudMarks</span><span class="o">.</span><span class="n">markCount</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="kt">InternalMarks</span> <span class="o">&gt;</span> <span class="kt">StudMarks</span><span class="o">.</span><span class="n">totalCount</span> <span class="p">{</span>
+        <span class="kt">StudMarks</span><span class="o">.</span><span class="n">totalCount</span> <span class="o">=</span> <span class="kt">InternalMarks</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">stud1Mark1</span> <span class="o">=</span> <span class="kt">StudMarks</span><span class="p">()</span>
+<span class="k">var</span> <span class="nv">stud1Mark2</span> <span class="o">=</span> <span class="kt">StudMarks</span><span class="p">()</span>
+
+<span class="n">stud1Mark1</span><span class="o">.</span><span class="kt">InternalMarks</span> <span class="o">=</span> <span class="mi">98</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">stud1Mark1</span><span class="o">.</span><span class="kt">InternalMarks</span><span class="p">)</span> <span class="c1">//97</span>
+
+<span class="n">stud1Mark2</span><span class="o">.</span><span class="kt">InternalMarks</span> <span class="o">=</span> <span class="mi">87</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">stud1Mark2</span><span class="o">.</span><span class="kt">InternalMarks</span><span class="p">)</span> <span class="c1">//87</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="swift方法">Swift方法</h2>
+
+<p>在OC中，类是唯一能定义方法的类型。但在Swift中，你不仅能选择是否要定义一个类/结构体/枚举，还能灵活的在你创建的类型上定义方法</p>
+
+<h3 id="实例方法">实例方法</h3>
+
+<p>在Swift语言中，实例方法是属于某个特定类、结构体或者枚举类型实例的方法</p>
+
+<ul>
+  <li>可以访问和修改实例属性</li>
+  <li>提供与实例目的相关的功能</li>
+</ul>
+
+<p>实例方法要写在它所属的类型的前后大括号之间</p>
+
+<p>实例方法能够隐式访问它所属类型的所有其他实例方法和属性</p>
+
+<p>实例方法只能被他所属的类的某个特定的实例所调用</p>
+
+<p>实例方法不能脱离于现存的实例而被调用</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">func</span> <span class="nf">funcname</span><span class="p">(</span><span class="kt">Parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">returntype</span>
+<span class="p">{</span>
+  <span class="kt">Statement1</span>
+  <span class="kt">Statement2</span>
+  <span class="o">......</span>
+  <span class="kt">StatementN</span>
+  <span class="k">return</span> <span class="n">parameters</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="方法的局部参数名称和外部参数名称">方法的局部参数名称和外部参数名称</h3>
+
+<p>Swift默认仅给方法的第一个参数名称一个局部参数名称，默认同时给第二个和后续的参数名称为全局参数名称</p>
+
+<h3 id="self属性">self属性</h3>
+
+<p>类型的每一个实例都有一个隐含属性叫做self，self完全等同于该实例本身</p>
+
+<p>你可以在一个实例的实例方法中使用这个隐含的self属性来引用当前实例</p>
+
+<h3 id="在实例方法中修改值类型">在实例方法中修改值类型</h3>
+
+<p>Swift语言中结构体和枚举是值类型。一般情况下，值类型的属性不能在他的实例方法中被修改</p>
+
+<p>但是，如果你确定需要在某个具体的方法中修改结构体或者枚举的属性，你可以选择变异mutating这个方法，然后方法就可以从方法内部改变他的属性，并且他做的任何改变在方法结束时还会保留在原始结构中</p>
+
+<p>方法还可以给他隐含的self属性赋值一个全新的实例，这个新实例在方法结束后将替换原来的实例</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">struct</span> <span class="n">area</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">length</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">var</span> <span class="nv">breadth</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="kd">func</span> <span class="nf">area</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">breadth</span>
+    <span class="p">}</span>
+    
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">length</span> <span class="o">*=</span> <span class="n">res</span>
+        <span class="n">breadth</span> <span class="o">*=</span> <span class="n">res</span>
+        
+        <span class="nf">print</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">breadth</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">val</span> <span class="o">=</span> <span class="nf">area</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">breadth</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">val</span><span class="o">.</span><span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">val</span><span class="o">.</span><span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">val</span><span class="o">.</span><span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="mi">300</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="在可变方法中给self赋值">在可变方法中给self赋值</h3>
+
+<p>可变方法能够赋给隐含属性self一个全新的实例</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">struct</span> <span class="n">area</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">length</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">var</span> <span class="nv">breadth</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="kd">func</span> <span class="nf">area</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="n">breadth</span>
+    <span class="p">}</span>
+    
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">length</span> <span class="o">*=</span> <span class="n">res</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">breadth</span> <span class="o">*=</span> <span class="n">res</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">breadth</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">val</span> <span class="o">=</span> <span class="nf">area</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">breadth</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">val</span><span class="o">.</span><span class="nf">scaleBy</span><span class="p">(</span><span class="nv">res</span><span class="p">:</span> <span class="mi">13</span><span class="p">)</span>
+
+<span class="mi">39</span>
+<span class="mi">65</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="类型方法">类型方法</h3>
+
+<p>生命结构体和枚举的类型方法，在方法的func关键字之前加上关键字static。类可能会用关键字class来允许子类重写父类的实现方法</p>
+
+<p>类型方法和实例方法一样用点语法调用</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+</pre></td><td class="rouge-code"><pre><span class="kd">import</span> <span class="kt">Cocoa</span>
+
+<span class="kd">class</span> <span class="kt">Math</span>
+<span class="p">{</span>
+    <span class="kd">class</span> <span class="kd">func</span> <span class="nf">abs</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="p">{</span>
+            <span class="nf">return</span> <span class="p">(</span><span class="o">-</span><span class="n">number</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">number</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="n">absno</span>
+<span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">abs</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="p">{</span>
+            <span class="nf">return</span> <span class="p">(</span><span class="o">-</span><span class="n">number</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="k">return</span> <span class="n">number</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">no</span> <span class="o">=</span> <span class="kt">Math</span><span class="o">.</span><span class="nf">abs</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="o">-</span><span class="mi">35</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">num</span> <span class="o">=</span> <span class="n">absno</span><span class="o">.</span><span class="nf">abs</span><span class="p">(</span><span class="nv">number</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">no</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="mi">35</span>
+<span class="mi">5</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="swift下标脚本">Swift下标脚本</h2>
+
+<h2 id="swift继承">Swift继承</h2>
+
+<h2 id="swfit可选链">Swfit可选链</h2>
+
+<h2 id="swfit自动引用计数">Swfit自动引用计数</h2>
+
+<h2 id="swfit类型转换">Swfit类型转换</h2>
+
+<h2 id="swift访问控制">Swift访问控制</h2>
+
+<h2 id="swift扩展">Swift扩展</h2>
+
+<p>扩展就是向一个已有的类、结构体或枚举类型添加新功能</p>
+
+<p>扩展可以对一个类型添加新的功能，但是不能重写已有的功能</p>
+
+<p>Swift中的扩展可以：</p>
+
+<ul>
+  <li>添加计算型属性和计算型静态属性</li>
+  <li>定义实例方法和类型方法</li>
+  <li>提供新的构造器</li>
+  <li>定义下标</li>
+  <li>定义和使用新的嵌套类型</li>
+  <li>使一个已有类型符合某个协议</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="kd">extension</span> <span class="kt">SomeType</span> <span class="p">{</span>
+  <span class="c1">//加到SomeType的新功能写到这里</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">SomeType</span><span class="p">:</span> <span class="kt">SomeProtocol</span><span class="p">,</span> <span class="kt">AnotherProtocol</span> <span class="p">{</span>
+  <span class="c1">//协议实现写到这里</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="计算型属性">计算型属性</h3>
+
+<p>扩展可以向已有类型添加计算型实例属性和计算型类型属性</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="kd">extension</span> <span class="kt">Int</span> <span class="p">{</span>
+   <span class="k">var</span> <span class="nv">add</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span><span class="k">return</span> <span class="k">self</span> <span class="o">+</span> <span class="mi">100</span> <span class="p">}</span>
+   <span class="k">var</span> <span class="nv">sub</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">return</span> <span class="k">self</span> <span class="o">-</span> <span class="mi">10</span> <span class="p">}</span>
+   <span class="k">var</span> <span class="nv">mul</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">return</span> <span class="k">self</span> <span class="o">*</span> <span class="mi">10</span> <span class="p">}</span>
+   <span class="k">var</span> <span class="nv">div</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">return</span> <span class="k">self</span> <span class="o">/</span> <span class="mi">5</span> <span class="p">}</span>
+<span class="p">}</span>
+    
+<span class="k">let</span> <span class="nv">addition</span> <span class="o">=</span> <span class="mi">3</span><span class="o">.</span><span class="n">add</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"加法运算后的值：</span><span class="se">\(</span><span class="n">addition</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    
+<span class="k">let</span> <span class="nv">subtraction</span> <span class="o">=</span> <span class="mi">120</span><span class="o">.</span><span class="n">sub</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"减法运算后的值：</span><span class="se">\(</span><span class="n">subtraction</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    
+<span class="k">let</span> <span class="nv">multiplication</span> <span class="o">=</span> <span class="mi">39</span><span class="o">.</span><span class="n">mul</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"乘法运算后的值：</span><span class="se">\(</span><span class="n">multiplication</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    
+<span class="k">let</span> <span class="nv">division</span> <span class="o">=</span> <span class="mi">55</span><span class="o">.</span><span class="n">div</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"除法运算后的值: </span><span class="se">\(</span><span class="n">division</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">mix</span> <span class="o">=</span> <span class="mi">30</span><span class="o">.</span><span class="n">add</span> <span class="o">+</span> <span class="mi">34</span><span class="o">.</span><span class="n">sub</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"混合运算结果：</span><span class="se">\(</span><span class="n">mix</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="构造器">构造器</h3>
+
+<p>这可以让你扩展其他类型，将你自己的定制类型作为构造器参数，或者提供该类型的原始实现中没有包含的额外初始化选项</p>
+
+<h3 id="方法">方法</h3>
+
+<p>拓展可以向已有类型添加新的实例方法和类型方法</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="kd">extension</span> <span class="kt">Int</span> <span class="p">{</span>
+   <span class="kd">func</span> <span class="nf">topics</span><span class="p">(</span><span class="nv">summation</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="k">self</span> <span class="p">{</span>
+         <span class="nf">summation</span><span class="p">()</span> 
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>  
+
+<span class="mi">4</span><span class="o">.</span><span class="nf">topics</span><span class="p">({</span>
+   <span class="nf">print</span><span class="p">(</span><span class="s">"扩展模块内"</span><span class="p">)</span>       
+<span class="p">})</span>    
+    
+<span class="mi">3</span><span class="o">.</span><span class="nf">topics</span><span class="p">({</span>
+   <span class="nf">print</span><span class="p">(</span><span class="s">"内型转换模块内"</span><span class="p">)</span>       
+<span class="p">})</span>  
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="可变实例方法">可变实例方法</h3>
+
+<p>通过拓展添加的实例方法也可以修改该实例本身</p>
+
+<p>结构体和枚举类型中修改self或其属性的方法必须将该实例方法标注为mutating，正如来自原始实现的修改方法一样</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">extension</span> <span class="kt">Double</span> <span class="p">{</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">square</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">pi</span> <span class="o">=</span> <span class="mf">3.1415</span>
+    <span class="k">self</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="k">self</span> <span class="o">*</span> <span class="k">self</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">trial</span> <span class="o">=</span> <span class="mf">3.3</span>
+<span class="n">trial</span><span class="o">.</span><span class="nf">square</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">trial</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="下标">下标</h3>
+
+<p>扩展可以向一个已有类型添加新下标</p>
+
+<h2 id="swift协议">Swift协议</h2>
+
+<p>协议规定了用来实现某一特定功能所必需的方法和属性</p>
+
+<p>任意能够满足协议要求的类型被称为遵循这个协议</p>
+
+<p>类、结构体或枚举类型都可以遵循协议，并提供具体实现方法来完成协议定义的方法和功能</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+  <span class="c1">//协议内容</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">SomeStructure</span><span class="p">:</span> <span class="kt">FirstProtocol</span><span class="p">,</span> <span class="kt">AnotherProtocol</span> <span class="p">{</span>
+  <span class="c1">//结构体内容</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">SomeClass</span><span class="p">:</span> <span class="kt">SomeSuperClass</span><span class="p">,</span> <span class="kt">FirstProtocol</span><span class="p">,</span> <span class="kt">AnotherProtocol</span> <span class="p">{</span>
+  <span class="c1">//类的内容</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>如果类在遵循协议的同时拥有父类，应该将父类名放在协议名之前，以逗号分隔</p>
+
+<h3 id="对属性的规定">对属性的规定</h3>
+
+<p>协议用于指定的实例类型或类属性，而不用指定是存储类型或计算型属性。此外还必须指明是只读的还是可读可写的</p>
+
+<p>协议中的通常用var来声明变量属性，在类型声明后加上{set get}来表示属性是可读可写的，只读属性则用{get}来表示</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="n">classa</span> <span class="p">{</span>
+    
+    <span class="k">var</span> <span class="nv">marks</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">attendance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+    <span class="kd">func</span> <span class="nf">markssecured</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span>
+    
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="nv">classb</span><span class="p">:</span> <span class="n">classa</span> <span class="p">{</span>
+    
+    <span class="k">var</span> <span class="nv">present</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">stname</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+    
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nv">classc</span><span class="p">:</span> <span class="n">classb</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">marks</span> <span class="o">=</span> <span class="mi">96</span>
+    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">var</span> <span class="nv">present</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="s">"Swift 协议"</span>
+    <span class="k">var</span> <span class="nv">stname</span> <span class="o">=</span> <span class="s">"Protocols"</span>
+    
+    <span class="kd">func</span> <span class="nf">attendance</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"The </span><span class="se">\(</span><span class="n">stname</span><span class="se">)</span><span class="s"> has secured 99% attendance"</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">markssecured</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"</span><span class="se">\(</span><span class="n">stname</span><span class="se">)</span><span class="s"> has scored </span><span class="se">\(</span><span class="n">marks</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="对mutating方法的规定">对Mutating方法的规定</h3>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="n">daysofaweek</span> <span class="p">{</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span> <span class="nv">days</span><span class="p">:</span> <span class="n">daysofaweek</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">sun</span><span class="p">,</span> <span class="n">mon</span><span class="p">,</span> <span class="n">tue</span><span class="p">,</span> <span class="n">wed</span><span class="p">,</span> <span class="n">thurs</span><span class="p">,</span> <span class="n">fri</span><span class="p">,</span> <span class="n">sat</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">sun</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">sun</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Sunday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">mon</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">mon</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Monday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">tue</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">tue</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Tuesday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">wed</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">wed</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Wednesday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">thurs</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">thurs</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Wednesday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">fri</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">fri</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Wednesday"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">sat</span><span class="p">:</span>
+            <span class="k">self</span> <span class="o">=</span> <span class="o">.</span><span class="n">sat</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Saturday"</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"NO Such Day"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">res</span> <span class="o">=</span> <span class="n">days</span><span class="o">.</span><span class="n">wed</span>
+<span class="n">res</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="对构造器的规定">对构造器的规定</h3>
+
+<p>协议可以要求他的遵循者实现指定的构造器</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+   <span class="nf">init</span><span class="p">(</span><span class="nv">someParameter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="协议构造器规定在类中的实现">协议构造器规定在类中的实现</h3>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="kt">SomeClass</span><span class="p">:</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+   <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="nv">someParameter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 构造器实现</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="n">tcpprotocol</span> <span class="p">{</span>
+   <span class="nf">init</span><span class="p">(</span><span class="nv">aprot</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nv">tcpClass</span><span class="p">:</span> <span class="n">tcpprotocol</span> <span class="p">{</span>
+   <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="nv">aprot</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>使用required修饰符可以保证：所有的遵循该协议的子类，同样能为构造器规定提供一个显式的实现或继承实现</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="n">tcpprotocol</span> <span class="p">{</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="n">mainClass</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">no1</span><span class="p">:</span> <span class="kt">Int</span> <span class="c1">// 局部变量</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">no1</span> <span class="o">=</span> <span class="n">no1</span> <span class="c1">// 初始化</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nv">subClass</span><span class="p">:</span> <span class="n">mainClass</span><span class="p">,</span> <span class="n">tcpprotocol</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">no2</span><span class="p">:</span> <span class="kt">Int</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">no2</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">no2</span> <span class="o">=</span> <span class="n">no2</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span><span class="n">no1</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// 因为遵循协议，需要加上"required"; 因为继承自父类，需要加上"override"</span>
+    <span class="kd">required</span> <span class="k">override</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>  <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span><span class="n">no1</span><span class="p">,</span> <span class="nv">no2</span><span class="p">:</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">let</span> <span class="nv">res</span> <span class="o">=</span> <span class="nf">mainClass</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">show</span> <span class="o">=</span> <span class="nf">subClass</span><span class="p">(</span><span class="nv">no1</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="nv">no2</span><span class="p">:</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">"res is: </span><span class="se">\(</span><span class="n">res</span><span class="o">.</span><span class="n">no1</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"res is: </span><span class="se">\(</span><span class="n">show</span><span class="o">.</span><span class="n">no1</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"res is: </span><span class="se">\(</span><span class="n">show</span><span class="o">.</span><span class="n">no2</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="协议类型">协议类型</h3>
+
+<p>尽管协议本身不实现任何功能，但是协议可以被当作类型来使用</p>
+
+<p>协议可以像其他普通类型一样。使用场景：</p>
+
+<ul>
+  <li>作为函数、方法或构造器中的参数类型或返回值类型</li>
+  <li>作为常量、变量或属性的类型</li>
+  <li>作为数组、字典或其他容器中的元素类型</li>
+</ul>
+
+<h3 id="在拓展中添加协议成员">在拓展中添加协议成员</h3>
+
+<h3 id="协议的继承">协议的继承</h3>
+
+<p>协议的继承语法与类的继承相似，多个被继承的协议间用逗号分隔</p>
+
+<h3 id="类专属协议">类专属协议</h3>
+
+<p>通过添加class关键字，限制协议只能适配到类类型</p>
+
+<p>class关键字必须是第一个</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="kt">SomeClassOnlyProtocol</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">SomeInheritedProtocol</span> <span class="p">{</span>
+  <span class="c1">//协议定义</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="协议合成">协议合成</h3>
+
+<p>Swift支持合成多个协议，这在我们需要同时遵循多个协议时非常有用</p>
+
+<h3 id="检验协议的一致性">检验协议的一致性</h3>
+
+<p>使用is和as操作符来检查是否遵循某一协议或强制转化为某一类型</p>
+
+<h2 id="swift泛型">Swift泛型</h2>
+
+<p>Swift提供了泛型让你写出灵活且可重用的函数和类型</p>
+
+<p>Swift标准库是通过泛型代码构建出来的</p>
+
+<p>Swift的数组和字典类型都是泛型集</p>
+
+<p>功能代码是相同的，只是类型上不一样，这是我们可以使用泛型，从而避免重复编写代码</p>
+
+<p>泛型使用了占位类型名（在这里用字母T来表示）来代替实际类型名</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="kd">func</span> <span class="nf">swapTwoStrings</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">temporaryA</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">temporaryA</span>
+<span class="p">}</span>
+ 
+<span class="kd">func</span> <span class="nf">swapTwoDoubles</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Double</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Double</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">temporaryA</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">temporaryA</span>
+<span class="p">}</span>
+
+<span class="c1">// 定义一个交换两个变量的函数</span>
+<span class="kd">func</span> <span class="n">swapTwoValues</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">T</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">temporaryA</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">temporaryA</span>
+<span class="p">}</span>
+ 
+<span class="k">var</span> <span class="nv">numb1</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">var</span> <span class="nv">numb2</span> <span class="o">=</span> <span class="mi">200</span>
+ 
+<span class="nf">print</span><span class="p">(</span><span class="s">"交换前数据:  </span><span class="se">\(</span><span class="n">numb1</span><span class="se">)</span><span class="s"> 和 </span><span class="se">\(</span><span class="n">numb2</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">swapTwoValues</span><span class="p">(</span><span class="o">&amp;</span><span class="n">numb1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">numb2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"交换后数据: </span><span class="se">\(</span><span class="n">numb1</span><span class="se">)</span><span class="s"> 和 </span><span class="se">\(</span><span class="n">numb2</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+ 
+<span class="k">var</span> <span class="nv">str1</span> <span class="o">=</span> <span class="s">"A"</span>
+<span class="k">var</span> <span class="nv">str2</span> <span class="o">=</span> <span class="s">"B"</span>
+ 
+<span class="nf">print</span><span class="p">(</span><span class="s">"交换前数据:  </span><span class="se">\(</span><span class="n">str1</span><span class="se">)</span><span class="s"> 和 </span><span class="se">\(</span><span class="n">str2</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="nf">swapTwoValues</span><span class="p">(</span><span class="o">&amp;</span><span class="n">str1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">str2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"交换后数据: </span><span class="se">\(</span><span class="n">str1</span><span class="se">)</span><span class="s"> 和 </span><span class="se">\(</span><span class="n">str2</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>swapTwoValues后面跟着占位类型名，并用尖括号括起来。这个尖括号告诉Swift那个T是swapTwoValues()函数定义内的一个占位类型名，因此Swift不会去查找名为T的实际类型</p>
+
+<h3 id="泛型类型">泛型类型</h3>
+
+<p>Swift允许你定义你自己的泛型类型</p>
+
+<p>自定义类、结构体和枚举作用于任何类型，如同Array和Dictionary的用法</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre><span class="c1">// Int型的栈</span>
+<span class="kd">struct</span> <span class="kt">IntStack</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">items</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]()</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">items</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">pop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="nf">removeLast</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 泛型的栈</span>
+<span class="kd">struct</span> <span class="kt">Stack</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">items</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]()</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">items</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">pop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Element</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="nf">removeLast</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">stackOfStrings</span> <span class="o">=</span> <span class="kt">Stack</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">stackOfStrings</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="s">"google"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="拓展泛型类型">拓展泛型类型</h3>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="kd">struct</span> <span class="kt">Stack</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">items</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]()</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">push</span><span class="p">(</span><span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">items</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="nf">pop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Element</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="nf">removeLast</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="kd">extension</span> <span class="kt">Stack</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">topItem</span><span class="p">:</span> <span class="kt">Element</span><span class="p">?</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="n">items</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">?</span> <span class="nv">nil</span> <span class="p">:</span> <span class="n">items</span><span class="p">[</span><span class="n">items</span><span class="o">.</span><span class="n">count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+ 
+<span class="k">var</span> <span class="nv">stackOfStrings</span> <span class="o">=</span> <span class="kt">Stack</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"字符串元素入栈: "</span><span class="p">)</span>
+<span class="n">stackOfStrings</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="s">"google"</span><span class="p">)</span>
+<span class="n">stackOfStrings</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="s">"runoob"</span><span class="p">)</span>
+ 
+<span class="k">if</span> <span class="k">let</span> <span class="nv">topItem</span> <span class="o">=</span> <span class="n">stackOfStrings</span><span class="o">.</span><span class="n">topItem</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"栈中的顶部元素是：</span><span class="se">\(</span><span class="n">topItem</span><span class="se">)</span><span class="s">."</span><span class="p">)</span>
+<span class="p">}</span>
+ 
+<span class="nf">print</span><span class="p">(</span><span class="n">stackOfStrings</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">extension</span> <span class="kt">Array</span><span class="p">:</span> <span class="kt">Container</span> <span class="p">{}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="类型约束">类型约束</h3>
+
+<p>类型约束制定了一个必须继承自指定类的类型参数名或者遵循一个特定的协议或协议构成</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">func</span> <span class="n">someFunction</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">SomeClass</span><span class="p">,</span> <span class="kt">U</span><span class="p">:</span> <span class="kt">SomeProtocol</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">someT</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">someU</span><span class="p">:</span> <span class="kt">U</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//这里是泛型函数的函数体部分</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c1">// 非泛型函数，查找指定字符串在数组中的索引</span>
+<span class="kd">func</span> <span class="nf">findIndex</span><span class="p">(</span><span class="n">ofString</span> <span class="nv">valueToFind</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="k">in</span> <span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Int</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">in</span> <span class="n">array</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">valueToFind</span> <span class="p">{</span>
+            <span class="c1">// 找到返回索引值</span>
+            <span class="k">return</span> <span class="n">index</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+ 
+ 
+<span class="k">let</span> <span class="nv">strings</span> <span class="o">=</span> <span class="p">[</span><span class="s">"google"</span><span class="p">,</span> <span class="s">"weibo"</span><span class="p">,</span> <span class="s">"taobao"</span><span class="p">,</span> <span class="s">"runoob"</span><span class="p">,</span> <span class="s">"facebook"</span><span class="p">]</span>
+<span class="k">if</span> <span class="k">let</span> <span class="nv">foundIndex</span> <span class="o">=</span> <span class="nf">findIndex</span><span class="p">(</span><span class="nv">ofString</span><span class="p">:</span> <span class="s">"runoob"</span><span class="p">,</span> <span class="nv">in</span><span class="p">:</span> <span class="n">strings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"runoob 的索引为 </span><span class="se">\(</span><span class="n">foundIndex</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

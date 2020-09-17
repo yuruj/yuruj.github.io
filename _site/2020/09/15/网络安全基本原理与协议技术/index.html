@@ -1,0 +1,2683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="网络安全基本原理与协议技术（mooc？ - YRJ的博客 | Yuruj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="网络安全基本原理
+">
+    
+    <meta property="article:published_time" content="2020-09-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yuruj">
+    
+    
+    <meta property="article:tag" content="计算机网络">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E4%B8%8E%E5%8D%8F%E8%AE%AE%E6%8A%80%E6%9C%AF/">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
+    
+    <title>网络安全基本原理与协议技术（mooc？ - YRJ的博客 | Yuruj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/15/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E4%B8%8E%E5%8D%8F%E8%AE%AE%E6%8A%80%E6%9C%AF/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C" title="计算机网络">计算机网络</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>网络安全基本原理与协议技术（mooc？</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by yuruj on September 15, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="网络安全基本原理">网络安全基本原理</h1>
+
+<h2 id="基础">基础</h2>
+
+<h3 id="基本属性">基本属性</h3>
+
+<ul>
+  <li>机密性</li>
+  <li>身份认证</li>
+  <li>信息完整性</li>
+  <li>可访问与可用性</li>
+</ul>
+
+<h3 id="研究领域">研究领域</h3>
+
+<ul>
+  <li>入侵者如何攻击计算机网络 Bad Guys</li>
+  <li>如何防护网络对抗攻击</li>
+  <li>如何设计网络体系机构免疫攻击</li>
+</ul>
+
+<h3 id="internet最初设计几乎没考虑安全性">Internet最初设计几乎没考虑安全性</h3>
+
+<ul>
+  <li>各种网络协议的出现</li>
+  <li>网络安全需要在网络各个层次考虑</li>
+</ul>
+
+<h3 id="网络安全拟人场景">网络安全拟人场景</h3>
+
+<h2 id="威胁">威胁</h2>
+
+<h3 id="bad-guys窃听插入假冒劫持拒绝服务dos">Bad Guys——窃听、插入、假冒、劫持、拒绝服务DOS</h3>
+
+<h3 id="internet安全威胁">Internet安全威胁</h3>
+
+<ul>
+  <li>
+    <p>映射Mapping</p>
+
+    <ul>
+      <li>发起攻击前：探路，找出网络上在运行什么服务</li>
+      <li>利用ping命令确定网络上主机的地址</li>
+      <li>端口扫描：依次尝试与某个端口建立 TCP连接</li>
+      <li>nmap，广为使用的国外端口扫描工具之一</li>
+      <li>
+        <p>对策</p>
+
+        <ul>
+          <li>记录到达的网络流量</li>
+          <li>分析、识别出可疑活动（IP地址和端口被依次扫描）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>分组嗅探sniffing</p>
+
+    <ul>
+      <li>广播介质（共享式以太网，无线网络）</li>
+      <li>混杂模式网路接口可以接受/记录所有经过的分组/帧</li>
+      <li>可以读到所有未加密数据包括口令</li>
+      <li>Wireshark就是一个典型免费的分组嗅探软件 抓包工具</li>
+      <li>
+        <p>对策</p>
+
+        <ul>
+          <li>组织中的所有主机都运行软件，周期性监测网络接口是否运行在混杂模式</li>
+          <li>每段广播介质连接一台主机（如交换式以太网）没有第三方介入</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>IP欺骗</p>
+
+    <ul>
+      <li>直接由应用生成原始IP分组，可以设置分组的源IP地址为任意值</li>
+      <li>接收方无法判断源地址是否被欺骗</li>
+      <li>
+        <p>对策-入口过滤</p>
+
+        <ul>
+          <li>路由器不转发源IP地址无效的IP分组（e.g.，源IP地址不属于所连接网络）</li>
+          <li>很有效，但不能强制所有网络都执行入口过滤</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>拒绝服务DOS</p>
+
+    <ul>
+      <li>
+        <p>向接受方恶意泛洪分组，淹没接收方</p>
+
+        <ul>
+          <li>带宽耗尽</li>
+          <li>资源耗尽</li>
+        </ul>
+      </li>
+      <li>
+        <p>分布式拒绝服务攻击DDOS（例如SYN flood-创建TCP连线需要发送SYN同步信息到服务器要求创建连线）</p>
+
+        <ul>
+          <li>选择目标</li>
+          <li>入侵网络中主机构建僵尸网络</li>
+          <li>控制僵尸主机向目标发送分组</li>
+        </ul>
+      </li>
+      <li>
+        <p>反射式DDOS攻击</p>
+
+        <ul>
+          <li>选择目标</li>
+          <li>入侵网络中主机</li>
+          <li>选择反射服务器并利用IP欺骗</li>
+          <li>借助反射服务器将服务请求返回给目标服务器向目标发起攻击</li>
+        </ul>
+      </li>
+      <li>
+        <p>对策</p>
+
+        <ul>
+          <li>在到达主机前过滤掉泛洪分组但可能好坏一起丢</li>
+          <li>追溯traceback攻击源</li>
+          <li>
+            <p>SYN cookie[RFC 4987]</p>
+
+            <ul>
+              <li>y=Hash（源IP地址，目的IP地址，源端口号，目的端口号，R）防止三次握手为攻击分配资源</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="密码学基础">密码学基础</h2>
+
+<h3 id="术语">术语</h3>
+
+<ul>
+  <li>明文m</li>
+  <li>加密密钥KA</li>
+  <li>密文KA（m）</li>
+  <li>解密密钥m=KB（KA（m））</li>
+  <li>对称密钥加密KA=KB=KS</li>
+  <li>
+    <p>公开密钥加密</p>
+
+    <ul>
+      <li>KB+ Bob的公开密钥 KB- Bob的私有密钥</li>
+      <li>密文KB+（m）</li>
+      <li>明文m=KB-（KB+（m））只有Bob能解密</li>
+    </ul>
+  </li>
+  <li>
+    <p>破解加密方法</p>
+
+    <ul>
+      <li>
+        <p>唯密文攻击</p>
+
+        <ul>
+          <li>暴力破解尝试所有可能的密钥</li>
+          <li>统计分析</li>
+        </ul>
+      </li>
+      <li>已知明文攻击</li>
+      <li>选择明文攻击-入侵者可以获取针对选择的明文的密文</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="传统加密方法">传统加密方法</h3>
+
+<ul>
+  <li>
+    <p>替代密码</p>
+
+    <ul>
+      <li>凯撒密码</li>
+      <li>单码（字母）替代密码-加密密钥：26个字母集合向26个字母集合的映射</li>
+      <li>多码（字母）替代加密：使用多个单码替代密码，明文中不同位置的字母使用不同的单码替代密码</li>
+    </ul>
+  </li>
+  <li>
+    <p>换位密码</p>
+
+    <ul>
+      <li>
+        <p>置换法</p>
+
+        <ul>
+          <li>
+            <p>列置换加密</p>
+
+            <ul>
+              <li>密钥包括列数和输出顺序，可以用一个单词表示</li>
+              <li>解密可利用转置矩阵</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="现代加密技术">现代加密技术</h3>
+
+<ul>
+  <li>基本操作仍为经典的替代和置换——针对二进制位操作</li>
+  <li>
+    <p>对称密钥加密</p>
+
+    <ul>
+      <li>
+        <p>流密码</p>
+
+        <ul>
+          <li>首先利用密钥K用伪随机字节产生器（密钥流产生器）产生一个密钥流：z=z0z1z2…</li>
+          <li>明文串x=x0x1x2…加密：y=y0y1y2…=Ez0(x0)…</li>
+        </ul>
+      </li>
+      <li>
+        <p>分组密码，也称块密码</p>
+
+        <ul>
+          <li>将明文序列划分成长为m的明文组</li>
+          <li>各明文组在长为i的密钥组的控制下变换成长度为n的密文组</li>
+          <li>
+            <p>通常取n=m</p>
+
+            <ul>
+              <li>n&gt;m 拓展分组密码</li>
+              <li>n&lt;m 压缩分组密码</li>
+            </ul>
+          </li>
+          <li>
+            <p>典型分组密码结构：Feistel分组密码结构-破坏对密码系统进行各种统计分析攻击的两个基本操作扩散和混淆</p>
+
+            <ul>
+              <li>基于扩散和混淆的思考，Feistel提出通过替代和置换交替操作方式构造密码</li>
+              <li>Feistel是一种设计原则，并非一个特殊的密码</li>
+              <li>
+                <p>加密</p>
+
+                <ul>
+                  <li>将明文分成左右两部分</li>
+                  <li>
+                    <p>每一轮i=1，2，…，n计算</p>
+
+                    <ul>
+                      <li>Li=Ri-1</li>
+                      <li>Ri=Li-1环和F（Ri-1，Ki）</li>
+                      <li>其中F是轮函数；Ki-1是子密钥</li>
+                    </ul>
+                  </li>
+                  <li>密文=（Ln，Rn）</li>
+                </ul>
+              </li>
+              <li>
+                <p>解密</p>
+
+                <ul>
+                  <li>密文=（Ln，Rn）</li>
+                  <li>
+                    <p>每一轮i=n，n-1，…，1计算</p>
+
+                    <ul>
+                      <li>Ri-1=Li</li>
+                      <li>Li-1=Ri环和F（Ri-1，Ki）</li>
+                      <li>其中F是轮函数；Ki是子密钥</li>
+                    </ul>
+                  </li>
+                  <li>密文=（L0，R0）</li>
+                </ul>
+              </li>
+              <li>
+                <p>安全性取决于</p>
+
+                <ul>
+                  <li>
+                    <p>分组长度</p>
+
+                    <ul>
+                      <li>分组长度越大，安全性越高，加密速度越慢，效率越低</li>
+                      <li>目前常用的分组加密算法的分组长度取64位</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>子密钥的大小</p>
+
+                    <ul>
+                      <li>子密钥长度增加，安全性提高，加密速度降低</li>
+                      <li>设计分组密码时需要在安全性和加密效率之间进行平衡</li>
+                    </ul>
+                  </li>
+                  <li>循环次数</li>
+                  <li>
+                    <p>子密钥产生算法</p>
+
+                    <ul>
+                      <li>在初始密钥给定的情况下，产生子密钥的算法越复杂，安全性越高</li>
+                    </ul>
+                  </li>
+                  <li>轮函数</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>数据加密标准：DES</p>
+
+            <ul>
+              <li>16轮的Feistel结构密码</li>
+              <li>
+                <p>包含16个阶段的替代-置换的分组加密算法</p>
+
+                <ul>
+                  <li>64位的分组明文序列作为加密算法的输入，经过16加密得到64位的密文序列</li>
+                </ul>
+              </li>
+              <li>分组长度是64位</li>
+              <li>56位的密钥</li>
+              <li>
+                <p>48位的子密钥</p>
+
+                <ul>
+                  <li>每一个子密钥是56位密钥的子集构成-压缩变换</li>
+                </ul>
+              </li>
+              <li>1998年12月以后不在将DES作为数据加密标准</li>
+              <li>将64位明文分成左右组前需按照IP置换表进行一次IP置换 16轮计算后需进行一次IP-1置换得到密文</li>
+              <li>需将右半部分32位进行拓展变换变为48位</li>
+              <li>
+                <p>f函数结构</p>
+
+                <ul>
+                  <li>黑盒变换</li>
+                  <li>多个函数/操作（E、异或、S、P）的组合函数</li>
+                  <li>拓展变换也被称为E-盒 确保最终的密文与所有的明文位都有关</li>
+                  <li>S-盒替代 48比特输入，32比特输出</li>
+                  <li>P-盒置换</li>
+                </ul>
+              </li>
+              <li>初始置换和对应的逆初始置换操作并不会增强DES算法的安全性 主要目的是为了更容易地将明文和密文数据以子节大小放入DES芯片中</li>
+              <li>
+                <p>每轮子密钥的生成</p>
+
+                <ul>
+                  <li>密钥置换分成两组循环移位压缩置换将56比特初始密钥得到48位子密钥</li>
+                </ul>
+              </li>
+              <li>
+                <p>安全性</p>
+
+                <ul>
+                  <li>56位密钥可能太小</li>
+                  <li>迭代次数可能太小-16次恰巧能抵抗差分分析</li>
+                  <li>S盒即替代函数可能有不安全因素</li>
+                  <li>DES的一些关键部分不应当保密</li>
+                  <li>DES存在弱密钥和半弱密钥</li>
+                  <li>
+                    <p>针对DES的攻击方法</p>
+
+                    <ul>
+                      <li>差分分析方法</li>
+                      <li>线性分析方法</li>
+                      <li>旁路攻击法</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <p>DES的改进</p>
+
+                <ul>
+                  <li>
+                    <p>密码分组链接</p>
+
+                    <ul>
+                      <li>加密算法的输入是当前明文分组和前一次密文分组的异或</li>
+                      <li>重复的明文分组不会在密文中暴露出重复关系</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>DES密钥过短</p>
+
+                    <ul>
+                      <li>
+                        <p>多重DES</p>
+
+                        <ul>
+                          <li>
+                            <p>3DES使用3个密钥，执行三次DES算法</p>
+
+                            <ul>
+                              <li>加密过程：加密-解密-加密（EDE），即C=Ek3（Dk2（Ek1（M）））</li>
+                              <li>为避免3DES使用3个密钥进行3阶段加密带来的密钥过长缺点 ，可使K1=K3，112bit密钥</li>
+                              <li>3DES的第二阶段的解密并没有密码编码学上的 意义，唯一优点是可以使用3DES解密原来的单次DES加密的数据，即K1=K2=K3</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>高级加密标准AES</p>
+
+            <ul>
+              <li>不属于Feistel结构</li>
+              <li>加密、解密相似但不完全对成</li>
+              <li>支持128/192/256数据块大小</li>
+              <li>支持128/192/256密钥长度</li>
+              <li>有较好的数学理论作为基础</li>
+              <li>结构简单、速度快</li>
+              <li>
+                <p>Rijndael算法特点</p>
+
+                <ul>
+                  <li>分组长度和密钥长度均可变</li>
+                  <li>循环次数允许在一定范围内根据安全要求进行修正</li>
+                  <li>汇聚了安全、效率、易用、灵活等优点</li>
+                  <li>抗线性攻击和差分攻击的能力大大增强</li>
+                  <li>如果1秒暴力破解DES，则需要149万亿年破解AES</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>非对称密钥加密（公开密钥加密）</p>
+
+    <ul>
+      <li>
+        <p>需求</p>
+
+        <ul>
+          <li>公钥加密和私钥解密需要满足：KB-（KB+（m））=m</li>
+          <li>给定公钥，不可能计算得到私钥</li>
+        </ul>
+      </li>
+      <li>
+        <p>RSA算法</p>
+
+        <ul>
+          <li>
+            <p>前提条件：模运算</p>
+
+            <ul>
+              <li>(a mod n)^d mod n = a^d mod n</li>
+            </ul>
+          </li>
+          <li>
+            <p>预备知识</p>
+
+            <ul>
+              <li>报文/信息：仅仅是一个比特模式</li>
+              <li>每个比特模式可以表示为一个唯一的整数</li>
+              <li>因此，加密一个报文等价于加密一个数</li>
+            </ul>
+          </li>
+          <li>
+            <p>生成公钥/私钥对</p>
+
+            <ul>
+              <li>1.选择2个大质数p和q</li>
+              <li>2.计算n=pq，z=（p-1）*（q-1）</li>
+              <li>3.选择e（满足e&lt;n），使e与z之间没有公因子，即e，z互质</li>
+              <li>4.选择d使得ed-1刚好可以被z整除</li>
+              <li>5.公钥：（n，e）；私钥：（n，d）</li>
+            </ul>
+          </li>
+          <li>
+            <p>加密、解密</p>
+
+            <ul>
+              <li>0.给定公钥和私钥</li>
+              <li>1.加密报文m（m&lt;n）时，计算 c=m^e mod n</li>
+              <li>2.解密密文c时，计算m=c^d mod n</li>
+              <li>m=(m^e mod n)^d mod n</li>
+            </ul>
+          </li>
+          <li>
+            <p>理论依据</p>
+
+            <ul>
+              <li>必须满足：c^d mod n = m 其中c=m^e mod n</li>
+              <li>可以证明：对于任意x和y，有x^y mod n = x^(y mod z) mod n 其中n=pq，z=（p-1）*（q-1）</li>
+            </ul>
+          </li>
+          <li>另一个重要性质 利用公钥加密利用私钥解密，也可以利用私钥加密用公钥解密</li>
+          <li>
+            <p>安全性</p>
+
+            <ul>
+              <li>
+                <p>大数分解和素性检测</p>
+
+                <ul>
+                  <li>即将两个大素数相乘在计算上容易实现，而将该乘积分解的计算量相当大</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>实际应用</p>
+
+            <ul>
+              <li>RSA的幂运算强度很大</li>
+              <li>DES至少把RSA快100倍</li>
+              <li>利用公钥加密建立安全连接，然后建立第二个密钥-对称会话密钥，用于加密数据</li>
+              <li>
+                <p>会话密钥</p>
+
+                <ul>
+                  <li>B和A利用RSA交换对称会话密钥Ks</li>
+                  <li>一旦双方确认Ks，则利用会话密钥加密/解密会话数据</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="身份认证">身份认证</h2>
+
+<h3 id="协议ap10alice声明im-alice">协议ap1.0:Alice声明I’m Alice</h3>
+
+<h3 id="协议ap20alice在ip分组中声明im-aliceip分组包含alice的源ip地址">协议ap2.0:Alice在IP分组中声明I’m Alice，IP分组包含Alice的源IP地址</h3>
+
+<h3 id="协议ap30声明的同时发送她的秘密口令进行证明">协议ap3.0:声明的同时，发送她的秘密口令进行证明</h3>
+
+<ul>
+  <li>嗅探攻击</li>
+</ul>
+
+<h3 id="协议ap31加密口令">协议ap3.1:加密口令</h3>
+
+<ul>
+  <li>回放攻击playback attack</li>
+</ul>
+
+<h3 id="协议ap40">协议ap4.0</h3>
+
+<ul>
+  <li>目标：避免回放攻击</li>
+  <li>一次性随机数：一个生命内只用一次的数R</li>
+  <li>为了证明是真实的Alice，Bob向Alice发送一个随机数R，Alice必须返回利用共享密钥加密的R</li>
+</ul>
+
+<h3 id="协议ap50">协议ap5.0</h3>
+
+<ul>
+  <li>利用一次随机数以及公钥加密技术</li>
+  <li>因为已知只有Alice拥有加密R的私钥，KA+（KA-（R））=R</li>
+  <li>
+    <p>安全漏洞：中间人攻击</p>
+
+    <ul>
+      <li>很难检测：Bob与Alice可以收到彼此发送的所有信息</li>
+      <li>获取Alice的公钥，并利用自己的私钥和公钥可以实现收到所有信息</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="消息完整性与数字签名">消息完整性与数字签名</h2>
+
+<h3 id="报文消息完整性的目标">报文/消息完整性的目标</h3>
+
+<ul>
+  <li>证明报文确实来自声称的发送方</li>
+  <li>验证报文在传输过程中没有被篡改</li>
+  <li>预防报文的时间、顺序被篡改</li>
+  <li>预防报文持有期被修改</li>
+  <li>预防抵赖-接受方或发送方否认</li>
+</ul>
+
+<h3 id="密码散列函数hm">密码散列函数：H（m）</h3>
+
+<ul>
+  <li>散列算法公开</li>
+  <li>H（m）能够快速计算</li>
+  <li>对任意长度报文进行多对一映射，均产生定长输出</li>
+  <li>对于任意报文无法预知其散列值</li>
+  <li>不同报文不能产生相同的散列值</li>
+  <li>单向性：无法根据散列值倒推出报文</li>
+  <li>抗弱碰撞性</li>
+  <li>抗强碰撞性</li>
+</ul>
+
+<h3 id="散列函数算法">散列函数算法</h3>
+
+<ul>
+  <li>
+    <p>MD5:被广泛应用的散列函数（RFC 1321）</p>
+
+    <ul>
+      <li>通过四个步骤，对任意长度的报文输入，计算输出128位的散列值</li>
+      <li>MD5不是足够安全</li>
+    </ul>
+  </li>
+  <li>
+    <p>SHA-1:另一个正在使用的散列算法</p>
+
+    <ul>
+      <li>US标准</li>
+      <li>SHA-1要求输入消息长度&lt;2的64次方</li>
+      <li>散列值为160位</li>
+      <li>速度慢于MD5，安全性优于MD5</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="报文摘要">报文摘要</h3>
+
+<ul>
+  <li>对报文m应用散列函数H，得到一个固定长度的散列码，称为报文摘要，记为H（m）</li>
+  <li>可以作为报文m的数字指纹</li>
+</ul>
+
+<h3 id="报文认证">报文认证</h3>
+
+<ul>
+  <li>简单方案：报文+报文摘要-&gt;拓展报文</li>
+  <li>报文认证码MAC：报文m+认证密钥s+密码散列函数H-&gt;拓展报文（m，H（m+s））</li>
+</ul>
+
+<h3 id="数字签名">数字签名</h3>
+
+<ul>
+  <li>
+    <p>目标：解决这些与报文完整性相关的问题</p>
+
+    <ul>
+      <li>否认：发送方不承认自己发送过某一报文</li>
+      <li>伪造：接收方自己伪造一份报文，并声称来自发送方</li>
+      <li>冒充：某个用户冒充另一个用户接受或发送报文</li>
+      <li>篡改：接收方对收到的信息进行篡改</li>
+    </ul>
+  </li>
+  <li>
+    <p>数字签名技术是实现安全电子交易的核心技术之一</p>
+
+    <ul>
+      <li>可验证性</li>
+      <li>不可伪造性</li>
+      <li>不可抵赖性</li>
+    </ul>
+  </li>
+  <li>
+    <p>对报文m的简单数字签名</p>
+
+    <ul>
+      <li>报文加密技术是数字签名的基础</li>
+      <li>Bob利用其私钥对m进行加密，创建签名报文</li>
+      <li>Alice利用Bob的公钥解密报文，并检验来证实报文m是Bob签名的</li>
+      <li>签名m的一定是Bob的私钥</li>
+    </ul>
+  </li>
+  <li>
+    <p>签名报文摘要</p>
+
+    <ul>
+      <li>Bob发送数字签名的报文包括大报文m以及用私钥数字签名加密的报文摘要</li>
+      <li>Alice核实签名以及数字签名报文的完整性</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="密钥分发与公钥证书">密钥分发与公钥证书</h2>
+
+<h3 id="密钥分发中心kdc">密钥分发中心KDC</h3>
+
+<ul>
+  <li>ap4.0Alice与Bob需要共享对称密钥</li>
+  <li>
+    <p>KDC：一个服务器</p>
+
+    <ul>
+      <li>每个注册用户共享其与KDC的秘密密钥</li>
+    </ul>
+  </li>
+  <li>Alice和Bob只知道自己与 KDC之间的对称密钥，用于分别与KDC进行秘密通信</li>
+  <li>
+    <p>过程</p>
+
+    <ul>
+      <li>A向KDC发送KA-KDC（A，B）</li>
+      <li>KDC产生R1并返回KA-KDC（R1，KB-KDC（A，R1））</li>
+      <li>A获知R1，并发送KB-KDC（A，R1）至B</li>
+      <li>B获知将使用R1与A通信</li>
+      <li>至此，R1作为会话密钥，用于共享对称加密</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="认证中心ca">认证中心CA</h3>
+
+<ul>
+  <li>ap5.0</li>
+  <li>
+    <p>比萨恶作剧</p>
+
+    <ul>
+      <li>T创建邮件订单</li>
+      <li>T利用他的私钥签名</li>
+      <li>T向比萨店发送订单，但声称这是Bob的公钥</li>
+      <li>比萨店核实签名，然后向Bob递送4个腊肠比萨</li>
+      <li>Bob根本不喜欢腊肠</li>
+      <li>核心公钥问题，无法确认是否是真的Bob的公钥</li>
+    </ul>
+  </li>
+  <li>CA实现特定实体E与其公钥的绑定</li>
+  <li>
+    <p>每个E（如人、路由器等）在CA上注册其公钥</p>
+
+    <ul>
+      <li>E向CA提供身份证明</li>
+      <li>CA创建绑定E及其公钥的证书</li>
+      <li>证书包含由CA签名的E的公钥——CA声明：这是E的公钥</li>
+    </ul>
+  </li>
+  <li>
+    <p>当Alice想要Bob的公钥</p>
+
+    <ul>
+      <li>首先获取Bob的公钥证书（从Bob或者其他地方）</li>
+      <li>应用CA的公钥、解密证书中签名的公钥，获得Bob的公钥</li>
+    </ul>
+  </li>
+  <li>
+    <p>公钥证书主要内容</p>
+
+    <ul>
+      <li>序列号（唯一发行号）</li>
+      <li>证书持有者信息，包括算法和密钥值</li>
+      <li>证书发行信息</li>
+      <li>有效期</li>
+      <li>发行者数字签名</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="网络安全协议与技术">网络安全协议与技术</h1>
+
+<h2 id="安全电子邮件">安全电子邮件</h2>
+
+<h3 id="电子邮件安全威胁">电子邮件安全威胁</h3>
+
+<ul>
+  <li>垃圾邮件</li>
+  <li>诈骗邮件</li>
+  <li>邮件炸弹</li>
+  <li>传播网络蠕虫/病毒</li>
+  <li>欺骗、钓鱼式攻击</li>
+</ul>
+
+<h3 id="安全需求">安全需求</h3>
+
+<ul>
+  <li>机密性</li>
+  <li>完整性</li>
+  <li>身份认证性</li>
+  <li>抗抵赖性</li>
+</ul>
+
+<h3 id="基本原理">基本原理</h3>
+
+<ul>
+  <li>邮件具有单向性和非实时性</li>
+  <li>
+    <p>A期望向B发送机密邮件m</p>
+
+    <ul>
+      <li>生成随即对称密钥，Ks</li>
+      <li>利用Ks加密报文（为了效率）</li>
+      <li>同时，利用Bob的公钥加密Ks</li>
+      <li>将Ks（m）和KB+（Ks）发送给B</li>
+    </ul>
+  </li>
+  <li>
+    <p>A期望提供发送者认证与报文完整性</p>
+
+    <ul>
+      <li>Alice对报文进行数字签名</li>
+      <li>发送报文（明文和数字签名）</li>
+    </ul>
+  </li>
+  <li>
+    <p>A期望提供保密、发送者认证与报文完整性</p>
+
+    <ul>
+      <li>使用三个密钥：她自己的私钥、Bob的公钥、新生成的对称密钥</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="安全电子邮件标准">安全电子邮件标准</h3>
+
+<ul>
+  <li>
+    <p>PEM标准 Privacy Enhanced Mail</p>
+
+    <ul>
+      <li>
+        <p>运行依赖PKI（公钥基础设施），如CA</p>
+
+        <ul>
+          <li>没有被广泛配置</li>
+        </ul>
+      </li>
+      <li>
+        <p>提供四种安全服务</p>
+
+        <ul>
+          <li>邮件加密</li>
+          <li>报文完整性</li>
+          <li>发送方的认证</li>
+          <li>防发送方否认</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>PGP标准 Pretty Good Privacy</p>
+
+    <ul>
+      <li>事实上标准</li>
+      <li>可在各种平台免费运行</li>
+      <li>还可用于普通文件加密及军事目的</li>
+      <li>
+        <p>所用算法被证实为非常安全</p>
+
+        <ul>
+          <li>
+            <p>公钥加密算法</p>
+
+            <ul>
+              <li>RSA、DSS、Diffie-Hellman</li>
+            </ul>
+          </li>
+          <li>
+            <p>对称加密算法</p>
+
+            <ul>
+              <li>CAST、3DES、IDEA</li>
+            </ul>
+          </li>
+          <li>
+            <p>散列算法</p>
+
+            <ul>
+              <li>MD5、SHA-1</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>特点</p>
+
+        <ul>
+          <li>对邮件内容进行数字签名，保证信件内容不被篡改</li>
+          <li>使用公钥和对称加密保证邮件内容机密且不可否认</li>
+          <li>公钥的权威性由收发双方或所信任的 第三方签名认证</li>
+          <li>实现不需要知道任何保密信道来传递对称的会话密钥</li>
+        </ul>
+      </li>
+      <li>
+        <p>功能框架</p>
+
+        <ul>
+          <li>发送至Internet前的最后一步是Base64</li>
+        </ul>
+      </li>
+      <li>
+        <p>PGP密钥</p>
+
+        <ul>
+          <li>
+            <p>安装PGP时，软件会为用户生成一个公开密钥对</p>
+
+            <ul>
+              <li>公钥放置用户网站或某公钥服务器上</li>
+              <li>私钥则使用用户口令进行保护</li>
+            </ul>
+          </li>
+          <li>
+            <p>PGP公钥认证机制与传统CA差异较大</p>
+
+            <ul>
+              <li>PGP公钥可以通过可信的Web认证</li>
+              <li>用户可以自己认证任何其信任的公钥/用户名对</li>
+              <li>用户还可以为其他公钥认证提供担保</li>
+            </ul>
+          </li>
+          <li>
+            <p>防止篡改公钥的方法</p>
+
+            <ul>
+              <li>直接从B手中得到其公钥</li>
+              <li>通过电话认证密钥</li>
+              <li>从双方信任的David那里获得Bob的公钥</li>
+              <li>通过CA</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>S/MIME标准</p>
+
+    <ul>
+      <li>提供数据保密、完整性和认证等服务</li>
+      <li>不仅限于邮件使用，可用于任何支持MIME数据的传输机制，如HTTP</li>
+      <li>增加了新的MIME数据类型</li>
+      <li>只保护邮件的邮件主体，对头部信息则不进行加密</li>
+      <li>认证机制依赖于层次结构的CA</li>
+      <li>证书格式采用X.509规范</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="安全套接字层ssl">安全套接字层SSL</h2>
+
+<h3 id="web安全威胁">Web安全威胁</h3>
+
+<ul>
+  <li>
+    <p>攻击与破坏事件层出不穷 ，需要安全Web服务</p>
+
+    <ul>
+      <li>Web应用广泛、服务器底层软件复杂，可能隐藏安全漏洞</li>
+    </ul>
+  </li>
+  <li>
+    <p>Web安全威胁的分类</p>
+
+    <ul>
+      <li>
+        <p>主动攻击</p>
+
+        <ul>
+          <li>篡改C/S之间信息或篡改Web站点信息 难防易检</li>
+        </ul>
+      </li>
+      <li>
+        <p>被动攻击</p>
+
+        <ul>
+          <li>监听数据流获取信息或进行信息量分析 难检易防</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>机密性</li>
+  <li>完整性</li>
+  <li>拒绝服务</li>
+  <li>
+    <p>身份认证</p>
+
+    <ul>
+      <li>冒充合法用户、伪造数据</li>
+    </ul>
+  </li>
+  <li>
+    <p>Web服务器的安全威胁</p>
+
+    <ul>
+      <li>Web服务越强大，包含安全漏洞概率就越高</li>
+      <li>HTTP服务可在不同权限下运行</li>
+    </ul>
+  </li>
+  <li>
+    <p>Web浏览器的安全威胁</p>
+
+    <ul>
+      <li>活动Web页可能隐藏恶意程序</li>
+    </ul>
+  </li>
+  <li>
+    <p>通信信道的安全威胁</p>
+
+    <ul>
+      <li>监听程序会威胁通信信道中所传输信息的机密性</li>
+      <li>伪造、篡改、重放会威胁所传输信息的机密性</li>
+      <li>缺乏身份认证使得冒充他人身份进行中间人攻击</li>
+      <li>缺乏数字签名使得通信双方能相互攻击</li>
+      <li>拒绝服务攻击使得通信信道不能保证可用性</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="基于应用层实现web安全">基于应用层实现Web安全</h3>
+
+<ul>
+  <li>为特定应用定制特定安全服务，将安全服务直接嵌入在应用程序中</li>
+</ul>
+
+<h3 id="基于传输层实现web安全">基于传输层实现Web安全</h3>
+
+<ul>
+  <li>
+    <p>SSL或TLS可作为基础协议栈的组成部分，对应用透明</p>
+
+    <ul>
+      <li>SMTP HTTP FTP</li>
+      <li>SSL或TLS</li>
+      <li>TCP</li>
+      <li>IP</li>
+      <li>也可直接嵌入到浏览器中使用</li>
+    </ul>
+  </li>
+  <li>
+    <p>使用SSL或TLS后，传输的应用层数据会被加密</p>
+
+    <ul>
+      <li>保证通信的安全</li>
+    </ul>
+  </li>
+  <li>
+    <p>基于网络层实现Web安全</p>
+
+    <ul>
+      <li>
+        <p>IPSec提供端到端（主机到主机）的安全机制</p>
+
+        <ul>
+          <li>通用解决方案</li>
+          <li>SMTP HTTP FTP</li>
+          <li>TCP</li>
+          <li>IP/IPSec</li>
+        </ul>
+      </li>
+      <li>
+        <p>各种应用程序均可利用IPSec提供的安全机制</p>
+
+        <ul>
+          <li>减少了安全漏洞的产生</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="sslsecure-sockets-layer">SSL：Secure Sockets Layer</h3>
+
+<ul>
+  <li>
+    <p>广泛部署的安全协议</p>
+
+    <ul>
+      <li>几乎所有浏览器和Web服务器</li>
+      <li>https</li>
+      <li>每年通过SSL交易额达数十亿美元</li>
+    </ul>
+  </li>
+  <li>实现：Netscape</li>
+  <li>变体：TLS（RFC 2246）</li>
+  <li>
+    <p>提供</p>
+
+    <ul>
+      <li>机密性 confidentiality</li>
+      <li>完整性 integrity</li>
+      <li>认证 authentication</li>
+    </ul>
+  </li>
+  <li>
+    <p>最初目标</p>
+
+    <ul>
+      <li>Web电子商务交易</li>
+      <li>加密</li>
+      <li>Web服务器认证</li>
+      <li>可选的客户认证</li>
+      <li>方便与新商户的商务活动</li>
+    </ul>
+  </li>
+  <li>
+    <p>可用于所有基于TCP的网络应用</p>
+
+    <ul>
+      <li>安全socket借口</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ssl和tcpip">SSL和TCP/IP</h3>
+
+<ul>
+  <li>APPlication</li>
+  <li>SSL</li>
+  <li>TCP</li>
+  <li>IP</li>
+  <li>SSL为网络应用提供应用编程接口（API）</li>
+  <li>C语言和JAVA语言的SSL库/类可用</li>
+</ul>
+
+<h3 id="可以像pgp那样实现某些安全可能">可以像PGP那样实现某些安全可能</h3>
+
+<ul>
+  <li>但是，需要发送字节流以及交互数据</li>
+  <li>需要一组密钥用于整个连接</li>
+  <li>需要证书交换作为协议的一部分：握手阶段</li>
+</ul>
+
+<h3 id="简化的ssl一个简单的安全信道">简化的SSL：一个简单的安全信道</h3>
+
+<ul>
+  <li>握手：A和B利用它们的证书、私钥认证（鉴别）彼此，依次交换共享密钥</li>
+  <li>密钥派生：A和B利用共享密钥派生出一组密钥</li>
+  <li>数据传输：待传输数据分割成一系列记录</li>
+  <li>连接关闭</li>
+</ul>
+
+<h3 id="简单的ssl一个简单的握手过程">简单的SSL：一个简单的握手过程</h3>
+
+<ul>
+  <li>MS：主密钥</li>
+  <li>EMS：加密的主密钥</li>
+</ul>
+
+<h3 id="简化的ssl密钥派生">简化的SSL：密钥派生</h3>
+
+<ul>
+  <li>
+    <p>不同加密操作使用不同密钥会更加安全</p>
+
+    <ul>
+      <li>例如：报文认证码（MAC）密钥和数据加密密钥</li>
+    </ul>
+  </li>
+  <li>
+    <p>4个密钥</p>
+
+    <ul>
+      <li>Kc=用于加密客户向服务器发送数据的密钥</li>
+      <li>Mc=用于客户向服务器发送数据的MAC密钥</li>
+      <li>Ks=用于加密服务器向客户发送数据的密钥</li>
+      <li>Ms=用于服务器向客户发送数据的MAC密钥</li>
+    </ul>
+  </li>
+  <li>
+    <p>通过密钥派生函数（KDF）实现密钥派生</p>
+
+    <ul>
+      <li>主密钥+一些随机数</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="简化的ssl数据记录">简化的SSL：数据记录</h3>
+
+<ul>
+  <li>
+    <p>为什么不直接加密发送给TCP的字节流</p>
+
+    <ul>
+      <li>
+        <p>MAC放到哪</p>
+
+        <ul>
+          <li>如果放到最后，则只有全部数据收全才能进行完整性认证</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>方案：将字节流分割成一系列记录</p>
+  </li>
+</ul>
+
+<h3 id="简化的ssl序列号">简化的SSL：序列号</h3>
+
+<ul>
+  <li>问题：攻击者可以捕获和重放记录或者排序记录</li>
+  <li>
+    <p>解决方案：在MAC中增加序列号</p>
+
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>MAC=MAC（Mx，sequence</td>
+              <td> </td>
+              <td>data）</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>注意：记录中没有序列号域</li>
+    </ul>
+  </li>
+  <li>问题：攻击者可以重放所有记录</li>
+  <li>解决方案：利用一次性随机数</li>
+</ul>
+
+<h3 id="简化的ssl控制信息">简化的SSL：控制信息</h3>
+
+<ul>
+  <li>
+    <p>问题：截断攻击</p>
+
+    <ul>
+      <li>攻击者伪造TCP连接的断连段，恶意断开连接</li>
+      <li>一方或者双方认为对方已没有数据发送</li>
+    </ul>
+  </li>
+  <li>解决方案：记录类型，利用一个类型的记录专门用于断连</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>MAC=MAC（Mx，sequence</td>
+          <td> </td>
+          <td>type</td>
+          <td> </td>
+          <td>data）</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="简化的ssl不完整">简化的SSL不完整</h3>
+
+<ul>
+  <li>每个域多长</li>
+  <li>采用哪种加密算法</li>
+  <li>
+    <p>需要协商</p>
+
+    <ul>
+      <li>允许客户与服务器支持不同加密算法</li>
+      <li>允许客户与服务器在数据传输之前共同选择特定的算法</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ssl协议栈">SSL协议栈</h3>
+
+<ul>
+  <li>
+    <p>介于HTTP与TCP之间的一个可选层</p>
+
+    <ul>
+      <li>绝大多数应用层协议可直接建立在SSL之上</li>
+    </ul>
+  </li>
+  <li>
+    <p>SSL不是一个单独的协议，而是两层协议</p>
+
+    <ul>
+      <li>SSL握手协议 SSL更改密码规格协议 SSL警告协议 HTTp</li>
+      <li>SSL记录协议</li>
+      <li>TCP</li>
+      <li>IP</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ssl密码组">SSL密码组</h3>
+
+<ul>
+  <li>
+    <p>密码组</p>
+
+    <ul>
+      <li>公开密钥算法</li>
+      <li>对称加密算法</li>
+      <li>MAC算法</li>
+    </ul>
+  </li>
+  <li>SSL支持多个密码组</li>
+  <li>
+    <p>常见的SSL对称密码</p>
+
+    <ul>
+      <li>DES-分组密码</li>
+      <li>3DES-分组密码</li>
+      <li>RC2-分组密码</li>
+      <li>RC4-流密码</li>
+    </ul>
+  </li>
+  <li>
+    <p>SSL公开密钥加密</p>
+
+    <ul>
+      <li>RSA</li>
+    </ul>
+  </li>
+  <li>
+    <p>协商：客户与服务器商定密码组</p>
+
+    <ul>
+      <li>客户提供选项</li>
+      <li>服务器挑选其一</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ssl更改密码规格协议">SSL更改密码规格协议</h3>
+
+<ul>
+  <li>更新当前连接的密钥组</li>
+  <li>位于SSL记录协议之上</li>
+  <li>Content Type=20</li>
+  <li>协议只包含一条消息（一个值为1的字节）</li>
+</ul>
+
+<h3 id="ssl警告协议">SSL警告协议</h3>
+
+<ul>
+  <li>
+    <p>Alert消息</p>
+
+    <ul>
+      <li>当握手过程或数据加密等出错或发生异常时，为对等实体传递SSL警告或终止当前连接</li>
+    </ul>
+  </li>
+  <li>位于SSL记录协议之上</li>
+  <li>ContentType=21</li>
+  <li>协议包含两个字节：警告级别、警告代码</li>
+</ul>
+
+<h3 id="ssl握手协议">SSL握手协议</h3>
+
+<ul>
+  <li>协商结果是SSL记录协议的基础，ContentType=22</li>
+  <li>SSL v3.0的握手过程用到三个协议：握手协议、更改密码规格协议和警告协议</li>
+  <li>
+    <p>目的</p>
+
+    <ul>
+      <li>服务器认证/鉴别</li>
+      <li>协商：商定加密算法</li>
+      <li>建立密钥</li>
+      <li>客户认证/鉴别（可选）</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ssl记录协议">SSL记录协议</h3>
+
+<ul>
+  <li>
+    <p>记录协议</p>
+
+    <ul>
+      <li>描述SSL信息交换过程中的记录格式</li>
+      <li>所有数据含SSL握手信息都被封装在记录中</li>
+      <li>一个记录由两部分组成：记录头和数据</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="安全套接字层ssl-1">安全套接字层（SSL）</h3>
+
+<ul>
+  <li>
+    <p>SSL握手过程</p>
+
+    <ul>
+      <li>客户发送其支持的算法列表，以及客户一次随机数</li>
+      <li>服务器从算法列表中选择算法，并发回给用户：选择+证书+服务器一次随机数</li>
+      <li>客户验证证书，提取服务器公钥，生成预主密钥，并利用服务器的公钥加密预主密钥，发送给服务器</li>
+      <li>客户与服务器基于预主密钥和一次随机数分别独立计算加密密钥和MAC密钥</li>
+      <li>客户发送一个针对所有握手信息的MAC</li>
+      <li>服务器发送一个针对所有握手新的MAC</li>
+      <li>
+        <p>最后两步的意义：保护握手过程免遭篡改</p>
+
+        <ul>
+          <li>
+            <p>客户提供的算法，安全性有强、有弱</p>
+
+            <ul>
+              <li>明文传输</li>
+            </ul>
+          </li>
+          <li>
+            <p>中间人攻击可以从列表中删除安全性强的算法</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>为什么使用两个一次随机数</p>
+
+        <ul>
+          <li>防止嗅探发送相同的记录序列B为每次连接发送完全不同的一次随机数确保两次的加密密钥不同</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>SSL握手协议</p>
+
+    <ul>
+      <li>SSL握手消息及参数</li>
+      <li>握手协议工作过程</li>
+    </ul>
+  </li>
+  <li>
+    <p>SSL记录协议</p>
+
+    <ul>
+      <li>
+        <p>操作步骤</p>
+
+        <ul>
+          <li>将数据分段成可操作的数据块</li>
+          <li>将分块数据进行数据压缩</li>
+          <li>计算MAC值</li>
+          <li>对压缩数据及MAC值加密</li>
+          <li>
+            <p>加入SSL记录头</p>
+
+            <ul>
+              <li>内容类型、版本、长度</li>
+            </ul>
+          </li>
+          <li>在TCP中传输</li>
+        </ul>
+      </li>
+      <li>
+        <p>MAC</p>
+
+        <ul>
+          <li>包括序列号，MAC密钥Mx</li>
+        </ul>
+      </li>
+      <li>
+        <p>片段（fragment）</p>
+
+        <ul>
+          <li>每个SSL片段为2^14字节（～16KB）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>密钥派生</p>
+
+    <ul>
+      <li>客户一次数、服务器一次数和预处理器输入伪随机数发生器产生主密钥MS</li>
+      <li>主密钥和和一次性随机数输入另一个伪随机数发生器：密钥块</li>
+      <li>
+        <p>密钥块切片</p>
+
+        <ul>
+          <li>四个密钥</li>
+          <li>客户初始向量IV</li>
+          <li>服务器初始向量IV</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ip安全ipsec">IP安全（IPSec）</h2>
+
+<h3 id="专用网pn">专用网（PN）</h3>
+
+<ul>
+  <li>动机：安全</li>
+  <li>专用网落PN（Private Networks）基于专属的网络设备、链路或协议等建设的专门服务于特定组织机构的网络。</li>
+  <li>成本问题</li>
+</ul>
+
+<h3 id="虚拟专用网vpn">虚拟专用网（VPN）</h3>
+
+<ul>
+  <li>动机：安全+成本</li>
+  <li>通过建立在公共网络上的安全通道，实现远程用户、分支机构、业务伙伴等与机构总部网络的安全连接，从而构建针对特定组织机构的专用网络</li>
+  <li>
+    <p>功能</p>
+
+    <ul>
+      <li>数据机密性保护</li>
+      <li>数据完整性认证</li>
+      <li>数据源身份认证</li>
+      <li>放重访攻击</li>
+      <li>访问控制</li>
+    </ul>
+  </li>
+  <li>
+    <p>关键技术</p>
+
+    <ul>
+      <li>
+        <p>隧道技术</p>
+
+        <ul>
+          <li>构建VPN的核心技术</li>
+          <li>
+            <p>隧道：通过Internet提供安全的点到点（或端到端）的数据传输安全通道</p>
+
+            <ul>
+              <li>实质上是一种封装</li>
+            </ul>
+          </li>
+          <li>
+            <p>VPN隧道利用隧道协议对通过隧道传输的数据进行封装</p>
+
+            <ul>
+              <li>使数据安全穿越公共网络</li>
+              <li>通过加密和认证以确保安全</li>
+              <li>数据包进入隧道时，由VPN封装成IP数据报</li>
+              <li>通过隧道在Internet上安全传输</li>
+              <li>离开隧道后，进行解封装，数据便不再被保护</li>
+            </ul>
+          </li>
+          <li>
+            <p>隧道协议</p>
+
+            <ul>
+              <li>乘客协议Passenger Protocol</li>
+              <li>封装协议Encapsulating Protocol</li>
+              <li>承载协议Carrier Protocol</li>
+            </ul>
+          </li>
+          <li>
+            <p>常见VPN隧道协议</p>
+
+            <ul>
+              <li>
+                <p>第二层隧道：PPTP、L2TP</p>
+
+                <ul>
+                  <li>主要用于远程客户机访问局域网方案</li>
+                </ul>
+              </li>
+              <li>
+                <p>第三层隧道：IPSec</p>
+
+                <ul>
+                  <li>主要用于网关到网关、或网关到主机方案</li>
+                  <li>不支持远程拨号访问</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>典型VPN实现技术</p>
+
+            <ul>
+              <li>IPSec：最安全、适用面最广</li>
+              <li>SSL：具有高层安全协议的优势</li>
+              <li>L2TP：最好的实现远程接入VPN的技术</li>
+              <li>典型VPN技术结合：IPSec与SSL、IPSec与L2TP</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>数据加密</li>
+      <li>身份认证</li>
+      <li>密钥管理</li>
+      <li>访问控制</li>
+      <li>网络管理</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ipsec">IPSec</h3>
+
+<ul>
+  <li>
+    <p>IPSec服务</p>
+
+    <ul>
+      <li>机密性</li>
+      <li>数据完成性</li>
+      <li>源认证/鉴别</li>
+      <li>重放攻击协议</li>
+      <li>
+        <p>提供不同服务模型的两个协议：AH、ESP</p>
+
+        <ul>
+          <li>
+            <p>AH：在IP数据报文头中的协议号为51</p>
+
+            <ul>
+              <li>认证头协议AH提供源认证/鉴别和数据完整性检验，但不提供机密性</li>
+            </ul>
+          </li>
+          <li>
+            <p>ESP：在IP数据报文头中的协议号为50</p>
+
+            <ul>
+              <li>封装安全协议ESP提供源认证/鉴别、数据完整性检验以及机密性</li>
+              <li>比AH应用更广泛</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>IPSec的传输模式</p>
+
+    <ul>
+      <li>IPSec数据报的发送与接收均有端系统完成</li>
+      <li>主机是IPSec感知的</li>
+    </ul>
+  </li>
+  <li>
+    <p>IPSec的隧道模式</p>
+
+    <ul>
+      <li>边缘路由器是IPSec感知的</li>
+    </ul>
+  </li>
+  <li>
+    <p>IPSec模式与协议的4种组合</p>
+
+    <ul>
+      <li>其中隧道模式ESP最普遍、最重要</li>
+    </ul>
+  </li>
+  <li>
+    <p>安全关联（SA）</p>
+
+    <ul>
+      <li>
+        <p>发送数据前，从发送是提到接受实体之间需要建立安全关联的</p>
+
+        <ul>
+          <li>SA是单工的：单向</li>
+        </ul>
+      </li>
+      <li>
+        <p>发送实体与接收实体均需要维护SA的状态信息</p>
+
+        <ul>
+          <li>TCP连接的端点也需要维护状态信息</li>
+          <li>IP是无连接的：IPSec是面向连接的</li>
+        </ul>
+      </li>
+      <li>
+        <p>安全关联主要参数</p>
+
+        <ul>
+          <li>
+            <p>安全参数索引（SPI）</p>
+
+            <ul>
+              <li>32位SA唯一标识（ID）</li>
+              <li>加密密钥、认证密钥</li>
+              <li>密码算法标识</li>
+              <li>
+                <p>序列号（32位）</p>
+
+                <ul>
+                  <li>抗重放攻击</li>
+                </ul>
+              </li>
+              <li>
+                <p>抗重播窗口</p>
+
+                <ul>
+                  <li>接收方使用滑动窗口检测恶意主机重放数据报</li>
+                </ul>
+              </li>
+              <li>
+                <p>生存周期</p>
+
+                <ul>
+                  <li>规定SA的有效使用周期</li>
+                </ul>
+              </li>
+              <li>运行模式：传输模式或隧道模式</li>
+              <li>IPSec隧道源、目的地址</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>安全数据库（SAD）</p>
+
+        <ul>
+          <li>
+            <p>IPSec端点将SA状态保存在安全关联数据库SAD中</p>
+
+            <ul>
+              <li>在处理IPSec数据包时，定位这些信息</li>
+            </ul>
+          </li>
+          <li>对于n个销售人员，一条分支机构的VPN，总部的路由器R1的SAD中存储2+2n条SAs</li>
+          <li>当发送IPSec安全报时，R1访问SAD，确定如何处理数据报</li>
+          <li>
+            <p>当IPSec数据报到达R2</p>
+
+            <ul>
+              <li>R2检验IPSec数据包中的SPI</li>
+              <li>利用SPI检索SAD</li>
+              <li>处理数据报</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>安全策略数据库（SPD）</p>
+
+        <ul>
+          <li>
+            <p>定义了对什么样的数据流实施什么样的安全处理</p>
+
+            <ul>
+              <li>应用IPSec、绕过、丢弃</li>
+            </ul>
+          </li>
+          <li>
+            <p>安全策略组成了SPD，每个记录就是一条SP</p>
+
+            <ul>
+              <li>
+                <p>提取关键信息填充到一个称为选择符的结构</p>
+
+                <ul>
+                  <li>包括目标IP、源IP、传输层协议、源和目标端口等</li>
+                </ul>
+              </li>
+              <li>
+                <p>利用选择符去搜索SPD检索匹配的SP</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>安全处理需要的参数存储在SP指向的SA结构</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>IPSec数据包</p>
+
+    <ul>
+      <li>传输模式AH</li>
+      <li>隧道模式AH</li>
+      <li>传输模式ESP</li>
+      <li>隧道模式ESP</li>
+    </ul>
+  </li>
+  <li>
+    <p>IPsec序列号</p>
+
+    <ul>
+      <li>对于新SA，发送方初始化序列号为0</li>
+      <li>每次通过SA发送数据报将序列号+1</li>
+      <li>
+        <p>目的</p>
+
+        <ul>
+          <li>预防嗅探与回放分组攻击</li>
+          <li>接收重复的、已认证的IP分组，会破坏正常服务</li>
+        </ul>
+      </li>
+      <li>
+        <p>方法</p>
+
+        <ul>
+          <li>接收方检验分组重复</li>
+          <li>无需记录所有已接收分组；而是利用一个窗口</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>SA的建立和密钥管理</p>
+
+    <ul>
+      <li>
+        <p>IPSec支持两种方式的SA建立和密钥管理</p>
+
+        <ul>
+          <li>
+            <p>手工方式</p>
+
+            <ul>
+              <li>所有信息需要手工配置</li>
+              <li>SA永远存在</li>
+              <li>适用于结构简单的网络</li>
+            </ul>
+          </li>
+          <li>
+            <p>自动方式</p>
+
+            <ul>
+              <li>SA可以通过协商方式产生</li>
+              <li>SA过期以后重新协商，提高了安全性</li>
+              <li>适用于较复杂结构和较高安全性的网络</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>IKE用于交换算法、秘密密钥、SPI</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>IPSec对等端可以是：两个端系统、两个路由器/防火墙、一个路由器/防火墙与一个端系统</p>
+  </li>
+</ul>
+
+<h2 id="无线局域网安全">无线局域网安全</h2>
+
+<h3 id="wep的设计目标">WEP的设计目标</h3>
+
+<ul>
+  <li>WEP：有线等效保密</li>
+  <li>对称密钥加密</li>
+  <li>
+    <p>自同步：每个分组单独加密</p>
+
+    <ul>
+      <li>给定加密分组和密钥，便可以解密；即便前序分组丢失，也可以通过成功解密分组（与CBC不同）</li>
+    </ul>
+  </li>
+  <li>
+    <p>高效</p>
+
+    <ul>
+      <li>可以由硬件或软件实现</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="流密码与分组独立性">流密码与分组独立性</h3>
+
+<ul>
+  <li>
+    <p>如果对于n+1号帧使用的密钥流，是在n号帧的密钥流之后，那么每个帧就不是独立加密的</p>
+
+    <ul>
+      <li>需要知道n号帧使用的密钥流截止到哪里</li>
+    </ul>
+  </li>
+  <li>
+    <p>WEP的解决方案：初始密钥+针对每个分组的新IV（初始向量），产生针对每个分组的密钥流</p>
+  </li>
+</ul>
+
+<h3 id="wep加密">WEP加密</h3>
+
+<h3 id="破解80211wep加密">破解802.11WEP加密</h3>
+
+<ul>
+  <li>
+    <p>安全漏洞</p>
+
+    <ul>
+      <li>每帧一个24位的IV-&gt;IV最终会被重用</li>
+      <li>IV以明文传输-&gt;重用IV容易被监测</li>
+    </ul>
+  </li>
+  <li>
+    <p>攻击</p>
+  </li>
+</ul>
+
+<h3 id="80211i改进的安全">802.11i：改进的安全</h3>
+
+<h3 id="eap拓展认证协议">EAP：拓展认证协议</h3>
+
+<h2 id="防火墙">防火墙</h2>
+
+<h3 id="隔离组织内部网络与公共互联网允许某些分组通过而组织其他分组进入离开内部网络的软件硬件设施">隔离组织内部网络与公共互联网，允许某些分组通过，而组织其他分组进入/离开内部网络的软件/硬件设施</h3>
+
+<h3 id="预防拒绝服务攻击dos">预防拒绝服务攻击DoS</h3>
+
+<ul>
+  <li>SYN泛洪：攻击者建立许多虚假TCP连接、耗尽资源，导致真正的连接无法建立</li>
+</ul>
+
+<h3 id="预防非法修改内部数据访问">预防非法修改/内部数据访问</h3>
+
+<h3 id="只允许对内部网络的授权访问">只允许对内部网络的授权访问</h3>
+
+<h3 id="三种类型的防火墙">三种类型的防火墙</h3>
+
+<ul>
+  <li>
+    <p>无状态分组过滤器</p>
+
+    <ul>
+      <li>内部网络通过路由器防火墙与Internet连接</li>
+      <li>
+        <p>路由器逐个分组过滤，决策是否转发/丢弃分组依据：</p>
+
+        <ul>
+          <li>源IP地址、目的IP地址</li>
+          <li>TCP/UDP源、目的端口号</li>
+          <li>ICMP报文类型</li>
+          <li>TCP SYN和ACK标识位</li>
+        </ul>
+      </li>
+      <li>访问控制列表</li>
+    </ul>
+  </li>
+  <li>
+    <p>有状态分组过滤器</p>
+
+    <ul>
+      <li>
+        <p>无状态：笨拙</p>
+
+        <ul>
+          <li>不加以区分放行满足条件的所有分组</li>
+        </ul>
+      </li>
+      <li>
+        <p>跟踪每个TCP连接</p>
+
+        <ul>
+          <li>跟踪连接建立（SYN）、拆除（FIN）：根据状态确认是否放行进入或外出的分组</li>
+          <li>超时的非活动连接：不再允许分组通过</li>
+        </ul>
+      </li>
+      <li>
+        <p>拓展ACL，以便在放行分组前，检测连接状态表</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>应用网关</p>
+
+    <ul>
+      <li>基于应用数据以及IP/TCP/UDP头部字段过滤分组</li>
+      <li>例如：允许特定用户telnet外部网络</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="防火墙应用网关的局限性">防火墙、应用网关的局限性</h3>
+
+<ul>
+  <li>IP欺骗</li>
+  <li>如果多个应用需要特殊处理，则每个应用需要一个应用网关</li>
+  <li>
+    <p>客户软件必须知道如何连接网关</p>
+
+    <ul>
+      <li>必须配置Web浏览器的代理服务器的IP地址</li>
+    </ul>
+  </li>
+  <li>过滤器经常对UDP流量使用全部通过或者全部不通过策略</li>
+  <li>折衷：确定安全级别</li>
+  <li>很多安全防护级别很高的网站仍然遭受攻击</li>
+</ul>
+
+<p><em>XMind - Trial Version</em></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/15/%E7%BD%91%E7%BB%9C%E5%85%A5%E4%BE%B5%E4%B8%8E%E8%84%9A%E6%9C%AC%E6%94%BB%E9%98%B2%E4%BF%AE%E7%82%BC/" data-toggle="tooltip" data-placement="top" title="网络入侵与脚本攻防修炼（第二、三章）">
+                        Previous<br>
+                        <span>网络入侵与脚本攻防修炼（第二、三章）</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%A6%82%E8%BF%B0/" data-toggle="tooltip" data-placement="top" title="计算机网络（第7版）第一章">
+                        Next<br>
+                        <span>计算机网络（第7版）第一章</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="28">学习笔记</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="7">计算机网络</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="5">tips</a>
+        
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="3">爬虫</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yuruj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

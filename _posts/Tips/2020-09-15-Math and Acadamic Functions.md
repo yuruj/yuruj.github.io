@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Typora数学公式"
-author: "yurj"
+author: "yuruj"
 catelog: true
+mathjax: true
 header-style: text
 tags:
   - tips  

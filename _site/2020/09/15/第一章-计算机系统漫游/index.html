@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="深入理解计算机系统 第一章 - 余润杰的博客 | Yurj Blog">
+    <meta property="og:title" content="深入理解计算机系统 第一章 - YRJ的博客 | Yuruj Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="第一章 计算机系统漫游
@@ -20,7 +20,7 @@
     <meta property="article:published_time" content="2020-09-15T00:00:00Z">
     
     
-    <meta property="article:author" content="yurj">
+    <meta property="article:author" content="yuruj">
     
     
     <meta property="article:tag" content="计算机系统">
@@ -30,9 +30,9 @@
     
     <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
     <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
-    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
     
-    <title>深入理解计算机系统 第一章 - 余润杰的博客 | Yurj Blog</title>
+    <title>深入理解计算机系统 第一章 - YRJ的博客 | Yuruj Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -83,7 +83,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Yurj Blog</a>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -106,6 +106,10 @@
                         <li>
                             <a href="/archive/">Archive</a>
                         </li>
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -238,7 +242,7 @@
                     <h1>深入理解计算机系统 第一章</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                    <span class="meta">Posted by yuruj on September 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -268,7 +272,7 @@
 
 <h2 id="信息就是位上下文">信息就是位+上下文</h2>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-20 下午7.01.33.png" alt="截屏2020-07-20 下午7.01.33" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-20 下午7.01.33.png" alt="" /></p>
 
 <p>作为程序员，我们需要了解数字的机器表示方法，他们是对真值的有限近似值，有时候会有意想不到的行为表现</p>
 
@@ -300,7 +304,7 @@
 
 <p>翻译成可执行文件</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-20 下午7.40.03.png" alt="截屏2020-07-20 下午7.40.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-20 下午7.40.03.png" alt="" /></p>
 
 <ul>
   <li>
@@ -357,7 +361,7 @@
 
 <h3 id="系统的硬件组成">系统的硬件组成</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午1.46.26.png" alt="截屏2020-07-22 下午1.46.26" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午1.46.26.png" alt="" /></p>
 
 <p>1、总线</p>
 
@@ -395,17 +399,17 @@
 
 <p>初始时，shell程序执行他的指令，等待我们输入一个命令。当我们在键盘上输入字符串后，shell程序将字符逐一读入寄存器，再把它存放到内存中</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.24.16.png" alt="截屏2020-07-22 下午2.24.16" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.24.16.png" alt="" /></p>
 
 <p>shell执行一系列指令来加载可执行的hello文件，这些指令将hello目标文件中的代码和数据从磁盘复制到主存中</p>
 
 <p>利用直接存储器存取技术，数据可以不通过处理器而直接从磁盘到达主存</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.24.34.png" alt="截屏2020-07-22 下午2.24.34" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.24.34.png" alt="" /></p>
 
 <p>一旦目标文件hello中的代码和数据被加载到主存，处理器就开始执行hello程序的main程序中的机器语言指令。这些指令将”hello, world\n”字符串中的字节从主存复制到寄存器文件中，再从寄存器文件中复制到显示设备，最终显示在屏幕上</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.25.00.png" alt="截屏2020-07-22 下午2.25.00" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.25.00.png" alt="" /></p>
 
 <h2 id="高速缓存至关重要">高速缓存至关重要</h2>
 
@@ -421,13 +425,13 @@
 
 <p>系系统可以获得一个很大的存储器，同时访问速度也很快，原因是利用了高速缓存的局部性远离，及程序具有访问局部区域里的数据和代码的趋势。通过让高速缓存里存放可能经常访问的数据，大部分的内存操作都能在快速的高速缓存中完成</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.40.00.png" alt="截屏2020-07-22 下午2.40.00" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.40.00.png" alt="" /></p>
 
 <h2 id="存储设备形成层次结构">存储设备形成层次结构</h2>
 
 <p>在处理器和一个较大较慢的设备（例如主存）之间插入一个更小更快的存储设备（例如高速缓存）的想法已经成为了一个普遍的观念</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.41.32.png" alt="截屏2020-07-22 下午2.41.32" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.41.32.png" alt="" /></p>
 
 <p>存储器层次结构的主要思想是上一层的存储器作为低一层存储器的高速缓存</p>
 
@@ -437,7 +441,7 @@
 
 <p>操作系统有两个基本功能：（1）防止硬件被失控的应用程序滥用（2）向应用程序提供简单一致的机制来控制复杂而又通常大不相同的低级硬件设备。操作系统通过几个基本的抽象概念（进程、虚拟内存和文件）来实现这两个功能</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午2.46.48.png" alt="截屏2020-07-22 下午2.46.48" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午2.46.48.png" alt="" /></p>
 
 <h3 id="进程">进程</h3>
 
@@ -449,11 +453,11 @@
 
 <p>操作系统保持跟踪进程运行所需的所有状态信息。这种状态，也就是上下文，包括许多信息，比如PC和寄存器文件的当前值，以及主存的内容。在任何一个时刻，但处理器系统都只能执行一个进程的代码。当操作系统决定要把控制权从当前进程转移到某个新进程时，就会进行上下文切换，即保存当前进程的上下文，恢复新进程的上下文，然后将控制权传递到新进程。新进程就会从他上次停止的地方开始</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.14.21.png" alt="截屏2020-07-22 下午3.14.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午3.14.21.png" alt="" /></p>
 
 <p>从一个进程到另一个进程的转换是由操作系统内核Kernel管理的。内核是操作系统代码常驻主存的部分。当应用程序需要操作系统的某些操作时，比如读写文件，他就执行一条特殊的系统调用指令，将控制权传递给内核，然后内核执行被请求的操作并返回应用程序。注意，内核不是一独立的进程。相反，他是系统管理全部进程所用代码和数据结构的集合</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.14.05.png" alt="截屏2020-07-22 下午3.14.05" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午3.14.05.png" alt="" /></p>
 
 <p>实现进程这个抽象概念需要低级硬件和操作系统软件之间的紧密合作</p>
 
@@ -467,7 +471,7 @@
 
 <p>在Linux中，地址空间最上面的区域是保留给操作系统中的代码和数据的，这对所有进程来说都是一样的。地址空间的底部区域存放用户进程定义的代码和数据</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午3.19.41.png" alt="截屏2020-07-22 下午3.19.41" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午3.19.41.png" alt="" /></p>
 
 <ul>
   <li>程序代码和数据。对所有的进程来说，代码是从同一固定地址开始，紧接着的是和C全局变量相对应的数据位置。代码和数据区是直接按照可执行目标文件的内容初始化的</li>
@@ -489,9 +493,9 @@
 
 <p>从一个单独的系统来看，网络可视为一个I/O设备</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.14.02.png" alt="截屏2020-07-22 下午4.14.02" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午4.14.02.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.15.29.png" alt="截屏2020-07-22 下午4.15.29" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午4.15.29.png" alt="" /></p>
 
 <h2 id="重要主题">重要主题</h2>
 
@@ -507,9 +511,9 @@
 
 <p>使用线程，我们甚至能够在一个进程中执行多个控制流</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.24.31.png" alt="截屏2020-07-22 下午4.24.31" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午4.24.31.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.25.40.png" alt="截屏2020-07-22 下午4.25.40" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午4.25.40.png" alt="" /></p>
 
 <p>超线程，有时称为同时多线程，是一项允许一个CPU执行多个控制流的技术。他设计CPU某些硬件有多个备份，比如程序计数器和寄存器文件，而其他的硬件部分只有一份，比如执行浮点算数运算的单元。</p>
 
@@ -531,25 +535,24 @@
 
 <h3 id="计算机系统中抽象的重要性">计算机系统中抽象的重要性</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-22 下午4.40.37.png" alt="截屏2020-07-22 下午4.40.37" style="zoom:50%;" /></p>
-
+<p><img src="/img/typora-user-images/截屏2020-07-22 下午4.40.37.png" alt="" /></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/15/Git%E6%95%99%E7%A8%8B/" data-toggle="tooltip" data-placement="top" title="Git教程">
+                        <a href="/2020/09/15/Web%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" data-toggle="tooltip" data-placement="top" title="大一下Web前端mooc随手记的（？">
                         Previous<br>
-                        <span>Git教程</span>
+                        <span>大一下Web前端mooc随手记的（？</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/09/15/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" data-toggle="tooltip" data-placement="top" title="深度学习入门：基于Python的理论与实现（2）">
+                        <a href="/2020/09/15/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E4%BF%A1%E6%81%AF%E7%A4%BE%E4%BC%9A/" data-toggle="tooltip" data-placement="top" title="人工智能与信息社会mooc">
                         Next<br>
-                        <span>深度学习入门：基于Python的理论与实现（2）</span>
+                        <span>人工智能与信息社会mooc</span>
                         </a>
                     </li>
                     
@@ -600,47 +603,67 @@
         
         
         
-                <a data-sort="0005" 
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
                     title="学习笔记"
-                    rel="13">学习笔记</a>
+                    rel="28">学习笔记</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
                     href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
                     title="计算机网络"
-                    rel="6">计算机网络</a>
+                    rel="7">计算机网络</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
                     href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
                     title="谢希仁"
                     rel="6">谢希仁</a>
         
-                <a data-sort="0013" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="5">Python</a>
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
         
-                <a data-sort="0014" 
+                <a data-sort="0029" 
                     href="/archive/?tag=tips"
                     title="tips"
-                    rel="4">tips</a>
+                    rel="5">tips</a>
         
-                <a data-sort="0015" 
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
                     href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
                     title="深度学习"
                     rel="3">深度学习</a>
         
-                <a data-sort="0015" 
-                    href="/archive/?tag=AI"
-                    title="AI"
-                    rel="3">AI</a>
-        
-                <a data-sort="0016" 
+                <a data-sort="0031" 
                     href="/archive/?tag=%E7%88%AC%E8%99%AB"
                     title="爬虫"
-                    rel="2">爬虫</a>
+                    rel="3">爬虫</a>
         
-                <a data-sort="0016" 
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
@@ -740,7 +763,7 @@
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright &copy; Yurj Blog 2020
+                    Copyright &copy; Yuruj Blog 2020
                     <br>
                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"

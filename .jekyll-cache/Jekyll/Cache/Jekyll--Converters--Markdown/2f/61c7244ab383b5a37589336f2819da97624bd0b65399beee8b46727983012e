@@ -1,0 +1,177 @@
+I"�<h1 id="网络爬虫">网络爬虫</h1>
+
+<h2 id="规则">规则</h2>
+
+<h2 id="提取">提取</h2>
+
+<h2 id="实战">实战</h2>
+
+<h3 id="正则表达式reregular-expression">正则表达式RE（regular expression）</h3>
+
+<ul>
+  <li>
+    <p>基本认知</p>
+
+    <ul>
+      <li>简洁 通用的字符串表达工具</li>
+      <li>判断某字符串的特征归属</li>
+      <li>正则表达式主要应用在字符串匹配中</li>
+    </ul>
+  </li>
+  <li>
+    <p>常用操作符号</p>
+
+    <ul>
+      <li>. 表示任何单个字符</li>
+      <li>[] 字符集，对单个字符给出取值范围</li>
+      <li>[^] 非字符集</li>
+      <li>
+        <ul>
+          <li>前一个字符0次或无限次拓展</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>前一个字符1次或无限次拓展</li>
+        </ul>
+      </li>
+      <li>？ 前一个字符0次或1次拓展</li>
+      <li>｜ 左右表达式任意一个</li>
+      <li>{m} 拓展前一个字符m次</li>
+      <li>{m,n} 拓展前一个字符m至n次（含n）</li>
+      <li>^ 匹配字符串开头</li>
+      <li>$ 匹配字符串结尾</li>
+      <li>（）分组标记，内部只能用｜操作符</li>
+      <li>\d 数字</li>
+      <li>\w 单词字符即a-zA-Z0-9</li>
+    </ul>
+  </li>
+  <li>
+    <p>经典正则表达式实例</p>
+
+    <ul>
+      <li>
+        <p>^[A-Za-z0-9]+$</p>
+
+        <ul>
+          <li>由26个字母和数字组成的字符串</li>
+        </ul>
+      </li>
+      <li>
+        <p>^-?\d+$</p>
+
+        <ul>
+          <li>整数形式的字符串</li>
+        </ul>
+      </li>
+      <li>
+        <p>^[0-9]<em>[1-9][0-9]</em>$</p>
+
+        <ul>
+          <li>正整数形式的字符串</li>
+        </ul>
+      </li>
+      <li>
+        <p>[1-9]\d{5}</p>
+
+        <ul>
+          <li>中国境内6位邮政编码</li>
+        </ul>
+      </li>
+      <li>
+        <p>[\u4e00-\u9fa5]</p>
+
+        <ul>
+          <li>匹配中文字符</li>
+        </ul>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>\d{3}-\d{8}</td>
+              <td>\d{4}-\d{7}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <li>国内电话号码</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Re库</p>
+
+    <ul>
+      <li>Python标准库 ，主要用于字符串匹配</li>
+      <li>
+        <p>表达类型</p>
+
+        <ul>
+          <li>raw string类型-r’text’</li>
+          <li>string类型由于转义字符\的存在更为繁琐</li>
+          <li>故当正则表达式包含转义符时，使用raw string</li>
+        </ul>
+      </li>
+      <li>
+        <p>功能函数</p>
+
+        <ul>
+          <li>
+            <p>search</p>
+
+            <ul>
+              <li>
+                <p>在一个字符串中搜索匹配正则表达式的第一个位置，返回match对象</p>
+
+                <ul>
+                  <li>pattern 正则表达式的字符串或原声字符串表示</li>
+                  <li>string 待匹配字符串</li>
+                  <li>
+                    <p>flags 正则表达式 使用时的控制标记</p>
+
+                    <ul>
+                      <li>
+                        <p>re.I re.IGNORECASE</p>
+
+                        <ul>
+                          <li>忽略正则表达式的大小写</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>re.M re.MULTILINE</p>
+
+                        <ul>
+                          <li>正则表达式中的 ^操作符能将给定字符串的每行当作匹配开始</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>re.S re.DOTALL</p>
+
+                        <ul>
+                          <li>正则表达式中的.操作符能够匹配所有字符，默认匹配除换行外的所有字符</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>match</li>
+          <li>findall</li>
+          <li>split</li>
+          <li>finditer</li>
+          <li>sub</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="框架">框架</h2>
+
+<p><em>XMind - Trial Version</em></p>
+:ET

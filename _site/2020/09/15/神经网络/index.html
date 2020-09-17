@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="深度学习入门：基于Python的理论与实现（1） - 余润杰的博客 | Yurj Blog">
+    <meta property="og:title" content="深度学习入门：基于Python的理论与实现（1） - YRJ的博客 | Yuruj Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="第一章 Python入门
@@ -20,7 +20,7 @@
     <meta property="article:published_time" content="2020-09-15T00:00:00Z">
     
     
-    <meta property="article:author" content="yurj">
+    <meta property="article:author" content="yuruj">
     
     
     <meta property="article:tag" content="AI">
@@ -34,9 +34,9 @@
     
     <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
     <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
     
-    <title>深度学习入门：基于Python的理论与实现（1） - 余润杰的博客 | Yurj Blog</title>
+    <title>深度学习入门：基于Python的理论与实现（1） - YRJ的博客 | Yuruj Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -87,7 +87,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Yurj Blog</a>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -110,6 +110,10 @@
                         <li>
                             <a href="/archive/">Archive</a>
                         </li>
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -246,7 +250,7 @@
                     <h1>深度学习入门：基于Python的理论与实现（1）</h1>
                     
                     <h2 class="subheading">神经网络</h2>
-                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                    <span class="meta">Posted by yuruj on September 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -422,11 +426,11 @@
 
 <p>forward 前向</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.35.01.png" alt="截屏2020-05-10 下午12.35.01" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.35.01.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.35.46.png" alt="截屏2020-05-10 下午12.35.46" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.35.46.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.36.02.png" alt="截屏2020-05-10 下午12.36.02" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.36.02.png" alt="" /></p>
 
 <h2 id="输出层的设计">输出层的设计</h2>
 
@@ -436,11 +440,11 @@
 
 <h3 id="恒等函数和softmax函数">恒等函数和softmax函数</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.39.03.png" alt="截屏2020-05-10 下午12.39.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.39.03.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.40.07.png" alt="截屏2020-05-10 下午12.40.07" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.40.07.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.40.30.png" alt="截屏2020-05-10 下午12.40.30" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.40.30.png" alt="" /></p>
 
 <p>输出层的各个神经元都受到所有输入信号的影响</p>
 
@@ -450,7 +454,7 @@
 
 <p>某个指数函数的值很容易变得非常大，在这些超大值之间进行除法运算，结果会出现不确定的情况</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午12.43.31.png" alt="截屏2020-05-10 下午12.43.31" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午12.43.31.png" alt="" /></p>
 
 <p>这里的C’可以使用任意值，但是为了防止溢出，一般会使用输入信号中的最大值</p>
 
@@ -518,7 +522,7 @@
 
 <p>这里所说的特征量是指可以从输入数据中准确地提取本质数据的转换器。图像的特征量通常表示为向量的形式。在计算机视觉领域，常用的特征量包括SIFT、SURF和HOG等。使用这些特征量将图像数据转换为向量，然后对转换后的向量使用机器学习中的SVM、KNN等分类器进行学习</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午2.12.03.png" alt="截屏2020-05-10 下午2.12.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午2.12.03.png" alt="" /></p>
 
 <p>深度学习有时也称为端到端机器学习</p>
 
@@ -542,13 +546,13 @@
 
 <p>最有名的损失函数 mean squared error</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午6.29.44.png" alt="截屏2020-05-10 下午6.29.44" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午6.29.44.png" alt="" /></p>
 
 <p>将正确解标签表示为1，其他标签表示为0的表示法成为one-hot表示</p>
 
 <h3 id="交叉熵误差">交叉熵误差</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午6.32.30.png" alt="截屏2020-05-10 下午6.32.30" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午6.32.30.png" alt="" /></p>
 
 <p>tk中只有正确解的标签为1，其他均为0。所以实际上只计算对应正确解标签的输出的自然对数</p>
 
@@ -560,7 +564,7 @@
 
 <p>之前的损失函数考虑的都是针对单个数据的损失函数，如果要求所有训练数据的损失函数的总和，以交叉熵为例，可以写成下面的式</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午6.44.06.png" alt="截屏2020-05-10 下午6.44.06" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午6.44.06.png" alt="" /></p>
 
 <p>除以N以正规化，求单个数据的平均损失函数</p>
 
@@ -602,7 +606,7 @@
 
 <p>梯度法是解决机器学习中最优化问题的常用方法，特别是在神经网络的学习中经常被使用</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午9.13.03.png" alt="截屏2020-05-10 下午9.13.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午9.13.03.png" alt="" /></p>
 
 <p>学习率需要事先确定为某个值，比如0.01或0.02。一般而言，这个值过大或过小，都无法抵达一个好的位置。在神经网络的学习中，一般会一边改变学习率的值，一边确认学习是否正确进行了</p>
 
@@ -612,7 +616,7 @@
 
 <h3 id="神经网络的梯度">神经网络的梯度</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午9.34.13.png" alt="截屏2020-05-10 下午9.34.13" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午9.34.13.png" alt="" /></p>
 
 <p>求出神经网络的梯度后，接下来只需根据梯度法，更新权重参数即可</p>
 
@@ -666,33 +670,33 @@
 
 <p>3、可以通过反向传播高效计算导数</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-10 下午9.58.39.png" alt="截屏2020-05-10 下午9.58.39" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-10 下午9.58.39.png" alt="" /></p>
 
 <h2 id="链式法则">链式法则</h2>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.21.43.png" alt="截屏2020-05-11 上午10.21.43" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.21.43.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.21.59.png" alt="截屏2020-05-11 上午10.21.59" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.21.59.png" alt="" /></p>
 
 <h2 id="反向传播">反向传播</h2>
 
 <h3 id="加法节点的反向传播">加法节点的反向传播</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.26.12.png" alt="截屏2020-05-11 上午10.26.12" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.26.12.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.26.54.png" alt="截屏2020-05-11 上午10.26.54" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.26.54.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.24.49.png" alt="截屏2020-05-11 上午10.24.49" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.24.49.png" alt="" /></p>
 
 <h3 id="乘法节点的反向传播">乘法节点的反向传播</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.27.51.png" alt="截屏2020-05-11 上午10.27.51" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.27.51.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.25.06.png" alt="截屏2020-05-11 上午10.25.06" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.25.06.png" alt="" /></p>
 
 <h3 id="苹果的例子">苹果的例子</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.29.05.png" alt="截屏2020-05-11 上午10.29.05" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.29.05.png" alt="" /></p>
 
 <h2 id="简单层的实现">简单层的实现</h2>
 
@@ -768,7 +772,7 @@
 
 <h3 id="relu层">ReLU层</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.42.17.png" alt="截屏2020-05-11 上午10.42.17" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.42.17.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -804,13 +808,13 @@
 
 <h3 id="sigmoid层">Sigmoid层</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.48.27.png" alt="截屏2020-05-11 上午10.48.27" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.48.27.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.48.46.png" alt="截屏2020-05-11 上午10.48.46" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.48.46.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.49.21.png" alt="截屏2020-05-11 上午10.49.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.49.21.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午10.49.34.png" alt="截屏2020-05-11 上午10.49.34" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午10.49.34.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -844,23 +848,23 @@
 
 <p>神经网络的正向传播中进行的矩阵的乘积运算在几何学领域被称为仿射变换。因此，在这里将进行仿射变换的处理实现为Affine层</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.12.41.png" alt="截屏2020-05-11 上午11.12.41" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.12.41.png" alt="" /></p>
 
 <p>之前我们见到的计算图的各个节点间流动的是标量，而这个例子中各个节点间传播的是矩阵</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.50.03.png" alt="截屏2020-05-11 上午11.50.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.50.03.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.51.30.png" alt="截屏2020-05-11 上午11.51.30" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.51.30.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.52.01.png" alt="截屏2020-05-11 上午11.52.01" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.52.01.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.52.14.png" alt="截屏2020-05-11 上午11.52.14" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.52.14.png" alt="" /></p>
 
 <h3 id="批版本的affine层">批版本的Affine层</h3>
 
 <p>前面介绍的Affine层的输入X是以单个数据为对象的。现在我们考虑N个数据一起进行正向传播的情况，也就是批版本的Affine层</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 上午11.53.56.png" alt="截屏2020-05-11 上午11.53.56" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 上午11.53.56.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -906,9 +910,9 @@
 
 <p>神经网络中进行的处理有推理和学习两个阶段。神经网络的推理通常不使用Softmax层。当神经网络的推理只需要给出一个答案的请光彩，因为此时只对最大得分值感兴趣，所以不需要Softmax层。不过神经网络的学习阶段则需要Softmax层</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午1.30.52.png" alt="截屏2020-05-11 下午1.30.52" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午1.30.52.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午1.31.27.png" alt="截屏2020-05-11 下午1.31.27" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午1.31.27.png" alt="" /></p>
 
 <p>Softmax函数记为Softmax层，交叉熵误差记为Cross Entropy Error层</p>
 
@@ -1020,11 +1024,11 @@
 
 <p>SGD低效的根本原因是，梯度的方向没有指向最小值的方向</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午4.34.03.png" alt="截屏2020-05-11 下午4.34.03" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午4.34.03.png" alt="" /></p>
 
 <h3 id="momentum">Momentum</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午4.36.37.png" alt="截屏2020-05-11 下午4.36.37" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午4.36.37.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -1060,7 +1064,7 @@
 
 <p>ɑv这一项，在物体不受任何力时，该项承担使物体逐渐减速的任务（ɑ设定为0.9之类的值），对应物体上的地面摩擦或空气阻力</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午4.50.56.png" alt="截屏2020-05-11 下午4.50.56" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午4.50.56.png" alt="" /></p>
 
 <p>实例变量v会保存物体的速度</p>
 
@@ -1078,7 +1082,7 @@
 
 <p>AdaGrad会为参数的每个元素适当的调整学习率，与此同时进行学习</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午4.59.46.png" alt="截屏2020-05-11 下午4.59.46" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午4.59.46.png" alt="" /></p>
 
 <p>h保存了以前的所有梯度值的平方和</p>
 
@@ -1126,7 +1130,7 @@
 
 <p>在很多深度学习的框架中，这个微小值也可以设定为参数</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午5.10.47.png" alt="截屏2020-05-11 下午5.10.47" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午5.10.47.png" alt="" /></p>
 
 <h3 id="adam">Adam</h3>
 
@@ -1136,7 +1140,7 @@
 
 <p>此外，进行超参数的偏置校正也是Adam的特征</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午5.13.23.png" alt="截屏2020-05-11 下午5.13.23" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午5.13.23.png" alt="" /></p>
 
 <p>Adam会设置3个超参数。一个是学习率，另外两个是一次momentum系数和二次momentum系数</p>
 
@@ -1150,7 +1154,7 @@
 
 <h3 id="基于mnist数据集的更新方法的比较">基于MNIST数据集的更新方法的比较</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午5.17.50.png" alt="截屏2020-05-11 下午5.17.50" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午5.17.50.png" alt="" /></p>
 
 <p>实验结果会随学习率等超参数、神经网络的结构的不同而发生变化</p>
 
@@ -1238,7 +1242,7 @@
 <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午7.23.53.png" alt="截屏2020-05-11 下午7.23.53" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午7.23.53.png" alt="" /></p>
 
 <p>各层的激活值偏向0和1的分布</p>
 
@@ -1246,7 +1250,7 @@
 
 <p>下面，将权重的标准差设为0.01，进行相同的实验</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午8.19.49.png" alt="截屏2020-05-11 下午8.19.49" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午8.19.49.png" alt="" /></p>
 
 <p>这次呈集中在0.5附近的分布。而且不像刚才的例子那样偏向0和1，所以不会发生梯度消失的问题。但是，激活值的分布有所偏向，说明在表现力上会有很大的问题</p>
 
@@ -1260,7 +1264,7 @@
 
 <p>Xavier的论文中，为了使各层的激活值呈现出具有相同的广度，推导了合适的权重尺度。推导出的结论是，如果前一层的节点数为n，则初始值使用标准差为1/根号n的分布</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午8.41.19.png" alt="截屏2020-05-11 下午8.41.19" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午8.41.19.png" alt="" /></p>
 
 <p>因为各层间传递的数据有适当的广度，所以sigmoid函数的表现力不受限制，有望进行高效的学习</p>
 
@@ -1280,7 +1284,7 @@
 
 <p>直观上可以解释为，因为ReLU的负值区域的值为0，为了使它更有广度，所以需要二倍的系数</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午8.52.49.png" alt="截屏2020-05-11 下午8.52.49" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午8.52.49.png" alt="" /></p>
 
 <p>观察实验结果可知，当std=0.01时，各层的激活值非常小。神经网络上传递的是非常小的值，说明逆向传播时权重的梯度也同样很小。这是很严重的问题，实际上学习基本上没有进展</p>
 
@@ -1290,7 +1294,7 @@
 
 <h3 id="基于mnist数据集的权重初始值的比较">基于MNIST数据集的权重初始值的比较</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午9.24.00.png" alt="截屏2020-05-11 下午9.24.00" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午9.24.00.png" alt="" /></p>
 
 <p>由图中的结果可知，std=0.01时完全无法进行学习。这和刚才观察到的激活值的分布一样，是因为正向传播中传递的值很小（集中在0附近的数据）。因此，逆向传播时求到的梯度也很小，权重几乎不进行更新。相反，当权重初始值为Xavier初始值和He初始值时，学习进行的很顺利。并且，我们发现He初始值时学习进度更快一些</p>
 
@@ -1316,13 +1320,13 @@
 
 <p>Batch Norm的思路是调整各层的激活值分布使其拥有适当的广度。为此，要向神经网络中插入对数据分布进行正规化的层，即Batch Norm层</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午9.54.30.png" alt="截屏2020-05-11 下午9.54.30" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午9.54.30.png" alt="" /></p>
 
 <p>Batch Norm，以进行学习时的mini-batch为单位，按mini-batch进行正规化</p>
 
 <p>具体而言，就是进行使数据分布的均值为0、方差为1的正规化</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午9.56.15.png" alt="截屏2020-05-11 下午9.56.15" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午9.56.15.png" alt="" /></p>
 
 <p>这里对mini-batch的m个输入数据的集合求均值和方差。然会，对输入数据进行均值为0、方差为1（合适的分布）的正规化。式中的微小值是为了防止除以0的情况</p>
 
@@ -1330,15 +1334,15 @@
 
 <p>接着，Batch Norm层会对正规化的数据进行缩放和平移的变换，用数学式可以如下表示</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午10.00.36.png" alt="截屏2020-05-11 下午10.00.36" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午10.00.36.png" alt="" /></p>
 
 <h3 id="batch-normalization的评估">Batch Normalization的评估</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午10.01.45.png" alt="截屏2020-05-11 下午10.01.45" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午10.01.45.png" alt="" /></p>
 
 <p>基于不同的初始值尺度，观察学习的情况如何变化</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午10.02.33.png" alt="截屏2020-05-11 下午10.02.33" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午10.02.33.png" alt="" /></p>
 
 <p>几乎所有的情况下都是使用Batch Norm时学习进行的更快</p>
 
@@ -1364,13 +1368,13 @@
 
 <p>神经网络的学习目的是减小损失函数的值。这时，例如为损失函数加上权重的平方范数（L2范数）。这样一来，就可以抑制权重变大</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.11.40.png" alt="截屏2020-05-11 下午11.11.40" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.11.40.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.12.08.png" alt="截屏2020-05-11 下午11.12.08" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.12.08.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.13.10.png" alt="截屏2020-05-11 下午11.13.10" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.13.10.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.12.50.png" alt="截屏2020-05-11 下午11.12.50" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.12.50.png" alt="" /></p>
 
 <h3 id="dropout">Dropout</h3>
 
@@ -1384,7 +1388,7 @@
 
 <p>Dropout是一种在学习的过程中随机删除神经元的方法。训练时，随机选出隐藏层的神经元，然后将其删除。被删除的神经元不再进行信号的传递。训练时，每传递一次数据，就会随机选择要删除的神经元。然后，测试时，虽然会传递所有的神经元信号，但是对于各个神经元的输出，要乘上训练时的删除比例后再输出</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.18.21.png" alt="截屏2020-05-11 下午11.18.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.18.21.png" alt="" /></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -1416,9 +1420,9 @@
     <span class="k">return</span> <span class="n">dout</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">mask</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.23.26.png" alt="截屏2020-05-11 下午11.23.26" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.23.26.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.23.47.png" alt="截屏2020-05-11 下午11.23.47" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.23.47.png" alt="" /></p>
 
 <p>通过使用Dropout，即便是表现力强的网络，也可以抑制过拟合</p>
 
@@ -1440,7 +1444,7 @@
 
 <p>训练数据用于参数（权重和偏置）的学习，验证数据用于超参数的性能评估。为了确认泛化能力，要在最后使用（比较理想的是只用一次）测试数据</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.35.06.png" alt="截屏2020-05-11 下午11.35.06" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.35.06.png" alt="" /></p>
 
 <h3 id="超参数的最优化">超参数的最优化</h3>
 
@@ -1464,11 +1468,11 @@
 
 <p>反复进行上述操作，不断缩小超参数的范围，在缩小到一定程度时，从该范围中选出一个超参数的值。这就是进行超参数的最优化的一种方法</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.44.07.png" alt="截屏2020-05-11 下午11.44.07" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.44.07.png" alt="" /></p>
 
 <h3 id="超参数最优化的实现">超参数最优化的实现</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-05-11 下午11.45.26.png" alt="截屏2020-05-11 下午11.45.26" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-05-11 下午11.45.26.png" alt="" /></p>
 
 
                 <hr style="visibility: hidden;">
@@ -1536,47 +1540,67 @@
         
         
         
-                <a data-sort="0005" 
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
                     title="学习笔记"
-                    rel="13">学习笔记</a>
+                    rel="28">学习笔记</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
                     href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
                     title="计算机网络"
-                    rel="6">计算机网络</a>
+                    rel="7">计算机网络</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
                     href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
                     title="谢希仁"
                     rel="6">谢希仁</a>
         
-                <a data-sort="0013" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="5">Python</a>
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
         
-                <a data-sort="0014" 
+                <a data-sort="0029" 
                     href="/archive/?tag=tips"
                     title="tips"
-                    rel="4">tips</a>
+                    rel="5">tips</a>
         
-                <a data-sort="0015" 
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
                     href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
                     title="深度学习"
                     rel="3">深度学习</a>
         
-                <a data-sort="0015" 
-                    href="/archive/?tag=AI"
-                    title="AI"
-                    rel="3">AI</a>
-        
-                <a data-sort="0016" 
+                <a data-sort="0031" 
                     href="/archive/?tag=%E7%88%AC%E8%99%AB"
                     title="爬虫"
-                    rel="2">爬虫</a>
+                    rel="3">爬虫</a>
         
-                <a data-sort="0016" 
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
@@ -1676,7 +1700,7 @@
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright &copy; Yurj Blog 2020
+                    Copyright &copy; Yuruj Blog 2020
                     <br>
                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"

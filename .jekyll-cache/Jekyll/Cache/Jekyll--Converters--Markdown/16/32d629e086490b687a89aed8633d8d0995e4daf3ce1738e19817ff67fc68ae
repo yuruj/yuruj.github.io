@@ -1,0 +1,194 @@
+I"�*<h1 id="git教程">Git教程</h1>
+
+<h2 id="git简介">Git简介</h2>
+
+<p>Git是目前世界上最先进的分布式版本控制系统</p>
+
+<p>Linus花了两周的时间用C语言编写，一个月之内，Linux系统的源码已经由Git管理</p>
+
+<p>Github</p>
+
+<p>集中式 vs 分布式</p>
+
+<p>每个人的电脑里都有完整的版本库，不必联网</p>
+
+<p>在实际使用时，通常也有一台充当中央服务器的电脑，但这个服务器的作用仅仅是用来方便交换大家的修改，没有它大家一样干活，只是交换修改不方便而已</p>
+
+<h2 id="安装git">安装Git</h2>
+
+<p>安装完成后，还需要最后一步设置，每个机器都必须自报家门，在命令行输入</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"email@example.com"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>–global参数表示，这台机器上所有的Git仓库都会是用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址</p>
+
+<h2 id="创建版本库">创建版本库</h2>
+
+<p>版本库又名仓库，repository</p>
+
+<p>1、选择一个合适的地方，创建一个空目录</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">mkdir </span>learngit
+<span class="nv">$ </span><span class="nb">cd </span>learngit
+<span class="nv">$ </span><span class="nb">pwd</span>
+/Users/michael/learngit
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>2、通过 git init 这个命令把目录变成Git可以管理的仓库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git init
+Initialized empty Git repository <span class="k">in</span> /Users/michael/learngit/.git/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>当前目录下会多一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了</p>
+
+<p>.git目录默认隐藏，用ls -ah命令就可以看见</p>
+
+<p>所有的版本控制系统，其实只能跟踪文本文件的改动</p>
+
+<p>Microsoft的Word格式是二进制格式的，因此，版本控制系统是无法跟踪Word文件的改动的。如果要真正使用版本控制系统，就要以纯文本方式编写文件</p>
+
+<p><img src="/img/typora-user-images/截屏2020-07-19 上午11.55.38.png" alt="" /></p>
+
+<p>把一个文件放到Git仓库只需要两步</p>
+
+<p>第一步，用命令 git add 告诉Git，把一个文件添加到仓库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git add readme.txt
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>第二步，用命令 git commit 告诉Git，把文件提交到仓库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"wrote a readme file"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>commit可以一次提交很多文件，所以你可以多次add不同的文件</p>
+
+<h2 id="时光机穿梭">时光机穿梭</h2>
+
+<h2 id="远程仓库">远程仓库</h2>
+
+<p>实际情况往往是这样的，找一台电脑充当服务器的角色，每天24小时开机，其他每个人都从这个服务器仓库克隆一份到自己的电脑上，并且各自把各自的提交推送到服务器仓库里，也从服务器仓库中拉取别人的提交</p>
+
+<p>只要注册一个GitHub账号，就可以免费获得Git远程仓库</p>
+
+<p>由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置</p>
+
+<p>1、创建SSH Key</p>
+
+<pre><code class="language-shel">$ ssh-keygen -t rsa -C "youremail@example.com"
+</code></pre>
+
+<p>可一路回车使用默认值，因为不是用于军事目的，所以也无需设置密码</p>
+
+<p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的密钥对，id_rsa是私钥，不能泄漏出去，id_rsa.pub是公钥，可以放心地告诉任何人</p>
+
+<p>2、登陆GitHub，打开Account settings，SSH Keys页面。新建Key，填上任意的Title，粘贴公钥中内容</p>
+
+<p><img src="/img/typora-user-images/截屏2020-07-19 上午10.49.01.png" alt="" /></p>
+
+<p>SSH协议</p>
+
+<p>SSH Key确认只有自己可以推送</p>
+
+<p>当然，GitHub允许添加多个Key。假定有多台电脑，只要把每台电脑上的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了</p>
+
+<p>如果不想让别人看到Git库，一个是交点保护费，一个是搭建一个Git服务器，公司内部开发必备</p>
+
+<h3 id="添加远程库">添加远程库</h3>
+
+<p>现在的情景时，你已经在本地创建了一个Git仓库，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作</p>
+
+<p>1、Create a new repo，创建一个新的仓库</p>
+
+<p>可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库</p>
+
+<p>2、在本地的learngit仓库下运行命令</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git remote add origin git@github.com:yrj-creator/learnGit.git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>本地关联别人的远程库没有问题，但是推送是推不上去的，因为SSH Key公钥不在账户列表里</p>
+
+<p>添加后，远程库的名字就是origin，这是Git默认的叫法，也可以改成别的，但是origin这个名字一看就知道是远程库</p>
+
+<p>3、把本地的所有内容推送到远程库上</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git push <span class="nt">-u</span> origin master
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一摸一样了</p>
+
+<p>从现在起，只要本地做了提交，就可以通过命令</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git push origin master
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程</p>
+
+<p>由于远程库是空的，我们第一次推送master分支时，加上-u参数，Git不但会把本地的master分支内容推送的远程新master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令</p>
+
+<p>把本地master分支的最新修改推送至GitHub，现在，你就拥有了真正的分布式版本库</p>
+
+<p><img src="/img/typora-user-images/截屏2020-07-19 下午12.36.48.png" alt="" /></p>
+
+<h3 id="从远程库克隆">从远程库克隆</h3>
+
+<p>之前，是现有本地库，后有远程库的时候，如何关联远程库</p>
+
+<p>现在，我们假设从0⃣️开发，那么最好的方式是先创建远程库，然后，从远程库克隆</p>
+
+<p>1、登陆GitHub，创建一个新的仓库，勾选Initialize this repository with a README</p>
+
+<p>2、远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git clone git@github.com:yrj-creator/gitSkills.git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址，实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等多种协议。使用https除了速度慢以外，还有个最大的麻烦就是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能使用https</p>
+
+<h2 id="分支管理">分支管理</h2>
+
+<h2 id="标签管理">标签管理</h2>
+
+<h2 id="使用github">使用GitHub</h2>
+
+<p>我们一直使用GitHub作为免费的远程仓库</p>
+
+<p>在GitHub上，利用Git极其强大的克隆和分支功能，广大人民群众真正可以第一次自由参与各种开源项目</p>
+
+<p>1、在GitHub上，可以任意Fork开源仓库</p>
+
+<p>2、自己拥有Fork后的仓库的读写权限</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git clone git@github.com:michaelliao/bootstrap.git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>3、可以推送pull request给官方仓库来贡献代码</p>
+
+<p><img src="/img/typora-user-images/截屏2020-07-19 上午9.58.31.png" alt="" /></p>
+
+<h2 id="使用gitee">使用Gitee</h2>
+
+<h2 id="自定义git">自定义Git</h2>
+
+<h2 id="使用sourcetree">使用SourceTree</h2>
+
+:ET

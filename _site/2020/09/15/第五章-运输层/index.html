@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="计算机网络（第7版）第五章 - 余润杰的博客 | Yurj Blog">
+    <meta property="og:title" content="计算机网络（第7版）第五章 - YRJ的博客 | Yuruj Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="第五章 运输层
@@ -20,7 +20,7 @@
     <meta property="article:published_time" content="2020-09-15T00:00:00Z">
     
     
-    <meta property="article:author" content="yurj">
+    <meta property="article:author" content="yuruj">
     
     
     <meta property="article:tag" content="谢希仁">
@@ -32,9 +32,9 @@
     
     <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
     <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E8%BF%90%E8%BE%93%E5%B1%82/">
-    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
     
-    <title>计算机网络（第7版）第五章 - 余润杰的博客 | Yurj Blog</title>
+    <title>计算机网络（第7版）第五章 - YRJ的博客 | Yuruj Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -85,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Yurj Blog</a>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -108,6 +108,10 @@
                         <li>
                             <a href="/archive/">Archive</a>
                         </li>
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -242,7 +246,7 @@
                     <h1>计算机网络（第7版）第五章</h1>
                     
                     <h2 class="subheading">计算机网络运输层</h2>
-                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                    <span class="meta">Posted by yuruj on September 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -278,7 +282,7 @@
 
 <p>网络层为主机之间提供逻辑通信，而运输层为应用进程之间提供端到端的逻辑通信</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.27.14.png" alt="截屏2020-06-07 上午11.27.14" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 上午11.27.14.png" alt="" /></p>
 
 <p>复用和分用：复用是指在发送方不同的应用进程都可以使用同一个运输层协议传输数据（当然需要加上适当的首部），而分用是指接受方的运输层在剥去报文的首部后能够把这些数据正确交付目的应用进程</p>
 
@@ -288,7 +292,7 @@
 
 <p>运输层向高层用户屏蔽了下面网络核心的细节，他使应用进程看见的就是好像在两个运输层实体之间有一条端到端的逻辑通信信道，但这条逻辑通信信道对上层的表现却因运输层使用的不同协议而有很大的差别。当运输层采用面向连接的TCP协议时，尽管下面的网络是不可靠的（只提供尽最大努力服务），但这种逻辑通信信道就相当于是一条全双工的可靠信道。但当运输层采用无连接的UDP协议时，这种逻辑通信信道仍然是一条不可靠信道</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.35.04.png" alt="截屏2020-06-07 上午11.35.04" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 上午11.35.04.png" alt="" /></p>
 
 <h3 id="运输层的两个主要协议">运输层的两个主要协议</h3>
 
@@ -298,11 +302,11 @@
 
 <p>（2）传输控制协议 TCP transmission control protocol</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.37.11.png" alt="截屏2020-06-07 上午11.37.11" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 上午11.37.11.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.38.10.png" alt="截屏2020-06-07 上午11.38.10" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 上午11.38.10.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 上午11.39.00.png" alt="截屏2020-06-07 上午11.39.00" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 上午11.39.00.png" alt="" /></p>
 
 <h3 id="运输层的端口">运输层的端口</h3>
 
@@ -322,7 +326,7 @@
 
 <p>这里又分为两类，最重要的一类叫做熟知端口号或系统端口号，数值为0～1023.这些数值可在网址www.iana.org查到。IANA把这些端口号指派给了TCP/IP最重要的一些应用程序，让所有的用户都知道。当一个新的应用程序出现后，IANA必须为他指派一个熟知端口，否则互联网上的其他应用进程就无法和他进行通信</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午10.03.14.png" alt="截屏2020-06-07 下午10.03.14" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 下午10.03.14.png" alt="" /></p>
 
 <p>另一类叫做登记端口号，数值为1024～49151。这类端口是为没有熟知端口号的应用程序使用的。使用这类端口号必须在IANA按照规定的手续登记，以防止重复</p>
 
@@ -340,7 +344,7 @@
 
 <p>（2）UDP使用尽最大努力交付，即不保证可靠交付，因此主机不需要维持复杂的连接状态表</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午10.30.21.png" alt="截屏2020-06-07 下午10.30.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 下午10.30.21.png" alt="" /></p>
 
 <p>（4）UDP没有拥塞控制，因为网络出现的拥塞不会使源主机的发送速率降低。这对某些实时应用是很重要的。很多的实时应用（如IP会议、实时视频会议等）要求源主机以恒定的速率发送数据，并且允许在网络发生拥塞时丢失一些数据，但却不允许数据有太大的时延。UDP正好适合这种要求</p>
 
@@ -352,9 +356,9 @@
 
 <h3 id="udp的首部格式">UDP的首部格式</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.09.43.png" alt="截屏2020-06-07 下午11.09.43" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 下午11.09.43.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.11.21.png" alt="截屏2020-06-07 下午11.11.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 下午11.11.21.png" alt="" /></p>
 
 <p>如果接收方UDP发现收到的报文中目的端口号不正确，就丢弃该报文，并由网际控制报文协议ICMP发送端口不可达差错报文给发送方</p>
 
@@ -364,7 +368,7 @@
 
 <p>UDP用户数据报首部中检验和的计算方法有些特殊。在计算检验和时，要在UDP用户数据报之前增加12个字节的伪首部。所谓伪首部是因为这种伪首部并不是UDP数据报真正的首部，只是在计算检验和时，临时添加在UDP数据报前面，得到一个临时的UDP用户数据报。检验和就是按照这个临时的UDP用户数据报来计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算检验和</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-07 下午11.20.19.png" alt="截屏2020-06-07 下午11.20.19" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-07 下午11.20.19.png" alt="" /></p>
 
 <p>UDP的检验和是把首部和数据部分一起都检验，IP数据报只检验IP数据报的首部</p>
 
@@ -382,11 +386,11 @@
 
 <p>（4）TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接受缓存，用来临时存放双向通信的数据</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.35.43.png" alt="截屏2020-06-08 上午10.35.43" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.35.43.png" alt="" /></p>
 
 <p>（5）面向字节流。TCP中的流stream指的是流入到进程或从进程流出的字节序列</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.38.36.png" alt="截屏2020-06-08 上午10.38.36" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.38.36.png" alt="" /></p>
 
 <p>实际的网络中，一个TCP报文段包含上千个字节是很常见的</p>
 
@@ -400,13 +404,13 @@
 
 <p>端口号拼接到IP地址即构成了套接字</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.47.10.png" alt="截屏2020-06-08 上午10.47.10" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.47.10.png" alt="" /></p>
 
 <p>TCP连接的端点是个很抽象的套接字</p>
 
 <p>同一个名词socket却可表示多种不同的意思</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.48.18.png" alt="截屏2020-06-08 上午10.48.18" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.48.18.png" alt="" /></p>
 
 <h2 id="可靠传输的工作原理">可靠传输的工作原理</h2>
 
@@ -418,11 +422,11 @@
 
 <h3 id="停止等待协议">停止等待协议</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.54.47.png" alt="截屏2020-06-08 上午10.54.47" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.54.47.png" alt="" /></p>
 
 <p>1、无差错情况</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午10.55.30.png" alt="截屏2020-06-08 上午10.55.30" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午10.55.30.png" alt="" /></p>
 
 <p>2、出现差错</p>
 
@@ -436,7 +440,7 @@
 
 <p>3、确认丢失和确认迟到</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.02.17.png" alt="截屏2020-06-08 上午11.02.17" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.02.17.png" alt="" /></p>
 
 <p>通常A最终总能收到对所有发出的分组的确认。如果A不断重传分组但总是收不到确认，就说明通信线路太差，不能进行通信</p>
 
@@ -448,15 +452,15 @@
 
 <p>停止等待协议的优点是简单，但缺点是信道利用率太低</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.07.25.png" alt="截屏2020-06-08 上午11.07.25" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.07.25.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.09.01.png" alt="截屏2020-06-08 上午11.09.01" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.09.01.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.09.18.png" alt="截屏2020-06-08 上午11.09.18" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.09.18.png" alt="" /></p>
 
 <p>为了提高传输效率，发送方可以不使用低效率的停止等待协议，而是采用流水线传输</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.11.05.png" alt="截屏2020-06-08 上午11.11.05" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.11.05.png" alt="" /></p>
 
 <p>当使用流水线传输的时候，就要使用下面介绍的连续ARQ协议和滑动窗口协议</p>
 
@@ -464,37 +468,37 @@
 
 <p>滑动窗口协议比较复杂，是TCP协议的精髓所在</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.12.51.png" alt="截屏2020-06-08 上午11.12.51" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.12.51.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.14.39.png" alt="截屏2020-06-08 上午11.14.39" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.14.39.png" alt="" /></p>
 
 <h2 id="tcp报文段的首部格式">TCP报文段的首部格式</h2>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 上午11.15.26.png" alt="截屏2020-06-08 上午11.15.26" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 上午11.15.26.png" alt="" /></p>
 
 <p>（1）源端口和目的端口</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.09.04.png" alt="截屏2020-06-08 下午12.09.04" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.09.04.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.11.22.png" alt="截屏2020-06-08 下午12.11.22" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.11.22.png" alt="" /></p>
 
 <p>（4）数据偏移</p>
 
 <p>他指出TCP报文段的数据起始处距离TCP报文段的起始处有多远。这个字段实际上是指出TCP报文段的首部长度</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.13.38.png" alt="截屏2020-06-08 下午12.13.38" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.13.38.png" alt="" /></p>
 
 <p>（5）保留</p>
 
 <p>占六位，保留为今后使用，但目前应置为0</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.21.11.png" alt="截屏2020-06-08 下午12.21.11" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.21.11.png" alt="" /></p>
 
 <p>（7）确认号ACK（ACKnowledgment）</p>
 
 <p>仅当ACK=1时确认好字段才有效。当ACK=0时，确认号无效。TCP规定，在连接建立后所有传送的报文段都必须把ACK置1</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.24.17.png" alt="截屏2020-06-08 下午12.24.17" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.24.17.png" alt="" /></p>
 
 <p>（9）复位RST（ReSeT）</p>
 
@@ -508,29 +512,29 @@
 
 <p>用来释放一个连接。当FIN=1时，表明此报文段的发送方的数据已发送完毕，并要求释放运输连接</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.35.01.png" alt="截屏2020-06-08 下午12.35.01" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.35.01.png" alt="" /></p>
 
 <p>（13）检验和</p>
 
 <p>占2字节。检验和字段检验的范围包括首部和数据这两部分。和UDP用户数据报一样，在计算检验和时，要在TCP报文段的前面加上12字节的伪首部。伪首部的格式与UDP用户数据报的伪首部一样。但应把伪首部第4个字段中的17改为6（TCP的协议号是6），把第5字段中的UDP长度改为TCP长度。接收方收到此报文段后，仍要加上这个伪首部来计算检验和。若使用IPv6，则相应的伪首部也要改变</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.45.20.png" alt="截屏2020-06-08 下午12.45.20" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.45.20.png" alt="" /></p>
 
 <p>（15）选项</p>
 
 <p>长度可变，最长可达40字节。当没有使用选项时，TCP的首部长度是20字节</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.48.44.png" alt="截屏2020-06-08 下午12.48.44" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.48.44.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.49.00.png" alt="截屏2020-06-08 下午12.49.00" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.49.00.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.49.17.png" alt="截屏2020-06-08 下午12.49.17" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.49.17.png" alt="" /></p>
 
 <h2 id="tcp可靠传输的实现">TCP可靠传输的实现</h2>
 
 <h3 id="以字节为单位的滑动窗口">以字节为单位的滑动窗口</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午12.53.08.png" alt="截屏2020-06-08 下午12.53.08" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午12.53.08.png" alt="" /></p>
 
 <p>发送窗口表示：在没有收到B的确认的情况下，A可以连续把窗口内的数据都发送出去。凡是已经发送过的数据，在未收到确认之前都必须暂时保留，以便在超时重传时使用</p>
 
@@ -542,33 +546,33 @@
 
 <p>发送前沿也有可能向后收缩。这发生在对方通知的窗口缩小了。但TCP的标准强烈不赞成这样做。因为很可能发送方在收到这个通知以前已经发送了窗口中的许多数据，现在又要收缩窗口，不让发送这些数据，这样就会产生一些错误</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.36.27.png" alt="截屏2020-06-08 下午2.36.27" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.36.27.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.36.39.png" alt="截屏2020-06-08 下午2.36.39" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.36.39.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.37.04.png" alt="截屏2020-06-08 下午2.37.04" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.37.04.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.37.23.png" alt="截屏2020-06-08 下午2.37.23" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.37.23.png" alt="" /></p>
 
 <p>第一，缓存空间和序号空间都是有限的，并且都是循环使用的。最好是把他们画成圆环状的，但这里为了画图的方便，我们还是把他们画成长条状的</p>
 
 <p>第二，由于实际上缓存或窗口中的字节数是非常之大的</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.42.26.png" alt="截屏2020-06-08 下午2.42.26" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.42.26.png" alt="" /></p>
 
 <h3 id="超时重传时间的选择">超时重传时间的选择</h3>
 
 <p>TCP采用了一种自适应算法</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.50.42.png" alt="截屏2020-06-08 下午2.50.42" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.50.42.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.51.21.png" alt="截屏2020-06-08 下午2.51.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.51.21.png" alt="" /></p>
 
 <h3 id="选择确认sack">选择确认SACK</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.52.58.png" alt="截屏2020-06-08 下午2.52.58" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.52.58.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.53.11.png" alt="截屏2020-06-08 下午2.53.11" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.53.11.png" alt="" /></p>
 
 <h2 id="tcp的流量控制">TCP的流量控制</h2>
 
@@ -576,9 +580,9 @@
 
 <p>所谓流量控制flow control就是让发送方的发送速率不要太快，要让接受方来得及接受</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午2.55.40.png" alt="截屏2020-06-08 下午2.55.40" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午2.55.40.png" alt="" /></p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.05.58.png" alt="截屏2020-06-08 下午3.05.58" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午3.05.58.png" alt="" /></p>
 
 <h3 id="tcp的传输效率">TCP的传输效率</h3>
 
@@ -586,18 +590,17 @@
 
 <p>如何控制TCP发送报文段的时机仍然是一个较为复杂的问题</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.10.46.png" alt="截屏2020-06-08 下午3.10.46" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午3.10.46.png" alt="" /></p>
 
 <p>在TCP的实现中广泛使用Nagle算法</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.12.08.png" alt="截屏2020-06-08 下午3.12.08" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午3.12.08.png" alt="" /></p>
 
 <p>糊涂窗口综合征</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-06-08 下午3.14.31.png" alt="截屏2020-06-08 下午3.14.31" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-06-08 下午3.14.31.png" alt="" /></p>
 
 <h2 id="tcp的拥塞控制">TCP的拥塞控制</h2>
-
 
 
                 <hr style="visibility: hidden;">
@@ -665,47 +668,67 @@
         
         
         
-                <a data-sort="0005" 
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
                     title="学习笔记"
-                    rel="13">学习笔记</a>
+                    rel="28">学习笔记</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
                     href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
                     title="计算机网络"
-                    rel="6">计算机网络</a>
+                    rel="7">计算机网络</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
                     href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
                     title="谢希仁"
                     rel="6">谢希仁</a>
         
-                <a data-sort="0013" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="5">Python</a>
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
         
-                <a data-sort="0014" 
+                <a data-sort="0029" 
                     href="/archive/?tag=tips"
                     title="tips"
-                    rel="4">tips</a>
+                    rel="5">tips</a>
         
-                <a data-sort="0015" 
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
                     href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
                     title="深度学习"
                     rel="3">深度学习</a>
         
-                <a data-sort="0015" 
-                    href="/archive/?tag=AI"
-                    title="AI"
-                    rel="3">AI</a>
-        
-                <a data-sort="0016" 
+                <a data-sort="0031" 
                     href="/archive/?tag=%E7%88%AC%E8%99%AB"
                     title="爬虫"
-                    rel="2">爬虫</a>
+                    rel="3">爬虫</a>
         
-                <a data-sort="0016" 
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
@@ -805,7 +828,7 @@
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright &copy; Yurj Blog 2020
+                    Copyright &copy; Yuruj Blog 2020
                     <br>
                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"

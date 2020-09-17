@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="《汇编语言》（第一到五章 - YRJ的博客 | Yuruj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="第一章 基础知识
+">
+    
+    <meta property="article:published_time" content="2020-09-17T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yuruj">
+    
+    
+    <meta property="article:tag" content="汇编">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/17/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E7%AC%AC%E4%B8%80%E5%88%B0%E4%BA%94%E7%AB%A0/">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
+    
+    <title>《汇编语言》（第一到五章 - YRJ的博客 | Yuruj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/17/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E7%AC%AC%E4%B8%80%E5%88%B0%E4%BA%94%E7%AB%A0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E6%B1%87%E7%BC%96" title="汇编">汇编</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>《汇编语言》（第一到五章</h1>
+                    
+                    <h2 class="subheading">王爽著</h2>
+                    <span class="meta">Posted by yuruj on September 17, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="第一章-基础知识">第一章 基础知识</h1>
+
+<p>汇编语言是直接在硬件之上工作的编程语言，我们首先要了解硬件系统的结构，才能有效地应用汇编语言对其编程</p>
+
+<p>关于PC机及CPU物理结构和编程结构的全面研究，在《微机原理与接口》中进行；对于计算机一般的结构、功能、性能的研究在一门称为《组成原理》的理论层次更高的课程中进行</p>
+
+<p>汇编课程的研究重点在如何利用硬件系统的编程结构和指令集有效灵活的控制系统进行工作</p>
+
+<h2 id="11-机器语言">1.1 机器语言</h2>
+
+<p>机器语言是机器指令的集合。机器指令展开来讲就是一台机器可以正确执行的命令。电子计算机的机器指令是一列二进制数字。计算机将之转变为一列高低电平，以使计算机的电子器件受到驱动，进行运算</p>
+
+<p>现在，在我们常用的PC机中，有一个芯片来完成上面所说的计算机的功能。这个芯片就是CPU，微处理器。以后我们提到的计算机是指由CPU和其他受CPU直接或间接控制的芯片、器件、设备组成的计算机系统，比如我们常见的PC机</p>
+
+<p>每一种微处理器，由于硬件设计和内部结构的不同，就需要用不同的电平脉冲来控制，使他工作。所以每一种微处理器都有自己的机器指令集，也就是机器语言</p>
+
+<h2 id="12-汇编语言的产生">1.2 汇编语言的产生</h2>
+
+<p>汇编语言的主体是汇编指令。汇编指令和机器指令的差别在于指令的表示方法上。汇编指令是机器指令便于记忆的书写格式</p>
+
+<p>mov ax,bx 寄存器BX的内容送到AX中</p>
+
+<p>寄存器，简单地讲是CPU中可以存储数据的器件，一个CPU中有多个寄存器。AX是其中一个寄存器的代号，BX是另一个寄存器的代号</p>
+
+<p>编译器，程序员用汇编语言写出源程序，再用汇编编译器将其编译为机器码，由计算机最终执行</p>
+
+<h2 id="13-汇编语言的组成">1.3 汇编语言的组成</h2>
+
+<p>（1）汇编指令：机器码的助记符，有对应的机器码</p>
+
+<p>（2）伪指令：没有对应的机器码，由编译器识别，没有对应的机器码</p>
+
+<p>（3）其他符号：如+、-、*、/等，由编译器识别，没有对应的机器码</p>
+
+<p>汇编语言的核心是汇编指令，他决定了汇编语言的特性</p>
+
+<h2 id="14-存储器">1.4 存储器</h2>
+
+<p>要想让CPU工作，就必须向他提供指令和数据。指令和数据在存储器中存放，也就是我们平时所说的内存。磁盘不同于内存，磁盘上的数据或程序如果不读到内存中，就无法被CPU使用</p>
+
+<h2 id="15-指令和数据">1.5 指令和数据</h2>
+
+<p>指令和数据是应用上的概念。在内存或磁盘上，指令和数据没有任何区别，都是二进制信息</p>
+
+<h2 id="16-存储单元">1.6 存储单元</h2>
+
+<p>存储器被划分为若干个存储单元，每个存储单元从0开始顺序编号</p>
+
+<p>微型机存储器的存储单元可以存储一个Byte，及8个二进制位。一个存储器有128个存储单元</p>
+
+<p>磁盘的容量单位同内存的一样，实际上以上单位是微机中常用的计量单位</p>
+
+<h2 id="17-cpu对存储器的读写">1.7 CPU对存储器的读写</h2>
+
+<p>CPU要从内存中读数据，首先要指定存储单元的地址。也就是说他要先确定他要读取哪一个存储单元中的数据</p>
+
+<p>另外，在一台微机中，不只有存储器这一种器件。CPU在读写数据时还要指明，他要对哪一个器件进行操作，进行哪种操作，是从中读出数据，还是向里面写入数据</p>
+
+<p>CPU要进行数据的读写，必须和外部器件（标准的说法是芯片）进行下面3类信息的交互：</p>
+
+<p>1、存储单元的地址（地址信息）</p>
+
+<p>2、器件的选择，读或写的命令（控制信息）</p>
+
+<p>3、读或写的数据（数据信息）</p>
+
+<p>电子计算机能传输、处理的信息都是电信号，电信号当然要用导线传送。在计算机中有专门连接CPU和其他芯片的导线，通常称为总线。总线从物理上来讲，就是一根根导线的集合。根据传输的信息的不同，总线上从逻辑上又分为3类，地址总线、控制总线和数据总线</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午6.15.37.png" alt="" /></p>
+
+<h2 id="18-地址总线">1.8 地址总线</h2>
+
+<p>地址总线上能传送多少个不同的信息，CPU就可以对多少个存储单元进行寻址</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午6.19.20.png" alt="" /></p>
+
+<h2 id="19-数据总线">1.9 数据总线</h2>
+
+<p>CPU与内存或其他器件之间的数据传送是通过数据总线来进行的。数据总线的宽度决定了CPU和外界的数据传送速度。8根数据总线一次可传送一个8位二进制数据。16根数据总线一次可传送两个字节</p>
+
+<h2 id="110-控制总线">1.10 控制总线</h2>
+
+<p>CPU对外部器件的控制是通过控制总线来进行的</p>
+
+<p>控制总线是一些不同控制线的集合。有多少根控制总线，就意味着CPU提供了对外部器件的多少种控制。所以，控制总线的宽度决定了CPU对外部器件的控制能力</p>
+
+<p>前面所讲的内存读或写命令是由几根控制线综合发出的，其中有一根称为读信号输出的控制线负责由CPU向外传送读信号，CPU向该控制线上输出低电平表示将要读取数据，有一根称为写信号输出的控制线则负责传送写信号</p>
+
+<h2 id="111内存地址空间">1.11内存地址空间</h2>
+
+<p>如果一个CPU的地址总线高度为10，那么可以寻址1024个内存单元，这1024个可寻到的内存单元就构成这个CPU的内存地址空间</p>
+
+<h2 id="112-主板">1.12 主板</h2>
+
+<p>在每一台PC机中，都有一个主板，主板上有核心器件和一些主要器件，这些器件通过总线（地址总线、数据总线、控制总线）相连。这些器件有CPU、存储器、外围芯片组、拓展插槽等。拓展插槽上一般插有RAM内存条和各类接口卡</p>
+
+<h2 id="113-接口卡">1.13 接口卡</h2>
+
+<p>计算机系统中，所有可用程序控制其工作的设备，必须受到CPU的控制。CPU对外部设备都不能直接控制，如显示器、音响、打印机等。直接控制这些设备进行工作的是插在拓展插槽上的接口卡</p>
+
+<p>拓展插槽通过总线和CPU相连，所以接口卡也通过总线同CPU相连</p>
+
+<p>CPU可以直接控制这些接口卡，从而实现CPU对外设的间接控制。简单地讲，就是CPU通过总线向接口卡发送命令，接口卡根据CPU的命令控制外设进行工作</p>
+
+<h2 id="114-各类存储器芯片">1.14 各类存储器芯片</h2>
+
+<p>一台PC机中，装有多个存储器芯片，这些存储器芯片从物理连接上看是独立的、不同的器件。从读写属性上看分为两类：随机存储器（RAM）和只读存储器（ROM）。随机存储器可读可写，但必须带电存储，关机后存储的内容丢失；只读存储器只能读取不能写入，关机后其中的内容不丢失。这些存储器从功能和连接上又分为以下几类</p>
+
+<p>1、随机存储器</p>
+
+<p>用于存放供CPU使用的绝大部分程序和数据，主随机存储器一般由两个位置上的RAM组成，装在主板上RAM和插在拓展插槽上的RAM</p>
+
+<p>2、装有BIOS的ROM</p>
+
+<p>BIOS是由主板和各类接口卡（如显卡、网卡等）厂商提供的软件系统，可以通过它利用该硬件设备进行最基本的输入输出。在主板和某些接口卡上插有存储相应BIOS的ROM。例如，主板上的ROM存储着主板的BIOS（通常称为系统的BIOS）</p>
+
+<p>3、接口卡上的RAM</p>
+
+<p>某些接口卡需要对大批量输入、输出数据进行暂时存储，在其上装有RAM。最典型的是显示卡上的RAM，一般称为显存。显示卡随时将显存中的数据向显示器上输出。换句话说，我们将需要显示的内容写入显存，就会出现在显示器上</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午7.27.09.png" alt="" /></p>
+
+<h2 id="115-内存地址空间">1.15 内存地址空间</h2>
+
+<p>上述的那些存储器，在物理上是独立的器件，但是在以下两点上相同</p>
+
+<p>1、都和CPU的总线相连</p>
+
+<p>2、CPU对他们进行读或写的时候都通过控制线发出内存读写命令</p>
+
+<p>这也就是说，CPU在操控他们的时候，把他们都当作内存来对待，把他们总的看作一个由若干存储单元组成的逻辑存储器，这个逻辑存储器就是我们所说的内存地址空间</p>
+
+<p>在汇编这门课中，我们所面对的是内存地址空间</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午7.31.59.png" alt="" /></p>
+
+<p>所有的物理存储器被看作一个由若干存储单元组成的逻辑存储器，每个物理存储器在这个逻辑存储器中占有一个地址段，即一段地址空间。CPU在这段地址空间中读写数据，实际上就是在相对应的物理存储器中读写数据</p>
+
+<p>内存地址空间的大小受CPU地址总线宽度的限制。8086CPU的地址总线宽度为20，可以传送2^20^个不同的地址信息，则8086PC的内存地址空间大小为1MB</p>
+
+<p>我们在基于一个计算机硬件系统编程的时候，必须知道这个系统中的内存地址空间分配情况。因为当我们想在某类存储器中读写数据的时候，必须知道他的第一个单元的地址和最后一个单元的地址，才能保证读写操作是在预期的存储器中进行</p>
+
+<p>不同的计算机系统的内存地址空间的分配情况是不同的</p>
+
+<h1 id="第2章-寄存器">第2章 寄存器</h1>
+
+<p>一个典型的CPU由运算器、控制器、寄存器（CPU工作原理）等器件构成，这些器件靠内部总线相连</p>
+
+<p>在CPU中：</p>
+
+<p>运算器进行信息处理</p>
+
+<p>寄存器进行信息存储</p>
+
+<p>控制器控制各种器件进行工作</p>
+
+<p>内部总线连接各种器件，在他们之间进行数据的传送</p>
+
+<p>对于一个汇编程序猿来说，CPU中的主要部件是寄存器。寄存器是CPU中程序员可以用指令读写的部件。程序员通过改变各种寄存器中的内容来实现对CPU的控制</p>
+
+<p>不同的CPU，寄存器的个数、结构是不相同的。8086CPU有14个寄存器，每个寄存器有一个名称。这些寄存器是：AX、BX、CX、DX、SI、DI、SP、BP、IP、CS、SS、DS、ES、PSW</p>
+
+<h2 id="21-通用寄存器">2.1 通用寄存器</h2>
+
+<p>8086CPU的所有寄存器都是16位的，可以存放两个字节。AX、BX、CX、DX这4个寄存器通常用来存放一般性的数据，被称为通用寄存器</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午7.53.45.png" alt="" /></p>
+
+<p>8086CPU的上一代CPU中的寄存器都是8位的，为了保证兼容，使原来基于上一代CPU编写的程序稍加修改就可以运行在8086上，8086CPU的AX、BX、CX、DX这4个寄存器都分为两个可独立使用的8位寄存器来用：</p>
+
+<p>AX可分为AH和AL；BX可分为BH和BL；CX可分为CH和CL；DX可分为DH和DL</p>
+
+<h2 id="22-字在寄存器中的存储">2.2 字在寄存器中的存储</h2>
+
+<p>出于对兼容性的考虑，8086CPU可以一次性处理以下两种尺寸的数据</p>
+
+<p>字节：byte，一个字节由8个bit组成，可以存在8位寄存器中</p>
+
+<p>字：word，一个字由两个字节组成，这两个字节分别称为这个字的高位字节和低位字节</p>
+
+<p>为了区分不同的进制，在16进制表示的数据后面加H，在二进制表示的数据后面加B，十进制表示的数据后面什么也不加</p>
+
+<h2 id="23-几条汇编指令">2.3 几条汇编指令</h2>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午8.03.10.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午8.18.27.png" alt="" /></p>
+
+<p>在进行数据传送或运算时，要注意指令的两个操作对象的位数应当是一致的</p>
+
+<h2 id="24-物理地址">2.4 物理地址</h2>
+
+<p>CPU访问内存单元时，要给出内存单元的地址。所有的内存单元构成的存储空间是一个一维的线性空间。我们将这个唯一的地址称为物理地址</p>
+
+<p>CPU通过地址总线送入存储器的，必须是一个内存单元的物理地址。在CPU向地址总线上发出物理地址之前，必须要在内部先形成这个物理地址，不同的CPU可以有不同的形成物理地址的方式。我们现在讨论8086CPU是如何在内部形成内存单元的物理地址的</p>
+
+<h2 id="25-16位结构的cpu">2.5 16位结构的CPU</h2>
+
+<p>概括的将，16位结构（16位机、字长为16位等常见说法，与16位结构的含义相同）描述了一个CPU具有以下几方面的结构特性</p>
+
+<p>1、运算器一次最多可以处理16位的数据</p>
+
+<p>2、寄存器的最大宽度为16位</p>
+
+<p>3、寄存器和运算器之间的通路为16位</p>
+
+<p>8086是16位结构的CPU，这也就是说，在8086内部，能够一次性处理、传输、暂时存储的信息的最大长度是16位的。内存单元的地址在送上地址总线之前，必须在CPU中处理、传输、暂时存放，对于16位CPU，能一次性处理、传输、暂时存储16位的地址</p>
+
+<h2 id="26-8086cpu给出物理地址的方法">2.6 8086CPU给出物理地址的方法</h2>
+
+<p>8086CPU有20位地址总线，可以传送20位地址，达到1MB寻址能力。8086CPU又是16位结构，在内部一次性处理、传输、暂时存储的地址为16位。从8086CPU的内部结构来看，如果将地址从内部简单的发出，那么它只能送出16位的地址，表现出的寻址能力只有64KB</p>
+
+<p>8086CPU采用一种在内部用两个16位地址合成的方法来形成一个20位的物理地址</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午8.53.55.png" alt="" /></p>
+
+<p>（1）CPU中的相关部件提供两个16位的地址，一个称为段地址，另一个称为偏移地址</p>
+
+<p>（2）段地址和偏移地址通过内部总线送入一个称为地址加法器的部件</p>
+
+<p>（3）地址加法器将两个16位地址合成为一个20位的物理地址</p>
+
+<p>（4）地址加法器通过内部总线将20位物理地址送入输入输出控制电路</p>
+
+<p>（5）输入输出控制电路将20位物理地址送上地址总线</p>
+
+<p>（6）20位物理地址被地址总线传送到存储器</p>
+
+<p>地址加法器采用物理地址=段地址x16+偏移地址的方法用段地址和偏移地址合成物理地址</p>
+
+<p>段地址x16有一个更为常用的说法是左移4位</p>
+
+<h2 id="27-段地址x16偏移地址物理地址的本质含义">2.7 段地址x16+偏移地址=物理地址的本质含义</h2>
+
+<p>CPU在访问内存时，用一个基础地址和一个相对于基础地址的偏移地址相加，给出内存单元的物理地址</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午9.03.16.png" alt="" /></p>
+
+<h2 id="28-段的概念">2.8 段的概念</h2>
+
+<p>内存并没有分段，段的划分来自于CPU</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-07 下午9.09.03.png" alt="" /></p>
+
+<p>以后，在编程时可以根据需要，将若干地址连续的内存单元看作一个段，用段地址x16定位段的起始地址（基础地址），用偏移地址定位段中的内存单元。有两点需要注意：段地址x16必然是16的倍数，所以一个段的起始地址也一定是16的倍数；偏移地址为16位，16位地址的寻址能力为64KB，所以一个段的长度最大为64KB</p>
+
+<h2 id="29-段寄存器">2.9 段寄存器</h2>
+
+<p>8086CPU在访问内存时要由相关部件提供内存单元的段地址和偏移地址，送入地址加法器合成物理地址。这里，需要看一下，是什么部件提供段地址。段地址在8086CPU的段寄存器中存放。8086CPU有4个段寄存器：CS、DS、SS、ES。当8086CPU要访问内存时由这4个段寄存器提供内存单元的段地址</p>
+
+<h2 id="210-cs和ip">2.10 CS和IP</h2>
+
+<p>CS和IP是8086CPU中两个最关键的寄存器，他们指示了CPU当前要读取指令的地址。CS为代码段寄存器，IP为指令指针寄存器</p>
+
+<p>在8086CPUPC机中，任意时刻，设CS中的内容为M，IP中的内容为N，8086CPU将从内存MX16+N单元开始，读取一条指令并执行</p>
+
+<p>也可以这样表示：8086机中，任意时刻，CPU将CS:IP指向的内容当作指令执行</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.53.00.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.54.51.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.57.12.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.57.33.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.57.54.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午12.58.11.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午1.00.19.png" alt="" /></p>
+
+<p>通过上面的过程展示，8086CPU的工作过程可以简要描述如下</p>
+
+<p>（1）从CS:IP指向的内存单元读取指令，读取的指令进入指令缓冲器</p>
+
+<p>（2）IP = IP + 所读取指令的长度，从而指向下一条指令</p>
+
+<p>（3）执行指令，转到步骤（1），重复这个过程</p>
+
+<p>在8086CPU加电启动或复位后（即CPU刚开始工作时）CS和IP被设置为CS=FFFFH，IP=0000H，即在8086PC机刚启动时，CPU从内存FFFF0H单元中读取指令执行，FFFF0H单元中的指令是8086PC机开机后执行的第一条指令</p>
+
+<p>在内存中，指令和数据没有任何区别。如果提出一个问题：CPU根据什么将内存中的信息看作指令？如何回答？我们可以说，CPU将CS:IP指向的内存单元中的内容看作指令，因为，在任何时候，CPU将CS、IP中的内容当作指令的段地址和偏移地址，用他们合成指令的物理地址，到内存中读取指令码，执行</p>
+
+<h2 id="211-修改csip的指令">2.11 修改CS、IP的指令</h2>
+
+<p>在CPU中，程序员能够用指令读写的部件只有寄存器，程序员可以通过改变寄存器中的内容实现对CPU的控制。CPU从何处执行指令是由CS、IP中的内容决定的，程序员可以通过改变CS、IP中的内容来控制CPU执行目标指令</p>
+
+<p>8086CPU大部分寄存器的值，都可以用mov指令来改变，mov指令被称为传送指令</p>
+
+<p>但是，mov指令不能用于设置CS、IP的值</p>
+
+<p>能够改变CS、IP的内容的指令被统称为转移指令。我们现在介绍一个最简单的可以修改CS、IP的指令：jmp指令</p>
+
+<p>jmp 段地址: 偏移地址 用指令中给出的段地址修改CS，偏移地址修改IP</p>
+
+<p>若想仅修改IP的内容，可用形如jmp 某一合法寄存器的指令完成</p>
+
+<p>jmp ax好似mov IP,ax</p>
+
+<p>适当的时候，可以用已知的汇编指令的语法来描述新学的汇编指令的功能</p>
+
+<h2 id="212-代码段">2.12 代码段</h2>
+
+<p>在编程时，可以根据需要，将一组内存单元定义为一个段</p>
+
+<p>将这一段内存当成代码段，仅仅是编程时的一种安排</p>
+
+<h2 id="实验1-查看cpu和内存用机器指令和汇编指令编程">实验1 查看CPU和内存，用机器指令和汇编指令编程</h2>
+
+<h3 id="预备知识debug的使用">预备知识：Debug的使用</h3>
+
+<p>Debug是DOS、Windows都提供的实模式（8086方式）程序的调试工具。使用它，可以查看CPU各种寄存器中的内容、内存的情况和在机器码级跟踪程序的运行</p>
+
+<p>Debug功能：</p>
+
+<p>R命令查看、改变CPU寄存器的内容</p>
+
+<p>D命令查看内存中的内容</p>
+
+<p>E命令改写内存中的内容</p>
+
+<p>U命令将内存中的机器指令翻译成汇编指令</p>
+
+<p>T命令执行一条机器指令</p>
+
+<p>A命令以汇编指令的格式在内存中写入一条机器指令</p>
+
+<p>Debug是在DOS方式下使用的程序</p>
+
+<p>进入DOS：</p>
+
+<p>1、重新启动计算机，进入DOS方式，此时进入的是实模式的DOS</p>
+
+<p>2、在Windows中进入DOS方式，此时进入的是虚拟8086模式的DOS</p>
+
+<h4 id="用r命令查看改变cpu寄存器的内容">用R命令查看、改变CPU寄存器的内容</h4>
+
+<p>-r</p>
+
+<p>-r ax</p>
+
+<h4 id="用debug的d命令查看内存中的内容">用Debug的D命令查看内存中的内容</h4>
+
+<p>-d 段地址:偏移地址</p>
+
+<p>Debug将列出从指定内存单元开始的128个内存单元的内容</p>
+
+<p>使用D命令，Debug将输出3部分内容：</p>
+
+<p>1、中间是从指定地址开始的128个内存单元的内容，用16进制的格式输出，每行的输出从16整数倍的地址开始，最多输出16个单元的内容。每行中间有一个-，他将每行的输出分为两部分</p>
+
+<p>2、左边是每行的起始地址</p>
+
+<p>3、右边是每个内存单元中的数据对应的可显示的ASCII代码。若没有对应可显示的ASCII字符，Debug就用.来代替</p>
+
+<p>我们用Debug看到的都是原来就在内存中的内容，这些内容受随时都有可能变化的系统环境的影响。当然，我们也可以改变内存、寄存器中的内容</p>
+
+<p>-d 一进入用D命令直接查看，将列出Debug预设的地址处的内容，在用过上面的那个之后在直接使用D命令，可列出后续的内容</p>
+
+<p>-d 段地址:偏移地址 结尾偏移地址 指定D命令的查看范围</p>
+
+<h4 id="用debug的e命令改写内存中的内容">用Debug的E命令改写内存中的内容</h4>
+
+<p>要将内存1000:0~1000:9单元中的内容分别写为0、1、2、3、4、5、6、7、8、9，可以用</p>
+
+<p>-e 起始地址 数据 数据 数据 …</p>
+
+<p>也可采用提问的方式来一个一个地改写内存中的内容</p>
+
+<p>-e 起始地址</p>
+
+<p>可以用E命令向内存中写入字符</p>
+
+<p>可以用E命令向内存中写入字符串（按多个字符处理而不是并入一个地方）</p>
+
+<h4 id="用e命令向内存中写入机器码用u命令查看内存中机器码的含义用t命令执行内存中的机器码">用E命令向内存中写入机器码，用U命令查看内存中机器码的含义，用T命令执行内存中的机器码</h4>
+
+<p>机器码也是数据，可以用E命令将机器码写入内存</p>
+
+<p>-u 起始地址 将内存单元中的内容翻译为汇编指令，并显示出来</p>
+
+<p>U命令的显示输出分为三部分，每一条机器指令的地址、机器指令、机器指令所对应的汇编指令</p>
+
+<p>简单的使用T命令可以执行CS:IP指向的指令</p>
+
+<h4 id="用debug的a命令以汇编指令的形式在内存中写入机器指令">用Debug的A命令以汇编指令的形式在内存中写入机器指令</h4>
+
+<p>前面我们使用E命令写入机器指令，这样做很不方便，最好能直接以汇编指令的形式写入指令</p>
+
+<p>-a 1000:0</p>
+
+<p>从起始地址依次输入指令</p>
+
+<p>-a</p>
+
+<p>从一个预设的地址开始输入指令</p>
+
+<p>a==5</p>
+
+<p>5==a</p>
+
+<p>编译时错误</p>
+
+<p>运行时错误</p>
+
+<p>函数式 sml</p>
+
+<h1 id="第三章-寄存器内存访问">第三章 寄存器（内存访问）</h1>
+
+<h2 id="31-内存中字的存储">3.1 内存中字的存储</h2>
+
+<p>CPU中，用16位寄存器来存储一个字。高8位存放高位字节，低8位存放低位字节。在内存中存储是，由于内存单元是字节单元，则一个字要用两个地址连续的内存单元来存放</p>
+
+<p>字单元，即存放一个字型数据（16位）的内存单元，由两个地址连续的内存单元组成</p>
+
+<p>我们将起始地址为N的字单元简称为N地址字单元</p>
+
+<h2 id="32-ds和address">3.2 DS和[address]</h2>
+
+<p>8086CPU通常有一个DS寄存器，通常用来存放要访问数据的段地址</p>
+
+<p>前面我们使用mov指令，可完成两种传送：1、将数据直接送入寄存器2、将一个寄存器中的内容送入另一个寄存</p>
+
+<p>器</p>
+
+<p>也可以使用mov指令将一个内存单元中的内容送入一个寄存器中</p>
+
+<p>mov 寄存器名，内存单元地址</p>
+
+<p>[…]表示一个内存单元，[…]中的0表示内存单元的偏移地址。我们知道，只有偏移地址是不能定位一个内存单元的，指令执行的时候，8086CPU会自动取ds中的数据为内存单元的段地址</p>
+
+<p>8086CPU不支持将数据直接送入段寄存器的操作，ds是一个段寄存器，所以mov ds,1000H这条指令是非法的。那么如何将1000H送入ds呢？只好用一个寄存器来进行中转，即先将1000H送入一个一般的寄存器，如bx，再将bx中的内容送入ds。这属于8086CPU硬件设计的问题</p>
+
+<h2 id="33-字的传送">3.3 字的传送</h2>
+
+<p>前面我们用mov指令在寄存器和内存之间进行字节型数据的传送。因为8086CPU是16位结构，有16根数据线，所以，可以一次性传送16位的数据，也就是说可以一次性传送一个字。只要在mov指令中给出16位的寄存器就可以进行16位数据的传送了</p>
+
+<h2 id="34-movaddsub指令">3.4 mov、add、sub指令</h2>
+
+<p>到现在，我们知道，mov指令可以有以下几种形式：</p>
+
+<p>mov 寄存器，数据                mov ax,8</p>
+
+<p>mov 寄存器，寄存器.           mov ax,bx</p>
+
+<p>mov 寄存器，内存单元        mov ax,[0]</p>
+
+<p>mov 内存单元，寄存器        mov [0],ax</p>
+
+<p>mov 段寄存器，寄存器        mov ds,ax</p>
+
+<p>推测：</p>
+
+<p>（1）8086CPU内部有寄存器到段寄存器的通路，那么也应该有相反的通路</p>
+
+<p>（2）既然可以从寄存器向内存单元传送数据，那么也应该有mov 内存单元，段寄存器，从段寄存器向内存单元传送数据</p>
+
+<p>（3）mov 段寄存器，内存单元也应该可行</p>
+
+<p>add sub</p>
+
+<h2 id="35-数据段">3.5 数据段</h2>
+
+<p>在编程时，根据需要，可以将一组内存单元定义为一个段</p>
+
+<p>专门存储数据的内存空间，可以定义一个数据段</p>
+
+<p>在具体操作时，用ds存放数据段的段地址，再根据需要，通过相关指令访问数据段中的具体单元</p>
+
+<h2 id="36-栈">3.6 栈</h2>
+
+<p>LIFO last in first out</p>
+
+<h2 id="37-cpu提供的栈机制">3.7 CPU提供的栈机制</h2>
+
+<p>现今的CPU中都有栈的机制，8086CPU也不例外。8086CPU提供相关的指令来以栈的方式访问内存空间。这意味着，在基于8086CPU编程的时候，可以将一段内存当作栈来使用</p>
+
+<p>PUSH POP</p>
+
+<p>8086CPU的入栈和出栈操作都是以字为单位进行的</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午8.18.55.png" alt="" /></p>
+
+<p>8086CPU中，有两个寄存器，段寄存器SS和寄存器SP，栈顶的段地址存放在SS中，偏移地址存放在SP中。任意时刻，SS:SP指向栈顶元素</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午8.22.49.png" alt="" /></p>
+
+<p>8086CPU中，入栈时，栈顶从高地址向低地址方向增长</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-08 下午8.26.21.png" alt="" /></p>
+
+<h2 id="38-栈顶超界的问题">3.8 栈顶超界的问题</h2>
+
+<p>8086CPU不保证我们对栈的操作不会超界</p>
+
+<p>8086CPU的工作机理，他只考虑当前的情况：当前的栈顶在何处、当前要执行的指令是哪一条</p>
+
+<p>我们在编程的时候要自己操心栈顶超界的问题，要根据可能要用到的最大栈空间，来安排栈的大小，防止入栈的数据过多而导致的超界；执行出栈操作的时候也要注意，以防栈空的时候继续出栈而导致的超界</p>
+
+<h2 id="39-pushpop指令">3.9 push、pop指令</h2>
+
+<p>push 寄存器</p>
+
+<p>pop 寄存器</p>
+
+<p>push 段寄存器</p>
+
+<p>pop 段寄存器</p>
+
+<p>push 内存单元</p>
+
+<p>pop 内存单元</p>
+
+<p>指令执行时，CPU要知道内存单元的地址，可以在push、pop指令中只给出内存单元的偏移地址，段地址在指令执行时，CPU从ds中取得</p>
+
+<p>push、pop实质上就是一种内存传送指令，可以在寄存器和内存之间传送数据</p>
+
+<p>两步操作</p>
+
+<h2 id="310-栈段">3.10 栈段</h2>
+
+<p>栈段</p>
+
+<p>将一段内存当作栈段，仅仅是我们在编程时的一种安排，CPU并不会由于这种安排，就在执行push、pop等栈操作指令时自动的将我们定义的栈段当作栈空间来访问</p>
+
+<h2 id="实验2-用机器指令和汇编指令编程">实验2 用机器指令和汇编指令编程</h2>
+
+<h3 id="预备知识debug的使用-1">预备知识：Debug的使用</h3>
+
+<h4 id="关于d命令">关于D命令</h4>
+
+<h1 id="第四章-第一个程序">第四章 第一个程序</h1>
+
+<h2 id="41-一个源程序从写出到执行的过程">4.1 一个源程序从写出到执行的过程</h2>
+
+<p>第一步：编写汇编源程序</p>
+
+<p>第二步：对源程序进行编译连接</p>
+
+<p>使用汇编语言编译程序对源程序文件中的源程序进行编译，产生目标文件；再用连接程序对目标文件进行连接，生成可在操作系统中直接运行的可执行文件</p>
+
+<p>可执行文件包含两个部分：</p>
+
+<p>（1）程序（从源程序中的汇编指令翻译过来的机器码）和数据（源程序中定义的数据）</p>
+
+<p>（2）相关的描述信息（比如，程序有多大、要占用多少内存空间等）</p>
+
+<p>第三步：执行可执行文件中的程序</p>
+
+<p>操作系统依照可执行文件中的描述信息，将可执行文件中的机器码和数据加载入内存，并进行相关的初始化（比如设置CS:IP指向第一条要执行的指令），然后由CPU执行程序</p>
+
+<h2 id="42-源程序">4.2 源程序</h2>
+
+<p><img src="/img/typora-user-images/截屏2020-09-12 下午9.30.21.png" alt="" /></p>
+
+<p>1、伪指令</p>
+
+<p>在汇编语言源程序中，包含两种指令，一种是汇编指令，一种是伪指令。汇编指令有对应的机器码的指令，可以被编译为机器指令，最终为CPU所执行。而伪指令没有对应的机器指令，最终不被CPU所执行。伪指令是由编译器来执行的指令，编译器根据伪指令来进行相关的编译工作</p>
+
+<p>（1）XXX segment XXXends</p>
+
+<p>segment和ends是一对成对使用的伪指令，这是在写可被编译器编译的汇编程序时，必须要用到的一对伪指令。segment和ends的功能是定义一个段，segment说明一个段开始，ends说明一个段结束。一个段必须有一个名称来标识</p>
+
+<p>一个汇编程序是由多个段组成的，这些段被用来存放代码、数据或当作栈空间来使用。一个源程序中所有将被计算机所处理的信息：指令、数据、栈，被划分到了不同的段中</p>
+
+<p>一个有意义的汇编程序中至少要有一个段，这个段用来存放代码</p>
+
+<p>（2）end</p>
+
+<p>end是一个汇编程序的结束标记，编译器在编译汇编程序的过程中，如果碰到了伪指令end，就结束对源程序的编译。所以，在我们写程序的时候，如果程序写完了，要在结尾处加上伪指令end。否则，编译器在编译程序时，就无法知道程序在何处结束</p>
+
+<p>（3）assume</p>
+
+<p>这条伪指令的含义是假设。他假设某一段寄存器和程序中的某一个用segment…ends定义的段相关联。通过assume说明这种关联，在需要的情况下，编译程序可以将段寄存器和某一个具体的段相联系。assume并不是一条非要深入理解不可的伪指令</p>
+
+<p>2、源程序中的程序</p>
+
+<p>源程序中的汇编指令组成了最终由计算机执行的程序，而源程序中的伪指令是由编译器来处理的，他们并不实现我们编程的最终目的。这里所说的程序就是指源程序中最终由计算机执行、处理的指令或数据</p>
+
+<p>注意，以后可以将源程序文件中的所有内容称为源程序，将源程序中最终由计算机执行、处理的指令或数据，称为程序。程序最先以汇编指令的形式存在源程序中，经编译、连接后转变为机器码，存储在可执行文件中</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-12 下午10.40.31.png" alt="" /></p>
+
+<p>3、标号</p>
+
+<p>比如codesg。一个标号指代了一个地址。比如codesg在segment的前面，作为一个段的名称，这个段的名称最终将被编译、连接程序处理为一个段的段地址</p>
+
+<p>4、程序的结构</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-12 下午10.44.02.png" alt="" /></p>
+
+<p>5、程序返回</p>
+
+<p>下面，我们在DOS(一个单任务操作系统)的基础上，简单的讨论一下程序运行的问题</p>
+
+<p>一个程序P2在可执行文件中，则必须有一个正在运行的程序P1，将P2从可执行文件中加载入内存后，将CPU的控制权交给P2，P2才能得以运行。P2开始运行后，P1暂停运行。而当P2运行完毕后，应该讲CPU的控制权交还给使他得以运行的程序P1，此后，P1继续运行</p>
+
+<p>一个程序结束后，将CPU的控制权交还给使他得以运行的程序，我们称这个过程为：程序返回</p>
+
+<p>在程序的末尾添加返回的程序段</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-12 下午10.50.05.png" alt="" /></p>
+
+<p>6、语法错误和逻辑错误</p>
+
+<p>程序在编译时被编译器发现的错误是语法错误</p>
+
+<p>在源程序编译后，在运行时发生的错误是逻辑错误</p>
+
+<p>语法错误容易发现和解决，而逻辑错误不容易被发现</p>
+
+<h2 id="43-编辑源程序">4.3 编辑源程序</h2>
+
+<p>可以用任意的文本编辑器来编辑源程序，只要最终将其存储为纯文本文件即可</p>
+
+<p>在我们的课程中，使用DOS下面的Edit</p>
+
+<h2 id="44-编译">4.4 编译</h2>
+
+<p>源程序文件 c:\1.asm</p>
+
+<p>对其进行编译，生成包含机器代码的目标文件</p>
+
+<p>在编译一个源程序之前首先要找到一个相应的编译器。在我们的课程中，采用微软的masm5.0汇编编译器，文件名为masm.exe</p>
+
+<p>（1）进入DOS方式，进入c:\masm目录，运行masm.exe</p>
+
+<p>默认的文件拓展名为asm，如果源程序文件不是asm，就要输入他的全名，比如P1.txt</p>
+
+<p>当前路径只用输入名字，其他目录需要输入路径</p>
+
+<p>（2）继续输入要编译出的目标文件的名称 1.obj</p>
+
+<p>（3）编译程序提示输入列表文件的名称，这个文件时编译器将源程序编译为目标文件的过程中产生的中间结果。可以让编译起不生成这个文件，直接按Enter</p>
+
+<p>（4）编译程序提示输入交叉引用文件的名称，同样是中间结果，可以不生成这个文件，按Enter</p>
+
+<h2 id="45-连接">4.5 连接</h2>
+
+<p>我们使用微软的Overlay Linker3.60连接器，文件名为link.exe</p>
+
+<p>（1）进入DOS方式，运行link.exe。默认的文件拓展名为obj，可如果文件名不是以obj为拓展名，则要输入他的全名，比如目标文件名为p1.bin</p>
+
+<p>（2）连接程序提示输入映像文件的名称。这个文件是连接程序将目标文件连接为可执行文件过程中产生的中间结果，可以让连接程序不生成这个文件</p>
+
+<p>（3）连接程序提示输入库文件的名称。库文件里面包含了一些可以调用的子程序，如果程序中调用了某一个库文件中的子程序，就需要在连接的时候，将这个库文件和目标文件连接到一起，生成可执行文件</p>
+
+<p>连接的作用我们并不想过多的讨论</p>
+
+<p>在汇编过程中，我们将会接触到许多知识、概念，对于这些，我们并不是都有深入讨论的必要</p>
+
+<p>我们学习汇编的主要目的，就是要通过汇编语言进行编程而深入的理解计算机底层的基本工作机理，达到可以随心所欲地控制计算机的目的。基于这种考虑，我们的编程活动，大都是直接对硬件进行的。我们希望直接对硬件编程，却并不希望用机器码编程。我们用汇编语言编程，就要用到编辑器Edit、编译器masm、连接器link、调试工具Debug等所有工具，而这些工具都是在操作系统之上运行的程序，所以我们的学习过程必须在操作系统的环境中进行。我们在一个操作系统环境下，使用了许多工具，这势必要牵扯到操作系统、编译原理等方面的知识和原理。我们只是利用这些环境、工具来方便我们的学习，而不希望这些东西分散了我们的注意力。所以，对于涉及而又不在我们学习的主要内容之中的东西，我们只做简单的解释</p>
+
+<p>连接的作用有以下几个</p>
+
+<p>(1) 当源程序很大时,可以将它分为多个源程序文件来编译,每个源程序编译成为目
+标文件后,再用连接程序将它们连接到一起,生成一个可执行文件</p>
+
+<p>(2) 程序中调用了某个库文件中的子程序,需要将这个库文件和该程序生成的目标文
+件连接到一起,生成一个可执行文件</p>
+
+<p>(3) 一个源程序编译后,得到了存有机器码的目标文件,目标文件中的有些内容还不
+能直接用来生成可执行文件,连接程序将这些内容处理为最终的可执行信息。所以，在只有一个源程序文件,而又不需要调用某个库中的子程序的情况下,也必须用连接程序对目标文件进行处理,生成可执行文件</p>
+
+<h2 id="46-以简化的方式进行编译和连接">4.6 以简化的方式进行编译和连接</h2>
+
+<p>编译、连接的最终目的使用源程序文件生成可执行文件。在这个过程中所产生的中间文件都可以忽略。我们可以用一种较为简捷的方式进行编译、连接。</p>
+
+<h2 id="47-1exe的执行">4.7 1.exe的执行</h2>
+
+<p>C:\masm&gt;1</p>
+
+<h2 id="48-谁将可执行文件中的程序装载进入内存并使他运行">4.8 谁将可执行文件中的程序装载进入内存并使他运行？</h2>
+
+<h3 id="操作系统的外壳">操作系统的外壳</h3>
+
+<p>操作系统是由多个功能模块组成的庞大、复杂的软件系统。任何通用的操作系统，都要提供一个称为shell(外壳)的程序，用户(操作人员)使用这个程序来操作计算机系统进行工作</p>
+
+<p>DOS中有一个程序command.com，这个程序在DOS中称为命令解释器，也就是DOS系统的shell</p>
+
+<p>DOS启动时，先完成其他重要的初始化工作，然后运行command.com，command.com运行后，执行完其他的相关任务，在屏幕上显示出由当前盘符和当前路径组成的提示符，然后等待用户的输入</p>
+
+<p>用户可以输入所要执行的命令，这些命令由command执行，command执行完这些命令后，再次显示由当前盘符和当前路径组成的提示符，等待用户的输入</p>
+
+<p>如果用户要执行一个程序，则输入该程序的可执行文件的名称，command首先根据文件名找到可执行文件，然后将这个可执行文件中的程序加载入内存，设置CS:IP指向程序的入口。此后，command暂停运行，CPU运行程序。程序运行结束后，返回到command中，command再次显示由当前盘符和当前路径组成的提示符，等待用户的输入</p>
+
+<p>在DOS中，command处理各种输入：命令或要执行的程序的文件名。我们就是通过command来进行工作的</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-13 下午1.06.09.png" alt="" /></p>
+
+<h2 id="49-程序执行过程的跟踪">4.9 程序执行过程的跟踪</h2>
+
+<p>可以用Debug来跟踪一个程序的运行过程</p>
+
+<p>Debug可以将程序加载入内存，设置CS:IP指向程序的入口，但Debug并不放弃对CPU的控制，这样，我们就可以使用Debug的相关命令来单步执行程序，查看每一条指令的执行结果</p>
+
+<p>debug 1.exe</p>
+
+<p>Debug将程序从可执行文件加载入内存后，cx中存放的是程序的长度</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-13 下午1.10.46.png" alt="" /></p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-13 下午1.13.00.png" alt="" /></p>
+
+<p>用T命令单步执行程序中的每一条指令，并观察每条指令的执行结果，到了int 21，我们要用P命令执行</p>
+
+<p>int 21执行后，显示出Program terminated normally，返回到Debug中，表示程序正常结束</p>
+
+<p>使用Q命令退出Debug，将返回到command中</p>
+
+<p>command加载Debug，Debug加载1.exe，从1.exe中的程序返回到Debug，从Debug返回到command</p>
+
+<h1 id="第五章-bx和loop指令">第五章 [BX]和loop指令</h1>
+
+<p>1、[bx]和内存单元的描述</p>
+
+<p>要完整描述一个内存单元，需要两种信息：内存单元的地址和内存单元的长度（类型）</p>
+
+<p>单元的长度（类型）可以由具体指令中的其他操作对象（比如说寄存器）指出</p>
+
+<p>mov ax, [bx]</p>
+
+<p>将一个内存单元的内容送入ax，这个内存单元的长度为2字节（字单元），存放一个字，偏移地址在bx中，段地址在ds中</p>
+
+<p>2、loop</p>
+
+<p>循环</p>
+
+<p>3、我们定义的描述性的符号：”()”</p>
+
+<p>为了描述上的简洁，在以后的课程中，我们将使用一个描述性的符号来表示一个寄存器或一个内存单元中的内容</p>
+
+<p>()中的元素可以有3种类型：寄存器名 段寄存器名 内存单元的物理地址（一个20位数据）</p>
+
+<p>（X）所表示的数据有两种类型：字节、字。是哪种类型是由寄存器名或具体的运算决定，比如：</p>
+
+<p>(al)、(bl)、(cl)等得到的数据为字节型</p>
+
+<p>(ds)、(ax)、(bx)等得到的数据为字型</p>
+
+<p>4、约定符号idata表示常量</p>
+
+<h2 id="51-bx">5.1 [BX]</h2>
+
+<p>mov ax, [bx]</p>
+
+<p>bx中存放的数据作为一个偏移地址EA，段地址SA默认的在ds中，将SA:EA处的数据送入ax中</p>
+
+<p>bx中存放的数据作为一个偏移地址EA，段地址SA默认的在ds中，将ax处的数据送入SA:EA中</p>
+
+<p>inc bx 的含义是bx中的内容加1</p>
+
+<h2 id="52-loop指令">5.2 Loop指令</h2>
+
+<p>loop指令的格式是：loop标号，CPU执行loop指令的时候，要进行两步操作</p>
+
+<p>1、(cx)=(cx-1)</p>
+
+<p>2、判断cx中的值，不为零则转至标号处执行程序，如果为零则向下执行</p>
+
+<p>通常我们用loop指令来实现循环功能，cx中存放循环次数</p>
+
+<p>assume cs:code</p>
+
+<p>code segment</p>
+
+<p>​		mov ax, 2</p>
+
+<p>​		mov cx, 11</p>
+
+<p>s:	 add ax, ax</p>
+
+<p>​		loop s</p>
+
+<p>​		mov ax, 4c00h</p>
+
+<p>​		int 21h</p>
+
+<p>code ends</p>
+
+<p>end</p>
+
+<p>（1）标号</p>
+
+<p>在汇编语言中，标号代表一个地址，程序中有一个标号s。它实际上标识了一个地址，这个地址处有一条指令：add ax, ax</p>
+
+<p>（2）loop s</p>
+
+<p>CPU执行loop s的时候，要进行两步操作</p>
+
+<p>cx和loop指令相配合实现循环功能的3个要点</p>
+
+<p>（1）在cx中存放循环次数</p>
+
+<p>（2）loop指令中的标号所标识地址要在前面</p>
+
+<p>（3）要循环执行的程序段，要写在标号和loop指令的中间</p>
+
+<h2 id="53-在debug中跟踪用loop指令实现的循环程序">5.3 在Debug中跟踪用loop指令实现的循环程序</h2>
+
+<p>大于9FFFh的十六进制数据A000H，在书写的时候都是以字母开头的。而在汇编源程序中，数据不能以字母开头，所以要再前面加0。比如，A000h在汇编源程序中要写为0A000h</p>
+
+<p>用Debug加载p3.exe后，用r命令查看寄存器中的内容</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/16/Thread-Management/" data-toggle="tooltip" data-placement="top" title="Threading Programming Guide（2）">
+                        Previous<br>
+                        <span>Threading Programming Guide（2）</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="28">学习笔记</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="7">计算机网络</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="5">tips</a>
+        
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="3">爬虫</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yuruj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

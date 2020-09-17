@@ -1,0 +1,60 @@
+I"l<p>数据分析
+numpy  表达N维数组的最基础库
+pandas Python数据分析高层次应用库
+SciPy 数学、科学和工程计算功能库</p>
+
+<p>数据可视化
+Matplotlib 高质量的二维数据可视化功能库 通过matplotlib.pyplot子库调用各可视化效果
+Seaborn 统计类数据可视化功能库
+Mayavi 三维科学数据可视化功能库</p>
+
+<p>文本处理
+PyPDF2 用来处理pdf文件的工具集
+NLTK 自然语言文本处理第三方库
+Python-docx 创建或更新Microsoft Word文件的第三方库</p>
+
+<p>人工智能
+Scikit-learn 机器学习方法工具集
+TensorFlow AlphaGo背后的机器学习计算框架
+MXNet 基于神经网络的深度学习计算框架</p>
+
+<p>网络爬虫
+Requests 最友好的网络爬虫功能库
+Scrapy 优秀的网络爬虫框架 Python数据分析高层次应用库
+pyspider 强大的Web页面爬取系统</p>
+
+<p>Web信息提取
+Beautiful Soup HTML和XML的解析库
+RE 正则表达式解析和处理功能库 python最主要的标准库之一 不用安装
+Python-Goose 提取文章类型Web页面的功能库</p>
+
+<p>Web网站开发
+Django 最流行的Web应用框架
+Pyramid 规模适中的Web应用框架
+Flask Web应用开发微框架</p>
+
+<p>网络应用开发
+WeRoBot 微信公众号开发框架
+aip 百度AI开发平台接口
+MyQR 二维码生成第三方库</p>
+
+<p>图形用户界面
+PyQt5 Qt开发框架的python接口
+wxPython 跨平台GUI开发框架
+PyGObject 使用GTK+开发GUI的功能库</p>
+
+<p>游戏开发
+PyGame 简单的游戏开发功能库
+Panda3D 开源、跨平台的3D渲染和游戏开发库
+cocos2d 构建2D游戏和图形界面交互式应用的框架</p>
+
+<p>虚拟现实
+VR Zero 在树莓派上开发VR应用的Python库
+pyovr Oculus Rift的Python开发接口
+Vizard 基于Python的通用VR开发引擎</p>
+
+<p>图形艺术
+Quads 迭代的艺术
+ascii_art ASCII艺术库
+turtle 海龟绘图体系</p>
+:ET

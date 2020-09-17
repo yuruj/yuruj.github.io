@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="计算机网络（第7版）第七章 - 余润杰的博客 | Yurj Blog">
+    <meta property="og:title" content="计算机网络（第7版）第七章 - YRJ的博客 | Yuruj Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="第七章 网络安全
@@ -20,7 +20,7 @@
     <meta property="article:published_time" content="2020-09-15T00:00:00Z">
     
     
-    <meta property="article:author" content="yurj">
+    <meta property="article:author" content="yuruj">
     
     
     <meta property="article:tag" content="谢希仁">
@@ -32,9 +32,9 @@
     
     <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
     <meta property="og:url" content="http://localhost:4000/2020/09/15/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-    <meta property="og:site_name" content="余润杰的博客 | Yurj Blog">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
     
-    <title>计算机网络（第7版）第七章 - 余润杰的博客 | Yurj Blog</title>
+    <title>计算机网络（第7版）第七章 - YRJ的博客 | Yuruj Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -85,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Yurj Blog</a>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -108,6 +108,10 @@
                         <li>
                             <a href="/archive/">Archive</a>
                         </li>
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -242,7 +246,7 @@
                     <h1>计算机网络（第7版）第七章</h1>
                     
                     <h2 class="subheading">计算机网络网络安全</h2>
-                    <span class="meta">Posted by yurj on September 15, 2020</span>
+                    <span class="meta">Posted by yuruj on September 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -278,7 +282,7 @@
 
 <p>计算机网络的通信面临两大类威胁，即被动攻击和主动攻击</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 上午10.15.41.png" alt="截屏2020-07-23 上午10.15.41" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 上午10.15.41.png" alt="" /></p>
 
 <p>被动攻击是指攻击者从网络上窃听他人的通信内容。通常把这类攻击称为截获。在被动攻击中，攻击者只是观察和分析某一个协议数据单元PDU而不干扰信息流。即使这些数据对攻击者来说是不易理解的，它也可以通过观察PDU的协议控制信息部分，了解正在通信的协议实体的地址和身份，研究PDU的长度和传输的频度，从而了解所交换的数据的某种性质。这种被动攻击又称为流量分析</p>
 
@@ -339,7 +343,7 @@
 
 <h3 id="数据加密模型">数据加密模型</h3>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 上午11.46.41.png" alt="截屏2020-07-23 上午11.46.41" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 上午11.46.41.png" alt="" /></p>
 
 <p>这里我们假定加密密钥和解密密钥都是一样的。但实际上他们可以是不一样的（即使不一样，这两个密钥也必然有某种相关性）。密钥通常由密钥中心提供。当密钥需要向原地传送时，一定要通过另一个安全信道</p>
 
@@ -401,11 +405,11 @@
 
 <p>采用公钥算法要比采用对称密钥算法更容易实现</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午12.50.47.png" alt="截屏2020-07-23 下午12.50.47" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午12.50.47.png" alt="" /></p>
 
 <p>上述过程只是对报文进行了签名，对报文X本身却未保密</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午12.51.35.png" alt="截屏2020-07-23 下午12.51.35" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午12.51.35.png" alt="" /></p>
 
 <h2 id="鉴别">鉴别</h2>
 
@@ -431,7 +435,7 @@
 
 <p>密码散列函数，要找到两个不同的报文，他们具有同样的密码散列函数输出，在计算上是不可行的。也就是说，密码散列函数实际上是一种单向函数</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.16.51.png" alt="截屏2020-07-23 下午1.16.51" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午1.16.51.png" alt="" /></p>
 
 <p>2、实用的密码散列函数MD5和SHA-1</p>
 
@@ -457,11 +461,11 @@
 
 <p>3、报文鉴别码</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.38.12.png" alt="截屏2020-07-23 下午1.38.12" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午1.38.12.png" alt="" /></p>
 
 <p>像上面列举的做法，实际上是不可行的。解决的办法并不复杂，就是对散列进行一次加密</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.39.18.png" alt="截屏2020-07-23 下午1.39.18" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午1.39.18.png" alt="" /></p>
 
 <p>报文鉴别码MAC（Message Authentication Code）</p>
 
@@ -477,11 +481,11 @@
 
 <p>实体鉴别和报文鉴别不同。报文鉴别是对每一个收到的报文都要鉴别报文的发送者，而实体鉴别实在系统接入的全部持续时间内对和自己通信的对方实体只需验证一次</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.49.22.png" alt="截屏2020-07-23 下午1.49.22" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午1.49.22.png" alt="" /></p>
 
 <p>为了对付重放攻击，可以使用不重数nonce。不重数就是一个不重复使用的大随机数，即一次一数。在鉴别过程中不重数可以使B能够把重复的鉴别请求和新的鉴别请求区分开来</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午1.50.52.png" alt="截屏2020-07-23 下午1.50.52" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午1.50.52.png" alt="" /></p>
 
 <p>在使用公钥密码体制时，可以对不重数进行签名认证</p>
 
@@ -567,11 +571,11 @@
 
 <p>在这些安全关联SA上传送的就是IP安全数据报</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.21.11.png" alt="截屏2020-07-23 下午3.21.11" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午3.21.11.png" alt="" /></p>
 
 <p>原始的IP数据报隐藏在IP安全数据报中了</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.22.21.png" alt="截屏2020-07-23 下午3.22.21" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午3.22.21.png" alt="" /></p>
 
 <p>建立安全关联SA的路由器或主机，必须维护这条SA的状态信息</p>
 
@@ -593,7 +597,7 @@
 
 <p>以隧道方式为例</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午3.27.01.png" alt="截屏2020-07-23 下午3.27.01" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午3.27.01.png" alt="" /></p>
 
 <p>P343</p>
 
@@ -636,7 +640,7 @@
 
 <p>很多浏览器都已使用了SSL和TLS</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.20.52.png" alt="截屏2020-07-23 下午4.20.52" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午4.20.52.png" alt="" /></p>
 
 <p>使用SSL后的情况有些特殊，因为SSL增强了TCP的服务（更加安全了），因此，SSL应该是运输层协议。然而实际上，使用安全运输的应用程序（如HTTP）却把SSL驻留在应用层</p>
 
@@ -662,7 +666,7 @@
 
 <p>上述的SSL安全会话建立过程</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.28.54.png" alt="截屏2020-07-23 下午4.28.54" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午4.28.54.png" alt="" /></p>
 
 <p>目前全球通过SSL进行的网上交易每年以超过数百亿美元。但SSL还缺少一些措施来防止在互联网商务中出现各种可能的欺骗行为</p>
 
@@ -690,7 +694,7 @@
 
 <p>防火墙是一种特殊编程的路由器，安装在一个网点和网络的其余部分之间，目的是实施访问控制策略</p>
 
-<p><img src="/Users/yurunjie/Library/Application Support/typora-user-images/截屏2020-07-23 下午4.42.04.png" alt="截屏2020-07-23 下午4.42.04" style="zoom:50%;" /></p>
+<p><img src="/img/typora-user-images/截屏2020-07-23 下午4.42.04.png" alt="" /></p>
 
 <p>防火墙技术一般分为以下两类</p>
 
@@ -796,47 +800,67 @@
         
         
         
-                <a data-sort="0005" 
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
                     href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
                     title="学习笔记"
-                    rel="13">学习笔记</a>
+                    rel="28">学习笔记</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
                     href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
                     title="计算机网络"
-                    rel="6">计算机网络</a>
+                    rel="7">计算机网络</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
                     href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
                     title="谢希仁"
                     rel="6">谢希仁</a>
         
-                <a data-sort="0013" 
-                    href="/archive/?tag=Python"
-                    title="Python"
-                    rel="5">Python</a>
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
         
-                <a data-sort="0014" 
+                <a data-sort="0029" 
                     href="/archive/?tag=tips"
                     title="tips"
-                    rel="4">tips</a>
+                    rel="5">tips</a>
         
-                <a data-sort="0015" 
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
                     href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
                     title="深度学习"
                     rel="3">深度学习</a>
         
-                <a data-sort="0015" 
-                    href="/archive/?tag=AI"
-                    title="AI"
-                    rel="3">AI</a>
-        
-                <a data-sort="0016" 
+                <a data-sort="0031" 
                     href="/archive/?tag=%E7%88%AC%E8%99%AB"
                     title="爬虫"
-                    rel="2">爬虫</a>
+                    rel="3">爬虫</a>
         
-                <a data-sort="0016" 
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
                     href="/archive/?tag=%E7%AE%97%E6%B3%95"
                     title="算法"
                     rel="2">算法</a>
@@ -936,7 +960,7 @@
 </ul>
 
                 <p class="copyright text-muted">
-                    Copyright &copy; Yurj Blog 2020
+                    Copyright &copy; Yuruj Blog 2020
                     <br>
                     Powered by <a href="http://huangxuan.me">Hux Blog</a> |
                     <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"

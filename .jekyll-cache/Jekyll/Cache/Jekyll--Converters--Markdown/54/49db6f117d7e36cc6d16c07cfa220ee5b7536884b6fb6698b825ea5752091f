@@ -1,0 +1,39 @@
+I"�<p>Typora支持使用Tex/LaTex语法渲染普通数学。渲染过程用MathJax处理</p>
+
+<p>H~2~0 e^2^  ==高亮==</p>
+
+<h2 id="math-blockdisplay-math">Math Block（Display Math）</h2>
+
+\[\begin{align*}
+y = y(x,t) &amp;= A e^{i\theta} \\
+&amp;= A (\cos \theta + i \sin \theta) \\
+&amp;= A (\cos(kx - \omega t) + i \sin(kx - \omega t)) \\
+&amp;= A\cos \Big(\frac{2\pi}{\lambda}x - \frac{2\pi v}{\lambda} t \Big) + i A\sin \Big(\frac{2\pi}{\lambda}x - \frac{2\pi v}{\lambda} t \Big)  \\
+&amp;= A\cos \frac{2\pi}{\lambda} (x - v t) + i A\sin \frac{2\pi}{\lambda} (x - v t)
+\end{align*}\]
+
+<h2 id="inline-math">Inline Math</h2>
+
+<p>f = $\frac{2 \pi}{T}$</p>
+
+<p>$lim_{x \to \infty} \exp(-x) = 0$</p>
+
+<h2 id="tex-commands-available-in-typora">TeX Commands available in Typora</h2>
+
+<p>http://docs.mathjax.org/en/v2.6-latest/tex.html#supported-latex-commands</p>
+
+<p>You could add new commands using <code class="language-plaintext highlighter-rouge">\def</code> or<code class="language-plaintext highlighter-rouge">\newcommand</code></p>
+
+<h2 id="chemistry-expressions">Chemistry Expressions</h2>
+
+<h2 id="cross-reference">Cross Reference</h2>
+
+<p>Typora支持TeX样式的引用语法</p>
+
+<h2 id="自动编号">自动编号</h2>
+
+<p>Typora支持自动编号数学块</p>
+
+<p>To turn on this feature, please open preferences panel, and enable “Auto Numbering Math Equations” under the “Markdown” section</p>
+
+:ET

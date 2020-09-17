@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="">
+    <meta name="keywords"  content="">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="看了点金融学mooc？ - YRJ的博客 | Yuruj Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="金融学原理
+">
+    
+    <meta property="article:published_time" content="2020-09-16T00:00:00Z">
+    
+    
+    <meta property="article:author" content="yuruj">
+    
+    
+    <meta property="article:tag" content="金融学">
+    
+    <meta property="article:tag" content="学习笔记">
+    
+    
+    <meta property="og:image" content="http://localhost:4000/img/ybmq.jpg">
+    <meta property="og:url" content="http://localhost:4000/2020/09/16/%E9%87%91%E8%9E%8D%E5%AD%A6%E5%8E%9F%E7%90%86/">
+    <meta property="og:site_name" content="YRJ的博客 | Yuruj Blog">
+    
+    <title>看了点金融学mooc？ - YRJ的博客 | Yuruj Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2020/09/16/%E9%87%91%E8%9E%8D%E5%AD%A6%E5%8E%9F%E7%90%86/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Yuruj Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="/archive/">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from 
+         * $toggle/$collapse will break global delegation.
+         * 
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.  
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/timg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/timg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=%E9%87%91%E8%9E%8D%E5%AD%A6" title="金融学">金融学</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0" title="学习笔记">学习笔记</a>
+                        
+                    </div>
+                    <h1>看了点金融学mooc？</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by yuruj on September 16, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<h1 id="金融学原理">金融学原理</h1>
+
+<h2 id="第一章-对金融学进行界定">第一章 对金融学进行界定</h2>
+
+<h3 id="金融学的定义金融学是研究人们怎样进行稀缺资源跨期配置的学科">金融学的定义：金融学是研究人们怎样进行稀缺资源跨期配置的学科</h3>
+
+<h3 id="金融体系">金融体系</h3>
+
+<ul>
+  <li>
+    <p>金融工具</p>
+
+    <ul>
+      <li>资金跨期配置的载体</li>
+    </ul>
+  </li>
+  <li>
+    <p>金融中介机构</p>
+
+    <ul>
+      <li>资金跨期配置的经济实体</li>
+    </ul>
+  </li>
+  <li>
+    <p>金融市场</p>
+
+    <ul>
+      <li>资金跨期配置的场所</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="企业是为社会提供商品和劳务的经济实体">企业是为社会提供商品和劳务的经济实体</h3>
+
+<h2 id="第二章-企业的组织形式">第二章 企业的组织形式</h2>
+
+<h3 id="财产的组织形式和承担的法律责任">财产的组织形式和承担的法律责任</h3>
+
+<ul>
+  <li>
+    <p>自然人企业</p>
+
+    <ul>
+      <li>
+        <p>独资企业</p>
+
+        <ul>
+          <li>无限责任</li>
+          <li>管理成本低</li>
+          <li>无重复纳税</li>
+        </ul>
+      </li>
+      <li>
+        <p>合伙人企业</p>
+
+        <ul>
+          <li>只缴纳个人所得税</li>
+          <li>
+            <p>无限责任</p>
+
+            <ul>
+              <li>LP 负有有限责任的合伙人 通常只出资，不参与企业日常决策</li>
+              <li>GP 负有无限责任的合伙人 出资少，但负责企业日常规划</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>公司（法人企业）</p>
+
+    <ul>
+      <li>公司以其全部财产对企业债务承担有限责任</li>
+      <li>股东拥有公司的股权或所有权</li>
+      <li>股东一旦购买股份出资，就是公司的法人财产，法人财产不可分割，股东不能要回自己的出资可在二级市场出售转让</li>
+      <li>
+        <p>有限责任公司</p>
+
+        <ul>
+          <li>2-50人共同出资</li>
+          <li>以其认缴的出资额为限对公司债务承担责任</li>
+        </ul>
+      </li>
+      <li>
+        <p>股份有限公司</p>
+
+        <ul>
+          <li>2人以上200人以下为发起人</li>
+          <li>一半以上发起人在中国境内有住所，注册资本最低限500万</li>
+        </ul>
+      </li>
+      <li>
+        <p>特点</p>
+
+        <ul>
+          <li>法人财产</li>
+          <li>股东有限责任</li>
+          <li>股份可以转让</li>
+          <li>募集的资金在理论上 可以很多</li>
+          <li>
+            <p>双重纳税</p>
+
+            <ul>
+              <li>公司所得税</li>
+              <li>红利税</li>
+            </ul>
+          </li>
+          <li>所有权和管理权分离</li>
+        </ul>
+      </li>
+      <li>公司是最为重要的一种 现代企业</li>
+      <li>
+        <p>公司治理机制</p>
+
+        <ul>
+          <li>股东大会</li>
+          <li>董事会</li>
+          <li>总经理</li>
+          <li>
+            <p>监事会</p>
+
+            <ul>
+              <li>代表员工利益</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>公司的委托代理问题</p>
+
+        <ul>
+          <li>
+            <p>分散股权结构下的股东和管理层之间的委托代理问题</p>
+
+            <ul>
+              <li>管理层花公司的钱给办公室坐豪华装修</li>
+            </ul>
+          </li>
+          <li>
+            <p>集中股权下的小股东和大股东之间</p>
+
+            <ul>
+              <li>公司向其大股东的公司低价提供产品</li>
+            </ul>
+          </li>
+          <li>
+            <p>负债经营的公司的债权人和股东之间</p>
+
+            <ul>
+              <li>公司将其借款来的资金投资在高风险的投资项目上</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>解决公司委托代理问题</p>
+
+        <ul>
+          <li>
+            <p>激励机制</p>
+
+            <ul>
+              <li>通过薪酬激励或管理层持股</li>
+            </ul>
+          </li>
+          <li>
+            <p>监督机制</p>
+
+            <ul>
+              <li>通过公司治理结构分配的权利</li>
+            </ul>
+          </li>
+          <li>
+            <p>市场机制</p>
+
+            <ul>
+              <li>资本市场的控制权争夺，敌意接管</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>公司的目标</p>
+
+        <ul>
+          <li>最大化股东的财富</li>
+          <li>核心取决于众多因素</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="第三章-金融学五大原理">第三章 金融学五大原理</h2>
+
+<h3 id="现金流是很重要的">现金流是很重要的</h3>
+
+<ul>
+  <li>利润就是企业的盈利</li>
+  <li>企业的利润总额是由营业利润、投资收益和营业外收支差额三个主要部分构成</li>
+  <li>
+    <p>利润与现金流都能反映企业经营绩效、但又有不同</p>
+
+    <ul>
+      <li>利润是在应收应记制下得到的</li>
+      <li>现金流是在收付实现制下得到的</li>
+    </ul>
+  </li>
+  <li>利润较高的含义是指：企业具有一定的盈利能力，利润结构基本合理，利润中的现金比率高</li>
+  <li>
+    <p>如果企业的应收账款多，企业的利润中真正可用的现金就少</p>
+
+    <ul>
+      <li>利润反映了企业的经营成果，越大当然越好，但只有高质量的利润，企业的财务才是健康的</li>
+    </ul>
+  </li>
+  <li>一个企业可以亏损，但只要现金流好，企业可以继续生存下来，最终通过成本下降收入的上升，实现盈利</li>
+  <li>但是，如果一个企业现金流紧张，存活的可能性就没有了，实现盈利就无从谈起</li>
+</ul>
+
+<h3 id="货币具有时间价值">货币具有时间价值</h3>
+
+<ul>
+  <li>投资收益或机会成本是造成货币时间价值的原因</li>
+  <li>未来的钱不如现在的钱值钱</li>
+  <li>货币的时间价值是我们金融决策时必须考虑的，因为金融决策的主要特点就是跨期配置资金</li>
+  <li>将现在的资金数量转换成等值的未来资金的数量，或将未来的资金数量转换为现在等值的资金数量，就是所谓的复利或折现</li>
+  <li>由于通常金融决策发生在当前，所以折现是我们金融决策最常用的换算方法</li>
+</ul>
+
+<h3 id="承担风险需要相应的回报">承担风险需要相应的回报</h3>
+
+<ul>
+  <li>
+    <p>推迟消费要得到的补偿</p>
+
+    <ul>
+      <li>无风险收益是投资者对推迟消费最低的补偿要求</li>
+    </ul>
+  </li>
+  <li>
+    <p>承担风险得到的补偿</p>
+
+    <ul>
+      <li>投资风险越高，投资者要求的收益补偿就越高</li>
+    </ul>
+  </li>
+  <li>所需要的回报是投资者期望的回报，与投资的实际回报是两个不同的概念</li>
+  <li>风险与回报成正比，回报是预期回报，高风险项目有时会导致较低的实际回报</li>
+</ul>
+
+<h3 id="市场价格通常是正确的">市场价格通常是正确的</h3>
+
+<ul>
+  <li>有效市场是在该市场中交易的资产的价格在任何时刻充分反映所有可用信息的市场</li>
+  <li>像纽交所或深交所这样的证券市场是否有效，取决于新发布的信息被纳入价格的速度</li>
+  <li>一个有效的股票市场的特点是拥有大量的以营利为目的的个人，他们通过买卖股票来应对新信息的发布</li>
+  <li>有效市场理论的关键点，股票的价格是其价值的晴雨表</li>
+  <li>任何有利于企业价值增值的经营行为，都会传递出相应的消息，从而刺激股价上升</li>
+  <li>
+    <p>有效市场假说</p>
+
+    <ul>
+      <li>基于投资者理性的假说</li>
+    </ul>
+  </li>
+  <li>
+    <p>行为金融</p>
+
+    <ul>
+      <li>基于投资者情绪化的假说</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="委托代理关系">委托代理关系</h3>
+
+<ul>
+  <li>简单的说，只要一个人依赖于另一个人的活动，那么委托代理关系就产生了</li>
+  <li>由于客观上委托方和代理方存在依赖关系，而双方的利益函数不一样，加上信息不对称导致监管成本很高</li>
+  <li>常常出现代理人损害委托人利益的情形</li>
+  <li>当我们考虑金融决策时，不管是买股票或买基金，上市公司和基金公司都有委托代理问题</li>
+  <li>而这样的委托代理问题，对投资者来说，可能遭遇投资价值下降的风险</li>
+</ul>
+
+<h3 id="总结">总结</h3>
+
+<ul>
+  <li>五个原理从不同的方面提醒我们金融决策的 独特性</li>
+  <li>不要把鸡蛋放在一个篮子里，控制风险</li>
+  <li>相似度很大的产品价格应该差不多，一价定律</li>
+</ul>
+
+<h2 id="第四章-金融市场与金融机构">第四章 金融市场与金融机构</h2>
+
+<h3 id="金融市场">金融市场</h3>
+
+<ul>
+  <li>交易金融工具的场所</li>
+  <li>
+    <p>分类</p>
+
+    <ul>
+      <li>按照交易的工具</li>
+      <li>
+        <p>按照经营场所</p>
+
+        <ul>
+          <li>
+            <p>场内交易市场，有固定交易场所</p>
+
+            <ul>
+              <li>纽交所</li>
+              <li>上交所</li>
+              <li>深交所</li>
+            </ul>
+          </li>
+          <li>
+            <p>场外交易场所，由电子交易系统</p>
+
+            <ul>
+              <li>NASDAQ</li>
+              <li>债券市场</li>
+              <li>外汇市场</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>按照资金交易期限</p>
+
+        <ul>
+          <li>资本市场，供应一年以上的中长期资金</li>
+          <li>货币市场，一年以下的短期资金的融通市场</li>
+        </ul>
+      </li>
+      <li>
+        <p>按照交易性质</p>
+
+        <ul>
+          <li>股票或债券的一级市场</li>
+          <li>股票或债券的二级市场</li>
+        </ul>
+      </li>
+      <li>
+        <p>按照交割期限</p>
+
+        <ul>
+          <li>金融现货市场</li>
+          <li>金融期货市场</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="金融机构提供金融服务和金融产品的企业">金融机构，提供金融服务和金融产品的企业</h3>
+
+<ul>
+  <li>商业银行</li>
+  <li>投资银行</li>
+  <li>保险公司</li>
+  <li>
+    <p>共同基金</p>
+
+    <ul>
+      <li>一种专业投资公司发行的基金份额</li>
+      <li>专业的投资公司：基金管理公司</li>
+      <li>
+        <p>根据基金募集资金投向和申赎方式，基金可以分为不同类别</p>
+
+        <ul>
+          <li>封闭式基金</li>
+          <li>开放式基金</li>
+          <li>
+            <p>ETF：交易型开放式指数基金</p>
+
+            <ul>
+              <li>封闭</li>
+              <li>开放</li>
+              <li>指数基金</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>风险投资企业</p>
+
+    <ul>
+      <li>投资于创业期企业的基金</li>
+      <li>风险投资企业的直接投资主体往往采用合伙企业组织形式</li>
+    </ul>
+  </li>
+  <li>
+    <p>其他金融机构</p>
+
+    <ul>
+      <li>养老基金</li>
+      <li>资产管理企业</li>
+      <li>
+        <p>信息服务企业</p>
+
+        <ul>
+          <li>会计师事务所</li>
+          <li>律师事务所</li>
+          <li>管理机构</li>
+        </ul>
+      </li>
+      <li>金融监管机构</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="第五章-金融的功能">第五章 金融的功能</h2>
+
+<h3 id="资金流动总览">资金流动总览</h3>
+
+<ul>
+  <li>盈余单位</li>
+  <li>赤字单位</li>
+  <li>他们之间可以直接在金融市场达成资金的融通</li>
+  <li>金融中介机构</li>
+  <li>
+    <p>间接融资</p>
+
+    <ul>
+      <li>企业通过银行借钱，投资者通过银行储蓄</li>
+    </ul>
+  </li>
+  <li>
+    <p>直接融资</p>
+
+    <ul>
+      <li>企业通过投资银行IPO，发行股票或债券，投资者认购股票或债券</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="功能">功能</h3>
+
+<ul>
+  <li>跨期转移资源</li>
+  <li>管理风险</li>
+  <li>支付功能</li>
+  <li>归集资源</li>
+  <li>提供信息</li>
+  <li>
+    <p>解决激励</p>
+
+    <ul>
+      <li>
+        <p>事前</p>
+
+        <ul>
+          <li>
+            <p>逆向选择</p>
+
+            <ul>
+              <li>例如保险公司健康险</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>事后</p>
+
+        <ul>
+          <li>委托代理</li>
+          <li>
+            <p>道德风险</p>
+
+            <ul>
+              <li>例如保险公司自行车保险</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="第六章-金融市场的比率">第六章 金融市场的比率</h2>
+
+<h3 id="利率">利率</h3>
+
+<ul>
+  <li>一定时期内利息额与借贷资金额即本金的比率</li>
+  <li>
+    <p>违约风险</p>
+
+    <ul>
+      <li>一般来说预期的违约风险越大，贷款利率越高</li>
+    </ul>
+  </li>
+  <li>
+    <p>期限</p>
+
+    <ul>
+      <li>期限越长，风险越高，利率要求就越高</li>
+      <li>利率反转 经济衰退</li>
+    </ul>
+  </li>
+  <li>汇率风险</li>
+  <li>
+    <p>其他风险</p>
+
+    <ul>
+      <li>流动性风险</li>
+      <li>通货膨胀风险</li>
+      <li>无风险收益率水平</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="持有期收益率投资收益率">持有期收益率：投资收益率</h3>
+
+<ul>
+  <li>资本品的预期生产能力</li>
+  <li>资本品生产能力的不确定性</li>
+  <li>人们的时间偏好</li>
+  <li>人们的风险偏好程度</li>
+</ul>
+
+<h3 id="指数">指数</h3>
+
+<ul>
+  <li>反映市场整体价格水平的一项指标</li>
+  <li>
+    <p>指数化投资策略</p>
+
+    <ul>
+      <li>一种有效的投资策略</li>
+      <li>投资者简单复制指数中的股票和权重</li>
+      <li>积极的基金投资与指数化投资基金被动型投资形成鲜明对比。但往往被动型投资跑赢积极性投资（CAPM）</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="第七章-资产负债表">第七章 资产负债表</h2>
+
+<h3 id="企业重要财务信息报表">企业重要财务信息报表</h3>
+
+<ul>
+  <li>
+    <p>资产负债表</p>
+
+    <ul>
+      <li>
+        <p>结构等式</p>
+
+        <ul>
+          <li>资产=负债+权益</li>
+          <li>等式左边是企业生产经营活动赖以进行的资产。包括流动资产和固定资产或长期资产</li>
+          <li>等式右边是购买企业资产的资金来源。包括负债（借入的资金）和权益（股东投资的资金）</li>
+          <li>通过资产负债表，我们可以了解企业的总资产规模，资产结构，资本结构等信息</li>
+        </ul>
+      </li>
+      <li>
+        <p>项目</p>
+
+        <ul>
+          <li>
+            <p>流动资产</p>
+
+            <ul>
+              <li>一般可以在一年之内变现的资金称为流动资产</li>
+            </ul>
+          </li>
+          <li>
+            <p>固定资产</p>
+
+            <ul>
+              <li>长期资产，只可以使用一年以上的资产</li>
+            </ul>
+          </li>
+          <li>
+            <p>负债</p>
+
+            <ul>
+              <li>负债是向债权人借的到期归还的钱</li>
+              <li>按照归还时间，一年内归还称为流动负债，超过一年叫长期负债</li>
+              <li>
+                <p>流动负债</p>
+
+                <ul>
+                  <li>应负债款</li>
+                  <li>应计费用</li>
+                  <li>应付票据</li>
+                </ul>
+              </li>
+              <li>长期借款通常由公司发行的债券筹资（有息）、税务局的递延税款（无息）</li>
+            </ul>
+          </li>
+          <li>
+            <p>权益</p>
+
+            <ul>
+              <li>股东以优先股或者普通股的形式对公司的投资</li>
+              <li>资产负债表中的资本、资本公积金以及累计的未分配利润（或累积的留存收益）都是属于普通股股东的权益</li>
+              <li>如果公司有回购股份，那么在权益部分还有库存股一项，作为股本的减项</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>利润表（损益表）</li>
+  <li>现金流量表</li>
+</ul>
+
+<h3 id="财务报表是我们了解企业经营情况判断企业内在价值的主要信息来源">财务报表是我们了解企业经营情况，判断企业内在价值的主要信息来源</h3>
+
+<h3 id="财务报表的功能">财务报表的功能</h3>
+
+<ul>
+  <li>向投资者提供有关企业现在、过去的财务信息</li>
+  <li>他向企业的财务计划提供了模版和信息来源</li>
+  <li>他为设定考核管理者的业绩目标提供的依据</li>
+</ul>
+
+<p><em>XMind - Trial Version</em></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/16/GitHub-Pages/" data-toggle="tooltip" data-placement="top" title="Github Pages & Jekyll">
+                        Previous<br>
+                        <span>Github Pages & Jekyll</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/09/16/CS193P-1/" data-toggle="tooltip" data-placement="top" title="CS193P（1）">
+                        Next<br>
+                        <span>CS193P（1）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=Git"
+                    title="Git"
+                    rel="2">Git</a>
+        
+                <a data-sort="0006" 
+                    href="/archive/?tag=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"
+                    title="学习笔记"
+                    rel="28">学习笔记</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"
+                    title="计算机网络"
+                    rel="7">计算机网络</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=Python"
+                    title="Python"
+                    rel="7">Python</a>
+        
+                <a data-sort="0027" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="7">iOS</a>
+        
+                <a data-sort="0028" 
+                    href="/archive/?tag=%E8%B0%A2%E5%B8%8C%E4%BB%81"
+                    title="谢希仁"
+                    rel="6">谢希仁</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=Swift"
+                    title="Swift"
+                    rel="5">Swift</a>
+        
+                <a data-sort="0029" 
+                    href="/archive/?tag=tips"
+                    title="tips"
+                    rel="5">tips</a>
+        
+                <a data-sort="0030" 
+                    href="/archive/?tag=AI"
+                    title="AI"
+                    rel="4">AI</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"
+                    title="深度学习"
+                    rel="3">深度学习</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=%E7%88%AC%E8%99%AB"
+                    title="爬虫"
+                    rel="3">爬虫</a>
+        
+                <a data-sort="0031" 
+                    href="/archive/?tag=SwiftUI"
+                    title="SwiftUI"
+                    rel="3">SwiftUI</a>
+        
+                <a data-sort="0032" 
+                    href="/archive/?tag=%E7%AE%97%E6%B3%95"
+                    title="算法"
+                    rel="2">算法</a>
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://rapiz.me">rapiz</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/yrj-creator">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Yuruj Blog 2020
+                    <br>
+                    Powered by <a href="http://huangxuan.me">Hux Blog</a> |
+                    <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px"
+                        height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        // interop with multilangual 
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason, 
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure 
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

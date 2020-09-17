@@ -1,0 +1,201 @@
+I"<h1 id="cs193p3">CS193P（3）</h1>
+
+<p>.font(Font.largeTitle) 声明式 本质上是时间不敏感的</p>
+
+<p>body由system调用</p>
+
+<p>ViewBuilder是返回视图的函数，不能在ViewBuilder中创建var</p>
+
+<p>body是计算属性，不是函数</p>
+
+<p>search+replace or Command+Click+rename</p>
+
+<p>反应式 当模型发生变化，他们将自动显示在视图中</p>
+
+<p>函数参数默认let Cannot assign to property</p>
+
+<p>因为结构是指类型，mutating func拥有修改自我的功能，class可以直接修改（指针 引用类型）</p>
+
+<p>所有初始化都是mutating，所以不用声明muating</p>
+
+<dl>
+  <dt>TODO: bogus! 提醒自己需要解决此问题，会出现在Xcode顶部</dt>
+  <dd>
+    <p>ObservableObject 协议</p>
+  </dd>
+</dl>
+
+<p>var objectWillChange: ObservableObjectPublisher</p>
+
+<p>objectWillChange.send()</p>
+
+<p>@published 属性包装器 每次这个属性改变，将会调用objectWillChange.send()</p>
+
+<p>@ObservedObject 标记为对该发布感兴趣 反应式编程</p>
+
+<p>SwiftUI不会全部重绘</p>
+
+<p>slides 幻灯片</p>
+
+<p>protocol就像是精简的类或结构，具有功能和变量而被剥离，没有实施</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="kt">Moveable</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">move</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+  <span class="k">var</span> <span class="nv">hasMoved</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span><span class="k">get</span><span class="p">}</span>
+  <span class="k">var</span> <span class="nv">distanceFromStart</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">extension</span> <span class="kt">Moveable</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">hasMoved</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span><span class="k">return</span> <span class="n">distanceFromStart</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>protocol is a type？</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-11 下午5.10.37.png" alt="" /></p>
+
+<p>protocol extension 可以添加默认实现</p>
+
+<p>extension adding code to a struct or class via an extension</p>
+
+<p>Why protocols？</p>
+
+<p>It’s the promise of encapsulation from OOP but taken to a higher level.</p>
+
+<p>这就是函数式编程，或实际上我们可以称之为面向协议的编程就是这样。这是关于规范数据结构的方式，在我们的应用程序功能中，他们的行为方式。专注于功能，忽略了实现细节。</p>
+
+<p>Just talking about the function.</p>
+
+<p>And this is even more powerful when we combine it with generics.</p>
+
+<p>Generics and Protocols      super powers</p>
+
+<p>Self 协议中一种特殊的类型名称表示实际类型正在实施此协议</p>
+
+<p>协议本身没有实现，它通过结构和类实现</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">protocol</span> <span class="kt">Greatness</span> <span class="p">{</span>
+  <span class="kd">func</span> <span class="nf">isGreaterThan</span><span class="p">(</span><span class="nv">other</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">Array</span> <span class="k">where</span> <span class="kt">Element</span><span class="p">:</span> <span class="kt">Greatness</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">greatest</span><span class="p">:</span> <span class="kt">Element</span> <span class="p">{</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">the</span> <span class="n">greatest</span> <span class="n">by</span> <span class="n">calling</span> <span class="n">isGreaterThan</span> <span class="n">on</span> <span class="n">each</span> <span class="kt">Element</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>where 泛型和协议连接的关键</p>
+
+<p>Help！</p>
+
+<p>Some of you might be shivering a bit right now.</p>
+
+<p>You might be thinking, “how am I going to design systems using generics/protocols?!”</p>
+
+<p>This is, indeed, a powerful foundation for designing things.</p>
+
+<p>But functional programming does require some mastery that only comes with experience.</p>
+
+<p>The good news: you can do a lot in SwiftUI without having to master functional programming.</p>
+
+<p>But the more you use it, the more you’ll want to be “grokking” it.</p>
+
+<p>That’s why I explain to you up front what’s going on.</p>
+
+<p>No one expects you to now be able to be adding extensions to protocols with generics!</p>
+
+<p>But eventually you will be able to.</p>
+
+<p>And in the meantime, you’ll have at least some idea how SwiftUI is built.</p>
+
+<p>Layout</p>
+
+<p>Container View（HStack VStack）</p>
+
+<p>不灵活的视图优先 例如图片</p>
+
+<p>空间分配</p>
+
+<p>Spacer(minLength: CGFloat) 垫片</p>
+
+<p>尽量使用默认值 默认值就很赞</p>
+
+<p>Divider() 不占用任何空间</p>
+
+<p>.layoutPriority(100)</p>
+
+<p>the default layout priority is 0</p>
+
+<p>VStack(alignment: .leading) {…}</p>
+
+<p>You can even define your own “things to line up” alignment guides. But that’s a bit beyond the scope of this course.</p>
+
+<p>内置</p>
+
+<p>Modifiers</p>
+
+<p>Remember that View modifier functions (like .padding) themselves return a View.</p>
+
+<p>.aspectRatio smaller .fit bigger .fill contentMode</p>
+
+<p>可以选择更大的尺寸，但我们不希望View互相溢出</p>
+
+<p>How does a View know what space was offered to it so it can try to adapt?</p>
+
+<p>Using a special View called a GeometryReader</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
+  <span class="kt">GeometryReader</span> <span class="p">{</span> <span class="n">geometry</span> <span class="k">in</span>
+  	<span class="o">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Safe Area</p>
+
+<p>.edgesIgnoringSafeArea([.top])</p>
+
+<p>Container</p>
+
+<p>.frame(…)</p>
+
+<p>.position(CGPoint)</p>
+
+<p>.offset(CGPoint)</p>
+
+<p>.font(Font.system(size: CGFloat))</p>
+
+<p>Geometry.size.width Geometry.size.height</p>
+
+<p>编码风格</p>
+
+<p>magic numbers 控制面板记录常数</p>
+
+<p>// MARK: - Drawing Constants</p>
+
+<p><img src="/img/typora-user-images/截屏2020-09-11 下午9.35.30.png" alt="" /></p>
+:ET
