@@ -5,8 +5,8 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 17 Sep 2020 01:02:15 +0800</pubDate>
-    <lastBuildDate>Thu, 17 Sep 2020 01:02:15 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Sep 2020 12:03:12 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Sep 2020 12:03:12 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -3715,386 +3715,171 @@
       </item>
     
       <item>
-        <title>Github Pages &amp; Jekyll</title>
-        <description>&lt;h1 id=&quot;github-pages使用入门&quot;&gt;GitHub Pages使用入门&lt;/h1&gt;
+        <title>十大排序算法浅涉？</title>
+        <description>&lt;h1 id=&quot;排序算法浅涉&quot;&gt;排序算法浅涉&lt;/h1&gt;
 
-&lt;h2 id=&quot;关于github-pages&quot;&gt;关于GitHub Pages&lt;/h2&gt;
+&lt;p&gt;排序算法（英语：Sorting algorithm）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。&lt;/p&gt;
 
-&lt;h3 id=&quot;关于github-pages-1&quot;&gt;关于GitHub Pages&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.56.09.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;GitHub Pages是一项静态站点托管服务，他直接从GitHub上的仓库获取HTML、CSS和JavaScript文件，（可选）通过构建过程运行文件，然后发布网站&lt;/p&gt;
+&lt;p&gt;稳定的排序？
+啥是稳定？？？&lt;/p&gt;
 
-&lt;p&gt;你可以在GitHub的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github.io&lt;/code&gt;域或自己的自定义域上托管站点&lt;/p&gt;
+&lt;p&gt;稳定性的大致定义：排序前后两个相等的数相对位置不变，则算法稳定。&lt;/p&gt;
 
-&lt;h3 id=&quot;github-pages站点的类型&quot;&gt;GitHub Pages站点的类型&lt;/h3&gt;
+&lt;p&gt;稳定性的好处：从一个键上排序，然后再从另一个键上排序，第一个键排序的结果可以为第二个键排序所用。&lt;/p&gt;
 
-&lt;p&gt;项目站点：连接到GitHub上托管的特定项目&lt;/p&gt;
+&lt;p&gt;时间复杂度&lt;/p&gt;
 
-&lt;p&gt;用户站点：必须创建名为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;user&amp;gt;.github.io&lt;/code&gt; 的用户帐户所拥有的仓库&lt;/p&gt;
+&lt;p&gt;时间频度：一个算法中基本语句执行次数称为语句频度或时间频度。记为T(n)。基本语句的执行次数，通常是最内层循环的循环体。&lt;/p&gt;
 
-&lt;p&gt;组织站点：必须创建名为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;organization&amp;gt;.github.io&lt;/code&gt; 的组织所拥有的仓库&lt;/p&gt;
+&lt;p&gt;在刚才提到的时间频度中，n称为问题的规模，当n不断变化时，时间频度T(n)也会不断变化。但有时我们想知道它变化时呈现什么规律。为此，我们引入时间复杂度概念。 一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n),使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。记作T(n)=Ｏ(f(n)),称Ｏ(f(n)) 为算法的渐进时间复杂度，简称时间复杂度。&lt;/p&gt;
 
-&lt;p&gt;除非您使用自定义域，否则用户和组织站点位于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http(s)://&amp;lt;username&amp;gt;.github.io&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http(s)://&amp;lt;organization&amp;gt;.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;虽然对f(n)没有规定，但是一般都是取尽可能简单的函数。&lt;/p&gt;
 
-&lt;p&gt;只能为每个GitHub账号创建一个用户或组织站点&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.56.29.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;github-pages站点的发布来源&quot;&gt;GitHub Pages站点的发布来源&lt;/h3&gt;
+&lt;p&gt;空间复杂度(Space Complexity)是对一个算法在运行过程中临时占用存储空间大小的量度。一个算法在计算机存储器上所占用的存储空间，包括存储算法本身所占用的存储空间，算法的输入输出数据所占用的存储空间和算法在运行过程中临时占用的存储空间这三个方面。&lt;/p&gt;
 
-&lt;p&gt;GitHub Pages站点将成为互联网上的公开内容，即使其仓库是私有的或内部的。如果站点的仓库中有敏感数据，您可能想要在发布前删除它&lt;/p&gt;
+&lt;p&gt;原地排序就是指在排序过程中不申请多余的存储空间，只利用原来存储待排数据的存储空间进行比较和交换的数据排序。&lt;/p&gt;
 
-&lt;h3 id=&quot;静态站点生成器&quot;&gt;静态站点生成器&lt;/h3&gt;
+&lt;h2 id=&quot;一冒泡排序&quot;&gt;一、冒泡排序&lt;/h2&gt;
 
-&lt;p&gt;GitHub Pages 会发布您推送到仓库的任何静态文件。 您可以创建自己的静态文件或使用静态站点生成器为您构建站点。 您还可以在本地或其他服务器上自定义自己的构建过程。 我们建议使用 Jekyll，它是一个静态站点生成器，内置 GitHub Pages 支持和简化的构建流程&lt;/p&gt;
+&lt;p&gt;1、比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+2、对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。 
+3、针对所有的元素重复以上的步骤，除了最后一个。 
+4、持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。&lt;/p&gt;
 
-&lt;p&gt;默认情况下，GitHub Pages 将使用 Jekyll 来构建您的站点。 如果您想使用除 Jekyll 以外的静态站点生成器，通过在发布来源的根目录中创建一个名为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.nojekyll&lt;/code&gt; 的空文件来禁用 Jekyll 构建过程，然后按照静态站点生成器的说明在 本地构建站点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.56.48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;GitHub Pages 不支持服务器端语言，例如 PHP、Ruby 或 Python&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.57.14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;使用github-pages的指南&quot;&gt;使用GitHub Pages的指南&lt;/h3&gt;
+&lt;h2 id=&quot;二选择排序&quot;&gt;二、选择排序&lt;/h2&gt;
 
-&lt;p&gt;2016年6月15日后创建并使用github.io域的GitHub Pages站点通过HTTPS提供服务&lt;/p&gt;
+&lt;p&gt;首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;/p&gt;
 
-&lt;p&gt;使用限制：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.57.48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;GitHub Pages 源仓库建议的限制为 1GB&lt;/li&gt;
-  &lt;li&gt;发布的 GitHub Pages 站点不得超过 1 GB&lt;/li&gt;
-  &lt;li&gt;GitHub Pages 站点的&lt;em&gt;软&lt;/em&gt;带宽限制为每月 100GB&lt;/li&gt;
-  &lt;li&gt;GitHub Pages 站点的&lt;em&gt;软&lt;/em&gt;限制为每小时 10 次构建&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 id=&quot;三快速排序&quot;&gt;三、快速排序&lt;/h2&gt;
 
-&lt;p&gt;如果您的站点超出这些使用配额，我们可能无法为您的站点提供服务&lt;/p&gt;
+&lt;p&gt;快速排序，又称划分交换排序，简称快排，一种排序算法，最早由东尼·霍尔提出。&lt;/p&gt;
 
-&lt;h3 id=&quot;github-pages上的mime类型&quot;&gt;GitHub Pages上的MIME类型&lt;/h3&gt;
+&lt;p&gt;快速排序使用分治法策略来把一个序列分为较小和较大的2个子序列，然后递归地排序两个子序列。&lt;/p&gt;
 
-&lt;p&gt;MIME类型是服务器发送到浏览器的标头，提供有关浏览器所请求文件性质和格式的信息&lt;/p&gt;
+&lt;p&gt;步骤为：&lt;/p&gt;
 
-&lt;p&gt;GitHub Pages 支持数千种文件扩展名中 750 多种 MIME 类型。虽然无法基于每个文件或每个仓库指定自定义 MIME 类型，但您可以添加或修改 MIME 类型以在 GitHub Pages 上使用&lt;/p&gt;
+&lt;p&gt;1、挑选基准值：从数列中挑出一个元素，称为“基准”，
+2、分割：重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（与基准值相等的数可以到任何一边）。在这个分割结束之后，对基准值的排序就已经完成，
+3、递归排序子序列：递归地将小于基准值元素的子序列和大于基准值元素的子序列排序。&lt;/p&gt;
 
-&lt;h2 id=&quot;创建github-pages站点&quot;&gt;创建GitHub Pages站点&lt;/h2&gt;
+&lt;p&gt;递归到最底部的判断条件是数列的大小是零或一，此时该数列显然已经有序。&lt;/p&gt;
 
-&lt;h3 id=&quot;为站点创建仓库&quot;&gt;为站点创建仓库&lt;/h3&gt;
+&lt;p&gt;选取基准值有数种具体方法，此选取方法对排序的时间性能有决定性影响。&lt;/p&gt;
 
-&lt;p&gt;1、在任何页面的右上角，使用 下拉菜单选择 &lt;strong&gt;New repository（新建仓库）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于分治算法，当每次划分时，算法若都能分成两个等长的子序列时，那么分治算法效率会达到最大。也就是说，基准的选择是很重要的。选择基准的方式决定了两个分割后两个子序列的长度，进而对整个算法的效率产生决定性影响。&lt;/p&gt;
 
-&lt;p&gt;2、使用 &lt;strong&gt;Owner（所有者）&lt;/strong&gt;下拉菜单选择你想要拥有仓库的帐户&lt;/p&gt;
+&lt;p&gt;最理想的方法是，选择的基准恰好能把待排序序列分成两个等长的子序列。&lt;/p&gt;
 
-&lt;p&gt;3、输入仓库的名称和说明（可选）。 如果您创建的是用户或组织站点，仓库名称必须为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;user&amp;gt;.github.io&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;organization&amp;gt;.github.io&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.59.00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;4、Choose a repository visibility&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.59.18.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;5、选择选择 &lt;strong&gt;Initialize this repository with a README（使用自述文件初始化此仓库）&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它分割了标示为”左边（left）”和”右边（right）”的序列部分，借由移动小于a[pivotIndex]的所有元素到子序列的开头，留下所有大于或等于的元素接在他们后面。在这个过程它也为基准元素找寻最后摆放的位置，也就是它回传的值。它暂时地把基准元素移到子序列的结尾，而不会被前述方式影响到。&lt;/p&gt;
 
-&lt;p&gt;6、Click Create repository&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.59.45.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;创建站点&quot;&gt;创建站点&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午10.59.59.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;1、在GitHub上，导航到站点的仓库&lt;/p&gt;
+&lt;h2 id=&quot;四插入排序&quot;&gt;四、插入排序&lt;/h2&gt;
 
-&lt;p&gt;2、Decide which publishing source you want to use&lt;/p&gt;
+&lt;p&gt;1、从第一个元素开始，该元素可以认为已经被排序
+2、取出下一个元素，在已经排序的元素序列中从后向前扫描
+3、如果该元素（已排序）大于新元素，将该元素移到下一位置
+4、重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
+5、将新元素插入到该位置后
+6、重复步骤2~5&lt;/p&gt;
 
-&lt;p&gt;3、如果所选发布源已经存在，请导航到发布源。如果所选发布源不存在，则创建发布源&lt;/p&gt;
+&lt;p&gt;可以采用二分查找法来减少比较操作的数目。&lt;/p&gt;
 
-&lt;p&gt;4、在发布源的根目录中，创建一个名为index.md、包含要在网站主页上显示的内容的文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.00.39.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;5、Configure your publishing source&lt;/p&gt;
+&lt;p&gt;如果序列本来是排好序的，那么会触发最好情况。这时只需要n-1次比较即可，没有任何元素移动。所以最好情况下时间复杂度是 O(n)。
+如果序列是逆序排列的，那么会触发最坏情况。这时每个元素都需要一步一步地挪到序列首部。所以最坏情况下的时间复杂度是 O(n^2)。
+平均情况下的时间复杂度是 O(n^2)&lt;/p&gt;
 
-&lt;p&gt;6、在仓库名称下，单击Settings&lt;/p&gt;
+&lt;h2 id=&quot;五希尔排序&quot;&gt;五、希尔排序&lt;/h2&gt;
 
-&lt;p&gt;7、要查看您已发布的站点，请在“GitHub Pages”下点击您的站点 URL&lt;/p&gt;
+&lt;p&gt;希尔排序（Shellsort），也称递减增量排序算法，是插入排序的一种更高效的改进版本。希尔排序是非稳定排序算法。&lt;/p&gt;
 
-&lt;p&gt;对站点的更改在推送到GitHub上，最长可能需要20分钟才会发布&lt;/p&gt;
+&lt;p&gt;希尔排序是基于插入排序的以下两点性质而提出改进方法的：&lt;/p&gt;
 
-&lt;h3 id=&quot;后续步骤&quot;&gt;后续步骤&lt;/h3&gt;
+&lt;p&gt;插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率
+但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位&lt;/p&gt;
 
-&lt;p&gt;可以通过创建更多新文件向网站添加更多页面。每个文件都将在网站上与发布源相同的目录结构中。例如，例如，如果项目网站的发布源是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt; 分支，并且您在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt; 分支上创建了名为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/about/contact-us.md&lt;/code&gt; 的新文件，该文件将在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://&amp;lt;user&amp;gt;.github.io/&amp;lt;repository&amp;gt;/about/contact-us.md&lt;/code&gt; 下&lt;/p&gt;
+&lt;p&gt;原始的算法实现在最坏的情况下需要进行O(n^2)的比较和交换。 可以使得性能提升至O(n （log n）^2)。这比最好的比较算法的O(n log n)要差一些。&lt;/p&gt;
 
-&lt;p&gt;还可以添加主题以自定义网站的外观&lt;/p&gt;
+&lt;p&gt;比较排序有很多性能上的根本限制。在最差情况下，任何一种比较排序至少需要O(n log n）比较操作。这是比较操作所获的信息有限所导致的，或者说是全序集的模糊代数结构所导致的。&lt;/p&gt;
 
-&lt;p&gt;要更多地自定义您的站点，你可以使用Jekyl-内置GitHub Pages支持的静态站点生成器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.01.58.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;使用主题选择器将主题添加到github-pages站点&quot;&gt;使用主题选择器将主题添加到GitHub Pages站点&lt;/h2&gt;
+&lt;p&gt;希尔排序通过将比较的全部元素分为几个区域来提升插入排序的性能。这样可以让一个元素可以一次性地朝最终位置前进一大步。然后算法再取越来越小的步长进行排序，算法的最后一步就是普通的插入排序，但是到了这步，需排序的数据几乎是已排好的了（此时插入排序较快）&lt;/p&gt;
 
-&lt;p&gt;拥有仓库管理员权限的人可以使用主题选择器向GitHub Pages站点添加主题&lt;/p&gt;
+&lt;p&gt;步长的选择是希尔排序的重要部分。只要最终步长为1任何步长序列都可以工作。算法最开始以一定的步长进行排序。然后会继续以一定步长进行排序，最终算法以步长为1进行排序。当步长为1时，算法变为普通插入排序，这就保证了数据一定会被排序。&lt;/p&gt;
 
-&lt;h3 id=&quot;关于主题选择器&quot;&gt;关于主题选择器&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.02.35.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;主题选择器可用于向仓库添加 Jekyll 主题&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.02.48.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;主题选择器如何工作取决于您的资源库是公共的还是私有的&lt;/p&gt;
+&lt;h2 id=&quot;六归并排序&quot;&gt;六、归并排序&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;如果已为仓库启用 GitHub Pages，主题选择器会将主题添加到当前发布源&lt;/li&gt;
-  &lt;li&gt;如果您的仓库是公共的，并且已对仓库禁用 GitHub Pages，则必须先通过配置发布源来启用 GitHub Pages，然后才可使用主题选择器&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;归并操作的工作原理如下：
+第一步：申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列
+第二步：设定两个指针，最初位置分别为两个已经排序序列的起始位置
+第三步：比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置重复步骤3直到某一指针超出序列尾将另一序列剩下的所有元素直接复制到合并序列尾&lt;/p&gt;
 
-&lt;p&gt;如果以前曾手动向仓库添加 Jekyll 主题，则这些文件在使用主题选择器后也可能应用。 为避免冲突，请先删除所有手动添加的主题文件夹和文件，然后再使用主题选择器。&lt;/p&gt;
+&lt;p&gt;将两个已排好序的数组合并成一个有序的数组,称之为归并排序&lt;/p&gt;
 
-&lt;h3 id=&quot;使用主题选择器添加主题&quot;&gt;使用主题选择器添加主题&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.03.30.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;1、在GitHub上，导航到站点的仓库&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.03.47.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;2、在仓库名称下，单击Settings&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-17 上午11.03.59.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;3、在GitHub Pages下，单击Choose a theme或Change theme&lt;/p&gt;
+&lt;h2 id=&quot;六基数排序&quot;&gt;六、基数排序&lt;/h2&gt;
 
-&lt;p&gt;4、在页面顶部单击所需的主题，然后单击Select theme（选择主题）&lt;/p&gt;
+&lt;p&gt;是一种非比较型整数排序算法
+基数排序属于“分配式排序”，又称“桶子法”&lt;/p&gt;
 
-&lt;p&gt;5、系统可能会提示您编辑站点的README.md文件&lt;/p&gt;
+&lt;p&gt;LSD MSD&lt;/p&gt;
 
-&lt;p&gt;您选择的主题将自动应用到仓库中的MarkDown文件。要将主题应用到仓库中的HTML文件，您需要添加YAML前页，以指定每个文件的布局&lt;/p&gt;
+&lt;p&gt;LSD的基数排序适用于位数小的数列，如果位数多的话，使用MSD的效率会比较好&lt;/p&gt;
 
-&lt;h2 id=&quot;配置github-pages站点的发布源&quot;&gt;配置GitHub Pages站点的发布源&lt;/h2&gt;
+&lt;h2 id=&quot;八堆排序&quot;&gt;八、堆排序&lt;/h2&gt;
 
-&lt;p&gt;如果您使用GitHub Pages站点的默认发布源，您的站点将自动发布&lt;/p&gt;
+&lt;p&gt;堆排序（英语：Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆是一个近似完全二叉树的结构，并同时满足堆积的性质：即子节点的键值或索引总是小于（或者大于）它的父节点。&lt;/p&gt;
 
-&lt;p&gt;You can also choose to publish your site from a different branch or folder&lt;/p&gt;
+&lt;p&gt;从下往上，从左往右&lt;/p&gt;
 
-&lt;p&gt;People with admin or maintainer permissions for a repository can configure a publishing source for a GitHub Pages site&lt;/p&gt;
+&lt;p&gt;若以升序排序说明，把数组转换成最大堆积(Max-Heap Heap)，这是一种满足最大堆积性质(Max-Heap Property)的二叉树：对于除了根之外的每个节点i, A[parent(i)] ≥ A[i]。&lt;/p&gt;
 
-&lt;h3 id=&quot;选择发布源&quot;&gt;选择发布源&lt;/h3&gt;
+&lt;p&gt;重复从最大堆积取出数值最大的结点(把根结点和最后一个结点交换，把交换后的最后一个结点移出堆)，并让残余的堆积维持最大堆积性质。&lt;/p&gt;
 
-&lt;p&gt;Before you configure a publishing source, make sure the branch you want to use as your publishing source already exists in your repository&lt;/p&gt;
+&lt;p&gt;堆排序的效率与快排、归并相同，都达到了基于比较的排序算法效率的峰值（时间复杂度为O(nlogn)）
+除了高效之外，最大的亮点就是只需要O(1)的辅助空间了，既最高效率又最节省空间
+堆排序效率相对稳定，不像快排在最坏情况下时间复杂度会变成O(n^2)），所以无论待排序序列是否有序，堆排序的效率都是O(nlogn)不变（注意这里的稳定特指平均时间复杂度=最坏时间复杂度，不是那个“稳定”，因为堆排序本身是不稳定的）&lt;/p&gt;
 
-&lt;p&gt;1、在GitHub上，导航到站点的仓库&lt;/p&gt;
+&lt;h2 id=&quot;九桶排序&quot;&gt;九、桶排序&lt;/h2&gt;
 
-&lt;p&gt;2、在仓库名称下，单击Settings&lt;/p&gt;
-
-&lt;p&gt;3、Under “GitHub Pages”, use the &lt;strong&gt;None&lt;/strong&gt; or &lt;strong&gt;Branch&lt;/strong&gt; drop-down menu and select a publishing source&lt;/p&gt;
-
-&lt;p&gt;4、Optionally, use the drop-down menu to select a folder for your publishing source&lt;/p&gt;
-
-&lt;p&gt;5、单击Save&lt;/p&gt;
-
-&lt;h3 id=&quot;github-pages站点发布问题疑难排解&quot;&gt;GitHub Pages站点发布问题疑难排解&lt;/h3&gt;
-
-&lt;p&gt;If your site has not published automatically, make sure someone with admin permissions and a verified email address has pushed to the publishing source&lt;/p&gt;
-
-&lt;p&gt;f you choose the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docs&lt;/code&gt; folder on any branch as your publishing source, then later remove the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; folder from that branch in your repository, your site won’t build and you’ll get a page build error message for a missing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; folder&lt;/p&gt;
-
-&lt;h2 id=&quot;为github-pages站点创建自定义404界面&quot;&gt;为GitHub Pages站点创建自定义404界面&lt;/h2&gt;
-
-&lt;p&gt;可以自定义在人们尝试访问站点上不存在的页面时显示的404错误页面&lt;/p&gt;
-
-&lt;p&gt;1、在Github上，导航到站点的仓库&lt;/p&gt;
-
-&lt;p&gt;2、导航到站点的发布来源&lt;/p&gt;
-
-&lt;p&gt;3、Above the list of files, using the Add file drop-down, click Create new file&lt;/p&gt;
-
-&lt;p&gt;4、在文件名字段中，键入404.html或404.md&lt;/p&gt;
-
-&lt;p&gt;5、如果将文件命名为404.md，请将以下YAML前页添加到文件的开头&lt;/p&gt;
-
-&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;---
-permalink: /404.html
----
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;6、在YAML前页（如果存在）下方添加要在404页面上显示的内容&lt;/p&gt;
-
-&lt;p&gt;7、在页面底部，输入一条简短、有意义的提交信息，描述您对文件所做的更改。您可以在提交消息中将提交归于多个作者&lt;/p&gt;
-
-&lt;p&gt;8、以下是提交消息字段，请单击电子邮件地址下拉菜单并选择 Git 作者电子邮件地址。 只有经过验证的电子邮件地址才会出现在此下拉菜单中。 如果您启用了电子邮件地址隐私保护，则 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;username&amp;gt;@users.noreply.github.com&lt;/code&gt; 为默认的提交作者电子邮件地址&lt;/p&gt;
-
-&lt;p&gt;9、在提交消息字段下面，确定是要将提交添加到当前分支还是新分支。 If your current branch is the default branch, you should choose to create a new branch for your commit and then create a pull request&lt;/p&gt;
-
-&lt;p&gt;10、单击Propose new file（提议新文件）&lt;/p&gt;
-
-&lt;h2 id=&quot;使用https保护github-pages站点&quot;&gt;使用HTTPS保护GitHub Pages站点&lt;/h2&gt;
-
-&lt;p&gt;HTTPS增加一层加密，用于防止其他人窥探或篡改您的站点的流量。您可对GitHub Pages站点强制实施HTTPS，从而将所有HTTPS请求透明的重定向到HTTPS&lt;/p&gt;
-
-&lt;p&gt;拥有仓库管理员权限的人可对GitHub Pages站点实施HTTPS&lt;/p&gt;
-
-&lt;h3 id=&quot;关于https和github-pages&quot;&gt;关于HTTPS和GitHub Pages&lt;/h3&gt;
-
-&lt;p&gt;所有 GitHub Pages 站点（包括使用自定义域正确配置的站点）均支持 HTTPS 和 HTTPS 强制实施&lt;/p&gt;
-
-&lt;p&gt;对于使用 2016 年 1 月 15 日后创建的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github.io&lt;/code&gt; 域的 GitHub Pages 站点，需要强制实施 HTTPS。 如果您在 2016 年 6 月 15 日之前创建了站点，则可以手动启用实施 HTTPS&lt;/p&gt;
-
-&lt;p&gt;GitHub Pages 站点不应该用于敏感事务，例如发送密码或信用卡号码&lt;/p&gt;
-
-&lt;h3 id=&quot;对您的github-pages站点强制实施https&quot;&gt;对您的GitHub Pages站点强制实施HTTPS&lt;/h3&gt;
-
-&lt;p&gt;1、在GitHub上，导航到站点的仓库&lt;/p&gt;
-
-&lt;p&gt;2、在仓库名称下，单击Settings&lt;/p&gt;
-
-&lt;p&gt;3、在GitHub Pages下，选择Enforce HTTPS（实施HTTPS）&lt;/p&gt;
-
-&lt;h3 id=&quot;解决具有混合内容的问题&quot;&gt;解决具有混合内容的问题&lt;/h3&gt;
-
-&lt;p&gt;如果您对 GitHub Pages 站点启用了 HTTPS，但站点的 HTML 仍通过 HTTP 引用图像、CSS 或 JavaScript，则您的站点将提供&lt;em&gt;混合内容&lt;/em&gt;。 提供混合内容可能会降低站点的安全性，并导致在加载资产时出现问题&lt;/p&gt;
-
-&lt;p&gt;要删除站点的混合内容，请在站点的 HTML 中将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://&lt;/code&gt; 更改为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://&lt;/code&gt;，确保所有资产都通过 HTTPS 提供&lt;/p&gt;
-
-&lt;p&gt;资产通常位于以下位置：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果您的站点使用 Jekyll，则 HTML 文件可能位于 &lt;em&gt;_layouts&lt;/em&gt; 文件夹中&lt;/li&gt;
-  &lt;li&gt;CSS 通常位于 HTML 文件的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt; 部分&lt;/li&gt;
-  &lt;li&gt;JavaScript 通常位于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt; 部分或结束 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/body&amp;gt;&lt;/code&gt; 标记之前&lt;/li&gt;
-  &lt;li&gt;图像通常位于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; 部分&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-06 下午4.24.28.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;将子模块用于github-pages&quot;&gt;将子模块用于GitHub Pages&lt;/h2&gt;
-
-&lt;p&gt;如果 GitHub Pages 站点的仓库包含子模块，则在构建站点时会自动拉取其内容&lt;/p&gt;
-
-&lt;p&gt;只能使用指向公共仓库的子模块，因为 GitHub Pages 服务器无法访问私有仓库&lt;/p&gt;
-
-&lt;p&gt;对子模块（包括嵌套子模块）使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://&lt;/code&gt; 只读 URL。 您可以在 &lt;em&gt;.gitmodules&lt;/em&gt; 文件中进行此更改&lt;/p&gt;
-
-&lt;h2 id=&quot;取消发布github-pages站点&quot;&gt;取消发布GitHub Pages站点&lt;/h2&gt;
-
-&lt;p&gt;1、在GitHub上，导航到仓库的主页面&lt;/p&gt;
-
-&lt;p&gt;2、在仓库名称下，单击Settings&lt;/p&gt;
-
-&lt;p&gt;3、Under GitHub Pages, use the Branch drop-down menu and select None&lt;/p&gt;
-
-&lt;p&gt;4、如果为站点启用了自定义域，为避免域名被占用，请更新您的DNS设置&lt;/p&gt;
-
-&lt;h1 id=&quot;使用jekyll设置github-pages站点&quot;&gt;使用Jekyll设置GitHub Pages站点&lt;/h1&gt;
-
-&lt;h2 id=&quot;关于github-pages和jekyll&quot;&gt;关于GitHub Pages和Jekyll&lt;/h2&gt;
-
-&lt;h3 id=&quot;关于jekyll&quot;&gt;关于Jekyll&lt;/h3&gt;
-
-&lt;p&gt;Jekyll是一个静态站点生成器，内置GitHub Pages支持和简化的构建过程&lt;/p&gt;
-
-&lt;p&gt;Jekyll使用Markdown和HTML文件，并根据您选择的布局创建完整静态网站。Jekyll支持Markdown和Lick，这是一种可在网站上加载动态内容的模版语言&lt;/p&gt;
-
-&lt;p&gt;Windows并未正式支持Jekyll&lt;/p&gt;
-
-&lt;p&gt;我们建议将Jekyll用于GitHub Pages。如果您喜欢，可以使用其他静态站点生成器或者在本地或其他服务器上自定义构建过程&lt;/p&gt;
-
-&lt;h3 id=&quot;在github-pages网站中配置jekyll&quot;&gt;在GitHub Pages网站中配置Jekyll&lt;/h3&gt;
-
-&lt;p&gt;可以通过编辑_config.yml文件来配置大多数Jekyll设置，例如网站的主题和插件&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-08 下午9.09.10.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-08 下午9.09.59.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;前页附属资料&quot;&gt;前页附属资料&lt;/h3&gt;
-
-&lt;p&gt;要为网站上的页面或帖子设置变量和原数据，例如标题和布局，可以讲YAML前页添加到任意MarkDown或HTML文件的顶部&lt;/p&gt;
-
-&lt;p&gt;可以添加site.github到帖子或页面，以将任何仓库引用元数据添加到您的网站&lt;/p&gt;
-
-&lt;h3 id=&quot;主题&quot;&gt;主题&lt;/h3&gt;
-
-&lt;p&gt;您可以将Jekyll主题添加到GitHub Pages站点，以自定义站点的外观&lt;/p&gt;
-
-&lt;p&gt;您可以在GitHub上添加支持的主题到站点&lt;/p&gt;
-
-&lt;p&gt;要使用GitHub上托管的任何其他开源Jekyll主题，您可以手动添加主题&lt;/p&gt;
-
-&lt;p&gt;您可以通过编辑主题文件来覆盖任何主题的默认值&lt;/p&gt;
-
-&lt;h3 id=&quot;插件&quot;&gt;插件&lt;/h3&gt;
-
-&lt;p&gt;可以下载或创建Jekyll插件，以便为您的网站拓展Jekyll的功能&lt;/p&gt;
-
-&lt;p&gt;例如， &lt;a href=&quot;https://github.com/jekyll/jemoji&quot;&gt;jemoji&lt;/a&gt; 插件允许您在站点的任何页面上使用 GitHub 风格的表情符号，就像在 GitHub 上使用一样&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-09 上午9.44.39.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;可以通过在_config.yml文件中添加插件的gem到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plugins&lt;/code&gt;设置来启用额外的插件&lt;/p&gt;
-
-&lt;p&gt;GitHub Pages无法使用不支持的插件构建网站。如果想使用不支持的插件，请在本地生成网站，然后将网站的静态文件推送到GitHub&lt;/p&gt;
-
-&lt;h3 id=&quot;语法突显&quot;&gt;语法突显&lt;/h3&gt;
-
-&lt;p&gt;为了使网站更容易读取，代码片段在GitHub Pages上突显，就像在GitHub上突显一样&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/typora-user-images/截屏2020-09-09 上午9.52.32.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;本地构建网站&quot;&gt;本地构建网站&lt;/h3&gt;
-
-&lt;p&gt;当更改合并到站点的发布源时，对站点的更改将自动发布。如果想先预览您的更改，可以在本地而不是GitHub上进行更改，然后在本地测试站点&lt;/p&gt;
-
-&lt;h2 id=&quot;使用jekyll创建github-pages站点mac&quot;&gt;使用Jekyll创建GitHub Pages站点（Mac）&lt;/h2&gt;
-
-&lt;p&gt;可以使用Jekyll在新仓库或现有仓库中创建GiHub Pages站点&lt;/p&gt;
-
-&lt;p&gt;拥有仓库管理员权限的人员可以使用Jekyll创建GitHub Pages站点&lt;/p&gt;
-
-&lt;h3 id=&quot;基本要求&quot;&gt;基本要求&lt;/h3&gt;
-
-&lt;p&gt;必须安装Jekyll和Git后才可使用Jekyll创建GitHub Pages站点&lt;/p&gt;
-
-&lt;p&gt;建议使用Bundler安装和运行Jekyll。Bunder可管理Ruby gem依赖项，减少Jekyll构建错误和组织环境相关的漏洞&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jekyllrb.com/docs/installation/&quot;&gt;Jekyll的安装&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Jekyll是可以在大多数系统上安装的Ruby Gem&lt;/p&gt;
-
-&lt;p&gt;Ruby是一种跨平台、面向对象的动态类型编程语言。&lt;/p&gt;
-
-&lt;h3 id=&quot;为站点创建仓库-1&quot;&gt;为站点创建仓库&lt;/h3&gt;
-
-&lt;h3 id=&quot;创建站点-1&quot;&gt;创建站点&lt;/h3&gt;
-
-&lt;h1 id=&quot;jekyll-官方文档&quot;&gt;Jekyll 官方文档&lt;/h1&gt;
-
-&lt;p&gt;Jekyll是静态站点生成器。它采用您喜欢的标记语言编写的文本，并使用布局创建静态网站。您可以调整网站的外观，URL，页面上显示的数据等。&lt;/p&gt;
-
-&lt;h2 id=&quot;ruby-101&quot;&gt;Ruby 101&lt;/h2&gt;
-
-&lt;p&gt;Jekyll用Ruby编写&lt;/p&gt;
-
-&lt;h3 id=&quot;gem&quot;&gt;Gem&lt;/h3&gt;
-
-&lt;p&gt;Gem是包含在Ruby项目中的代码。Gem包装的特定功能。您可以在多个项目中或与他人共享宝石。宝石可以执行以下操作：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;将Ruby对象转换为JSON&lt;/li&gt;
-  &lt;li&gt;分页&lt;/li&gt;
-  &lt;li&gt;与GitHub等API交互&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Jekyll是一个Gem，许多Jekyll插件也是Gem&lt;/p&gt;
-
-&lt;h3 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h3&gt;
-
-&lt;p&gt;网站使用的Gem列表。每个Jekyll站点的主文件夹中都有一个Gemfile&lt;/p&gt;
-
-&lt;h3 id=&quot;bundler&quot;&gt;Bundler&lt;/h3&gt;
-
-&lt;p&gt;Bundler是一种宝石，可在您的电脑上安装所有gems in your Gemfile&lt;/p&gt;
-
-&lt;p&gt;While you don’t have to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler&lt;/code&gt;, it is highly recommended as it ensures you’re running the same version of Jekyll and its plugins across different environments.&lt;/p&gt;
-
-&lt;p&gt;Install Bundler using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt;. You only need to install it once, not every time you create a new Jekyll project.&lt;/p&gt;
-
-&lt;p&gt;要使用Bundler在Gemfile中安装gem，请在具有Gemfile的目录中运行以下命令：&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;bundle &lt;span class=&quot;nb&quot;&gt;install
-&lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;要在不使用Gemfile的情况下绕过Bundler，请运行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;step-by-step-tutorial&quot;&gt;Step by Step Tutorial&lt;/h3&gt;
+&lt;h2 id=&quot;十计数排序&quot;&gt;十、计数排序&lt;/h2&gt;
 
 </description>
         <pubDate>Wed, 16 Sep 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/09/16/GitHub-Pages/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/09/16/GitHub-Pages/</guid>
+        <link>http://localhost:4000/2020/09/16/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%B5%85%E6%B6%89/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/16/%E5%8D%81%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%B5%85%E6%B6%89/</guid>
         
-        <category>Git</category>
+        <category>算法</category>
         
-        <category>学习笔记</category>
+        <category>tips</category>
         
         
       </item>
